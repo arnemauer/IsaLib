@@ -1,0 +1,41 @@
+#######################################
+# Syntax Coloring Map For SED1531
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+SED1531		KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+init			KEYWORD2
+standby			KEYWORD2
+sleep			KEYWORD2
+wakeup			KEYWORD2
+command			KEYWORD2
+setCursor		KEYWORD2
+setFont			KEYWORD2
+setIndicator	KEYWORD2
+drawBox			KEYWORD2
+clearDisplay	KEYWORD2
+drawPixel		KEYWORD2
+drawFrame		KEYWORD2
+drawLine		KEYWORD2
+drawCircle		KEYWORD2
+write			KEYWORD2
+drawText		KEYWORD2
+drawText_P		KEYWORD2
+drawText		KEYWORD2
+
+pageUpdateStart	KEYWORD2
+pageUpdateEnd	KEYWORD2
+updateBuffer_P	KEYWORD2
+drawText_int	KEYWORD2
+send			KEYWORD2
+updateData		KEYWORD2
+sendRepeated	KEYWORD2
+

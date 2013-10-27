@@ -1,0 +1,45 @@
+<b>Partlist exported from Z:/Elektronica/Central RELAY/01-09-2013 - Central RELAY - kopie/Central relay.sch at 1-9-2013 20:16:16</b>
+<p>
+<table>
+<tr><td><b>Qty</b></td><td><b>Value</b></td><td><b>Device</b></td><td><b>Package</b></td><td><b>Parts</b></td><td><b>Description</b></td><td><b>MF</b></td><td><b>MPN</b></td><td><b>OC_FARNELL</b></td><td><b>OC_NEWARK</b></td></tr>
+<tr><td>1</td><td></td><td>10-XX</td><td>B3F-10XX</td><td>RESET1</td><td>OMRON SWITCH</td><td></td><td>B3F-1000</td><td>176432</td><td>36M3542</td></tr>
+<tr><td>1</td><td></td><td>JACK-PLUG0</td><td>SPC4077</td><td>J1</td><td>DC POWER JACK</td><td></td><td></td><td>unknown</td><td>unknown</td></tr>
+<tr><td>1</td><td></td><td>MEGA1284P</td><td>DIL40</td><td>IC3</td><td>Atmel ATmega1284P 8-bit AVR Microcontroller</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td></td><td>PINHD-1X2</td><td>1X02</td><td>JP2</td><td>PIN HEADER</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td></td><td>PINHD-1X3</td><td>1X03</td><td>JP1</td><td>PIN HEADER</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td></td><td>PINHD-1X8</td><td>1X08</td><td>JP3</td><td>PIN HEADER</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>100n</td><td>C-EU025-025X050</td><td>C025-025X050</td><td>C15</td><td>CAPACITOR, European symbol</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>12</td><td>100n</td><td>CAP0805</td><td>0805</td><td>C1, C2, C3, C6, C31, C32, C33, C34, C35, C36, C39, C41</td><td>Capacitor</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>10K</td><td>R-EU_0207/7</td><td>0207/7</td><td>R65</td><td>RESISTOR, European symbol</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>2</td><td>10K</td><td>RESISTOR0805-RES</td><td>0805</td><td>R2, R6</td><td>Resistor</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>2</td><td>10uf</td><td>CPOL-EUE2,5-6E</td><td>E2,5-6E</td><td>C4, C40</td><td>POLARIZED CAPACITOR, European symbol</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>120</td><td>RESISTOR0805-RES</td><td>0805</td><td>R3</td><td>Resistor</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>14867</td><td>14867</td><td>14867</td><td>X2</td><td>RJ11 Connector</td><td></td><td></td><td>unknown</td><td>unknown</td></tr>
+<tr><td>1</td><td>2.2K</td><td>RESISTOR0805-RES</td><td>0805</td><td>R1</td><td>Resistor</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>2.32K</td><td>R-EU_0207/7</td><td>0207/7</td><td>R63</td><td>RESISTOR, European symbol</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>20mhz</td><td>XTAL/S</td><td>QS</td><td>Q2</td><td>CRYSTAL</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>2</td><td>20pf</td><td>CAP0805</td><td>0805</td><td>C37, C38</td><td>Capacitor</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>2</td><td>22pf</td><td>CAP0805</td><td>0805</td><td>C8, C9</td><td>Capacitor</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>22uf</td><td>CPOL-EUE2,5-6E</td><td>E2,5-6E</td><td>C5</td><td>POLARIZED CAPACITOR, European symbol</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>25mhz</td><td>CRYSTALHC49S</td><td>HC49/S</td><td>Q10</td><td>CRYSTAL</td><td></td><td></td><td>1667008</td><td>unknown</td></tr>
+<tr><td>2</td><td>270</td><td>RESISTOR0805-RES</td><td>0805</td><td>R80, R81</td><td>Resistor</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>2</td><td>2mA geel</td><td>LED5MM</td><td>LED5MM</td><td>LED11, LED12</td><td>LED</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>3</td><td>2mA groen</td><td>LED5MM</td><td>LED5MM</td><td>LED6, LED8, LED10</td><td>LED</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>2</td><td>470</td><td>RESISTOR0805-RES</td><td>0805</td><td>R4, R5</td><td>Resistor</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>4</td><td>49.9</td><td>R-EU_0207/7</td><td>0207/7</td><td>R57, R58, R61, R64</td><td>RESISTOR, European symbol</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>5x2 M</td><td>PINHD-2X5</td><td>2X05</td><td>ICSP1</td><td>PIN HEADER</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>6.8K</td><td>RESISTOR0805-RES</td><td>0805</td><td>R7</td><td>Resistor</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>5</td><td>820</td><td>RESISTOR0805-RES</td><td>0805</td><td>R74, R75, R76, R77, R87</td><td>Resistor</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>AMS1117-3.3</td><td>V_REG_LM1117SOT223</td><td>SOT223</td><td>IC1</td><td>Voltage Regulator LM1117</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>BC547B</td><td>BC547B</td><td>TO92</td><td>Q1</td><td>NPN Transistor</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>BL01RN1A</td><td>BL01RN1A</td><td>BL01RN1A</td><td>L2</td><td>Noise Suppression Products/EMI Suppression Filters, Lead EMIFIL(R) Inductor Type</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>ENC28J60-DIL</td><td>ENC28J60-DIL</td><td>DIL28-3</td><td>U1</td><td>Microchip 10Mbit Ethernet controller with SPI interface</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>FH21-14S-1DSA</td><td>FH21-14S-1DSA</td><td>FH21-14S-1DSA</td><td>X1</td><td>FPC CONNECTOR</td><td></td><td></td><td>unknown</td><td>unknown</td></tr>
+<tr><td>1</td><td>FTDI</td><td>MA06-1</td><td>MA06-1</td><td>FTDI1</td><td>PIN HEADER</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>M25P16</td><td>SPI_FLASH-X25XXSMD</td><td>SO08</td><td>U$5</td><td>8pin SPI Flash series x25xx. Works with devices like W25X32 and BR25L32</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>RF-LINK_RX</td><td>RF-LINK_RX</td><td>RF-LINK_RX</td><td>U$1</td><td>RF Link receivers- WRL-8947, 8948, 8949, 8950</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>RF-LINK_TX</td><td>RF-LINK_TX</td><td>RF-LINK_TX</td><td>U$3</td><td>RF Link transmitters WRL-8945, 8946</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>RFM12B</td><td>RFM12B_BREAKOUT_BASE</td><td>RFM12B-BREAKOUT-BASE</td><td>U$2</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>1</td><td>SI-50170</td><td>SI-50170</td><td>SI-50170</td><td>X21</td><td>Ethernet Connector MagJack (R)</td><td></td><td></td><td>unknown</td><td>unknown</td></tr>
+<tr><td>3</td><td>SMA_EDGE</td><td>SMA_EDGE</td><td>SMA-EDGE</td><td>J$1, J$2, J$3</td><td>SMA Antenna Connector</td><td></td><td></td><td></td><td></td></tr>
+</table>
