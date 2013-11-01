@@ -1017,14 +1017,14 @@ design rules under a new name.</description>
 <element name="R26" library="SparkFun-Resistors" package="0805" value="10K" x="74.93" y="38.1"/>
 <element name="R27" library="SparkFun-Resistors" package="0805" value="10K" x="74.93" y="33.02"/>
 <element name="R28" library="SparkFun-Resistors" package="0805" value="10K" x="74.93" y="35.56"/>
-<element name="SG1" library="buzzer" package="F/DB18" value="F/DB18" x="5.08" y="-20.32">
-<attribute name="OC_NEWARK" value="unknown" x="5.08" y="-20.32" size="1.778" layer="27" display="off"/>
-<attribute name="MPN" value="" x="5.08" y="-20.32" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="" x="5.08" y="-20.32" size="1.778" layer="27" display="off"/>
-<attribute name="OC_FARNELL" value="unknown" x="5.08" y="-20.32" size="1.778" layer="27" display="off"/>
+<element name="SG1" library="buzzer" package="F/DB18" value="F/DB18" x="-64.77" y="-96.52">
+<attribute name="OC_NEWARK" value="unknown" x="-64.77" y="-96.52" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="" x="-64.77" y="-96.52" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="" x="-64.77" y="-96.52" size="1.778" layer="27" display="off"/>
+<attribute name="OC_FARNELL" value="unknown" x="-64.77" y="-96.52" size="1.778" layer="27" display="off"/>
 </element>
-<element name="Q14" library="transistor-npn" package="TO92" value="BC547" x="15.24" y="-29.21"/>
-<element name="R29" library="resistor" package="0204/7" value="1K" x="16.51" y="-26.67"/>
+<element name="Q14" library="transistor-npn" package="TO92" value="BC547" x="-82.55" y="-114.3"/>
+<element name="R29" library="resistor" package="0204/7" value="1K" x="-81.28" y="-119.38"/>
 </elements>
 <signals>
 <signal name="GND" class="1">
@@ -1051,7 +1051,7 @@ design rules under a new name.</description>
 <contactref element="Q12" pad="1"/>
 <contactref element="Q13" pad="1"/>
 <contactref element="Q14" pad="1"/>
-<wire x1="-78.74" y1="17.78" x2="16.51" y2="-29.21" width="0" layer="19" extent="1-1"/>
+<wire x1="-78.74" y1="17.78" x2="-81.28" y2="-114.3" width="0" layer="19" extent="1-1"/>
 <wire x1="-78.74" y1="35.56" x2="-78.74" y2="17.78" width="0" layer="19" extent="1-1"/>
 <wire x1="-12.7" y1="0" x2="-78.74" y2="17.78" width="0" layer="19" extent="1-1"/>
 <wire x1="-5.08" y1="0" x2="-12.7" y2="0" width="0" layer="19" extent="1-1"/>
@@ -1173,21 +1173,19 @@ design rules under a new name.</description>
 <contactref element="JP9" pad="1"/>
 <contactref element="LED6" pad="A"/>
 <contactref element="LED8" pad="A"/>
-<contactref element="SG1" pad="+"/>
+<wire x1="-15.24" y1="0" x2="-81.28" y2="17.78" width="0" layer="19" extent="1-1"/>
+<wire x1="-7.62" y1="0" x2="-15.24" y2="0" width="0" layer="19" extent="1-1"/>
+<wire x1="-52.07" y1="31.75" x2="-7.62" y2="0" width="0" layer="19" extent="1-1"/>
+<wire x1="-46.99" y1="39.37" x2="-52.07" y2="31.75" width="0" layer="19" extent="1-1"/>
 <wire x1="-83.82" y1="35.56" x2="-81.28" y2="17.78" width="0" layer="19" extent="1-1"/>
-<wire x1="-77.47" y1="62.23" x2="-83.82" y2="35.56" width="0" layer="19" extent="1-1"/>
-<wire x1="-52.07" y1="62.23" x2="-77.47" y2="62.23" width="0" layer="19" extent="1-1"/>
+<wire x1="-1.27" y1="-1.27" x2="-46.99" y2="39.37" width="0" layer="19" extent="1-1"/>
+<wire x1="-52.07" y1="62.23" x2="-46.99" y2="39.37" width="0" layer="19" extent="1-1"/>
 <wire x1="-51.689" y1="68.58" x2="-52.07" y2="62.23" width="0" layer="19" extent="1-1"/>
 <wire x1="-40.64" y1="68.58" x2="-51.689" y2="68.58" width="0" layer="19" extent="1-1"/>
 <wire x1="-26.67" y1="69.85" x2="-40.64" y2="68.58" width="0" layer="19" extent="1-1"/>
 <wire x1="-24.13" y1="80.01" x2="-26.67" y2="69.85" width="0" layer="19" extent="1-1"/>
-<wire x1="-46.99" y1="39.37" x2="-52.07" y2="62.23" width="0" layer="19" extent="1-1"/>
-<wire x1="-52.07" y1="31.75" x2="-46.99" y2="39.37" width="0" layer="19" extent="1-1"/>
-<wire x1="-14.86" y1="3.62" x2="-52.07" y2="31.75" width="0" layer="19" extent="1-1"/>
-<wire x1="-15.24" y1="0" x2="-14.86" y2="3.62" width="0" layer="19" extent="1-1"/>
-<wire x1="-7.62" y1="0" x2="-15.24" y2="0" width="0" layer="19" extent="1-1"/>
-<wire x1="-1.27" y1="-1.27" x2="-7.62" y2="0" width="0" layer="19" extent="1-1"/>
-<wire x1="12.0904" y1="-20.32" x2="-1.27" y2="-1.27" width="0" layer="19" extent="1-1"/>
+<wire x1="-77.47" y1="62.23" x2="-52.07" y2="62.23" width="0" layer="19" extent="1-1"/>
+<wire x1="-14.86" y1="3.62" x2="-1.27" y2="-1.27" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$12" class="1">
 <contactref element="FTDI" pad="3"/>
@@ -1617,12 +1615,12 @@ design rules under a new name.</description>
 <signal name="N$84">
 <contactref element="SG1" pad="-"/>
 <contactref element="Q14" pad="3"/>
-<wire x1="-1.9304" y1="-20.32" x2="13.97" y2="-29.21" width="0" layer="19" extent="1-1"/>
+<wire x1="-71.7804" y1="-96.52" x2="-83.82" y2="-114.3" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$85">
 <contactref element="Q14" pad="2"/>
 <contactref element="R29" pad="1"/>
-<wire x1="15.24" y1="-27.305" x2="12.7" y2="-26.67" width="0" layer="19" extent="1-1"/>
+<wire x1="-82.55" y1="-112.395" x2="-85.09" y2="-119.38" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>
