@@ -10120,8 +10120,8 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <wire x1="-1.27" y1="-0.635" x2="-0.635" y2="-1.27" width="0.2032" layer="21"/>
 <wire x1="0.635" y1="-1.27" x2="-0.635" y2="-1.27" width="0.2032" layer="21"/>
 <wire x1="3.81" y1="0.635" x2="3.81" y2="-0.635" width="0.2032" layer="21"/>
-<pad name="1" x="0" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
-<pad name="2" x="2.54" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
+<pad name="1" x="0" y="0" drill="1.016" rot="R90"/>
+<pad name="2" x="2.54" y="0" drill="1.016" rot="R90"/>
 <text x="-1.3462" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
 <text x="-1.27" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
 <rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
@@ -10137,8 +10137,8 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <wire x1="0" y1="-2.54" x2="0" y2="-1.27" width="0.127" layer="21"/>
 <wire x1="0" y1="-1.27" x2="2.54" y2="-1.27" width="0.127" layer="21"/>
 <wire x1="2.54" y1="-1.27" x2="2.54" y2="-2.54" width="0.127" layer="21"/>
-<pad name="1" x="0" y="0" drill="1.016" diameter="1.8796" shape="square"/>
-<pad name="2" x="2.54" y="0" drill="1.016" diameter="1.8796"/>
+<pad name="1" x="0" y="0" drill="1.016" shape="square"/>
+<pad name="2" x="2.54" y="0" drill="1.016"/>
 </package>
 <package name="SCREWTERMINAL-3.5MM-2">
 <wire x1="-1.75" y1="3.4" x2="5.25" y2="3.4" width="0.2032" layer="21"/>
@@ -10155,8 +10155,8 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <wire x1="5.65" y1="3.15" x2="5.65" y2="2.15" width="0.2032" layer="51"/>
 <wire x1="5.65" y1="2.15" x2="5.25" y2="2.15" width="0.2032" layer="51"/>
 <circle x="2" y="3" radius="0.2828" width="0.127" layer="51"/>
-<pad name="1" x="0" y="0" drill="1.2" diameter="2.032" shape="square"/>
-<pad name="2" x="3.5" y="0" drill="1.2" diameter="2.032"/>
+<pad name="1" x="0" y="0" drill="1.2" shape="square"/>
+<pad name="2" x="3.5" y="0" drill="1.2"/>
 <text x="-1.27" y="2.54" size="0.4064" layer="25">&gt;NAME</text>
 <text x="-1.27" y="1.27" size="0.4064" layer="27">&gt;VALUE</text>
 </package>
@@ -10175,8 +10175,8 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <wire x1="8.7" y1="4" x2="8.7" y2="3" width="0.2032" layer="51"/>
 <wire x1="8.7" y1="3" x2="8.1" y2="3" width="0.2032" layer="51"/>
 <circle x="2.5" y="3.7" radius="0.2828" width="0.127" layer="51"/>
-<pad name="1" x="0" y="0" drill="1.3" diameter="2.032" shape="square"/>
-<pad name="2" x="5" y="0" drill="1.3" diameter="2.032"/>
+<pad name="1" x="0" y="0" drill="1.3" shape="square"/>
+<pad name="2" x="5" y="0" drill="1.3"/>
 <text x="-1.27" y="2.54" size="0.4064" layer="25">&gt;NAME</text>
 <text x="-1.27" y="1.27" size="0.4064" layer="27">&gt;VALUE</text>
 </package>
@@ -10195,8 +10195,8 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <wire x1="-1.27" y1="-0.635" x2="-0.635" y2="-1.27" width="0.2032" layer="21"/>
 <wire x1="0.635" y1="-1.27" x2="-0.635" y2="-1.27" width="0.2032" layer="21"/>
 <wire x1="3.81" y1="0.635" x2="3.81" y2="-0.635" width="0.2032" layer="21"/>
-<pad name="1" x="-0.1778" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
-<pad name="2" x="2.7178" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
+<pad name="1" x="-0.127" y="0" drill="1.016" rot="R90"/>
+<pad name="2" x="2.667" y="0" drill="1.016" rot="R90"/>
 <text x="-1.3462" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
 <text x="-1.27" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
 <rectangle x1="-0.2921" y1="-0.2921" x2="0.2921" y2="0.2921" layer="51"/>
@@ -10212,32 +10212,10 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <wire x1="0" y1="-2.54" x2="0" y2="-1.27" width="0.127" layer="21"/>
 <wire x1="0" y1="-1.27" x2="2.54" y2="-1.27" width="0.127" layer="21"/>
 <wire x1="2.54" y1="-1.27" x2="2.54" y2="-2.54" width="0.127" layer="21"/>
-<pad name="1" x="-0.127" y="0" drill="1.016" diameter="1.8796" shape="square"/>
-<pad name="2" x="2.667" y="0" drill="1.016" diameter="1.8796"/>
+<pad name="1" x="-0.127" y="0" drill="1.016" shape="square"/>
+<pad name="2" x="2.667" y="0" drill="1.016"/>
 <rectangle x1="-0.2921" y1="-0.2921" x2="0.2921" y2="0.2921" layer="51"/>
 <rectangle x1="2.2479" y1="-0.2921" x2="2.8321" y2="0.2921" layer="51"/>
-</package>
-<package name="SCREWTERMINAL-3.5MM-2_LOCK">
-<wire x1="-1.75" y1="3.4" x2="5.25" y2="3.4" width="0.2032" layer="21"/>
-<wire x1="5.25" y1="3.4" x2="5.25" y2="-2.8" width="0.2032" layer="21"/>
-<wire x1="5.25" y1="-2.8" x2="5.25" y2="-3.6" width="0.2032" layer="21"/>
-<wire x1="5.25" y1="-3.6" x2="-1.75" y2="-3.6" width="0.2032" layer="21"/>
-<wire x1="-1.75" y1="-3.6" x2="-1.75" y2="-2.8" width="0.2032" layer="21"/>
-<wire x1="-1.75" y1="-2.8" x2="-1.75" y2="3.4" width="0.2032" layer="21"/>
-<wire x1="5.25" y1="-2.8" x2="-1.75" y2="-2.8" width="0.2032" layer="21"/>
-<wire x1="-1.75" y1="-1.35" x2="-2.15" y2="-1.35" width="0.2032" layer="51"/>
-<wire x1="-2.15" y1="-1.35" x2="-2.15" y2="-2.35" width="0.2032" layer="51"/>
-<wire x1="-2.15" y1="-2.35" x2="-1.75" y2="-2.35" width="0.2032" layer="51"/>
-<wire x1="5.25" y1="3.15" x2="5.65" y2="3.15" width="0.2032" layer="51"/>
-<wire x1="5.65" y1="3.15" x2="5.65" y2="2.15" width="0.2032" layer="51"/>
-<wire x1="5.65" y1="2.15" x2="5.25" y2="2.15" width="0.2032" layer="51"/>
-<circle x="2" y="3" radius="0.2828" width="0.127" layer="51"/>
-<circle x="0" y="0" radius="0.4318" width="0.0254" layer="51"/>
-<circle x="3.5" y="0" radius="0.4318" width="0.0254" layer="51"/>
-<pad name="1" x="-0.1778" y="0" drill="1.2" diameter="2.032" shape="square"/>
-<pad name="2" x="3.6778" y="0" drill="1.2" diameter="2.032"/>
-<text x="-1.27" y="2.54" size="0.4064" layer="25">&gt;NAME</text>
-<text x="-1.27" y="1.27" size="0.4064" layer="27">&gt;VALUE</text>
 </package>
 </packages>
 <symbols>
@@ -10372,15 +10350,6 @@ Standard 2-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </technologies>
 </device>
 <device name="LOCK_LONGPADS" package="1X02_LOCK_LONGPADS">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="3.5MM_LOCK" package="SCREWTERMINAL-3.5MM-2_LOCK">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
@@ -13942,17 +13911,6 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <pad name="P$3" x="2.54" y="5.08" drill="1.1" diameter="1.9"/>
 <pad name="2" x="2.54" y="0" drill="1.1" diameter="1.9"/>
 </package>
-<package name="1X02_2.54_SCREWTERM">
-<pad name="P2" x="0" y="0" drill="0.8" shape="square"/>
-<pad name="P1" x="2.54" y="0" drill="0.8" shape="square"/>
-<wire x1="-1.5" y1="3.25" x2="4" y2="3.25" width="0.127" layer="21"/>
-<wire x1="4" y1="3.25" x2="4" y2="2.5" width="0.127" layer="21"/>
-<wire x1="4" y1="2.5" x2="4" y2="-3.25" width="0.127" layer="21"/>
-<wire x1="4" y1="-3.25" x2="-1.5" y2="-3.25" width="0.127" layer="21"/>
-<wire x1="-1.5" y1="-3.25" x2="-1.5" y2="2.5" width="0.127" layer="21"/>
-<wire x1="-1.5" y1="2.5" x2="-1.5" y2="3.25" width="0.127" layer="21"/>
-<wire x1="-1.5" y1="2.5" x2="4" y2="2.5" width="0.127" layer="21"/>
-</package>
 <package name="1X08">
 <wire x1="14.605" y1="1.27" x2="15.875" y2="1.27" width="0.2032" layer="21"/>
 <wire x1="15.875" y1="1.27" x2="16.51" y2="0.635" width="0.2032" layer="21"/>
@@ -14346,21 +14304,9 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="M02" prefix="JP">
-<description>Standard 2-pin 0.1" header. Use with &lt;br&gt;
-- straight break away headers ( PRT-00116)&lt;br&gt;
-- right angle break away headers (PRT-00553)&lt;br&gt;
-- swiss pins (PRT-00743)&lt;br&gt;
-- machine pins (PRT-00117)&lt;br&gt;
-- female headers (PRT-00115)&lt;br&gt;&lt;br&gt;
-
- Molex polarized connector foot print use with: PRT-08233 with associated crimp pins and housings.&lt;br&gt;&lt;br&gt;
-
-2.54_SCREWTERM for use with  PRT-10571.&lt;br&gt;&lt;br&gt;
-
-3.5mm Screw Terminal footprints for  PRT-08084&lt;br&gt;&lt;br&gt;
-
-5mm Screw Terminal footprints for use with PRT-08433</description>
+<deviceset name="M02" prefix="JP" uservalue="yes">
+<description>&lt;b&gt;Header 2&lt;/b&gt;
+Standard 2-pin 0.1" header. Use with straight break away headers (SKU : PRT-00116), right angle break away headers (PRT-00553), swiss pins (PRT-00743), machine pins (PRT-00117), and female headers (PRT-00115). Molex polarized connector foot print use with SKU : PRT-08233 with associated crimp pins and housings.</description>
 <gates>
 <gate name="G$1" symbol="M02" x="-2.54" y="0"/>
 </gates>
@@ -14551,15 +14497,6 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="2.54MM_SCREWTERM" package="1X02_2.54_SCREWTERM">
-<connects>
-<connect gate="G$1" pin="1" pad="P1"/>
-<connect gate="G$1" pin="2" pad="P2"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -14937,7 +14874,6 @@ IC needs to have legs bent before insertion.</description>
 <pin name="DCPRG" x="-12.7" y="-5.08" length="short"/>
 <pin name="IREF" x="-12.7" y="-12.7" length="short"/>
 <pin name="VCC" x="-12.7" y="17.78" length="short"/>
-<wire x1="10.16" y1="20.32" x2="-10.16" y2="20.32" width="0.254" layer="94"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -15062,6 +14998,134 @@ IC needs to have legs bent before insertion.</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="NPX PCA9635">
+<packages>
+<package name="PCA9635">
+<wire x1="0" y1="0" x2="9.7" y2="0" width="0.127" layer="21"/>
+<wire x1="9.7" y1="0" x2="9.7" y2="4.4" width="0.127" layer="21"/>
+<wire x1="9.7" y1="4.4" x2="0" y2="4.4" width="0.127" layer="21"/>
+<wire x1="0" y1="4.4" x2="0" y2="0" width="0.127" layer="21"/>
+<circle x="0.7" y="0.8" radius="0.5" width="0.127" layer="21"/>
+<smd name="1" x="0.65" y="-0.6" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="2" x="1.3" y="-0.6" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="3" x="1.95" y="-0.6" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="4" x="2.6" y="-0.6" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="5" x="3.25" y="-0.6" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="6" x="3.9" y="-0.6" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="7" x="4.55" y="-0.6" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="8" x="5.2" y="-0.6" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="9" x="5.85" y="-0.6" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="10" x="6.45" y="-0.6" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="11" x="7.1" y="-0.6" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="12" x="7.75" y="-0.6" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="13" x="8.4" y="-0.6" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="14" x="9.05" y="-0.6" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="15" x="9.05" y="5" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="16" x="8.4" y="5" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="17" x="7.75" y="5" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="18" x="7.1" y="5" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="19" x="6.45" y="5" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="20" x="5.85" y="5" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="21" x="5.2" y="5" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="22" x="4.55" y="5" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="23" x="3.9" y="5" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="24" x="3.25" y="5" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="25" x="2.6" y="5" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="26" x="1.95" y="5" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="27" x="1.3" y="5" dx="1" dy="0.25" layer="1" rot="R90"/>
+<smd name="28" x="0.65" y="5" dx="1" dy="0.25" layer="1" rot="R90"/>
+<text x="0" y="5.9" size="1.27" layer="25">&gt;NAME</text>
+<text x="-0.1" y="-2.7" size="1.27" layer="27">&gt;VALUE</text>
+<text x="-0.3" y="-0.9" size="0.4064" layer="27">1</text>
+<text x="9.5" y="-0.9" size="0.4064" layer="27">14</text>
+<text x="9.6" y="4.8" size="0.4064" layer="27">15</text>
+<text x="-0.6" y="4.8" size="0.4064" layer="27">28</text>
+</package>
+</packages>
+<symbols>
+<symbol name="PCA9635">
+<wire x1="-22.86" y1="22.86" x2="25.4" y2="22.86" width="0.254" layer="94"/>
+<wire x1="25.4" y1="22.86" x2="25.4" y2="-22.86" width="0.254" layer="94"/>
+<wire x1="25.4" y1="-22.86" x2="-22.86" y2="-22.86" width="0.254" layer="94"/>
+<wire x1="-22.86" y1="-22.86" x2="-22.86" y2="22.86" width="0.254" layer="94"/>
+<pin name="LED0" x="30.48" y="20.32" length="middle" rot="R180"/>
+<pin name="LED1" x="30.48" y="17.78" length="middle" rot="R180"/>
+<pin name="LED2" x="30.48" y="15.24" length="middle" rot="R180"/>
+<pin name="LED3" x="30.48" y="12.7" length="middle" rot="R180"/>
+<pin name="LED4" x="30.48" y="10.16" length="middle" rot="R180"/>
+<pin name="LED5" x="30.48" y="7.62" length="middle" rot="R180"/>
+<pin name="LED6" x="30.48" y="5.08" length="middle" rot="R180"/>
+<pin name="LED7" x="30.48" y="2.54" length="middle" rot="R180"/>
+<pin name="LED8" x="30.48" y="-2.54" length="middle" rot="R180"/>
+<pin name="LED9" x="30.48" y="-5.08" length="middle" rot="R180"/>
+<pin name="LED10" x="30.48" y="-7.62" length="middle" rot="R180"/>
+<pin name="LED11" x="30.48" y="-10.16" length="middle" rot="R180"/>
+<pin name="LED12" x="30.48" y="-12.7" length="middle" rot="R180"/>
+<pin name="LED13" x="30.48" y="-15.24" length="middle" rot="R180"/>
+<pin name="LED14" x="30.48" y="-17.78" length="middle" rot="R180"/>
+<pin name="LED15" x="30.48" y="-20.32" length="middle" rot="R180"/>
+<pin name="SCL" x="-27.94" y="15.24" length="middle"/>
+<pin name="SDA" x="-27.94" y="12.7" length="middle"/>
+<pin name="VDD" x="-27.94" y="2.54" length="middle"/>
+<pin name="VSS" x="-27.94" y="0" length="middle"/>
+<pin name="OE" x="-27.94" y="-20.32" length="middle"/>
+<pin name="A0" x="-7.62" y="27.94" length="middle" rot="R270"/>
+<pin name="A1" x="-5.08" y="27.94" length="middle" rot="R270"/>
+<pin name="A2" x="-2.54" y="27.94" length="middle" rot="R270"/>
+<pin name="A3" x="0" y="27.94" length="middle" rot="R270"/>
+<pin name="A4" x="2.54" y="27.94" length="middle" rot="R270"/>
+<pin name="A5" x="5.08" y="27.94" length="middle" rot="R270"/>
+<pin name="A6" x="7.62" y="27.94" length="middle" rot="R270"/>
+<text x="-22.86" y="25.4" size="1.778" layer="95">&gt;NAME</text>
+<text x="-22.86" y="-27.94" size="1.778" layer="96">&gt;VALUE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="PCA9635">
+<description>16 pin PWM with 8 bit per-channel PWM, and 7 bit group PWM on I2C bus</description>
+<gates>
+<gate name="G$1" symbol="PCA9635" x="-7.62" y="0"/>
+</gates>
+<devices>
+<device name="" package="PCA9635">
+<connects>
+<connect gate="G$1" pin="A0" pad="1"/>
+<connect gate="G$1" pin="A1" pad="2"/>
+<connect gate="G$1" pin="A2" pad="3"/>
+<connect gate="G$1" pin="A3" pad="4"/>
+<connect gate="G$1" pin="A4" pad="5"/>
+<connect gate="G$1" pin="A5" pad="24"/>
+<connect gate="G$1" pin="A6" pad="25"/>
+<connect gate="G$1" pin="LED0" pad="6"/>
+<connect gate="G$1" pin="LED1" pad="7"/>
+<connect gate="G$1" pin="LED10" pad="17"/>
+<connect gate="G$1" pin="LED11" pad="18"/>
+<connect gate="G$1" pin="LED12" pad="19"/>
+<connect gate="G$1" pin="LED13" pad="20"/>
+<connect gate="G$1" pin="LED14" pad="21"/>
+<connect gate="G$1" pin="LED15" pad="22"/>
+<connect gate="G$1" pin="LED2" pad="8"/>
+<connect gate="G$1" pin="LED3" pad="9"/>
+<connect gate="G$1" pin="LED4" pad="10"/>
+<connect gate="G$1" pin="LED5" pad="11"/>
+<connect gate="G$1" pin="LED6" pad="12"/>
+<connect gate="G$1" pin="LED7" pad="13"/>
+<connect gate="G$1" pin="LED8" pad="15"/>
+<connect gate="G$1" pin="LED9" pad="16"/>
+<connect gate="G$1" pin="OE" pad="23"/>
+<connect gate="G$1" pin="SCL" pad="26"/>
+<connect gate="G$1" pin="SDA" pad="27"/>
+<connect gate="G$1" pin="VDD" pad="28"/>
+<connect gate="G$1" pin="VSS" pad="14"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 <attribute name="ABBREV" value="jn6"/>
@@ -15131,6 +15195,7 @@ IC needs to have legs bent before insertion.</description>
 <part name="JP4" library="pinhead" deviceset="PINHD-1X4" device="/90"/>
 <part name="LED4" library="SparkFun-LED" deviceset="LED-TRICOLOR-5050" device="NO_IC"/>
 <part name="JP5" library="pinhead" deviceset="PINHD-1X4" device="/90"/>
+<part name="U$1" library="NPX PCA9635" deviceset="PCA9635" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -15215,6 +15280,7 @@ IC needs to have legs bent before insertion.</description>
 <instance part="JP4" gate="A" x="297.18" y="86.36" rot="MR0"/>
 <instance part="LED4" gate="D1" x="327.66" y="66.04" smashed="yes"/>
 <instance part="JP5" gate="A" x="297.18" y="68.58" rot="MR0"/>
+<instance part="U$1" gate="G$1" x="205.74" y="177.8"/>
 </instances>
 <busses>
 </busses>
