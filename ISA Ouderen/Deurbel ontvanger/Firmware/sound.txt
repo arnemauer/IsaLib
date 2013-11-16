@@ -1,0 +1,9 @@
+http://code.google.com/p/playing-music-with-atmega328-pwm/
+
+pwm sound met timer 0 en timer 1
+
+Videos of the projects:
+
+http://www.youtube.com/watch?v=dWjsupWdNiI (Brasileirinho - Guitar)
+
+http://www.youtube.com/watch?v=v3vlXswfGGs (Turkish March - Piano) 
