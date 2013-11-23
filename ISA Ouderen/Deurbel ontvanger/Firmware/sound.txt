@@ -7,3 +7,10 @@ Videos of the projects:
 http://www.youtube.com/watch?v=dWjsupWdNiI (Brasileirinho - Guitar)
 
 http://www.youtube.com/watch?v=v3vlXswfGGs (Turkish March - Piano) 
+
+
+
+
+
+VOORBEELDE
+https://code.google.com/p/arduino-nodo/source/browse/Nodo_Due/Sound.pde?r=183
