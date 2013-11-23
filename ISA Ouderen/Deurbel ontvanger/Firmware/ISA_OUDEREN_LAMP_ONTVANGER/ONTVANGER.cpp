@@ -19,7 +19,10 @@
 #include <avr/interrupt.h>
 
 #include <avr/pgmspace.h>
-
+#define byte uint8_t
+#include "delay.c"
+#include "millis.h"
+#include "toneAC.h"
 
 #define TicksPorTempo 200000
 
@@ -211,83 +214,115 @@ const unsigned char Tempo2[864] PROGMEM ={
 	192,24,24,24,24,24,12,24,24,24,36,24,12,24,12,36,24,24,24,24,24,12,12,24,24,24,12,12,24,24,24,12,24,72,24,24,24,24,24,12,24,24,24,24,12,24,12,24,12,36,24,24,24,24,24,12,12,24,24,24,12,12,24,12,12,24,12,12,24,12,12,24,12,24,24,24,24,24,12,24,24,24,24,24,24,12,24,12,24,24,24,24,12,24,12,12,24,12,24,24,24,24,24,24,12,24,12,24,24,12,36,36,36,36,24,24,36,36,36,36,48,36,36,36,36,24,24,24,24,24,24,24,72,24,24,24,24,24,12,24,24,24,36,24,24,12,24,24,24,24,36,24,24,24,12,24,24,24,24,24,24,12,24,24,48,36,36,36,36,24,24,24,24,24,24,24,72,24,24,24,24,24,12,24,24,24,36,24,24,24,24,12,24,12,12,24,12,12,24,12,12,24,12,12,24,12,12,24,12,12,24,12,12,24,24,24,24,36,24,12,36,36,24,24,24,24,24,12,24,24,24,36,36,24,24,36,24,24,24,36,24,12,24,12,24,12,24,24,24,12,12,24,12,12,24,12,12,12,12,12,12,24,12,12,24,12,24,72,24,24,24,24,24,12,24,24,24,24,12,24,12,24,12,24,12,24,24,24,12,12,24,12,12,24,12,12,24,12,12,24,12,12,24,12,24,72,24,24,24,24,24,12,24,24,24,24,12,24,12,24,12,24,12,24,24,24,12,12,24,12,12,24,24,24,12,12,24,24,24,12,24,12,24,24,12,24,24,24,24,36,24,24,12,12,24,24,24,12,12,24,24,24,12,24,12,24,12,24,12,24,12,36,24,12,24,12,24,12,24,12,24,24,12,72,36,36,24,24,36,36,36,36,48,36,36,36,36,24,24,36,12,36,12,36,12,36,12,36,12,36,12,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,96,96,96,36,98
 };
 
+// ---------------------------------------------------------------------------
+// Created by Tim Eckel - teckel@leethost.com
+// Copyright 2013 License: GNU GPL v3 http://www.gnu.org/licenses/gpl-3.0.html
+//
+// See "toneAC.h" for purpose, syntax, version history, links, and more.
+// ---------------------------------------------------------------------------
 
-int main()
-{
+#include "toneAC.h"
 
-	DDRD|=0xFF; // Seta porta D output (pino PWM)
+// ---------------------------------------------------------------------------
+// Connect your piezo buzzer (without internal oscillator) or speaker to these pins:
+//   Pins  9 & 10 - ATmega328, ATmega128, ATmega640, ATmega8, Uno, Leonardo, etc.
+//   Pins 11 & 12 - ATmega2560/2561, ATmega1280/1281, Mega
+//   Pins 12 & 13 - ATmega1284P, ATmega644
+//   Pins 14 & 15 - Teensy 2.0
+//   Pins 25 & 26 - Teensy++ 2.0
+// Be sure to include an inline 100 ohm resistor on one pin as you normally do when connecting a piezo or speaker.
+// ---------------------------------------------------------------------------
 
-	TCCR0A|=(1<<WGM00)|(1<<WGM01)|(1<<COM0A1)|(1<<COM0A0);
-	// |(1<<COM0B1)|(1<<COM0B0); // T0 Modo Fast PWM
-	TCCR0B|=(1<<CS00); // Inicia Timer0 c/ prescaler 1/1
 
-	TCCR1B|=(1<<WGM12); // Timer 1 = CTC mode
-	TIMSK1|=(1<<OCIE1A); // Enable CTC Compare A interrupt
-	TCCR1B|=(1<<CS10); // Inicia Timer1 c/ prescaler 1/1
 
-	TCCR2A|=(1<<WGM21); // Timer 2 = CTC mode
-	TIMSK2|=(1<<OCIE2A); // Enable CTC Compare A interrupt
-	TCCR2B|=(1<<CS21); // Inicia Timer2 c/ prescaler 1/8
+// Melody liberated from the toneMelody Arduino example sketch by Tom Igoe.
+int melody[] = { 262, 196, 196, 220, 196, 0, 247, 262 };
+int noteDurations[] = { 4, 8, 8, 4, 4, 4, 4, 4 };
 
-	SizeMusic=sizeof(Tempo1);
 
+
+int main() {
+	
 	sei();
-	while (1) {} //LOOP
+	        // Initialize library
+	        millis_init();
+			
 
+//MELODIE AFSPELEN 
+/*
+  for (int thisNote = 0; thisNote < 8; thisNote++) {
+	  int noteDuration = 1000/noteDurations[thisNote];
+	  toneAC(melody[thisNote], 10, noteDuration, true); // Play thisNote at full volume for noteDuration in the background.
+	  var_delay_ms(noteDuration * 4 / 3); // Wait while the tone plays in the background, plus another 33% delay between notes.
+  }
+	toneAC(); // Turn off toneAC, can also use noToneAC().
+*/
+//MELODIE AFSPELEN 
+
+	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
+	
+	
+// WHOOP UP
+	byte x;
+		for(x=50;x>0;x++){
+			toneAC((250*x/20) );
+			_delay_ms(30); // Wait a second.
+		}
+		toneAC(); // Turn off toneAC, can also use noToneAC().
+		_delay_ms(500);
+// WHOOP UP
+
+_delay_ms(4000);
+
+
+// WHOOP DOWN
+for(x=50;x>0;x--){
+	toneAC((250*x/20) );
+	_delay_ms(30); // Wait a second.
 }
-
-
-
-ISR(TIMER2_COMPA_vect)
-{
-	if (cont2<10000) OCR0B=pgm_read_byte(&(piano[cont2]));
-	cont2++;
-	if (cont2>T2) {
-		Periodo2temp=pgm_read_word(&(Periodo2[n2]));
-		if (Periodo2temp==0) {
-			TCCR0A&= 0xCF; // PWM B OFF
-			Periodo2temp=1600;
-		}
-		else TCCR0A|= 0x30; // PWM B ON
-		if (Periodo2temp>2000) {
-			TCCR2B|= 0x01; // prescaler 1/32
-			OCR2A=Periodo2temp/32;
-			T2=TicksPorTempo*pgm_read_byte(&(Tempo2[n2]))/Periodo2temp;
-			} else {
-			TCCR2B&= 0xFE; // prescaler 1/8
-			OCR2A=Periodo2temp/8;
-			T2=TicksPorTempo*pgm_read_byte(&(Tempo2[n2]))/Periodo2temp;
-		}
-		cont2=0;
-		asd=T2/pgm_read_byte(&(Tempo2[n2]));
-		if (n2>0) TemposPassados2+=pgm_read_byte(&(Tempo2[n2-1]));
-		n2++;
-		} else {
-		TP2=TemposPassados2+( cont2/asd  );
+toneAC(); // Turn off toneAC, can also use noToneAC().
+_delay_ms(500);
+// WHOOP DOWN
+		
+	
+_delay_ms(4000);		
+		
+		
+// DOORBELL
+for(x=2;x>0;x++){
+toneAC(1500, 10, 500, true); // Play thisNote at full volume for noteDuration in the background.
+_delay_ms(500);
+toneAC(1200, 10, 500, true); // Play thisNote at full volume for noteDuration in the background.
+}
+//DOORBELL		
+	
+	_delay_ms(4000);
+	
+// Phone ring
+byte Duration = 1;
+//byte x;
+byte y;
+	for(y=0;y<3;y++){
+	      for(x=0;x<(15*Duration);x++)
+	      {
+			toneAC(1000, 10, 40); // Play thisNote at full volume for noteDuration in the background.
+			toneAC(750, 10, 40); // Play thisNote at full volume for noteDuration in the background.
+	      }
+		  _delay_ms(1200);
 	}
-}
-
-ISR(TIMER1_COMPA_vect)
-{
-	if (cont1<10000) OCR0A=pgm_read_word(&(piano[cont1]));
-	if (TemposPassados1<=TP2) cont1++;
-	if (cont1>T1) {
-		Periodo1temp=pgm_read_word(&(Periodo1[n1]));
-		if (Periodo1temp==0) {
-			TCCR0A&= 0x3F; // PWM A OFF
-			Periodo1temp=1600;
-		}
-		else TCCR0A|= 0xC0; // PWM A ON
-		OCR1A=Periodo1temp;
-		T1=TicksPorTempo*pgm_read_byte(&(Tempo1[n1]))/Periodo1temp;
-		if (n1>0) TemposPassados1+=pgm_read_byte(&(Tempo1[n1-1]));
-		cont1=0;
-		n1++;
-		if (n1>SizeMusic) { while (1) {} }
+			  
+		  
+	
+// Phone ring			
+		
+		
+		_delay_ms(10000);
 	}
+	
+	
+	
+	
 }
-
-
 
 
 // GEBLEVEN BIJ SPI INIT, RFM INITIALISE funtie die verwijst naar SPIINIT();

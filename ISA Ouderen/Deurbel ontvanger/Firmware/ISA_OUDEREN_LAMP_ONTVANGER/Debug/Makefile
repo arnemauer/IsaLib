@@ -36,8 +36,11 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../delay.c \
 ../log.c \
-../ONTVANGER.cpp
+../millis.c \
+../ONTVANGER.cpp \
+../toneAC.cpp
 
 
 PREPROCESSING_SRCS += 
@@ -47,20 +50,32 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+delay.o \
 log.o \
-ONTVANGER.o
+millis.o \
+ONTVANGER.o \
+toneAC.o
 
 OBJS_AS_ARGS +=  \
+delay.o \
 log.o \
-ONTVANGER.o
+millis.o \
+ONTVANGER.o \
+toneAC.o
 
 C_DEPS +=  \
+delay.d \
 log.d \
-ONTVANGER.d
+millis.d \
+ONTVANGER.d \
+toneAC.d
 
 C_DEPS_AS_ARGS +=  \
+delay.d \
 log.d \
-ONTVANGER.d
+millis.d \
+ONTVANGER.d \
+toneAC.d
 
 OUTPUT_FILE_PATH +=ONTVANGER.elf
 
@@ -73,6 +88,12 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
 
 
 

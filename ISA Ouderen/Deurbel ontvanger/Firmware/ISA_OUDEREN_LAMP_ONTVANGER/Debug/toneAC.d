@@ -1,4 +1,4 @@
-ONTVANGER.d ONTVANGER.o: .././ONTVANGER.cpp .././config.h \
+toneAC.d toneAC.o: .././toneAC.cpp .././config.h \
  c:\program\ files\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/io.h \
  c:\program\ files\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/sfr_defs.h \
  c:\program\ files\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/inttypes.h \
@@ -20,7 +20,7 @@ ONTVANGER.d ONTVANGER.o: .././ONTVANGER.cpp .././config.h \
  c:\program\ files\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/include/stddef.h \
  c:\program\ files\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/string.h \
  c:\program\ files\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/pgmspace.h \
- .././delay.c .././millis.h .././toneAC.h
+ .././millis.h .././toneAC.h
 
 .././config.h:
 
@@ -65,8 +65,6 @@ c:\program\ files\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-to
 c:\program\ files\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/string.h:
 
 c:\program\ files\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/pgmspace.h:
-
-.././delay.c:
 
 .././millis.h:
 

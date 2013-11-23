@@ -5,7 +5,7 @@
  * License: GNU GPL v3 (see License.txt)
  * Web: http://blog.zakkemble.co.uk/millisecond-tracking-library-for-avr/
  */
-
+#include "config.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/power.h>

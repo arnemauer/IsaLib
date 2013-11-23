@@ -131,16 +131,25 @@
     <Compile Include="config.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="delay.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="log.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="log.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="millis.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="ONTVANGER.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="ONTVANGER.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="toneAC.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="uart.h">
