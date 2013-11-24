@@ -289,10 +289,11 @@ _delay_ms(4000);
 		
 		
 // DOORBELL
-for(x=2;x>0;x++){
+for(x=0;x<2;x++){
 toneAC(1500, 10, 500, true); // Play thisNote at full volume for noteDuration in the background.
 _delay_ms(500);
 toneAC(1200, 10, 500, true); // Play thisNote at full volume for noteDuration in the background.
+_delay_ms(1500);
 }
 //DOORBELL		
 	
@@ -314,6 +315,29 @@ byte y;
 		  
 	
 // Phone ring			
+		
+		_delay_ms(4000);
+
+         toneAC(1200,10, 50);
+         _delay_ms(100);
+         toneAC(1200,10, 50);
+         _delay_ms(100);
+         toneAC(1200,10, 50);
+         _delay_ms(200);
+         toneAC(1200,10, 300);
+         _delay_ms(100);
+         toneAC(1200,10, 300);
+         _delay_ms(100);
+         toneAC(1200,10, 300);
+         _delay_ms(200);
+         toneAC(1200,10, 50);
+         _delay_ms(100);
+         toneAC(1200,10, 50);
+         _delay_ms(100);
+         toneAC(1200,10, 50);
+		
+		
+		
 		
 		
 		_delay_ms(10000);
