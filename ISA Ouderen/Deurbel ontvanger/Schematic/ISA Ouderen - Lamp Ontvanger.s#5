@@ -14830,7 +14830,7 @@ Source: avr.lbr</description>
 <part name="SUPPLY17" library="supply2" deviceset="GND" device=""/>
 <part name="R29" library="resistor" deviceset="R-EU_" device="0207/7" value="1K"/>
 <part name="SUPPLY18" library="SparkFun" deviceset="VCC" device=""/>
-<part name="Q15" library="special" deviceset="XTAL/S" device="" value="16mhz"/>
+<part name="Q15" library="special" deviceset="XTAL/S" device=""/>
 <part name="+3V1" library="supply1" deviceset="+3V3" device=""/>
 <part name="SUPPLY19" library="supply2" deviceset="GND" device=""/>
 <part name="+3V2" library="supply1" deviceset="+3V3" device=""/>
