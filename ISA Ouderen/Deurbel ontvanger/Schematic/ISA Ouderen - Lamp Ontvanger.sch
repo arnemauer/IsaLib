@@ -11551,7 +11551,7 @@ manufacturer Siemens</description>
 <classes>
 <class number="0" name="default" width="0" drill="0">
 </class>
-<class number="1" name="power" width="0.381" drill="0">
+<class number="1" name="power" width="0.2032" drill="0">
 <clearance class="1" value="0.254"/>
 </class>
 </classes>
