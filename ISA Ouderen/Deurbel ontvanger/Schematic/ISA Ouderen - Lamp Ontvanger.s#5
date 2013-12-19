@@ -11619,6 +11619,10 @@ manufacturer Siemens</description>
 <part name="LED2" library="adafruit" deviceset="RGBLED_CA" device="-5MM"/>
 <part name="LED3" library="adafruit" deviceset="RGBLED_CA" device="-5MM"/>
 <part name="LED4" library="adafruit" deviceset="RGBLED_CA" device="-5MM"/>
+<part name="R16" library="resistor" deviceset="R-EU_" device="R0805" value="240"/>
+<part name="R17" library="resistor" deviceset="R-EU_" device="R0805" value="240"/>
+<part name="R18" library="resistor" deviceset="R-EU_" device="R0805" value="240"/>
+<part name="R19" library="resistor" deviceset="R-EU_" device="R0805" value="240"/>
 </parts>
 <sheets>
 <sheet>
@@ -11725,13 +11729,13 @@ manufacturer Siemens</description>
 <instance part="+3V9" gate="G$1" x="119.38" y="152.4"/>
 <instance part="SV1" gate="-1" x="50.8" y="25.4"/>
 <instance part="SV1" gate="-2" x="50.8" y="27.94"/>
-<instance part="SV1" gate="-3" x="220.98" y="144.78"/>
+<instance part="SV1" gate="-3" x="228.6" y="144.78"/>
 <instance part="SV1" gate="-4" x="256.54" y="144.78"/>
-<instance part="SV1" gate="-5" x="220.98" y="142.24"/>
+<instance part="SV1" gate="-5" x="228.6" y="142.24"/>
 <instance part="SV1" gate="-6" x="256.54" y="142.24"/>
-<instance part="SV1" gate="-7" x="220.98" y="139.7"/>
+<instance part="SV1" gate="-7" x="228.6" y="139.7"/>
 <instance part="SV1" gate="-8" x="256.54" y="139.7"/>
-<instance part="SV1" gate="-9" x="220.98" y="137.16"/>
+<instance part="SV1" gate="-9" x="228.6" y="137.16"/>
 <instance part="SV1" gate="-10" x="256.54" y="137.16"/>
 <instance part="S1" gate="1" x="-12.7" y="139.7" rot="R270"/>
 <instance part="SUPPLY4" gate="GND" x="-20.32" y="132.08"/>
@@ -11739,6 +11743,22 @@ manufacturer Siemens</description>
 <instance part="LED2" gate="G$1" x="238.76" y="119.38" rot="R180"/>
 <instance part="LED3" gate="G$1" x="238.76" y="96.52" rot="R180"/>
 <instance part="LED4" gate="G$1" x="238.76" y="73.66" rot="R180"/>
+<instance part="R16" gate="G$1" x="215.9" y="144.78" smashed="yes">
+<attribute name="NAME" x="209.09" y="145.2786" size="1.778" layer="95"/>
+<attribute name="VALUE" x="220.09" y="145.478" size="1.778" layer="96"/>
+</instance>
+<instance part="R17" gate="G$1" x="215.9" y="142.24" smashed="yes">
+<attribute name="NAME" x="209.09" y="142.7386" size="1.778" layer="95"/>
+<attribute name="VALUE" x="220.09" y="142.938" size="1.778" layer="96"/>
+</instance>
+<instance part="R18" gate="G$1" x="215.9" y="139.7" smashed="yes">
+<attribute name="NAME" x="209.09" y="140.1986" size="1.778" layer="95"/>
+<attribute name="VALUE" x="220.09" y="140.398" size="1.778" layer="96"/>
+</instance>
+<instance part="R19" gate="G$1" x="215.9" y="137.16" smashed="yes">
+<attribute name="NAME" x="209.09" y="137.6586" size="1.778" layer="95"/>
+<attribute name="VALUE" x="220.09" y="137.858" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -12371,11 +12391,11 @@ manufacturer Siemens</description>
 </net>
 <net name="N$31" class="0">
 <segment>
-<pinref part="R5" gate="G$1" pin="1"/>
-<wire x1="218.44" y1="124.46" x2="210.82" y2="124.46" width="0.1524" layer="91"/>
-<wire x1="210.82" y1="124.46" x2="210.82" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="U$1" gate="G$1" pin="LED8"/>
 <wire x1="190.5" y1="109.22" x2="210.82" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="109.22" x2="210.82" y2="124.46" width="0.1524" layer="91"/>
+<pinref part="R5" gate="G$1" pin="1"/>
+<wire x1="210.82" y1="124.46" x2="218.44" y2="124.46" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$27" class="0">
@@ -12383,8 +12403,8 @@ manufacturer Siemens</description>
 <pinref part="U$1" gate="G$1" pin="LED3"/>
 <wire x1="190.5" y1="124.46" x2="200.66" y2="124.46" width="0.1524" layer="91"/>
 <wire x1="200.66" y1="124.46" x2="200.66" y2="144.78" width="0.1524" layer="91"/>
-<pinref part="SV1" gate="-3" pin="S"/>
-<wire x1="218.44" y1="144.78" x2="200.66" y2="144.78" width="0.1524" layer="91"/>
+<pinref part="R16" gate="G$1" pin="1"/>
+<wire x1="210.82" y1="144.78" x2="200.66" y2="144.78" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$32" class="0">
@@ -12392,8 +12412,8 @@ manufacturer Siemens</description>
 <pinref part="U$1" gate="G$1" pin="LED4"/>
 <wire x1="190.5" y1="121.92" x2="203.2" y2="121.92" width="0.1524" layer="91"/>
 <wire x1="203.2" y1="121.92" x2="203.2" y2="142.24" width="0.1524" layer="91"/>
-<pinref part="SV1" gate="-5" pin="S"/>
-<wire x1="218.44" y1="142.24" x2="203.2" y2="142.24" width="0.1524" layer="91"/>
+<pinref part="R17" gate="G$1" pin="1"/>
+<wire x1="210.82" y1="142.24" x2="203.2" y2="142.24" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$28" class="0">
@@ -12410,8 +12430,8 @@ manufacturer Siemens</description>
 <pinref part="U$1" gate="G$1" pin="LED5"/>
 <wire x1="190.5" y1="119.38" x2="205.74" y2="119.38" width="0.1524" layer="91"/>
 <wire x1="205.74" y1="119.38" x2="205.74" y2="139.7" width="0.1524" layer="91"/>
-<pinref part="SV1" gate="-7" pin="S"/>
-<wire x1="218.44" y1="139.7" x2="205.74" y2="139.7" width="0.1524" layer="91"/>
+<pinref part="R18" gate="G$1" pin="1"/>
+<wire x1="210.82" y1="139.7" x2="205.74" y2="139.7" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$37" class="0">
@@ -12419,19 +12439,43 @@ manufacturer Siemens</description>
 <pinref part="U$1" gate="G$1" pin="LED6"/>
 <wire x1="190.5" y1="116.84" x2="208.28" y2="116.84" width="0.1524" layer="91"/>
 <wire x1="208.28" y1="116.84" x2="208.28" y2="137.16" width="0.1524" layer="91"/>
-<pinref part="SV1" gate="-9" pin="S"/>
-<wire x1="218.44" y1="137.16" x2="208.28" y2="137.16" width="0.1524" layer="91"/>
+<pinref part="R19" gate="G$1" pin="1"/>
+<wire x1="210.82" y1="137.16" x2="208.28" y2="137.16" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$39" class="0">
 <segment>
-<pinref part="R7" gate="G$1" pin="1"/>
-<wire x1="215.9" y1="114.3" x2="218.44" y2="114.3" width="0.1524" layer="91"/>
 <pinref part="U$1" gate="G$1" pin="LED7"/>
-<wire x1="190.5" y1="114.3" x2="203.2" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="203.2" y1="114.3" x2="203.2" y2="111.76" width="0.1524" layer="91"/>
-<wire x1="203.2" y1="111.76" x2="215.9" y2="111.76" width="0.1524" layer="91"/>
-<wire x1="215.9" y1="111.76" x2="215.9" y2="114.3" width="0.1524" layer="91"/>
+<pinref part="R7" gate="G$1" pin="1"/>
+<wire x1="218.44" y1="114.3" x2="190.5" y2="114.3" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$29" class="0">
+<segment>
+<pinref part="SV1" gate="-3" pin="S"/>
+<pinref part="R16" gate="G$1" pin="2"/>
+<wire x1="220.98" y1="144.78" x2="226.06" y2="144.78" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$40" class="0">
+<segment>
+<pinref part="SV1" gate="-5" pin="S"/>
+<pinref part="R17" gate="G$1" pin="2"/>
+<wire x1="220.98" y1="142.24" x2="226.06" y2="142.24" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$41" class="0">
+<segment>
+<pinref part="SV1" gate="-7" pin="S"/>
+<pinref part="R18" gate="G$1" pin="2"/>
+<wire x1="220.98" y1="139.7" x2="226.06" y2="139.7" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$42" class="0">
+<segment>
+<pinref part="SV1" gate="-9" pin="S"/>
+<pinref part="R19" gate="G$1" pin="2"/>
+<wire x1="220.98" y1="137.16" x2="226.06" y2="137.16" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

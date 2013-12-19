@@ -11551,7 +11551,7 @@ manufacturer Siemens</description>
 <classes>
 <class number="0" name="default" width="0" drill="0">
 </class>
-<class number="1" name="power" width="0.381" drill="0">
+<class number="1" name="power" width="0.2032" drill="0">
 <clearance class="1" value="0.254"/>
 </class>
 </classes>
@@ -11619,10 +11619,10 @@ manufacturer Siemens</description>
 <part name="LED2" library="adafruit" deviceset="RGBLED_CA" device="-5MM"/>
 <part name="LED3" library="adafruit" deviceset="RGBLED_CA" device="-5MM"/>
 <part name="LED4" library="adafruit" deviceset="RGBLED_CA" device="-5MM"/>
-<part name="R16" library="resistor" deviceset="R-EU_" device="R0805" value="240"/>
-<part name="R17" library="resistor" deviceset="R-EU_" device="R0805" value="240"/>
-<part name="R18" library="resistor" deviceset="R-EU_" device="R0805" value="240"/>
-<part name="R19" library="resistor" deviceset="R-EU_" device="R0805" value="240"/>
+<part name="R16" library="resistor" deviceset="R-EU_" device="0207/2V" value="240"/>
+<part name="R17" library="resistor" deviceset="R-EU_" device="0207/2V" value="240"/>
+<part name="R18" library="resistor" deviceset="R-EU_" device="0207/2V" value="240"/>
+<part name="R19" library="resistor" deviceset="R-EU_" device="0207/2V" value="240"/>
 </parts>
 <sheets>
 <sheet>
@@ -12137,9 +12137,9 @@ manufacturer Siemens</description>
 <label x="25.4" y="7.62" size="1.778" layer="95" rot="R180"/>
 </segment>
 <segment>
-<pinref part="IC1" gate="G$1" pin="PD6(AIN0)"/>
-<wire x1="86.36" y1="101.6" x2="91.44" y2="101.6" width="0.1524" layer="91"/>
-<label x="91.44" y="101.6" size="1.778" layer="95"/>
+<label x="91.44" y="93.98" size="1.778" layer="95"/>
+<pinref part="IC1" gate="G$1" pin="PB0(ICP)"/>
+<wire x1="86.36" y1="93.98" x2="91.44" y2="93.98" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$51" class="0">

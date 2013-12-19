@@ -11557,7 +11557,7 @@ manufacturer Siemens</description>
 </classes>
 <parts>
 <part name="FTDI" library="JeeLabs" deviceset="MA06-1" device="" value="FTDI"/>
-<part name="R1" library="resistor" deviceset="R-EU_" device="0207/2V" value="10k"/>
+<part name="R1" library="resistor" deviceset="R-EU_" device="0207/7" value="10k"/>
 <part name="SUPPLY9" library="supply2" deviceset="GND" device=""/>
 <part name="IC2" library="JeeLabs" deviceset="MCP1702" device="Z" value="MCP1702-33"/>
 <part name="C1" library="resistor" deviceset="C-EU" device="025-024X044" value="100nF"/>
@@ -11571,7 +11571,7 @@ manufacturer Siemens</description>
 <part name="SUPPLY12" library="supply2" deviceset="GND" device=""/>
 <part name="Q14" library="transistor-npn" deviceset="BC546*" device="" technology="B"/>
 <part name="SUPPLY17" library="supply2" deviceset="GND" device=""/>
-<part name="R29" library="resistor" deviceset="R-EU_" device="0207/5V" value="1K"/>
+<part name="R29" library="resistor" deviceset="R-EU_" device="0207/7" value="1K"/>
 <part name="SUPPLY18" library="SparkFun" deviceset="VCC" device=""/>
 <part name="Q15" library="special" deviceset="XTAL/S" device="" value="16mhz"/>
 <part name="+3V1" library="supply1" deviceset="+3V3" device=""/>
@@ -11609,8 +11609,8 @@ manufacturer Siemens</description>
 <part name="R12" library="resistor" deviceset="R-EU_" device="0207/7" value="330"/>
 <part name="R13" library="resistor" deviceset="R-EU_" device="0207/7" value="240"/>
 <part name="L2" library="inductors" deviceset="82114R" device="" value="33mH"/>
-<part name="R14" library="resistor" deviceset="R-EU_" device="0207/5V" value="10k"/>
-<part name="R15" library="resistor" deviceset="R-EU_" device="0207/2V" value="10k"/>
+<part name="R14" library="resistor" deviceset="R-EU_" device="0207/7" value="10k"/>
+<part name="R15" library="resistor" deviceset="R-EU_" device="0207/7" value="10k"/>
 <part name="+3V9" library="supply1" deviceset="+3V3" device=""/>
 <part name="SV1" library="con-ml" deviceset="ML10LE" device=""/>
 <part name="S1" library="switch-omron" deviceset="10-XX" device=""/>
