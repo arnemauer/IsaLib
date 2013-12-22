@@ -8,7 +8,63 @@
 /* 
 TIMER 0 - 8BIT  -  MILLIS
 TIMER 1 - 16BIT -  PIEZO SOUND
-TIMER 2 - 8BIT  -  
+TIMER 2 - 8BIT  -  LED
+
+array dingdong_freq (1500, 0, 1200, 0); // 0=wait
+array dingdong_length (500, 500, 500, 1500);
+
+
+array led_doorbell_R
+array led_doorbell_R
+array led_doorbell_R
+array led_doorbell_R
+array led_doorbell_R
+array led_doorbell_R
+
+
+
+toneAC(1500, 10, 500, true); // Play thisNote at full volume for noteDuration in the background.
+_delay_ms(500);
+toneAC(1200, 10, 500, true); // Play thisNote at full volume for noteDuration in the background.
+_delay_ms(1500);
+__________________________________________________________________________
+
+toneAC - set soundon = true;
+
+notoneAC - set soundon = false;
+
+__________________________________________________________________________
+while{
+	- controleren of geldig pakket is binnengekomen
+	- JA	-> actief alarm array vullen (telefoon, deurbel, brand, hulp)
+			-> geluid (+timer1) starten
+			-> leds (+timer2) starten
+			-> 
+			
+			-> 1 timer (2): variabel(meldingduurteller = millis + meldingduur), 
+				-> meldingsduurteller groter dan millis? 
+				NEE: timer geheel uitschakelen!
+				
+				JA: 
+					-> check of geluid aan staat (soundon == true)
+						-> JA -> uitzetten? (vergelijk millis met _tAC_time) 
+									-> JA,	pwm uit, _tAC_time = 0;
+											Volgende toon :
+												speeltoon(dingdong_freq[soundstep];
+												
+												if(soundstep == totaal(dingdong_freq)){
+													soundstep = 0; // reset soundstep
+												}else{
+													soundstep++;
+												}
+												
+													
+									->  Nee, niks doen. 
+				
+					->  
+			
+				 NEE: timer geheel uitschakelen!
+*/
 
 #include "config.h"
 #include <avr/io.h>
