@@ -12137,9 +12137,9 @@ manufacturer Siemens</description>
 <label x="25.4" y="7.62" size="1.778" layer="95" rot="R180"/>
 </segment>
 <segment>
-<label x="91.44" y="93.98" size="1.778" layer="95"/>
-<pinref part="IC1" gate="G$1" pin="PB0(ICP)"/>
-<wire x1="86.36" y1="93.98" x2="91.44" y2="93.98" width="0.1524" layer="91"/>
+<label x="91.44" y="91.44" size="1.778" layer="95"/>
+<pinref part="IC1" gate="G$1" pin="PB1(OC1A)"/>
+<wire x1="86.36" y1="91.44" x2="91.44" y2="91.44" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$51" class="0">

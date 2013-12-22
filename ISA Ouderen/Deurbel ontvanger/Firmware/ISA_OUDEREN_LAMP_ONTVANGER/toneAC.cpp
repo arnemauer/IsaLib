@@ -56,7 +56,7 @@ void toneAC(unsigned long frequency, uint8_t volume, unsigned long length, uint8
   if (TCNT1 > top) TCNT1 = top;         // Counter over the top, put within range.
   TCCR1B = _BV(WGM13)  | prescaler;     // Set PWM, phase and frequency corrected (top=ICR1) and prescaler.
   OCR1A  = OCR1B = duty;                // Set the duty cycle (volume).
-  TCCR1A = _BV(COM1A1) | _BV(COM1B1) | _BV(COM1B0); // Inverted/non-inverted mode (AC).
+  TCCR1A = _BV(COM1A1); // Inverted/non-inverted mode (AC).
 
 
   if (length > 0 && !background) { 
@@ -71,7 +71,7 @@ void noToneAC() {
   TCCR1B  = _BV(CS11);        // Default clock prescaler of 8.
   TCCR1A  = _BV(WGM10);       // Set to defaults so PWM can work like normal (PWM, phase corrected, 8bit).
   PWMT1PORT &= ~_BV(PWMT1AMASK); // Set timer 1 PWM pins to LOW.
-  PWMT1PORT &= ~_BV(PWMT1BMASK); // Other timer 1 PWM pin also to LOW.
+ // PWMT1PORT &= ~_BV(PWMT1BMASK); // Other timer 1 PWM pin also to LOW.
 }
 
 ISR(TIMER1_COMPA_vect) { // Timer interrupt vector.

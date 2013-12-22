@@ -3,11 +3,11 @@ ONTVANGER.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         0000000a  00800100  00000726  000007ba  2**0
+  0 .data         0000000a  00800100  00000724  000007b8  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000726  00000000  00000000  00000094  2**1
+  1 .text         00000724  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000008  0080010a  0080010a  000007c4  2**0
+  2 .bss          00000008  0080010a  0080010a  000007c2  2**0
                   ALLOC
   3 .stab         000006cc  00000000  00000000  000007c4  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -21,15 +21,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   8 .debug_abbrev 0000067e  00000000  00000000  000026c3  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_line   00000ba4  00000000  00000000  00002d41  2**0
+  9 .debug_line   00000bd4  00000000  00000000  00002d41  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_frame  00000294  00000000  00000000  000038e8  2**2
+ 10 .debug_frame  00000294  00000000  00000000  00003918  2**2
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_str    00000380  00000000  00000000  00003b7c  2**0
+ 11 .debug_str    0000037b  00000000  00000000  00003bac  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_loc    00000871  00000000  00000000  00003efc  2**0
+ 12 .debug_loc    00000871  00000000  00000000  00003f27  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_ranges 00000190  00000000  00000000  0000476d  2**0
+ 13 .debug_ranges 00000190  00000000  00000000  00004798  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -57,7 +57,7 @@ Disassembly of section .text:
   26:	00 00       	nop
   28:	3a c0       	rjmp	.+116    	; 0x9e <__bad_interrupt>
   2a:	00 00       	nop
-  2c:	fc c2       	rjmp	.+1528   	; 0x626 <__vector_11>
+  2c:	fb c2       	rjmp	.+1526   	; 0x624 <__vector_11>
   2e:	00 00       	nop
   30:	36 c0       	rjmp	.+108    	; 0x9e <__bad_interrupt>
   32:	00 00       	nop
@@ -100,7 +100,7 @@ Disassembly of section .text:
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	e6 e2       	ldi	r30, 0x26	; 38
+  7a:	e4 e2       	ldi	r30, 0x24	; 36
   7c:	f7 e0       	ldi	r31, 0x07	; 7
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
@@ -123,7 +123,7 @@ Disassembly of section .text:
   96:	b2 07       	cpc	r27, r18
   98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
   9a:	47 d0       	rcall	.+142    	; 0x12a <main>
-  9c:	42 c3       	rjmp	.+1668   	; 0x722 <_exit>
+  9c:	41 c3       	rjmp	.+1666   	; 0x720 <_exit>
 
 0000009e <__bad_interrupt>:
   9e:	b0 cf       	rjmp	.-160    	; 0x0 <__vectors>
@@ -250,7 +250,7 @@ int main() {
  160:	c0 01       	movw	r24, r0
  162:	11 24       	eor	r1, r1
  164:	b6 01       	movw	r22, r12
- 166:	94 d2       	rcall	.+1320   	; 0x690 <__divmodhi4>
+ 166:	93 d2       	rcall	.+1318   	; 0x68e <__divmodhi4>
  168:	88 27       	eor	r24, r24
  16a:	77 fd       	sbrc	r23, 7
  16c:	80 95       	com	r24
@@ -260,7 +260,7 @@ int main() {
  174:	10 e0       	ldi	r17, 0x00	; 0
  176:	98 01       	movw	r18, r16
  178:	4a e0       	ldi	r20, 0x0A	; 10
- 17a:	a2 d1       	rcall	.+836    	; 0x4c0 <_Z6toneACmhmh>
+ 17a:	a1 d1       	rcall	.+834    	; 0x4be <_Z6toneACmhmh>
  17c:	2f ef       	ldi	r18, 0xFF	; 255
  17e:	36 e7       	ldi	r19, 0x76	; 118
  180:	81 e0       	ldi	r24, 0x01	; 1
@@ -291,7 +291,7 @@ int main() {
  19e:	60 e0       	ldi	r22, 0x00	; 0
  1a0:	70 e0       	ldi	r23, 0x00	; 0
  1a2:	cb 01       	movw	r24, r22
- 1a4:	8d d1       	rcall	.+794    	; 0x4c0 <_Z6toneACmhmh>
+ 1a4:	8c d1       	rcall	.+792    	; 0x4be <_Z6toneACmhmh>
  1a6:	9f ef       	ldi	r25, 0xFF	; 255
  1a8:	29 e6       	ldi	r18, 0x69	; 105
  1aa:	38 e1       	ldi	r19, 0x18	; 24
@@ -319,7 +319,7 @@ for(x=50;x>0;x--){
 	toneAC((250*x/20) );
  1cc:	ce 01       	movw	r24, r28
  1ce:	b6 01       	movw	r22, r12
- 1d0:	5f d2       	rcall	.+1214   	; 0x690 <__divmodhi4>
+ 1d0:	5e d2       	rcall	.+1212   	; 0x68e <__divmodhi4>
  1d2:	88 27       	eor	r24, r24
  1d4:	77 fd       	sbrc	r23, 7
  1d6:	80 95       	com	r24
@@ -329,7 +329,7 @@ for(x=50;x>0;x--){
  1de:	10 e0       	ldi	r17, 0x00	; 0
  1e0:	98 01       	movw	r18, r16
  1e2:	4a e0       	ldi	r20, 0x0A	; 10
- 1e4:	6d d1       	rcall	.+730    	; 0x4c0 <_Z6toneACmhmh>
+ 1e4:	6c d1       	rcall	.+728    	; 0x4be <_Z6toneACmhmh>
  1e6:	3f ef       	ldi	r19, 0xFF	; 255
  1e8:	86 e7       	ldi	r24, 0x76	; 118
  1ea:	91 e0       	ldi	r25, 0x01	; 1
@@ -359,7 +359,7 @@ toneAC(); // Turn off toneAC, can also use noToneAC().
  206:	60 e0       	ldi	r22, 0x00	; 0
  208:	70 e0       	ldi	r23, 0x00	; 0
  20a:	cb 01       	movw	r24, r22
- 20c:	59 d1       	rcall	.+690    	; 0x4c0 <_Z6toneACmhmh>
+ 20c:	58 d1       	rcall	.+688    	; 0x4be <_Z6toneACmhmh>
  20e:	2f ef       	ldi	r18, 0xFF	; 255
  210:	39 e6       	ldi	r19, 0x69	; 105
  212:	88 e1       	ldi	r24, 0x18	; 24
@@ -395,7 +395,7 @@ toneAC(1500, 10, 500, true); // Play thisNote at full volume for noteDuration in
  242:	75 e0       	ldi	r23, 0x05	; 5
  244:	80 e0       	ldi	r24, 0x00	; 0
  246:	90 e0       	ldi	r25, 0x00	; 0
- 248:	3b d1       	rcall	.+630    	; 0x4c0 <_Z6toneACmhmh>
+ 248:	3a d1       	rcall	.+628    	; 0x4be <_Z6toneACmhmh>
  24a:	8f ef       	ldi	r24, 0xFF	; 255
  24c:	99 e6       	ldi	r25, 0x69	; 105
  24e:	28 e1       	ldi	r18, 0x18	; 24
@@ -416,7 +416,7 @@ toneAC(1200, 10, 500, true); // Play thisNote at full volume for noteDuration in
  268:	74 e0       	ldi	r23, 0x04	; 4
  26a:	80 e0       	ldi	r24, 0x00	; 0
  26c:	90 e0       	ldi	r25, 0x00	; 0
- 26e:	28 d1       	rcall	.+592    	; 0x4c0 <_Z6toneACmhmh>
+ 26e:	27 d1       	rcall	.+590    	; 0x4be <_Z6toneACmhmh>
  270:	3f ef       	ldi	r19, 0xFF	; 255
  272:	8d e3       	ldi	r24, 0x3D	; 61
  274:	99 e4       	ldi	r25, 0x49	; 73
@@ -441,7 +441,7 @@ toneAC(1500, 10, 500, true); // Play thisNote at full volume for noteDuration in
  28e:	75 e0       	ldi	r23, 0x05	; 5
  290:	80 e0       	ldi	r24, 0x00	; 0
  292:	90 e0       	ldi	r25, 0x00	; 0
- 294:	15 d1       	rcall	.+554    	; 0x4c0 <_Z6toneACmhmh>
+ 294:	14 d1       	rcall	.+552    	; 0x4be <_Z6toneACmhmh>
  296:	2f ef       	ldi	r18, 0xFF	; 255
  298:	39 e6       	ldi	r19, 0x69	; 105
  29a:	88 e1       	ldi	r24, 0x18	; 24
@@ -462,7 +462,7 @@ toneAC(1200, 10, 500, true); // Play thisNote at full volume for noteDuration in
  2b4:	74 e0       	ldi	r23, 0x04	; 4
  2b6:	80 e0       	ldi	r24, 0x00	; 0
  2b8:	90 e0       	ldi	r25, 0x00	; 0
- 2ba:	02 d1       	rcall	.+516    	; 0x4c0 <_Z6toneACmhmh>
+ 2ba:	01 d1       	rcall	.+514    	; 0x4be <_Z6toneACmhmh>
  2bc:	9f ef       	ldi	r25, 0xFF	; 255
  2be:	2d e3       	ldi	r18, 0x3D	; 61
  2c0:	39 e4       	ldi	r19, 0x49	; 73
@@ -499,7 +499,7 @@ byte y;
  2f2:	73 e0       	ldi	r23, 0x03	; 3
  2f4:	80 e0       	ldi	r24, 0x00	; 0
  2f6:	90 e0       	ldi	r25, 0x00	; 0
- 2f8:	e3 d0       	rcall	.+454    	; 0x4c0 <_Z6toneACmhmh>
+ 2f8:	e2 d0       	rcall	.+452    	; 0x4be <_Z6toneACmhmh>
 			toneAC(750, 10, 40); // Play thisNote at full volume for noteDuration in the background.
  2fa:	08 e2       	ldi	r16, 0x28	; 40
  2fc:	10 e0       	ldi	r17, 0x00	; 0
@@ -510,7 +510,7 @@ byte y;
  306:	72 e0       	ldi	r23, 0x02	; 2
  308:	80 e0       	ldi	r24, 0x00	; 0
  30a:	90 e0       	ldi	r25, 0x00	; 0
- 30c:	d9 d0       	rcall	.+434    	; 0x4c0 <_Z6toneACmhmh>
+ 30c:	d8 d0       	rcall	.+432    	; 0x4be <_Z6toneACmhmh>
 // Phone ring
 byte Duration = 1;
 //byte x;
@@ -564,7 +564,7 @@ byte y;
  34e:	74 e0       	ldi	r23, 0x04	; 4
  350:	80 e0       	ldi	r24, 0x00	; 0
  352:	90 e0       	ldi	r25, 0x00	; 0
- 354:	b5 d0       	rcall	.+362    	; 0x4c0 <_Z6toneACmhmh>
+ 354:	b4 d0       	rcall	.+360    	; 0x4be <_Z6toneACmhmh>
  356:	9f ef       	ldi	r25, 0xFF	; 255
  358:	21 ee       	ldi	r18, 0xE1	; 225
  35a:	34 e0       	ldi	r19, 0x04	; 4
@@ -585,7 +585,7 @@ byte y;
  374:	74 e0       	ldi	r23, 0x04	; 4
  376:	80 e0       	ldi	r24, 0x00	; 0
  378:	90 e0       	ldi	r25, 0x00	; 0
- 37a:	a2 d0       	rcall	.+324    	; 0x4c0 <_Z6toneACmhmh>
+ 37a:	a1 d0       	rcall	.+322    	; 0x4be <_Z6toneACmhmh>
  37c:	8f ef       	ldi	r24, 0xFF	; 255
  37e:	91 ee       	ldi	r25, 0xE1	; 225
  380:	24 e0       	ldi	r18, 0x04	; 4
@@ -606,7 +606,7 @@ byte y;
  39a:	74 e0       	ldi	r23, 0x04	; 4
  39c:	80 e0       	ldi	r24, 0x00	; 0
  39e:	90 e0       	ldi	r25, 0x00	; 0
- 3a0:	8f d0       	rcall	.+286    	; 0x4c0 <_Z6toneACmhmh>
+ 3a0:	8e d0       	rcall	.+284    	; 0x4be <_Z6toneACmhmh>
  3a2:	3f ef       	ldi	r19, 0xFF	; 255
  3a4:	83 ec       	ldi	r24, 0xC3	; 195
  3a6:	99 e0       	ldi	r25, 0x09	; 9
@@ -627,7 +627,7 @@ byte y;
  3c0:	74 e0       	ldi	r23, 0x04	; 4
  3c2:	80 e0       	ldi	r24, 0x00	; 0
  3c4:	90 e0       	ldi	r25, 0x00	; 0
- 3c6:	7c d0       	rcall	.+248    	; 0x4c0 <_Z6toneACmhmh>
+ 3c6:	7b d0       	rcall	.+246    	; 0x4be <_Z6toneACmhmh>
  3c8:	2f ef       	ldi	r18, 0xFF	; 255
  3ca:	31 ee       	ldi	r19, 0xE1	; 225
  3cc:	84 e0       	ldi	r24, 0x04	; 4
@@ -648,7 +648,7 @@ byte y;
  3e6:	74 e0       	ldi	r23, 0x04	; 4
  3e8:	80 e0       	ldi	r24, 0x00	; 0
  3ea:	90 e0       	ldi	r25, 0x00	; 0
- 3ec:	69 d0       	rcall	.+210    	; 0x4c0 <_Z6toneACmhmh>
+ 3ec:	68 d0       	rcall	.+208    	; 0x4be <_Z6toneACmhmh>
  3ee:	9f ef       	ldi	r25, 0xFF	; 255
  3f0:	21 ee       	ldi	r18, 0xE1	; 225
  3f2:	34 e0       	ldi	r19, 0x04	; 4
@@ -669,7 +669,7 @@ byte y;
  40c:	74 e0       	ldi	r23, 0x04	; 4
  40e:	80 e0       	ldi	r24, 0x00	; 0
  410:	90 e0       	ldi	r25, 0x00	; 0
- 412:	56 d0       	rcall	.+172    	; 0x4c0 <_Z6toneACmhmh>
+ 412:	55 d0       	rcall	.+170    	; 0x4be <_Z6toneACmhmh>
  414:	8f ef       	ldi	r24, 0xFF	; 255
  416:	93 ec       	ldi	r25, 0xC3	; 195
  418:	29 e0       	ldi	r18, 0x09	; 9
@@ -690,7 +690,7 @@ byte y;
  432:	74 e0       	ldi	r23, 0x04	; 4
  434:	80 e0       	ldi	r24, 0x00	; 0
  436:	90 e0       	ldi	r25, 0x00	; 0
- 438:	43 d0       	rcall	.+134    	; 0x4c0 <_Z6toneACmhmh>
+ 438:	42 d0       	rcall	.+132    	; 0x4be <_Z6toneACmhmh>
  43a:	3f ef       	ldi	r19, 0xFF	; 255
  43c:	81 ee       	ldi	r24, 0xE1	; 225
  43e:	94 e0       	ldi	r25, 0x04	; 4
@@ -711,7 +711,7 @@ byte y;
  458:	74 e0       	ldi	r23, 0x04	; 4
  45a:	80 e0       	ldi	r24, 0x00	; 0
  45c:	90 e0       	ldi	r25, 0x00	; 0
- 45e:	30 d0       	rcall	.+96     	; 0x4c0 <_Z6toneACmhmh>
+ 45e:	2f d0       	rcall	.+94     	; 0x4be <_Z6toneACmhmh>
  460:	2f ef       	ldi	r18, 0xFF	; 255
  462:	31 ee       	ldi	r19, 0xE1	; 225
  464:	84 e0       	ldi	r24, 0x04	; 4
@@ -732,7 +732,7 @@ byte y;
  47e:	74 e0       	ldi	r23, 0x04	; 4
  480:	80 e0       	ldi	r24, 0x00	; 0
  482:	90 e0       	ldi	r25, 0x00	; 0
- 484:	1d d0       	rcall	.+58     	; 0x4c0 <_Z6toneACmhmh>
+ 484:	1c d0       	rcall	.+56     	; 0x4be <_Z6toneACmhmh>
  486:	9a ea       	ldi	r25, 0xAA	; 170
  488:	26 ee       	ldi	r18, 0xE6	; 230
  48a:	36 e9       	ldi	r19, 0x96	; 150
@@ -775,386 +775,384 @@ void noToneAC() {
  4b6:	80 93 80 00 	sts	0x0080, r24
   PWMT1PORT &= ~_BV(PWMT1AMASK); // Set timer 1 PWM pins to LOW.
  4ba:	29 98       	cbi	0x05, 1	; 5
-  PWMT1PORT &= ~_BV(PWMT1BMASK); // Other timer 1 PWM pin also to LOW.
- 4bc:	2a 98       	cbi	0x05, 2	; 5
- 4be:	08 95       	ret
+ 4bc:	08 95       	ret
 
-000004c0 <_Z6toneACmhmh>:
+000004be <_Z6toneACmhmh>:
 
 uint8_t _tAC_volume[] = { 200, 100, 67, 50, 40, 33, 29, 22, 11, 2 }; // Duty for linear volume control.
 
 
 
 void toneAC(unsigned long frequency, uint8_t volume, unsigned long length, uint8_t background) {
- 4c0:	4f 92       	push	r4
- 4c2:	5f 92       	push	r5
- 4c4:	6f 92       	push	r6
- 4c6:	7f 92       	push	r7
- 4c8:	8f 92       	push	r8
- 4ca:	9f 92       	push	r9
- 4cc:	af 92       	push	r10
- 4ce:	bf 92       	push	r11
- 4d0:	cf 92       	push	r12
- 4d2:	df 92       	push	r13
- 4d4:	ef 92       	push	r14
- 4d6:	ff 92       	push	r15
- 4d8:	0f 93       	push	r16
- 4da:	1f 93       	push	r17
- 4dc:	cf 93       	push	r28
- 4de:	df 93       	push	r29
- 4e0:	2b 01       	movw	r4, r22
- 4e2:	3c 01       	movw	r6, r24
- 4e4:	48 01       	movw	r8, r16
- 4e6:	59 01       	movw	r10, r18
- 4e8:	ce 2d       	mov	r28, r14
+ 4be:	4f 92       	push	r4
+ 4c0:	5f 92       	push	r5
+ 4c2:	6f 92       	push	r6
+ 4c4:	7f 92       	push	r7
+ 4c6:	8f 92       	push	r8
+ 4c8:	9f 92       	push	r9
+ 4ca:	af 92       	push	r10
+ 4cc:	bf 92       	push	r11
+ 4ce:	cf 92       	push	r12
+ 4d0:	df 92       	push	r13
+ 4d2:	ef 92       	push	r14
+ 4d4:	ff 92       	push	r15
+ 4d6:	0f 93       	push	r16
+ 4d8:	1f 93       	push	r17
+ 4da:	cf 93       	push	r28
+ 4dc:	df 93       	push	r29
+ 4de:	2b 01       	movw	r4, r22
+ 4e0:	3c 01       	movw	r6, r24
+ 4e2:	48 01       	movw	r8, r16
+ 4e4:	59 01       	movw	r10, r18
+ 4e6:	ce 2d       	mov	r28, r14
   if (frequency == 0 || volume == 0) { noToneAC(); return; } // If frequency or volume are 0, turn off sound and return.
- 4ea:	61 15       	cp	r22, r1
- 4ec:	71 05       	cpc	r23, r1
- 4ee:	81 05       	cpc	r24, r1
- 4f0:	91 05       	cpc	r25, r1
- 4f2:	11 f0       	breq	.+4      	; 0x4f8 <_Z6toneACmhmh+0x38>
- 4f4:	41 11       	cpse	r20, r1
- 4f6:	02 c0       	rjmp	.+4      	; 0x4fc <_Z6toneACmhmh+0x3c>
- 4f8:	d5 df       	rcall	.-86     	; 0x4a4 <_Z8noToneACv>
- 4fa:	84 c0       	rjmp	.+264    	; 0x604 <_Z6toneACmhmh+0x144>
- 4fc:	d4 2f       	mov	r29, r20
- 4fe:	4b 30       	cpi	r20, 0x0B	; 11
- 500:	08 f0       	brcs	.+2      	; 0x504 <_Z6toneACmhmh+0x44>
- 502:	da e0       	ldi	r29, 0x0A	; 10
+ 4e8:	61 15       	cp	r22, r1
+ 4ea:	71 05       	cpc	r23, r1
+ 4ec:	81 05       	cpc	r24, r1
+ 4ee:	91 05       	cpc	r25, r1
+ 4f0:	11 f0       	breq	.+4      	; 0x4f6 <_Z6toneACmhmh+0x38>
+ 4f2:	41 11       	cpse	r20, r1
+ 4f4:	02 c0       	rjmp	.+4      	; 0x4fa <_Z6toneACmhmh+0x3c>
+ 4f6:	d6 df       	rcall	.-84     	; 0x4a4 <_Z8noToneACv>
+ 4f8:	84 c0       	rjmp	.+264    	; 0x602 <_Z6toneACmhmh+0x144>
+ 4fa:	d4 2f       	mov	r29, r20
+ 4fc:	4b 30       	cpi	r20, 0x0B	; 11
+ 4fe:	08 f0       	brcs	.+2      	; 0x502 <_Z6toneACmhmh+0x44>
+ 500:	da e0       	ldi	r29, 0x0A	; 10
   if (volume > 10) volume = 10;                              // Make sure volume is in range (1 to 10).
 
   
   PWMT1DREG |= _BV(PWMT1AMASK) | _BV(PWMT1BMASK); // Set timer 1 PWM pins to OUTPUT (because analogWrite does it too).
- 504:	84 b1       	in	r24, 0x04	; 4
- 506:	86 60       	ori	r24, 0x06	; 6
- 508:	84 b9       	out	0x04, r24	; 4
+ 502:	84 b1       	in	r24, 0x04	; 4
+ 504:	86 60       	ori	r24, 0x06	; 6
+ 506:	84 b9       	out	0x04, r24	; 4
 
   uint8_t prescaler = _BV(CS10);                 // Try using prescaler 1 first.
   unsigned long top = F_CPU / frequency / 2 - 1; // Calculate the top.
- 50a:	60 e0       	ldi	r22, 0x00	; 0
- 50c:	72 e1       	ldi	r23, 0x12	; 18
- 50e:	8a e7       	ldi	r24, 0x7A	; 122
- 510:	90 e0       	ldi	r25, 0x00	; 0
- 512:	a3 01       	movw	r20, r6
- 514:	92 01       	movw	r18, r4
- 516:	cf d0       	rcall	.+414    	; 0x6b6 <__udivmodsi4>
- 518:	cc 24       	eor	r12, r12
- 51a:	ca 94       	dec	r12
- 51c:	dc 2c       	mov	r13, r12
- 51e:	76 01       	movw	r14, r12
- 520:	c2 0e       	add	r12, r18
- 522:	d3 1e       	adc	r13, r19
- 524:	e4 1e       	adc	r14, r20
- 526:	f5 1e       	adc	r15, r21
+ 508:	60 e0       	ldi	r22, 0x00	; 0
+ 50a:	72 e1       	ldi	r23, 0x12	; 18
+ 50c:	8a e7       	ldi	r24, 0x7A	; 122
+ 50e:	90 e0       	ldi	r25, 0x00	; 0
+ 510:	a3 01       	movw	r20, r6
+ 512:	92 01       	movw	r18, r4
+ 514:	cf d0       	rcall	.+414    	; 0x6b4 <__udivmodsi4>
+ 516:	cc 24       	eor	r12, r12
+ 518:	ca 94       	dec	r12
+ 51a:	dc 2c       	mov	r13, r12
+ 51c:	76 01       	movw	r14, r12
+ 51e:	c2 0e       	add	r12, r18
+ 520:	d3 1e       	adc	r13, r19
+ 522:	e4 1e       	adc	r14, r20
+ 524:	f5 1e       	adc	r15, r21
   if (top > 65535) {                             // If not in the range for prescaler 1, use prescaler 256 (122 Hz and lower @ 16 MHz).
- 528:	c1 14       	cp	r12, r1
- 52a:	d1 04       	cpc	r13, r1
- 52c:	81 e0       	ldi	r24, 0x01	; 1
- 52e:	e8 06       	cpc	r14, r24
- 530:	f1 04       	cpc	r15, r1
- 532:	58 f0       	brcs	.+22     	; 0x54a <_Z6toneACmhmh+0x8a>
+ 526:	c1 14       	cp	r12, r1
+ 528:	d1 04       	cpc	r13, r1
+ 52a:	81 e0       	ldi	r24, 0x01	; 1
+ 52c:	e8 06       	cpc	r14, r24
+ 52e:	f1 04       	cpc	r15, r1
+ 530:	58 f0       	brcs	.+22     	; 0x548 <_Z6toneACmhmh+0x8a>
     prescaler = _BV(CS12);                       // Set the 256 prescaler bit.
     top = top / 256 - 1;                         // Calculate the top using prescaler 256.
- 534:	cd 2c       	mov	r12, r13
- 536:	de 2c       	mov	r13, r14
- 538:	ef 2c       	mov	r14, r15
- 53a:	ff 24       	eor	r15, r15
- 53c:	91 e0       	ldi	r25, 0x01	; 1
- 53e:	c9 1a       	sub	r12, r25
- 540:	d1 08       	sbc	r13, r1
- 542:	e1 08       	sbc	r14, r1
- 544:	f1 08       	sbc	r15, r1
+ 532:	cd 2c       	mov	r12, r13
+ 534:	de 2c       	mov	r13, r14
+ 536:	ef 2c       	mov	r14, r15
+ 538:	ff 24       	eor	r15, r15
+ 53a:	91 e0       	ldi	r25, 0x01	; 1
+ 53c:	c9 1a       	sub	r12, r25
+ 53e:	d1 08       	sbc	r13, r1
+ 540:	e1 08       	sbc	r14, r1
+ 542:	f1 08       	sbc	r15, r1
   PWMT1DREG |= _BV(PWMT1AMASK) | _BV(PWMT1BMASK); // Set timer 1 PWM pins to OUTPUT (because analogWrite does it too).
 
   uint8_t prescaler = _BV(CS10);                 // Try using prescaler 1 first.
   unsigned long top = F_CPU / frequency / 2 - 1; // Calculate the top.
   if (top > 65535) {                             // If not in the range for prescaler 1, use prescaler 256 (122 Hz and lower @ 16 MHz).
     prescaler = _BV(CS12);                       // Set the 256 prescaler bit.
- 546:	14 e0       	ldi	r17, 0x04	; 4
- 548:	01 c0       	rjmp	.+2      	; 0x54c <_Z6toneACmhmh+0x8c>
+ 544:	14 e0       	ldi	r17, 0x04	; 4
+ 546:	01 c0       	rjmp	.+2      	; 0x54a <_Z6toneACmhmh+0x8c>
   if (volume > 10) volume = 10;                              // Make sure volume is in range (1 to 10).
 
   
   PWMT1DREG |= _BV(PWMT1AMASK) | _BV(PWMT1BMASK); // Set timer 1 PWM pins to OUTPUT (because analogWrite does it too).
 
   uint8_t prescaler = _BV(CS10);                 // Try using prescaler 1 first.
- 54a:	11 e0       	ldi	r17, 0x01	; 1
+ 548:	11 e0       	ldi	r17, 0x01	; 1
   if (top > 65535) {                             // If not in the range for prescaler 1, use prescaler 256 (122 Hz and lower @ 16 MHz).
     prescaler = _BV(CS12);                       // Set the 256 prescaler bit.
     top = top / 256 - 1;                         // Calculate the top using prescaler 256.
   }
 
   unsigned int duty = top / _tAC_volume[volume - 1]; // Calculate the duty cycle (volume).
- 54c:	ed 2f       	mov	r30, r29
- 54e:	f0 e0       	ldi	r31, 0x00	; 0
- 550:	e1 50       	subi	r30, 0x01	; 1
- 552:	ff 4f       	sbci	r31, 0xFF	; 255
- 554:	20 81       	ld	r18, Z
- 556:	30 e0       	ldi	r19, 0x00	; 0
- 558:	40 e0       	ldi	r20, 0x00	; 0
- 55a:	50 e0       	ldi	r21, 0x00	; 0
- 55c:	c7 01       	movw	r24, r14
- 55e:	b6 01       	movw	r22, r12
- 560:	aa d0       	rcall	.+340    	; 0x6b6 <__udivmodsi4>
- 562:	39 01       	movw	r6, r18
+ 54a:	ed 2f       	mov	r30, r29
+ 54c:	f0 e0       	ldi	r31, 0x00	; 0
+ 54e:	e1 50       	subi	r30, 0x01	; 1
+ 550:	ff 4f       	sbci	r31, 0xFF	; 255
+ 552:	20 81       	ld	r18, Z
+ 554:	30 e0       	ldi	r19, 0x00	; 0
+ 556:	40 e0       	ldi	r20, 0x00	; 0
+ 558:	50 e0       	ldi	r21, 0x00	; 0
+ 55a:	c7 01       	movw	r24, r14
+ 55c:	b6 01       	movw	r22, r12
+ 55e:	aa d0       	rcall	.+340    	; 0x6b4 <__udivmodsi4>
+ 560:	39 01       	movw	r6, r18
 
 
 
   if (length > 0 && background) {  // Background tone playing, returns control to your sketch.
- 564:	81 14       	cp	r8, r1
- 566:	91 04       	cpc	r9, r1
- 568:	a1 04       	cpc	r10, r1
- 56a:	b1 04       	cpc	r11, r1
- 56c:	b1 f0       	breq	.+44     	; 0x59a <_Z6toneACmhmh+0xda>
- 56e:	cc 23       	and	r28, r28
- 570:	a1 f0       	breq	.+40     	; 0x59a <_Z6toneACmhmh+0xda>
+ 562:	81 14       	cp	r8, r1
+ 564:	91 04       	cpc	r9, r1
+ 566:	a1 04       	cpc	r10, r1
+ 568:	b1 04       	cpc	r11, r1
+ 56a:	b1 f0       	breq	.+44     	; 0x598 <_Z6toneACmhmh+0xda>
+ 56c:	cc 23       	and	r28, r28
+ 56e:	a1 f0       	breq	.+40     	; 0x598 <_Z6toneACmhmh+0xda>
 
     _tAC_time = millis() + length; // Set when the note should end.
- 572:	a2 dd       	rcall	.-1212   	; 0xb8 <millis_get>
- 574:	dc 01       	movw	r26, r24
- 576:	cb 01       	movw	r24, r22
- 578:	88 0d       	add	r24, r8
- 57a:	99 1d       	adc	r25, r9
- 57c:	aa 1d       	adc	r26, r10
- 57e:	bb 1d       	adc	r27, r11
- 580:	80 93 0e 01 	sts	0x010E, r24
- 584:	90 93 0f 01 	sts	0x010F, r25
- 588:	a0 93 10 01 	sts	0x0110, r26
- 58c:	b0 93 11 01 	sts	0x0111, r27
+ 570:	a3 dd       	rcall	.-1210   	; 0xb8 <millis_get>
+ 572:	dc 01       	movw	r26, r24
+ 574:	cb 01       	movw	r24, r22
+ 576:	88 0d       	add	r24, r8
+ 578:	99 1d       	adc	r25, r9
+ 57a:	aa 1d       	adc	r26, r10
+ 57c:	bb 1d       	adc	r27, r11
+ 57e:	80 93 0e 01 	sts	0x010E, r24
+ 582:	90 93 0f 01 	sts	0x010F, r25
+ 586:	a0 93 10 01 	sts	0x0110, r26
+ 58a:	b0 93 11 01 	sts	0x0111, r27
     TIMSK1 |= _BV(OCIE1A);         // Activate the timer interrupt.
- 590:	ef e6       	ldi	r30, 0x6F	; 111
- 592:	f0 e0       	ldi	r31, 0x00	; 0
- 594:	80 81       	ld	r24, Z
- 596:	82 60       	ori	r24, 0x02	; 2
- 598:	80 83       	st	Z, r24
+ 58e:	ef e6       	ldi	r30, 0x6F	; 111
+ 590:	f0 e0       	ldi	r31, 0x00	; 0
+ 592:	80 81       	ld	r24, Z
+ 594:	82 60       	ori	r24, 0x02	; 2
+ 596:	80 83       	st	Z, r24
   }
 
   ICR1   = top;                         // Set the top.
- 59a:	d0 92 87 00 	sts	0x0087, r13
- 59e:	c0 92 86 00 	sts	0x0086, r12
+ 598:	d0 92 87 00 	sts	0x0087, r13
+ 59c:	c0 92 86 00 	sts	0x0086, r12
   if (TCNT1 > top) TCNT1 = top;         // Counter over the top, put within range.
- 5a2:	80 91 84 00 	lds	r24, 0x0084
- 5a6:	90 91 85 00 	lds	r25, 0x0085
- 5aa:	a0 e0       	ldi	r26, 0x00	; 0
- 5ac:	b0 e0       	ldi	r27, 0x00	; 0
- 5ae:	c8 16       	cp	r12, r24
- 5b0:	d9 06       	cpc	r13, r25
- 5b2:	ea 06       	cpc	r14, r26
- 5b4:	fb 06       	cpc	r15, r27
- 5b6:	20 f4       	brcc	.+8      	; 0x5c0 <_Z6toneACmhmh+0x100>
- 5b8:	d0 92 85 00 	sts	0x0085, r13
- 5bc:	c0 92 84 00 	sts	0x0084, r12
+ 5a0:	80 91 84 00 	lds	r24, 0x0084
+ 5a4:	90 91 85 00 	lds	r25, 0x0085
+ 5a8:	a0 e0       	ldi	r26, 0x00	; 0
+ 5aa:	b0 e0       	ldi	r27, 0x00	; 0
+ 5ac:	c8 16       	cp	r12, r24
+ 5ae:	d9 06       	cpc	r13, r25
+ 5b0:	ea 06       	cpc	r14, r26
+ 5b2:	fb 06       	cpc	r15, r27
+ 5b4:	20 f4       	brcc	.+8      	; 0x5be <_Z6toneACmhmh+0x100>
+ 5b6:	d0 92 85 00 	sts	0x0085, r13
+ 5ba:	c0 92 84 00 	sts	0x0084, r12
   TCCR1B = _BV(WGM13)  | prescaler;     // Set PWM, phase and frequency corrected (top=ICR1) and prescaler.
- 5c0:	10 61       	ori	r17, 0x10	; 16
- 5c2:	10 93 81 00 	sts	0x0081, r17
+ 5be:	10 61       	ori	r17, 0x10	; 16
+ 5c0:	10 93 81 00 	sts	0x0081, r17
   OCR1A  = OCR1B = duty;                // Set the duty cycle (volume).
- 5c6:	70 92 8b 00 	sts	0x008B, r7
- 5ca:	60 92 8a 00 	sts	0x008A, r6
- 5ce:	70 92 89 00 	sts	0x0089, r7
- 5d2:	60 92 88 00 	sts	0x0088, r6
-  TCCR1A = _BV(COM1A1) | _BV(COM1B1) | _BV(COM1B0); // Inverted/non-inverted mode (AC).
- 5d6:	80 eb       	ldi	r24, 0xB0	; 176
- 5d8:	80 93 80 00 	sts	0x0080, r24
+ 5c4:	70 92 8b 00 	sts	0x008B, r7
+ 5c8:	60 92 8a 00 	sts	0x008A, r6
+ 5cc:	70 92 89 00 	sts	0x0089, r7
+ 5d0:	60 92 88 00 	sts	0x0088, r6
+  TCCR1A = _BV(COM1A1); // Inverted/non-inverted mode (AC).
+ 5d4:	80 e8       	ldi	r24, 0x80	; 128
+ 5d6:	80 93 80 00 	sts	0x0080, r24
 
 
   if (length > 0 && !background) { 
- 5dc:	81 14       	cp	r8, r1
- 5de:	91 04       	cpc	r9, r1
- 5e0:	a1 04       	cpc	r10, r1
- 5e2:	b1 04       	cpc	r11, r1
- 5e4:	79 f0       	breq	.+30     	; 0x604 <_Z6toneACmhmh+0x144>
- 5e6:	c1 11       	cpse	r28, r1
- 5e8:	0d c0       	rjmp	.+26     	; 0x604 <_Z6toneACmhmh+0x144>
- 5ea:	8f e9       	ldi	r24, 0x9F	; 159
- 5ec:	9f e0       	ldi	r25, 0x0F	; 15
- 5ee:	01 97       	sbiw	r24, 0x01	; 1
- 5f0:	f1 f7       	brne	.-4      	; 0x5ee <_Z6toneACmhmh+0x12e>
- 5f2:	00 c0       	rjmp	.+0      	; 0x5f4 <_Z6toneACmhmh+0x134>
- 5f4:	00 00       	nop
- 5f6:	91 e0       	ldi	r25, 0x01	; 1
- 5f8:	89 1a       	sub	r8, r25
- 5fa:	91 08       	sbc	r9, r1
- 5fc:	a1 08       	sbc	r10, r1
- 5fe:	b1 08       	sbc	r11, r1
+ 5da:	81 14       	cp	r8, r1
+ 5dc:	91 04       	cpc	r9, r1
+ 5de:	a1 04       	cpc	r10, r1
+ 5e0:	b1 04       	cpc	r11, r1
+ 5e2:	79 f0       	breq	.+30     	; 0x602 <_Z6toneACmhmh+0x144>
+ 5e4:	c1 11       	cpse	r28, r1
+ 5e6:	0d c0       	rjmp	.+26     	; 0x602 <_Z6toneACmhmh+0x144>
+ 5e8:	8f e9       	ldi	r24, 0x9F	; 159
+ 5ea:	9f e0       	ldi	r25, 0x0F	; 15
+ 5ec:	01 97       	sbiw	r24, 0x01	; 1
+ 5ee:	f1 f7       	brne	.-4      	; 0x5ec <_Z6toneACmhmh+0x12e>
+ 5f0:	00 c0       	rjmp	.+0      	; 0x5f2 <_Z6toneACmhmh+0x134>
+ 5f2:	00 00       	nop
+ 5f4:	91 e0       	ldi	r25, 0x01	; 1
+ 5f6:	89 1a       	sub	r8, r25
+ 5f8:	91 08       	sbc	r9, r1
+ 5fa:	a1 08       	sbc	r10, r1
+ 5fc:	b1 08       	sbc	r11, r1
 	  while(length--) {	_delay_ms(1); }
- 600:	a1 f7       	brne	.-24     	; 0x5ea <_Z6toneACmhmh+0x12a>
+ 5fe:	a1 f7       	brne	.-24     	; 0x5e8 <_Z6toneACmhmh+0x12a>
 	  noToneAC(); 
- 602:	50 df       	rcall	.-352    	; 0x4a4 <_Z8noToneACv>
+ 600:	51 df       	rcall	.-350    	; 0x4a4 <_Z8noToneACv>
 	  } // Just a simple delay, doesn't return control till finished.
 
 }
- 604:	df 91       	pop	r29
- 606:	cf 91       	pop	r28
- 608:	1f 91       	pop	r17
- 60a:	0f 91       	pop	r16
- 60c:	ff 90       	pop	r15
- 60e:	ef 90       	pop	r14
- 610:	df 90       	pop	r13
- 612:	cf 90       	pop	r12
- 614:	bf 90       	pop	r11
- 616:	af 90       	pop	r10
- 618:	9f 90       	pop	r9
- 61a:	8f 90       	pop	r8
- 61c:	7f 90       	pop	r7
- 61e:	6f 90       	pop	r6
- 620:	5f 90       	pop	r5
- 622:	4f 90       	pop	r4
- 624:	08 95       	ret
+ 602:	df 91       	pop	r29
+ 604:	cf 91       	pop	r28
+ 606:	1f 91       	pop	r17
+ 608:	0f 91       	pop	r16
+ 60a:	ff 90       	pop	r15
+ 60c:	ef 90       	pop	r14
+ 60e:	df 90       	pop	r13
+ 610:	cf 90       	pop	r12
+ 612:	bf 90       	pop	r11
+ 614:	af 90       	pop	r10
+ 616:	9f 90       	pop	r9
+ 618:	8f 90       	pop	r8
+ 61a:	7f 90       	pop	r7
+ 61c:	6f 90       	pop	r6
+ 61e:	5f 90       	pop	r5
+ 620:	4f 90       	pop	r4
+ 622:	08 95       	ret
 
-00000626 <__vector_11>:
+00000624 <__vector_11>:
   TCCR1A  = _BV(WGM10);       // Set to defaults so PWM can work like normal (PWM, phase corrected, 8bit).
   PWMT1PORT &= ~_BV(PWMT1AMASK); // Set timer 1 PWM pins to LOW.
-  PWMT1PORT &= ~_BV(PWMT1BMASK); // Other timer 1 PWM pin also to LOW.
+ // PWMT1PORT &= ~_BV(PWMT1BMASK); // Other timer 1 PWM pin also to LOW.
 }
 
 ISR(TIMER1_COMPA_vect) { // Timer interrupt vector.
- 626:	1f 92       	push	r1
- 628:	0f 92       	push	r0
- 62a:	0f b6       	in	r0, 0x3f	; 63
- 62c:	0f 92       	push	r0
- 62e:	11 24       	eor	r1, r1
- 630:	0f 93       	push	r16
- 632:	1f 93       	push	r17
- 634:	2f 93       	push	r18
- 636:	3f 93       	push	r19
- 638:	4f 93       	push	r20
- 63a:	5f 93       	push	r21
- 63c:	6f 93       	push	r22
- 63e:	7f 93       	push	r23
- 640:	8f 93       	push	r24
- 642:	9f 93       	push	r25
- 644:	af 93       	push	r26
- 646:	bf 93       	push	r27
- 648:	ef 93       	push	r30
- 64a:	ff 93       	push	r31
+ 624:	1f 92       	push	r1
+ 626:	0f 92       	push	r0
+ 628:	0f b6       	in	r0, 0x3f	; 63
+ 62a:	0f 92       	push	r0
+ 62c:	11 24       	eor	r1, r1
+ 62e:	0f 93       	push	r16
+ 630:	1f 93       	push	r17
+ 632:	2f 93       	push	r18
+ 634:	3f 93       	push	r19
+ 636:	4f 93       	push	r20
+ 638:	5f 93       	push	r21
+ 63a:	6f 93       	push	r22
+ 63c:	7f 93       	push	r23
+ 63e:	8f 93       	push	r24
+ 640:	9f 93       	push	r25
+ 642:	af 93       	push	r26
+ 644:	bf 93       	push	r27
+ 646:	ef 93       	push	r30
+ 648:	ff 93       	push	r31
 	//noToneAC();
   if (millis() >= _tAC_time) noToneAC(); // Check to see if it's time for the note to end.
- 64c:	35 dd       	rcall	.-1430   	; 0xb8 <millis_get>
- 64e:	00 91 0e 01 	lds	r16, 0x010E
- 652:	10 91 0f 01 	lds	r17, 0x010F
- 656:	20 91 10 01 	lds	r18, 0x0110
- 65a:	30 91 11 01 	lds	r19, 0x0111
- 65e:	60 17       	cp	r22, r16
- 660:	71 07       	cpc	r23, r17
- 662:	82 07       	cpc	r24, r18
- 664:	93 07       	cpc	r25, r19
- 666:	08 f0       	brcs	.+2      	; 0x66a <__vector_11+0x44>
- 668:	1d df       	rcall	.-454    	; 0x4a4 <_Z8noToneACv>
- 66a:	ff 91       	pop	r31
- 66c:	ef 91       	pop	r30
- 66e:	bf 91       	pop	r27
- 670:	af 91       	pop	r26
- 672:	9f 91       	pop	r25
- 674:	8f 91       	pop	r24
- 676:	7f 91       	pop	r23
- 678:	6f 91       	pop	r22
- 67a:	5f 91       	pop	r21
- 67c:	4f 91       	pop	r20
- 67e:	3f 91       	pop	r19
- 680:	2f 91       	pop	r18
- 682:	1f 91       	pop	r17
- 684:	0f 91       	pop	r16
- 686:	0f 90       	pop	r0
- 688:	0f be       	out	0x3f, r0	; 63
- 68a:	0f 90       	pop	r0
- 68c:	1f 90       	pop	r1
- 68e:	18 95       	reti
+ 64a:	36 dd       	rcall	.-1428   	; 0xb8 <millis_get>
+ 64c:	00 91 0e 01 	lds	r16, 0x010E
+ 650:	10 91 0f 01 	lds	r17, 0x010F
+ 654:	20 91 10 01 	lds	r18, 0x0110
+ 658:	30 91 11 01 	lds	r19, 0x0111
+ 65c:	60 17       	cp	r22, r16
+ 65e:	71 07       	cpc	r23, r17
+ 660:	82 07       	cpc	r24, r18
+ 662:	93 07       	cpc	r25, r19
+ 664:	08 f0       	brcs	.+2      	; 0x668 <__vector_11+0x44>
+ 666:	1e df       	rcall	.-452    	; 0x4a4 <_Z8noToneACv>
+ 668:	ff 91       	pop	r31
+ 66a:	ef 91       	pop	r30
+ 66c:	bf 91       	pop	r27
+ 66e:	af 91       	pop	r26
+ 670:	9f 91       	pop	r25
+ 672:	8f 91       	pop	r24
+ 674:	7f 91       	pop	r23
+ 676:	6f 91       	pop	r22
+ 678:	5f 91       	pop	r21
+ 67a:	4f 91       	pop	r20
+ 67c:	3f 91       	pop	r19
+ 67e:	2f 91       	pop	r18
+ 680:	1f 91       	pop	r17
+ 682:	0f 91       	pop	r16
+ 684:	0f 90       	pop	r0
+ 686:	0f be       	out	0x3f, r0	; 63
+ 688:	0f 90       	pop	r0
+ 68a:	1f 90       	pop	r1
+ 68c:	18 95       	reti
 
-00000690 <__divmodhi4>:
- 690:	97 fb       	bst	r25, 7
- 692:	07 2e       	mov	r0, r23
- 694:	16 f4       	brtc	.+4      	; 0x69a <__divmodhi4+0xa>
- 696:	00 94       	com	r0
- 698:	06 d0       	rcall	.+12     	; 0x6a6 <__divmodhi4_neg1>
- 69a:	77 fd       	sbrc	r23, 7
- 69c:	08 d0       	rcall	.+16     	; 0x6ae <__divmodhi4_neg2>
- 69e:	2d d0       	rcall	.+90     	; 0x6fa <__udivmodhi4>
- 6a0:	07 fc       	sbrc	r0, 7
- 6a2:	05 d0       	rcall	.+10     	; 0x6ae <__divmodhi4_neg2>
- 6a4:	3e f4       	brtc	.+14     	; 0x6b4 <__divmodhi4_exit>
+0000068e <__divmodhi4>:
+ 68e:	97 fb       	bst	r25, 7
+ 690:	07 2e       	mov	r0, r23
+ 692:	16 f4       	brtc	.+4      	; 0x698 <__divmodhi4+0xa>
+ 694:	00 94       	com	r0
+ 696:	06 d0       	rcall	.+12     	; 0x6a4 <__divmodhi4_neg1>
+ 698:	77 fd       	sbrc	r23, 7
+ 69a:	08 d0       	rcall	.+16     	; 0x6ac <__divmodhi4_neg2>
+ 69c:	2d d0       	rcall	.+90     	; 0x6f8 <__udivmodhi4>
+ 69e:	07 fc       	sbrc	r0, 7
+ 6a0:	05 d0       	rcall	.+10     	; 0x6ac <__divmodhi4_neg2>
+ 6a2:	3e f4       	brtc	.+14     	; 0x6b2 <__divmodhi4_exit>
 
-000006a6 <__divmodhi4_neg1>:
- 6a6:	90 95       	com	r25
- 6a8:	81 95       	neg	r24
- 6aa:	9f 4f       	sbci	r25, 0xFF	; 255
- 6ac:	08 95       	ret
+000006a4 <__divmodhi4_neg1>:
+ 6a4:	90 95       	com	r25
+ 6a6:	81 95       	neg	r24
+ 6a8:	9f 4f       	sbci	r25, 0xFF	; 255
+ 6aa:	08 95       	ret
 
-000006ae <__divmodhi4_neg2>:
- 6ae:	70 95       	com	r23
- 6b0:	61 95       	neg	r22
- 6b2:	7f 4f       	sbci	r23, 0xFF	; 255
+000006ac <__divmodhi4_neg2>:
+ 6ac:	70 95       	com	r23
+ 6ae:	61 95       	neg	r22
+ 6b0:	7f 4f       	sbci	r23, 0xFF	; 255
 
-000006b4 <__divmodhi4_exit>:
- 6b4:	08 95       	ret
+000006b2 <__divmodhi4_exit>:
+ 6b2:	08 95       	ret
 
-000006b6 <__udivmodsi4>:
- 6b6:	a1 e2       	ldi	r26, 0x21	; 33
- 6b8:	1a 2e       	mov	r1, r26
- 6ba:	aa 1b       	sub	r26, r26
- 6bc:	bb 1b       	sub	r27, r27
- 6be:	fd 01       	movw	r30, r26
- 6c0:	0d c0       	rjmp	.+26     	; 0x6dc <__udivmodsi4_ep>
+000006b4 <__udivmodsi4>:
+ 6b4:	a1 e2       	ldi	r26, 0x21	; 33
+ 6b6:	1a 2e       	mov	r1, r26
+ 6b8:	aa 1b       	sub	r26, r26
+ 6ba:	bb 1b       	sub	r27, r27
+ 6bc:	fd 01       	movw	r30, r26
+ 6be:	0d c0       	rjmp	.+26     	; 0x6da <__udivmodsi4_ep>
 
-000006c2 <__udivmodsi4_loop>:
- 6c2:	aa 1f       	adc	r26, r26
- 6c4:	bb 1f       	adc	r27, r27
- 6c6:	ee 1f       	adc	r30, r30
- 6c8:	ff 1f       	adc	r31, r31
- 6ca:	a2 17       	cp	r26, r18
- 6cc:	b3 07       	cpc	r27, r19
- 6ce:	e4 07       	cpc	r30, r20
- 6d0:	f5 07       	cpc	r31, r21
- 6d2:	20 f0       	brcs	.+8      	; 0x6dc <__udivmodsi4_ep>
- 6d4:	a2 1b       	sub	r26, r18
- 6d6:	b3 0b       	sbc	r27, r19
- 6d8:	e4 0b       	sbc	r30, r20
- 6da:	f5 0b       	sbc	r31, r21
+000006c0 <__udivmodsi4_loop>:
+ 6c0:	aa 1f       	adc	r26, r26
+ 6c2:	bb 1f       	adc	r27, r27
+ 6c4:	ee 1f       	adc	r30, r30
+ 6c6:	ff 1f       	adc	r31, r31
+ 6c8:	a2 17       	cp	r26, r18
+ 6ca:	b3 07       	cpc	r27, r19
+ 6cc:	e4 07       	cpc	r30, r20
+ 6ce:	f5 07       	cpc	r31, r21
+ 6d0:	20 f0       	brcs	.+8      	; 0x6da <__udivmodsi4_ep>
+ 6d2:	a2 1b       	sub	r26, r18
+ 6d4:	b3 0b       	sbc	r27, r19
+ 6d6:	e4 0b       	sbc	r30, r20
+ 6d8:	f5 0b       	sbc	r31, r21
 
-000006dc <__udivmodsi4_ep>:
- 6dc:	66 1f       	adc	r22, r22
- 6de:	77 1f       	adc	r23, r23
- 6e0:	88 1f       	adc	r24, r24
- 6e2:	99 1f       	adc	r25, r25
- 6e4:	1a 94       	dec	r1
- 6e6:	69 f7       	brne	.-38     	; 0x6c2 <__udivmodsi4_loop>
- 6e8:	60 95       	com	r22
- 6ea:	70 95       	com	r23
- 6ec:	80 95       	com	r24
- 6ee:	90 95       	com	r25
- 6f0:	9b 01       	movw	r18, r22
- 6f2:	ac 01       	movw	r20, r24
- 6f4:	bd 01       	movw	r22, r26
- 6f6:	cf 01       	movw	r24, r30
- 6f8:	08 95       	ret
+000006da <__udivmodsi4_ep>:
+ 6da:	66 1f       	adc	r22, r22
+ 6dc:	77 1f       	adc	r23, r23
+ 6de:	88 1f       	adc	r24, r24
+ 6e0:	99 1f       	adc	r25, r25
+ 6e2:	1a 94       	dec	r1
+ 6e4:	69 f7       	brne	.-38     	; 0x6c0 <__udivmodsi4_loop>
+ 6e6:	60 95       	com	r22
+ 6e8:	70 95       	com	r23
+ 6ea:	80 95       	com	r24
+ 6ec:	90 95       	com	r25
+ 6ee:	9b 01       	movw	r18, r22
+ 6f0:	ac 01       	movw	r20, r24
+ 6f2:	bd 01       	movw	r22, r26
+ 6f4:	cf 01       	movw	r24, r30
+ 6f6:	08 95       	ret
 
-000006fa <__udivmodhi4>:
- 6fa:	aa 1b       	sub	r26, r26
- 6fc:	bb 1b       	sub	r27, r27
- 6fe:	51 e1       	ldi	r21, 0x11	; 17
- 700:	07 c0       	rjmp	.+14     	; 0x710 <__udivmodhi4_ep>
+000006f8 <__udivmodhi4>:
+ 6f8:	aa 1b       	sub	r26, r26
+ 6fa:	bb 1b       	sub	r27, r27
+ 6fc:	51 e1       	ldi	r21, 0x11	; 17
+ 6fe:	07 c0       	rjmp	.+14     	; 0x70e <__udivmodhi4_ep>
 
-00000702 <__udivmodhi4_loop>:
- 702:	aa 1f       	adc	r26, r26
- 704:	bb 1f       	adc	r27, r27
- 706:	a6 17       	cp	r26, r22
- 708:	b7 07       	cpc	r27, r23
- 70a:	10 f0       	brcs	.+4      	; 0x710 <__udivmodhi4_ep>
- 70c:	a6 1b       	sub	r26, r22
- 70e:	b7 0b       	sbc	r27, r23
+00000700 <__udivmodhi4_loop>:
+ 700:	aa 1f       	adc	r26, r26
+ 702:	bb 1f       	adc	r27, r27
+ 704:	a6 17       	cp	r26, r22
+ 706:	b7 07       	cpc	r27, r23
+ 708:	10 f0       	brcs	.+4      	; 0x70e <__udivmodhi4_ep>
+ 70a:	a6 1b       	sub	r26, r22
+ 70c:	b7 0b       	sbc	r27, r23
 
-00000710 <__udivmodhi4_ep>:
- 710:	88 1f       	adc	r24, r24
- 712:	99 1f       	adc	r25, r25
- 714:	5a 95       	dec	r21
- 716:	a9 f7       	brne	.-22     	; 0x702 <__udivmodhi4_loop>
- 718:	80 95       	com	r24
- 71a:	90 95       	com	r25
- 71c:	bc 01       	movw	r22, r24
- 71e:	cd 01       	movw	r24, r26
- 720:	08 95       	ret
+0000070e <__udivmodhi4_ep>:
+ 70e:	88 1f       	adc	r24, r24
+ 710:	99 1f       	adc	r25, r25
+ 712:	5a 95       	dec	r21
+ 714:	a9 f7       	brne	.-22     	; 0x700 <__udivmodhi4_loop>
+ 716:	80 95       	com	r24
+ 718:	90 95       	com	r25
+ 71a:	bc 01       	movw	r22, r24
+ 71c:	cd 01       	movw	r24, r26
+ 71e:	08 95       	ret
 
-00000722 <_exit>:
- 722:	f8 94       	cli
+00000720 <_exit>:
+ 720:	f8 94       	cli
 
-00000724 <__stop_program>:
- 724:	ff cf       	rjmp	.-2      	; 0x724 <__stop_program>
+00000722 <__stop_program>:
+ 722:	ff cf       	rjmp	.-2      	; 0x722 <__stop_program>
