@@ -100,6 +100,6 @@
 
 
     void toneAC(unsigned long frequency = 0, uint8_t volume = 10, unsigned long length = 0, uint8_t background = false);
- 
+	void Alarm(int variant,int vption);
   void noToneAC();
 #endif

@@ -8,7 +8,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/wdt.h>
-#include <util/delay.h>
+#include <util/_delay_ms.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <inttypes.h>
@@ -55,14 +55,14 @@ void toneAC(unsigned long frequency, uint8_t volume, unsigned long length, uint8
   ICR1   = top;                         // Set the top.
   if (TCNT1 > top) TCNT1 = top;         // Counter over the top, put within range.
   TCCR1B = _BV(WGM13)  | prescaler;     // Set PWM, phase and frequency corrected (top=ICR1) and prescaler.
-  OCR1A  = OCR1B = duty;                // Set the duty cycle (volume).
+  OCR1A  = duty;                // Set the duty cycle (volume).
   TCCR1A = _BV(COM1A1); // Inverted/non-inverted mode (AC).
 
 
   if (length > 0 && !background) { 
-	  while(length--) {	_delay_ms(1); }
+	  while(length--) {	__delay_ms_ms(1); }
 	  noToneAC(); 
-	  } // Just a simple delay, doesn't return control till finished.
+	  } // Just a simple _delay_ms, doesn't return control till finished.
 
 }
 
@@ -77,4 +77,100 @@ void noToneAC() {
 ISR(TIMER1_COMPA_vect) { // Timer interrupt vector.
 	//noToneAC();
   if (millis() >= _tAC_time) noToneAC(); // Check to see if it's time for the note to end.
+}
+
+
+
+void Alarm(int variant,int option)
+{
+	byte x,y;
+
+	switch (variant)
+	{
+		case 1:// four beeps
+		for(y=1;y<=(option>1?option:1);y++)
+		{
+			Beep(3000,30);
+			__delay_ms_ms(100);
+			Beep(3000,30);
+			__delay_ms_ms(100);
+			Beep(3000,30);
+			__delay_ms_ms(100);
+			Beep(3000,30);
+			__delay_ms_ms(1000);
+		}
+		break;
+
+		case 2: // whoop up
+		for(y=1;y<=(option>1?option:1);y++)
+		{
+			for(x=1;x<=50;x++)
+			Beep(250*x/4,20);
+		}
+		break;
+
+		case 3: // whoop down
+		for(y=1;y<=(option>1?option:1);y++)
+		{
+			for(x=50;x>0;x--)
+			Beep(250*x/4,20);
+		}
+		break;
+
+		case 4:// Settings.O.Settings.
+		for(y=1;y<=(option>1?option:1);y++)
+		{
+			Beep(1200,50);
+			__delay_ms_ms(100);
+			Beep(1200,50);
+			__delay_ms_ms(100);
+			Beep(1200,50);
+			__delay_ms_ms(200);
+			Beep(1200,300);
+			_delay_ms(100);
+			Beep(1200,300);
+			_delay_ms(100);
+			Beep(1200,300);
+			_delay_ms(200);
+			Beep(1200,50);
+			_delay_ms(100);
+			Beep(1200,50);
+			_delay_ms(100);
+			Beep(1200,50);
+			if(Option>1)_delay_ms(500);
+		}
+		break;
+
+		case 5:// ding-dong
+		for(x=1;x<=(option>1?option:1);x++)
+		{
+			if(x>1)_delay_ms(2000);
+			Beep(1500,500);
+			Beep(1200,500);
+		}
+		break;
+
+		case 6: // phone ring
+		for(x=1;x<(15*(option>1?option:1));x++)
+		{
+			Beep(1000,40);
+			Beep(750,40);
+		}
+		break;
+
+		case 7: // boot
+		Beep(1500,100);
+		Beep(1000,100);
+		break;
+
+		default:// beep
+		if(variant==0)
+		variant=5; // tijdsduur
+
+		if(option==0)
+		option=20; // toonhoogte
+
+		Beep(100*option,variant*10);
+		break;
+	}
 }

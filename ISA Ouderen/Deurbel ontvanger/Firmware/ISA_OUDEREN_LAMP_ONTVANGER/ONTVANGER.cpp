@@ -5,6 +5,11 @@
  *  Author: Arne
  */ 
 
+/* 
+TIMER 0 - 8BIT  -  MILLIS
+TIMER 1 - 16BIT -  PIEZO SOUND
+TIMER 2 - 8BIT  -  
+
 #include "config.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
