@@ -1,0 +1,530 @@
+Archive member included because of file (symbol)
+
+c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+                              c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm328p.o (exit)
+c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_clear_bss.o)
+                              millis.o (__do_clear_bss)
+
+Discarded input sections
+
+ .bss           0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm328p.o
+ .text          0x00000000        0x0 delay.o
+ .bss           0x00000000        0x0 delay.o
+ .text.var_delay_ms
+                0x00000000       0x16 delay.o
+ .text.var_delay_us
+                0x00000000       0x12 delay.o
+ .text          0x00000000        0x0 I2C_master.o
+ .bss           0x00000000        0x0 I2C_master.o
+ .text.I2C_read_ack
+                0x00000000       0x16 I2C_master.o
+ .text.I2C_read_nack
+                0x00000000       0x16 I2C_master.o
+ .text          0x00000000        0x0 log.o
+ .bss           0x00000000        0x0 log.o
+ .text.log_uint16_t
+                0x00000000        0x6 log.o
+ .text.log_int16_t
+                0x00000000        0x2 log.o
+ .text.log_s    0x00000000        0x2 log.o
+ .text          0x00000000        0x0 millis.o
+ .bss           0x00000000        0x0 millis.o
+ .text.millis_get
+                0x00000000       0x28 millis.o
+ .text.millis_resume
+                0x00000000       0x16 millis.o
+ .text.millis_pause
+                0x00000000       0x16 millis.o
+ .text.millis_reset
+                0x00000000       0x18 millis.o
+ .text.millis_add
+                0x00000000       0x44 millis.o
+ .text.millis_subtract
+                0x00000000       0x4c millis.o
+ .text          0x00000000        0x0 ONTVANGER.o
+ .bss           0x00000000        0x0 ONTVANGER.o
+ .text._Z12var_delay_msj
+                0x00000000       0x16 ONTVANGER.o
+ .text._Z12var_delay_usj
+                0x00000000       0x12 ONTVANGER.o
+ .text          0x00000000        0x0 pca9635.o
+ .bss           0x00000000        0x0 pca9635.o
+ .text          0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+ .bss           0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+ .text.libgcc.mul
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+ .text.libgcc.div
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+ .text          0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_clear_bss.o)
+ .bss           0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.mul
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.div
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_clear_bss.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00020000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+fuse             0x00820000         0x00000400         rw !x
+lock             0x00830000         0x00000400         rw !x
+signature        0x00840000         0x00000400         rw !x
+user_signatures  0x00850000         0x00000400         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+Address of section .data set to 0x800100
+LOAD c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm328p.o
+LOAD delay.o
+LOAD I2C_master.o
+LOAD log.o
+LOAD millis.o
+LOAD ONTVANGER.o
+LOAD pca9635.o
+START GROUP
+LOAD c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libm.a
+END GROUP
+LOAD c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a
+LOAD c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libm.a
+LOAD c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a
+LOAD c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5\libc.a
+LOAD c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000      0x254
+ *(.vectors)
+ .vectors       0x00000000       0x68 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm328p.o
+                0x00000000                __vector_default
+                0x00000000                __vectors
+ *(.vectors)
+ *(.progmem.gcc*)
+ *(.progmem*)
+                0x00000068                . = ALIGN (0x2)
+                0x00000068                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x00000068        0x0 linker stubs
+ *(.trampolines*)
+                0x00000068                __trampolines_end = .
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x00000068                __ctors_start = .
+ *(.ctors)
+                0x00000068                __ctors_end = .
+                0x00000068                __dtors_start = .
+ *(.dtors)
+                0x00000068                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x00000068        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm328p.o
+                0x00000068                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x00000068        0xc c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm328p.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x00000074       0x10 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_clear_bss.o)
+                0x00000074                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x00000084        0x4 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm328p.o
+ *(.init9)
+ *(.text)
+ .text          0x00000088        0x2 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm328p.o
+                0x00000088                __vector_22
+                0x00000088                __vector_1
+                0x00000088                __vector_24
+                0x00000088                __vector_12
+                0x00000088                __bad_interrupt
+                0x00000088                __vector_6
+                0x00000088                __vector_3
+                0x00000088                __vector_23
+                0x00000088                __vector_25
+                0x00000088                __vector_11
+                0x00000088                __vector_13
+                0x00000088                __vector_17
+                0x00000088                __vector_19
+                0x00000088                __vector_5
+                0x00000088                __vector_4
+                0x00000088                __vector_9
+                0x00000088                __vector_2
+                0x00000088                __vector_21
+                0x00000088                __vector_15
+                0x00000088                __vector_8
+                0x00000088                __vector_14
+                0x00000088                __vector_10
+                0x00000088                __vector_16
+                0x00000088                __vector_18
+                0x00000088                __vector_20
+                0x0000008a                . = ALIGN (0x2)
+ *(.text.*)
+ .text.I2C_init
+                0x0000008a        0x8 I2C_master.o
+                0x0000008a                I2C_init
+ .text.I2C_start
+                0x00000092       0x4a I2C_master.o
+                0x00000092                I2C_start
+ .text.I2C_write
+                0x000000dc       0x24 I2C_master.o
+                0x000000dc                I2C_write
+ .text.I2C_stop
+                0x00000100        0x8 I2C_master.o
+                0x00000100                I2C_stop
+ .text.millis_init
+                0x00000108       0x18 millis.o
+                0x00000108                millis_init
+ .text.__vector_7
+                0x00000120       0x4a millis.o
+                0x00000120                __vector_7
+ .text.main     0x0000016a       0x5a ONTVANGER.o
+                0x0000016a                main
+ .text.pca9635_init
+                0x000001c4       0x6a pca9635.o
+                0x000001c4                pca9635_init
+ .text.pca9635_set_led_pwm
+                0x0000022e       0x22 pca9635.o
+                0x0000022e                pca9635_set_led_pwm
+                0x00000250                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x00000250        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+                0x00000250                _exit
+                0x00000250                exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x00000250        0x4 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+ *(.fini0)
+                0x00000254                _etext = .
+
+.data           0x00800100        0x0 load address 0x00000254
+                0x00800100                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800100        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm328p.o
+ .data          0x00800100        0x0 delay.o
+ .data          0x00800100        0x0 I2C_master.o
+ .data          0x00800100        0x0 log.o
+ .data          0x00800100        0x0 millis.o
+ .data          0x00800100        0x0 ONTVANGER.o
+ .data          0x00800100        0x0 pca9635.o
+ .data          0x00800100        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+ .data          0x00800100        0x0 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_clear_bss.o)
+ *(.data*)
+ *(.rodata)
+ *(.rodata*)
+ *(.gnu.linkonce.d*)
+                0x00800100                . = ALIGN (0x2)
+                0x00800100                _edata = .
+                0x00800100                PROVIDE (__data_end, .)
+
+.bss            0x00800100        0x4
+                0x00800100                PROVIDE (__bss_start, .)
+ *(.bss)
+ *(.bss*)
+ .bss.milliseconds
+                0x00800100        0x4 millis.o
+ *(COMMON)
+                0x00800104                PROVIDE (__bss_end, .)
+                0x00000254                __data_load_start = LOADADDR (.data)
+                0x00000254                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x00800104        0x0
+                0x00800104                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x00800104                PROVIDE (__noinit_end, .)
+                0x00800104                _end = .
+                0x00800104                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.user_signatures
+ *(.user_signatures*)
+
+.stab           0x00000000      0x6cc
+ *(.stab)
+ .stab          0x00000000      0x6cc c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm328p.o
+
+.stabstr        0x00000000       0x97
+ *(.stabstr)
+ .stabstr       0x00000000       0x97 c:/program files/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm328p.o
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x00000000       0x2f
+ *(.comment)
+ .comment       0x00000000       0x2f delay.o
+                                 0x30 (size before relaxing)
+ .comment       0x00000000       0x30 I2C_master.o
+ .comment       0x00000000       0x30 log.o
+ .comment       0x00000000       0x30 millis.o
+ .comment       0x00000000       0x30 ONTVANGER.o
+ .comment       0x00000000       0x30 pca9635.o
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x150
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x28 delay.o
+ .debug_aranges
+                0x00000028       0x48 I2C_master.o
+ .debug_aranges
+                0x00000070       0x30 log.o
+ .debug_aranges
+                0x000000a0       0x58 millis.o
+ .debug_aranges
+                0x000000f8       0x30 ONTVANGER.o
+ .debug_aranges
+                0x00000128       0x28 pca9635.o
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x00000000      0xe2b
+ *(.debug_info)
+ .debug_info    0x00000000      0x1e9 delay.o
+ .debug_info    0x000001e9      0x138 I2C_master.o
+ .debug_info    0x00000321      0x140 log.o
+ .debug_info    0x00000461      0x309 millis.o
+ .debug_info    0x0000076a      0x36d ONTVANGER.o
+ .debug_info    0x00000ad7      0x354 pca9635.o
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev   0x00000000      0x603
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0xee delay.o
+ .debug_abbrev  0x000000ee       0xa5 I2C_master.o
+ .debug_abbrev  0x00000193       0xc1 log.o
+ .debug_abbrev  0x00000254      0x16b millis.o
+ .debug_abbrev  0x000003bf      0x168 ONTVANGER.o
+ .debug_abbrev  0x00000527       0xdc pca9635.o
+
+.debug_line     0x00000000      0xb70
+ *(.debug_line)
+ .debug_line    0x00000000      0x1a2 delay.o
+ .debug_line    0x000001a2      0x205 I2C_master.o
+ .debug_line    0x000003a7       0xf0 log.o
+ .debug_line    0x00000497      0x2d9 millis.o
+ .debug_line    0x00000770      0x24e ONTVANGER.o
+ .debug_line    0x000009be      0x1b2 pca9635.o
+
+.debug_frame    0x00000000      0x264
+ *(.debug_frame)
+ .debug_frame   0x00000000       0x34 delay.o
+ .debug_frame   0x00000034       0x74 I2C_master.o
+ .debug_frame   0x000000a8       0x44 log.o
+ .debug_frame   0x000000ec       0xf4 millis.o
+ .debug_frame   0x000001e0       0x44 ONTVANGER.o
+ .debug_frame   0x00000224       0x40 pca9635.o
+
+.debug_str      0x00000000      0x30e
+ *(.debug_str)
+ .debug_str     0x00000000      0x124 delay.o
+                                0x17a (size before relaxing)
+ .debug_str     0x00000124       0x65 I2C_master.o
+                                0x142 (size before relaxing)
+ .debug_str     0x00000189       0x3b log.o
+                                0x126 (size before relaxing)
+ .debug_str     0x000001c4       0xb2 millis.o
+                                0x18f (size before relaxing)
+ .debug_str     0x00000276       0x7d ONTVANGER.o
+                                0x1f3 (size before relaxing)
+ .debug_str     0x000002f3       0x1b pca9635.o
+                                0x136 (size before relaxing)
+
+.debug_loc      0x00000000      0x62b
+ *(.debug_loc)
+ .debug_loc     0x00000000       0xd4 delay.o
+ .debug_loc     0x000000d4       0x81 I2C_master.o
+ .debug_loc     0x00000155       0x26 log.o
+ .debug_loc     0x0000017b      0x1fb millis.o
+ .debug_loc     0x00000376      0x1f1 ONTVANGER.o
+ .debug_loc     0x00000567       0xc4 pca9635.o
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges   0x00000000      0x108
+ *(.debug_ranges)
+ .debug_ranges  0x00000000       0x18 delay.o
+ .debug_ranges  0x00000018       0x38 I2C_master.o
+ .debug_ranges  0x00000050       0x20 log.o
+ .debug_ranges  0x00000070       0x48 millis.o
+ .debug_ranges  0x000000b8       0x38 ONTVANGER.o
+ .debug_ranges  0x000000f0       0x18 pca9635.o
+
+.debug_macro
+ *(.debug_macro)
+OUTPUT(ONTVANGER.elf elf32-avr)
+LOAD linker stubs

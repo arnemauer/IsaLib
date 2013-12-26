@@ -9,62 +9,8 @@
 TIMER 0 - 8BIT  -  MILLIS
 TIMER 1 - 16BIT -  PIEZO SOUND
 TIMER 2 - 8BIT  -  LED
-
-array dingdong_freq (1500, 0, 1200, 0); // 0=wait
-array dingdong_length (500, 500, 500, 1500);
-
-
-array led_doorbell_R
-array led_doorbell_R
-array led_doorbell_R
-array led_doorbell_R
-array led_doorbell_R
-array led_doorbell_R
-
-
-
-toneAC(1500, 10, 500, true); // Play thisNote at full volume for noteDuration in the background.
-_delay_ms(500);
-toneAC(1200, 10, 500, true); // Play thisNote at full volume for noteDuration in the background.
-_delay_ms(1500);
-__________________________________________________________________________
-
-toneAC - set soundon = true;
-
-notoneAC - set soundon = false;
-
-__________________________________________________________________________
-while{
-	- controleren of geldig pakket is binnengekomen
-	- JA	-> actief alarm array vullen (telefoon, deurbel, brand, hulp)
-			-> geluid (+timer1) starten
-			-> leds (+timer2) starten
-			-> 
-			
-			-> 1 timer (2): variabel(meldingduurteller = millis + meldingduur), 
-				-> meldingsduurteller groter dan millis? 
-				NEE: timer geheel uitschakelen!
-				
-				JA: 
-					-> check of geluid aan staat (soundon == true)
-						-> JA -> uitzetten? (vergelijk millis met _tAC_time) 
-									-> JA,	pwm uit, _tAC_time = 0;
-											Volgende toon :
-												speeltoon(dingdong_freq[soundstep];
-												
-												if(soundstep == totaal(dingdong_freq)){
-													soundstep = 0; // reset soundstep
-												}else{
-													soundstep++;
-												}
-												
-													
-									->  Nee, niks doen. 
-				
-					->  
-			
-				 NEE: timer geheel uitschakelen!
 */
+
 
 #include "config.h"
 #include <avr/io.h>
@@ -75,38 +21,62 @@ while{
 #include <stdio.h>
 #include <inttypes.h>
 #include <string.h>
-
-#include <avr/io.h>
-#include <avr/interrupt.h>
-
 #include <avr/pgmspace.h>
+
 #define byte uint8_t
 #include "delay.c"
 #include "millis.h"
-#include "toneAC.h"
+//#include "toneAC.h"
+extern "C" {
+	#include "I2C_master.h"
+	#include "pca9635.h"
+};
 
 
 int main() {
+	  uint8_t mychannel;
+	  uint8_t counter;
 	
 	sei();
 	        // Initialize library
 	        millis_init();
-			
+			I2C_init();	
+			pca9635_init();
 
-//MELODIE AFSPELEN 
-/*
-  for (int thisNote = 0; thisNote < 8; thisNote++) {
-	  int noteDuration = 1000/noteDurations[thisNote];
-	  toneAC(melody[thisNote], 10, noteDuration, true); // Play thisNote at full volume for noteDuration in the background.
-	  var_delay_ms(noteDuration * 4 / 3); // Wait while the tone plays in the background, plus another 33% delay between notes.
-  }
-	toneAC(); // Turn off toneAC, can also use noToneAC().
-*/
-//MELODIE AFSPELEN 
+// pca9635_set_led_pwm(15, 200);
+ 
 
 	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
 	
+		 for(mychannel =0; mychannel <= 15; mychannel++)
+		 {
+			  for(counter = 0; counter < 255; counter++)
+			  {
+				  _delay_ms(1);
+			 pca9635_set_led_pwm(mychannel, counter);
+			 
+			}
+			_delay_ms(100);
+			
+			for(counter = 255; counter > 0; counter--)
+			{
+				_delay_ms(1);
+				pca9635_set_led_pwm(mychannel, counter);
+				
+			}
+		}
+
 	
+	}
+	
+	
+	
+	
+	
+	
+}
+
+	/*
 // WHOOP UP
 	byte x;
 		for(x=50;x>0;x++){

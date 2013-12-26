@@ -1,0 +1,494 @@
+
+ONTVANGER.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00000254  000002e8  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000254  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000004  00800100  00800100  000002e8  2**0
+                  ALLOC
+  3 .stab         000006cc  00000000  00000000  000002e8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000097  00000000  00000000  000009b4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .comment      0000002f  00000000  00000000  00000a4b  2**0
+                  CONTENTS, READONLY
+  6 .debug_aranges 00000150  00000000  00000000  00000a7a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   00000e2b  00000000  00000000  00000bca  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 00000603  00000000  00000000  000019f5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   00000b70  00000000  00000000  00001ff8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_frame  00000264  00000000  00000000  00002b68  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_str    0000030e  00000000  00000000  00002dcc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_loc    0000062b  00000000  00000000  000030da  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 00000108  00000000  00000000  00003705  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	33 c0       	rjmp	.+102    	; 0x68 <__ctors_end>
+   2:	00 00       	nop
+   4:	41 c0       	rjmp	.+130    	; 0x88 <__bad_interrupt>
+   6:	00 00       	nop
+   8:	3f c0       	rjmp	.+126    	; 0x88 <__bad_interrupt>
+   a:	00 00       	nop
+   c:	3d c0       	rjmp	.+122    	; 0x88 <__bad_interrupt>
+   e:	00 00       	nop
+  10:	3b c0       	rjmp	.+118    	; 0x88 <__bad_interrupt>
+  12:	00 00       	nop
+  14:	39 c0       	rjmp	.+114    	; 0x88 <__bad_interrupt>
+  16:	00 00       	nop
+  18:	37 c0       	rjmp	.+110    	; 0x88 <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	81 c0       	rjmp	.+258    	; 0x120 <__vector_7>
+  1e:	00 00       	nop
+  20:	33 c0       	rjmp	.+102    	; 0x88 <__bad_interrupt>
+  22:	00 00       	nop
+  24:	31 c0       	rjmp	.+98     	; 0x88 <__bad_interrupt>
+  26:	00 00       	nop
+  28:	2f c0       	rjmp	.+94     	; 0x88 <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	2d c0       	rjmp	.+90     	; 0x88 <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	2b c0       	rjmp	.+86     	; 0x88 <__bad_interrupt>
+  32:	00 00       	nop
+  34:	29 c0       	rjmp	.+82     	; 0x88 <__bad_interrupt>
+  36:	00 00       	nop
+  38:	27 c0       	rjmp	.+78     	; 0x88 <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	25 c0       	rjmp	.+74     	; 0x88 <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	23 c0       	rjmp	.+70     	; 0x88 <__bad_interrupt>
+  42:	00 00       	nop
+  44:	21 c0       	rjmp	.+66     	; 0x88 <__bad_interrupt>
+  46:	00 00       	nop
+  48:	1f c0       	rjmp	.+62     	; 0x88 <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	1d c0       	rjmp	.+58     	; 0x88 <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	1b c0       	rjmp	.+54     	; 0x88 <__bad_interrupt>
+  52:	00 00       	nop
+  54:	19 c0       	rjmp	.+50     	; 0x88 <__bad_interrupt>
+  56:	00 00       	nop
+  58:	17 c0       	rjmp	.+46     	; 0x88 <__bad_interrupt>
+  5a:	00 00       	nop
+  5c:	15 c0       	rjmp	.+42     	; 0x88 <__bad_interrupt>
+  5e:	00 00       	nop
+  60:	13 c0       	rjmp	.+38     	; 0x88 <__bad_interrupt>
+  62:	00 00       	nop
+  64:	11 c0       	rjmp	.+34     	; 0x88 <__bad_interrupt>
+	...
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a4 30       	cpi	r26, 0x04	; 4
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	72 d0       	rcall	.+228    	; 0x16a <main>
+  86:	e4 c0       	rjmp	.+456    	; 0x250 <_exit>
+
+00000088 <__bad_interrupt>:
+  88:	bb cf       	rjmp	.-138    	; 0x0 <__vectors>
+
+0000008a <I2C_init>:
+	TWCR = (1<<TWINT) | (1<<TWEN);
+	// wait for end of transmission
+	while( !(TWCR & (1<<TWINT)) );
+	// return received data from TWDR
+	return TWDR;
+}
+  8a:	88 e4       	ldi	r24, 0x48	; 72
+  8c:	80 93 b8 00 	sts	0x00B8, r24
+  90:	08 95       	ret
+
+00000092 <I2C_start>:
+  92:	ec eb       	ldi	r30, 0xBC	; 188
+  94:	f0 e0       	ldi	r31, 0x00	; 0
+  96:	10 82       	st	Z, r1
+  98:	94 ea       	ldi	r25, 0xA4	; 164
+  9a:	90 83       	st	Z, r25
+  9c:	90 81       	ld	r25, Z
+  9e:	99 23       	and	r25, r25
+  a0:	ec f7       	brge	.-6      	; 0x9c <I2C_start+0xa>
+  a2:	90 91 b9 00 	lds	r25, 0x00B9
+  a6:	98 7f       	andi	r25, 0xF8	; 248
+  a8:	98 30       	cpi	r25, 0x08	; 8
+  aa:	a1 f4       	brne	.+40     	; 0xd4 <I2C_start+0x42>
+  ac:	80 93 bb 00 	sts	0x00BB, r24
+  b0:	84 e8       	ldi	r24, 0x84	; 132
+  b2:	80 93 bc 00 	sts	0x00BC, r24
+  b6:	ec eb       	ldi	r30, 0xBC	; 188
+  b8:	f0 e0       	ldi	r31, 0x00	; 0
+  ba:	80 81       	ld	r24, Z
+  bc:	88 23       	and	r24, r24
+  be:	ec f7       	brge	.-6      	; 0xba <I2C_start+0x28>
+  c0:	90 91 b9 00 	lds	r25, 0x00B9
+  c4:	98 7f       	andi	r25, 0xF8	; 248
+  c6:	98 31       	cpi	r25, 0x18	; 24
+  c8:	39 f0       	breq	.+14     	; 0xd8 <I2C_start+0x46>
+  ca:	81 e0       	ldi	r24, 0x01	; 1
+  cc:	90 34       	cpi	r25, 0x40	; 64
+  ce:	29 f4       	brne	.+10     	; 0xda <I2C_start+0x48>
+  d0:	80 e0       	ldi	r24, 0x00	; 0
+  d2:	08 95       	ret
+  d4:	81 e0       	ldi	r24, 0x01	; 1
+  d6:	08 95       	ret
+  d8:	80 e0       	ldi	r24, 0x00	; 0
+  da:	08 95       	ret
+
+000000dc <I2C_write>:
+  dc:	80 93 bb 00 	sts	0x00BB, r24
+  e0:	84 e8       	ldi	r24, 0x84	; 132
+  e2:	80 93 bc 00 	sts	0x00BC, r24
+  e6:	ec eb       	ldi	r30, 0xBC	; 188
+  e8:	f0 e0       	ldi	r31, 0x00	; 0
+  ea:	80 81       	ld	r24, Z
+  ec:	88 23       	and	r24, r24
+  ee:	ec f7       	brge	.-6      	; 0xea <I2C_write+0xe>
+  f0:	90 91 b9 00 	lds	r25, 0x00B9
+  f4:	98 7f       	andi	r25, 0xF8	; 248
+  f6:	81 e0       	ldi	r24, 0x01	; 1
+  f8:	98 32       	cpi	r25, 0x28	; 40
+  fa:	09 f4       	brne	.+2      	; 0xfe <I2C_write+0x22>
+  fc:	80 e0       	ldi	r24, 0x00	; 0
+  fe:	08 95       	ret
+
+00000100 <I2C_stop>:
+
+void I2C_stop(void){
+	// transmit STOP condition
+	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWSTO);
+ 100:	84 e9       	ldi	r24, 0x94	; 148
+ 102:	80 93 bc 00 	sts	0x00BC, r24
+ 106:	08 95       	ret
+
+00000108 <millis_init>:
+{
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+	{
+		milliseconds -= ms;
+	}
+}
+ 108:	82 e0       	ldi	r24, 0x02	; 2
+ 10a:	80 93 b0 00 	sts	0x00B0, r24
+ 10e:	94 e0       	ldi	r25, 0x04	; 4
+ 110:	90 93 b1 00 	sts	0x00B1, r25
+ 114:	80 93 70 00 	sts	0x0070, r24
+ 118:	8a ef       	ldi	r24, 0xFA	; 250
+ 11a:	80 93 b3 00 	sts	0x00B3, r24
+ 11e:	08 95       	ret
+
+00000120 <__vector_7>:
+
+ISR(ISR_VECT)
+{
+ 120:	1f 92       	push	r1
+ 122:	0f 92       	push	r0
+ 124:	0f b6       	in	r0, 0x3f	; 63
+ 126:	0f 92       	push	r0
+ 128:	11 24       	eor	r1, r1
+ 12a:	8f 93       	push	r24
+ 12c:	9f 93       	push	r25
+ 12e:	af 93       	push	r26
+ 130:	bf 93       	push	r27
+	++milliseconds;
+ 132:	80 91 00 01 	lds	r24, 0x0100
+ 136:	90 91 01 01 	lds	r25, 0x0101
+ 13a:	a0 91 02 01 	lds	r26, 0x0102
+ 13e:	b0 91 03 01 	lds	r27, 0x0103
+ 142:	01 96       	adiw	r24, 0x01	; 1
+ 144:	a1 1d       	adc	r26, r1
+ 146:	b1 1d       	adc	r27, r1
+ 148:	80 93 00 01 	sts	0x0100, r24
+ 14c:	90 93 01 01 	sts	0x0101, r25
+ 150:	a0 93 02 01 	sts	0x0102, r26
+ 154:	b0 93 03 01 	sts	0x0103, r27
+}
+ 158:	bf 91       	pop	r27
+ 15a:	af 91       	pop	r26
+ 15c:	9f 91       	pop	r25
+ 15e:	8f 91       	pop	r24
+ 160:	0f 90       	pop	r0
+ 162:	0f be       	out	0x3f, r0	; 63
+ 164:	0f 90       	pop	r0
+ 166:	1f 90       	pop	r1
+ 168:	18 95       	reti
+
+0000016a <main>:
+
+int main() {
+	  uint8_t mychannel;
+	  uint8_t counter;
+	
+	sei();
+ 16a:	78 94       	sei
+	        // Initialize library
+	        millis_init();
+ 16c:	cd df       	rcall	.-102    	; 0x108 <millis_init>
+			I2C_init();	
+ 16e:	8d df       	rcall	.-230    	; 0x8a <I2C_init>
+			pca9635_init();
+ 170:	29 d0       	rcall	.+82     	; 0x1c4 <pca9635_init>
+// pca9635_set_led_pwm(15, 200);
+ 
+
+	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
+	
+		 for(mychannel =0; mychannel <= 15; mychannel++)
+ 172:	d0 e0       	ldi	r29, 0x00	; 0
+	#include "I2C_master.h"
+	#include "pca9635.h"
+};
+
+
+int main() {
+ 174:	10 e0       	ldi	r17, 0x00	; 0
+ 176:	24 c0       	rjmp	.+72     	; 0x1c0 <main+0x56>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 178:	8f e9       	ldi	r24, 0x9F	; 159
+ 17a:	9f e0       	ldi	r25, 0x0F	; 15
+ 17c:	01 97       	sbiw	r24, 0x01	; 1
+ 17e:	f1 f7       	brne	.-4      	; 0x17c <main+0x12>
+ 180:	00 c0       	rjmp	.+0      	; 0x182 <main+0x18>
+ 182:	00 00       	nop
+		 for(mychannel =0; mychannel <= 15; mychannel++)
+		 {
+			  for(counter = 0; counter < 255; counter++)
+			  {
+				  _delay_ms(1);
+			 pca9635_set_led_pwm(mychannel, counter);
+ 184:	6c 2f       	mov	r22, r28
+ 186:	8d 2f       	mov	r24, r29
+ 188:	52 d0       	rcall	.+164    	; 0x22e <pca9635_set_led_pwm>
+
+	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
+	
+		 for(mychannel =0; mychannel <= 15; mychannel++)
+		 {
+			  for(counter = 0; counter < 255; counter++)
+ 18a:	cf 5f       	subi	r28, 0xFF	; 255
+ 18c:	cf 3f       	cpi	r28, 0xFF	; 255
+ 18e:	a1 f7       	brne	.-24     	; 0x178 <main+0xe>
+ 190:	9f ef       	ldi	r25, 0xFF	; 255
+ 192:	21 ee       	ldi	r18, 0xE1	; 225
+ 194:	84 e0       	ldi	r24, 0x04	; 4
+ 196:	91 50       	subi	r25, 0x01	; 1
+ 198:	20 40       	sbci	r18, 0x00	; 0
+ 19a:	80 40       	sbci	r24, 0x00	; 0
+ 19c:	e1 f7       	brne	.-8      	; 0x196 <main+0x2c>
+ 19e:	00 c0       	rjmp	.+0      	; 0x1a0 <main+0x36>
+ 1a0:	00 00       	nop
+ 1a2:	8f e9       	ldi	r24, 0x9F	; 159
+ 1a4:	9f e0       	ldi	r25, 0x0F	; 15
+ 1a6:	01 97       	sbiw	r24, 0x01	; 1
+ 1a8:	f1 f7       	brne	.-4      	; 0x1a6 <main+0x3c>
+ 1aa:	00 c0       	rjmp	.+0      	; 0x1ac <main+0x42>
+ 1ac:	00 00       	nop
+			_delay_ms(100);
+			
+			for(counter = 255; counter > 0; counter--)
+			{
+				_delay_ms(1);
+				pca9635_set_led_pwm(mychannel, counter);
+ 1ae:	6c 2f       	mov	r22, r28
+ 1b0:	8d 2f       	mov	r24, r29
+ 1b2:	3d d0       	rcall	.+122    	; 0x22e <pca9635_set_led_pwm>
+			 pca9635_set_led_pwm(mychannel, counter);
+			 
+			}
+			_delay_ms(100);
+			
+			for(counter = 255; counter > 0; counter--)
+ 1b4:	c1 50       	subi	r28, 0x01	; 1
+ 1b6:	a9 f7       	brne	.-22     	; 0x1a2 <main+0x38>
+// pca9635_set_led_pwm(15, 200);
+ 
+
+	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
+	
+		 for(mychannel =0; mychannel <= 15; mychannel++)
+ 1b8:	df 5f       	subi	r29, 0xFF	; 255
+ 1ba:	d0 31       	cpi	r29, 0x10	; 16
+ 1bc:	08 f0       	brcs	.+2      	; 0x1c0 <main+0x56>
+ 1be:	d1 2f       	mov	r29, r17
+	#include "I2C_master.h"
+	#include "pca9635.h"
+};
+
+
+int main() {
+ 1c0:	c1 2f       	mov	r28, r17
+ 1c2:	da cf       	rjmp	.-76     	; 0x178 <main+0xe>
+
+000001c4 <pca9635_init>:
+
+#define device_address 0x70; // Default to the all-call address
+#define autoincrement_bits 0x80; // Autoincrement all
+
+void pca9635_init(){
+  I2C_start((0x40<<1)+I2C_WRITE);
+ 1c4:	80 e8       	ldi	r24, 0x80	; 128
+ 1c6:	65 df       	rcall	.-310    	; 0x92 <I2C_start>
+  
+  //Autoincrement ALL registers, start at reg 0 - we're initting
+  I2C_write(0x80);
+ 1c8:	80 e8       	ldi	r24, 0x80	; 128
+ 1ca:	88 df       	rcall	.-240    	; 0xdc <I2C_write>
+  
+  //Reg 0x00 = MODE1 - set to 0x80 - autoincrement enabled (this is readonly?), do not respond to subaddresses or allcall
+  I2C_write(0x80);
+ 1cc:	80 e8       	ldi	r24, 0x80	; 128
+ 1ce:	86 df       	rcall	.-244    	; 0xdc <I2C_write>
+  
+  //Reg 0x01 = MODE2 - set to 0x02 - noninverted logic state, open-drain
+  I2C_write(0x02);
+ 1d0:	82 e0       	ldi	r24, 0x02	; 2
+ 1d2:	84 df       	rcall	.-248    	; 0xdc <I2C_write>
+  
+  //Reg 0x02-0x11 - PWM0-15 - LED brightnesses, start at low brightness (0x20)
+  
+  I2C_write(0x01);
+ 1d4:	81 e0       	ldi	r24, 0x01	; 1
+ 1d6:	82 df       	rcall	.-252    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 1d8:	81 e0       	ldi	r24, 0x01	; 1
+ 1da:	80 df       	rcall	.-256    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 1dc:	81 e0       	ldi	r24, 0x01	; 1
+ 1de:	7e df       	rcall	.-260    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 1e0:	81 e0       	ldi	r24, 0x01	; 1
+ 1e2:	7c df       	rcall	.-264    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 1e4:	81 e0       	ldi	r24, 0x01	; 1
+ 1e6:	7a df       	rcall	.-268    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 1e8:	81 e0       	ldi	r24, 0x01	; 1
+ 1ea:	78 df       	rcall	.-272    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 1ec:	81 e0       	ldi	r24, 0x01	; 1
+ 1ee:	76 df       	rcall	.-276    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 1f0:	81 e0       	ldi	r24, 0x01	; 1
+ 1f2:	74 df       	rcall	.-280    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 1f4:	81 e0       	ldi	r24, 0x01	; 1
+ 1f6:	72 df       	rcall	.-284    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 1f8:	81 e0       	ldi	r24, 0x01	; 1
+ 1fa:	70 df       	rcall	.-288    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 1fc:	81 e0       	ldi	r24, 0x01	; 1
+ 1fe:	6e df       	rcall	.-292    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 200:	81 e0       	ldi	r24, 0x01	; 1
+ 202:	6c df       	rcall	.-296    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 204:	81 e0       	ldi	r24, 0x01	; 1
+ 206:	6a df       	rcall	.-300    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 208:	81 e0       	ldi	r24, 0x01	; 1
+ 20a:	68 df       	rcall	.-304    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 20c:	81 e0       	ldi	r24, 0x01	; 1
+ 20e:	66 df       	rcall	.-308    	; 0xdc <I2C_write>
+  I2C_write(0x01);
+ 210:	81 e0       	ldi	r24, 0x01	; 1
+ 212:	64 df       	rcall	.-312    	; 0xdc <I2C_write>
+  
+  //Reg 0x12 - Group PWM - should not matter
+  I2C_write(0xff);
+ 214:	8f ef       	ldi	r24, 0xFF	; 255
+ 216:	62 df       	rcall	.-316    	; 0xdc <I2C_write>
+
+  //Reg 0x13 - Group Freq - should not matter
+  I2C_write(0x00);
+ 218:	80 e0       	ldi	r24, 0x00	; 0
+ 21a:	60 df       	rcall	.-320    	; 0xdc <I2C_write>
+
+  //Reg 0x14-0x17 - LED Output State Control - all 0xAA (output state for each LED = 0x2)
+  I2C_write(0xaa);
+ 21c:	8a ea       	ldi	r24, 0xAA	; 170
+ 21e:	5e df       	rcall	.-324    	; 0xdc <I2C_write>
+  I2C_write(0xaa);
+ 220:	8a ea       	ldi	r24, 0xAA	; 170
+ 222:	5c df       	rcall	.-328    	; 0xdc <I2C_write>
+  I2C_write(0xaa);
+ 224:	8a ea       	ldi	r24, 0xAA	; 170
+ 226:	5a df       	rcall	.-332    	; 0xdc <I2C_write>
+  I2C_write(0xaa);
+ 228:	8a ea       	ldi	r24, 0xAA	; 170
+ 22a:	58 df       	rcall	.-336    	; 0xdc <I2C_write>
+
+  //Reg 0x18-0x1b - Subaddressing stuff, doesn't matter, just stop the xfer
+  I2C_stop();
+ 22c:	69 cf       	rjmp	.-302    	; 0x100 <I2C_stop>
+
+0000022e <pca9635_set_led_pwm>:
+* Sets the pwm value for given led, note that it must have previously been enabled for PWM control with set_mode
+*
+* Remember that led numbers start from 0
+*/
+uint8_t pca9635_set_led_pwm(uint8_t ledno, uint8_t cycle)
+{
+ 22e:	cf 93       	push	r28
+ 230:	df 93       	push	r29
+ 232:	d8 2f       	mov	r29, r24
+ 234:	c6 2f       	mov	r28, r22
+	  I2C_start((0x40<<1)+I2C_WRITE);
+ 236:	80 e8       	ldi	r24, 0x80	; 128
+ 238:	2c df       	rcall	.-424    	; 0x92 <I2C_start>
+	uint8_t reg = 0x02 + ledno;
+ 23a:	8d 2f       	mov	r24, r29
+ 23c:	8e 5f       	subi	r24, 0xFE	; 254
+	// 0x80 = autoincrementbits
+	I2C_write((reg | 0x80) );
+ 23e:	80 68       	ori	r24, 0x80	; 128
+ 240:	4d df       	rcall	.-358    	; 0xdc <I2C_write>
+	I2C_write(cycle);
+ 242:	8c 2f       	mov	r24, r28
+ 244:	4b df       	rcall	.-362    	; 0xdc <I2C_write>
+	 I2C_stop();
+ 246:	5c df       	rcall	.-328    	; 0x100 <I2C_stop>
+	return 1;
+}
+ 248:	81 e0       	ldi	r24, 0x01	; 1
+ 24a:	df 91       	pop	r29
+ 24c:	cf 91       	pop	r28
+ 24e:	08 95       	ret
+
+00000250 <_exit>:
+ 250:	f8 94       	cli
+
+00000252 <__stop_program>:
+ 252:	ff cf       	rjmp	.-2      	; 0x252 <__stop_program>

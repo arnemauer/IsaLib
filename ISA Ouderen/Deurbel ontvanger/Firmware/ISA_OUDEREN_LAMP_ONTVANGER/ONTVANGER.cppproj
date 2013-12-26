@@ -134,6 +134,12 @@
     <Compile Include="delay.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="I2C_master.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="I2C_master.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="log.c">
       <SubType>compile</SubType>
     </Compile>
@@ -149,7 +155,10 @@
     <Compile Include="ONTVANGER.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="toneAC.cpp">
+    <Compile Include="pca9635.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pca9635.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="uart.h">
