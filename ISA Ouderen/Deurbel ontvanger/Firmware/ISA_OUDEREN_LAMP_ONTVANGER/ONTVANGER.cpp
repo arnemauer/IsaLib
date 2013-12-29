@@ -23,49 +23,74 @@ TIMER 2 - 8BIT  -  LED
 #include <string.h>
 #include <avr/pgmspace.h>
 
+
+
 #define byte uint8_t
+#include "RF12.h"
 #include "delay.c"
 #include "millis.h"
 //#include "toneAC.h"
 extern "C" {
 	#include "I2C_master.h"
 	#include "pca9635.h"
+	#include "uart.h"
+	#include "log.h"
 };
 
 
 int main() {
+
 	  uint8_t mychannel;
 	  uint8_t counter;
-	
+		static long payload;
+
 	sei();
 	        // Initialize library
 	        millis_init();
+			_delay_ms(3000);
+			
+
+			/* Initialize UART */
+			uart_init(UART_BAUD_SELECT(UART_BAUD_RATE,F_CPU));
+			uart0_puts("kak");
+			_delay_ms(1000);
+		
+		
 			I2C_init();	
 			pca9635_init();
-
+			
+			log_s("PCA ok");
+			_delay_ms(1000);
+			
+			
+  // node id, rfband, group id
+    rf12_initialize(2, RF12_868MHZ, 14);
+    // see http://tools.jeelabs.org/rfm12b
+  //  rf12_control(0xC040); // set low-battery level to 2.2V i.s.o. 3.1V
+	
+	
 // pca9635_set_led_pwm(15, 200);
- 
-
+log_s("geinitialiseert!");
+_delay_ms(1000);
 	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
 	
-		 for(mychannel =0; mychannel <= 15; mychannel++)
-		 {
-			  for(counter = 0; counter < 255; counter++)
-			  {
-				  _delay_ms(1);
-			 pca9635_set_led_pwm(mychannel, counter);
-			 
-			}
-			_delay_ms(100);
-			
-			for(counter = 255; counter > 0; counter--)
-			{
-				_delay_ms(1);
-				pca9635_set_led_pwm(mychannel, counter);
-				
-			}
-		}
+	/*
+	    ++payload;
+	    
+	    while (!rf12_canSend())
+	    rf12_recvDone();
+	  
+	    rf12_sendStart(0, &payload, sizeof payload);
+	    // set the sync mode to 2 if the fuses are still the Arduino default
+	    // mode 3 (full powerdown) can only be used with 258 CK startup fuses
+	    rf12_sendWait(0);
+	    
 
+	    
+		_delay_ms(3000);
+		
+*/
+	
 	
 	}
 	
@@ -75,6 +100,35 @@ int main() {
 	
 	
 }
+
+
+/*
+PWM AANSTURING
+
+for(mychannel =0; mychannel <= 15; mychannel++)
+{
+	for(counter = 0; counter < 255; counter++)
+	{
+		_delay_ms(1);
+		pca9635_set_led_pwm(mychannel, counter);
+		
+	}
+	_delay_ms(100);
+	
+	for(counter = 255; counter > 0; counter--)
+	{
+		_delay_ms(1);
+		pca9635_set_led_pwm(mychannel, counter);
+		
+	}
+}
+
+
+
+*/
+
+
+
 
 	/*
 // WHOOP UP

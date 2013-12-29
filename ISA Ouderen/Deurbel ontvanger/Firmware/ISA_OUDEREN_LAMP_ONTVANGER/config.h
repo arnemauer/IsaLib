@@ -70,6 +70,8 @@
 #define BIT_RFM_CS 2
 
 //Pin that the RFM12's IRQ  is connected to
+
+// DO NOT USE THIS, USE INT0! 
 #define DDR_RFM_IRQ DDRD
 #define PORT_RFM_IRQ PORTD
 #define PIN_RFM_IRQ PIND

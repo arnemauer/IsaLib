@@ -161,6 +161,15 @@
     <Compile Include="pca9635.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="RF12.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="RF12.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="uart.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="uart.h">
       <SubType>compile</SubType>
     </Compile>

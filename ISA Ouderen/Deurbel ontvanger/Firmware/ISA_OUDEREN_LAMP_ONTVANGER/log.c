@@ -12,7 +12,7 @@
 //#include <stdint.h>
 #include <inttypes.h>
 
-//#include "config.h"
+#include "config.h"
 //#include "uart.h"
 /**
  * Poll the specified uint16_t out the log port.

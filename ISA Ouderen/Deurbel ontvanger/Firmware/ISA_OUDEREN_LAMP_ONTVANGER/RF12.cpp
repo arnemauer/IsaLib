@@ -4,12 +4,17 @@
 #include "config.h"
 #include "RF12.h"
 #include "binary.h"
+#include <string.h>
 #include <avr/io.h>
 #include <util/crc16.h>
 #include <avr/eeprom.h>
 #include <avr/sleep.h>
-#include "millis.c"
+#include <avr/interrupt.h>
 
+#include "millis.h"
+extern "C" {
+#include "uart.h" 
+}
 // pin change interrupts are currently only supported on ATmega328's
 // #define PINCHG_IRQ 1    // uncomment this to use pin-change interrupts
 
@@ -27,70 +32,7 @@
 //  - please leave SPI_SS, SPI_MOSI, SPI_MISO, and SPI_SCK as is, i.e. pointing
 //    to the hardware-supported SPI pins on the ATmega, *including* SPI_SS !
 
-/*
-#if defined(__AVR_ATmega2560__) || defined(__AVR_ATmega1280__)
 
-#define RFM_IRQ     2
-#define SS_DDR      DDRB
-#define SS_PORT     PORTB
-#define SS_BIT      0
-
-#define SPI_SS      53    // PB0, pin 19
-#define SPI_MOSI    51    // PB2, pin 21
-#define SPI_MISO    50    // PB3, pin 22
-#define SPI_SCK     52    // PB1, pin 20
-
-#elif defined(__AVR_ATmega644P__)
-
-#define RFM_IRQ     10
-#define SS_DDR      DDRB
-#define SS_PORT     PORTB
-#define SS_BIT      4
-
-#define SPI_SS      4
-#define SPI_MOSI    5
-#define SPI_MISO    6
-#define SPI_SCK     7
-
-#elif defined(__AVR_ATtiny84__) || defined(__AVR_ATtiny44__)
-
-#define RFM_IRQ     2
-#define SS_DDR      DDRB
-#define SS_PORT     PORTB
-#define SS_BIT      1
-
-#define SPI_SS      1     // PB1, pin 3
-#define SPI_MISO    4     // PA6, pin 7
-#define SPI_MOSI    5     // PA5, pin 8
-#define SPI_SCK     6     // PA4, pin 9
-
-#elif defined(__AVR_ATmega32U4__) //Arduino Leonardo
-
-#define RFM_IRQ     0	    // PD0, INT0, Digital3
-#define SS_DDR      DDRB
-#define SS_PORT     PORTB
-#define SS_BIT      6	    // Dig10, PB6
-
-#define SPI_SS      17    // PB0, pin 8, Digital17
-#define SPI_MISO    14    // PB3, pin 11, Digital14
-#define SPI_MOSI    16    // PB2, pin 10, Digital16
-#define SPI_SCK     15    // PB1, pin 9, Digital15
-
-#else
-
-// ATmega168, ATmega328, etc.
-#define RFM_IRQ     2
-#define SS_DDR      DDRB
-#define SS_PORT     PORTB
-#define SS_BIT      2     // for PORTB: 2 = d.10, 1 = d.9, 0 = d.8
-
-#define SPI_SS      10    // PB2, pin 16
-#define SPI_MOSI    11    // PB3, pin 17
-#define SPI_MISO    12    // PB4, pin 18
-#define SPI_SCK     13    // PB5, pin 19
-
-#endif
-*/
 // RF12 command codes
 #define RF_TXREG_WRITE  0xB800
 #define RF_WAKEUP_TIMER 0xE000
@@ -159,21 +101,6 @@ static uint32_t seqNum;             // encrypted send sequence number
 static uint32_t cryptKey[4];        // encryption key to use
 void (*crypter)(uint8_t);           // does en-/decryption (null if disabled)
 
-/*
-// function to set chip select pin from within sketch
-void rf12_set_cs(uint8_t pin) {
-	#if defined(__AVR_ATmega32U4__)     //Arduino Leonardo
-	if (pin==10) cs_pin=6; 	    // Dig10, PB6
-	if (pin==9)  cs_pin=5; 	    // Dig9,  PB5
-	if (pin==8)  cs_pin=4; 	    // Dig8,  PB4
-	#elif defined(__AVR_ATmega168__) || defined(__AVR_ATmega328__) || defined (__AVR_ATmega328P__) // ATmega168, ATmega328
-	if (pin==10) cs_pin = 2; 	    // Dig10, PB2
-	if (pin==9) cs_pin = 1;  	    // Dig9,  PB1
-	if (pin==8) cs_pin = 0;  	    // Dig8,  PB0
-	#endif
-}
-*/
-
 
 // interrupts need to be disabled in a few spots
 // do so by disabling the source of the interrupt, not all interrupts
@@ -189,7 +116,7 @@ static void blockInterrupts () {
 //	#elif RFM_IRQ < 14
 //	bitClear(EIMSK, PCIE0);
 //	#else
-	EIMSK &= ~(1 << INT0); // disable pcint1 interrupt  //bitClear(EIMSK, INT0);
+	EIMSK &= ~(1 << INT0); // disable pcint0 interrupt  //bitClear(EIMSK, INT0);
 	//bitClear(EIMSK, PCIE1);
 	
 //	#endif
@@ -205,7 +132,7 @@ static void allowInterrupts () {
 //	#elif RFM_IRQ < 14
 //	bitSet(EIMSK, PCIE0);
 //	#else
-	 EIMSK |= (1 << INT0); // disable pcint1 interrupt //bitSet(EIMSK, INT0);
+	 EIMSK |= (1 << INT0); // enable pcint1 interrupt //bitSet(EIMSK, INT0);
 //	bitSet(EIMSK, PCIE1);
 //	#endif
 //	#else
@@ -215,10 +142,11 @@ static void allowInterrupts () {
 
 
 void rf12_spiInit () {
-//	bitSet(SS_PORT, cs_pin); in setup loop!
-//	bitSet(SS_DDR, cs_pin); in setup loop!
-	PORT_RFM_CS |= (1 << BIT_RFM_CS);  // Pull RFM12B CS high
-		DDR_SPI |= (1 << BIT_MOSI) | (1 << BIT_SCK) | (1 << BIT_RFM_CS);  // SDI, SCK,  CS output in setup loop!
+//	bitSet(SS_PORT, cs_pin); 
+//	bitSet(SS_DDR, cs_pin); 
+
+		DDR_SPI |= (1 << BIT_MOSI) | (1 << BIT_SCK) | (1 << BIT_RFM_CS);  // SDI, SCK,  CS output 
+		PORT_RFM_CS |= (1 << BIT_RFM_CS);  // Pull RFM12B CS high
 		DDR_SPI &= ~(1 << BIT_MISO);  // SDO  input
 
 //	digitalWrite(SPI_SS, 1);
@@ -238,8 +166,10 @@ void rf12_spiInit () {
 	USICR = bit(USIWM0);
 	#endif
 	
-	  DDR_RFM_IRQ &= ~(1 << BIT_RFM_IRQ);  // RFM12 IRQ  input
-	  PORT_RFM_IRQ |= (1 << BIT_RFM_IRQ); // digitalWrite(RFM_IRQ, 1); // pull-up
+	 // DDR_RFM_IRQ &= ~(1 << BIT_RFM_IRQ);  // RFM12 IRQ  input
+	  DDR_RFM_IRQ &= ~(1 << DDD2);  // RFM12 IRQ  input
+	//  PORT_RFM_IRQ |= (1 << BIT_RFM_IRQ); // digitalWrite(RFM_IRQ, 1); // pull-up
+	//  PORT_RFM_IRQ |= (1 << PORTD2); // digitalWrite(RFM_IRQ, 1); // pull-up
 	//pinMode(RFM_IRQ, INPUT);
 	//digitalWrite(RFM_IRQ, 1); // pull-up
 }
@@ -364,10 +294,10 @@ static void rf12_idle() {
 /// Handles a RFM12 interrupt depending on rxstate and the status reported by the RF
 /// module.
 static void rf12_interrupt() {
+	uart0_puts("INT");
 	uint8_t in;
 	state = rf12_xferState(&in);
-	//uart0_putc(rxfill);
-	//LED_PORT |= (1 << LED_BIT);  // led aan	
+
 	// data received or byte needed for sending
 	if (state & RF_FIFO_BIT) {
 		
@@ -453,6 +383,7 @@ ISR(PCINT0_vect) {
 #else
 */
 ISR(INT0_vect) {
+		uart0_puts("INT");
 	//while (!bitRead(PINC, RFM_IRQ - 14))
 	//LED_PORT |= (1 << LED_BIT);  // led aan	
 	//while(!(PIN_RFM_IRQ & (1<<BIT_RFM_IRQ)))
@@ -682,8 +613,9 @@ void rf12_sendWait (uint8_t mode) {
 void rf12_interruptcontrol () {
 	//#if PINCHG_IRQ
 	EIMSK |= (1<<INT0);					// Enable INT0
+	
 	//EICRA &= ~(1<<ISC01);	// Trigger INT0 on rising edge
-	//EICRA |= (1<<ISC00);	// Trigger INT0 on rising edge
+	//EICRA |= (1<<ISC01);	// Trigger INT0 on every change
 	
 	
 	  /* 	if ((nodeid & NODE_ID) != 0) {
@@ -776,19 +708,20 @@ uint8_t rf12_initialize (uint8_t id, uint8_t b, uint8_t g) {
 	// normally about 50ms
 	set_sleep_mode(SLEEP_MODE_IDLE);
 	 
+	
+	 
+	 
 	while (rxstate==UNINITIALIZED) {
-//#if PINCHG_IRQ
-	//while (digitalRead(RFM_IRQ)==LOW)
-	//	while ((PIN_RFM_IRQ & (1<<BIT_RFM_IRQ)) == 0){
-		//	rf12_interrupt();
-	//	}
-//#else
-sleep_mode();
-//#endif		
-		//#else
-		//sleep_mode();
-		//#endif
+		
+	#if PINCHG_IRQ
+		while (digitalRead(RFM_IRQ)==LOW)
+		rf12_interrupt();
+	#else
+		sleep_mode();
+	#endif
 	}
+	
+uart0_puts("HERE2");
 	
 	rf12_restore(id, b, g);
 	return nodeid;
@@ -884,6 +817,7 @@ void rf12_onOff (uint8_t value) {
 /// As side effect, rf12_config() also writes the current configuration to the
 /// serial port, ending with a newline.
 /// @returns the node ID obtained from EEPROM, or 0 if there was none.
+/*
 uint8_t rf12_config (uint8_t show) {
 	uint16_t crc = ~0;
 	for (uint8_t i = 0; i < RF12_EEPROM_SIZE; ++i)
@@ -902,15 +836,17 @@ uint8_t rf12_config (uint8_t show) {
 		break;
 		else if (show)
 		//Serial.print((char) b);
-		uart0_putc(b);
+		//uart0_putc(b);
 	}
 	if (show)
-	uart0_puts("\r\n");
+	//uart0_puts("\r\n");
 	//Serial.println();
 	
 	rf12_initialize(nodeId, nodeId >> 6, group);
 	return nodeId & RF12_HDR_MASK;
 }
+*/
+
 
 /// @details
 /// This function can put the radio module to sleep and wake it up again.
