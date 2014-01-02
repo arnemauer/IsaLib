@@ -166,9 +166,9 @@ void rf12_spiInit () {
 	USICR = bit(USIWM0);
 	#endif
 	
-	 // DDR_RFM_IRQ &= ~(1 << BIT_RFM_IRQ);  // RFM12 IRQ  input
-	  DDR_RFM_IRQ &= ~(1 << DDD2);  // RFM12 IRQ  input
-	//  PORT_RFM_IRQ |= (1 << BIT_RFM_IRQ); // digitalWrite(RFM_IRQ, 1); // pull-up
+	  DDR_RFM_IRQ &= ~(1 << BIT_RFM_IRQ);  // RFM12 IRQ  input
+	 // DDR_RFM_IRQ &= ~(1 << DDD2);  // RFM12 IRQ  input
+	  PORT_RFM_IRQ |= (1 << BIT_RFM_IRQ); // digitalWrite(RFM_IRQ, 1); // pull-up
 	//  PORT_RFM_IRQ |= (1 << PORTD2); // digitalWrite(RFM_IRQ, 1); // pull-up
 	//pinMode(RFM_IRQ, INPUT);
 	//digitalWrite(RFM_IRQ, 1); // pull-up
@@ -294,10 +294,10 @@ static void rf12_idle() {
 /// Handles a RFM12 interrupt depending on rxstate and the status reported by the RF
 /// module.
 static void rf12_interrupt() {
-	uart0_puts("INT");
 	uint8_t in;
 	state = rf12_xferState(&in);
-
+uart0_putc(state);
+uart0_putc(rxstate);
 	// data received or byte needed for sending
 	if (state & RF_FIFO_BIT) {
 		
@@ -383,10 +383,7 @@ ISR(PCINT0_vect) {
 #else
 */
 ISR(INT0_vect) {
-		uart0_puts("INT");
-	//while (!bitRead(PINC, RFM_IRQ - 14))
-	//LED_PORT |= (1 << LED_BIT);  // led aan	
-	//while(!(PIN_RFM_IRQ & (1<<BIT_RFM_IRQ)))
+	uart0_puts("I");
 	rf12_interrupt();
 }
 //#endif
@@ -614,7 +611,7 @@ void rf12_interruptcontrol () {
 	//#if PINCHG_IRQ
 	EIMSK |= (1<<INT0);					// Enable INT0
 	
-	//EICRA &= ~(1<<ISC01);	// Trigger INT0 on rising edge
+	EICRA &= ~(1<<ISC01) | (1<<ISC00);	// Trigger INT0 on rising edge
 	//EICRA |= (1<<ISC01);	// Trigger INT0 on every change
 	
 	
@@ -708,9 +705,6 @@ uint8_t rf12_initialize (uint8_t id, uint8_t b, uint8_t g) {
 	// normally about 50ms
 	set_sleep_mode(SLEEP_MODE_IDLE);
 	 
-	
-	 
-	 
 	while (rxstate==UNINITIALIZED) {
 		
 	#if PINCHG_IRQ
@@ -721,7 +715,6 @@ uint8_t rf12_initialize (uint8_t id, uint8_t b, uint8_t g) {
 	#endif
 	}
 	
-uart0_puts("HERE2");
 	
 	rf12_restore(id, b, g);
 	return nodeid;

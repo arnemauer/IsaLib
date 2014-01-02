@@ -22,7 +22,7 @@ TIMER 2 - 8BIT  -  LED
 #include <inttypes.h>
 #include <string.h>
 #include <avr/pgmspace.h>
-
+#include <avr/sleep.h>
 
 
 #define byte uint8_t
@@ -44,9 +44,14 @@ int main() {
 	  uint8_t counter;
 		static long payload;
 
+
+// disable ADC for less power 
+  ADCSRA &= ~_BV(ADEN); // ADC off 
+
+
 	sei();
 	        // Initialize library
-	        millis_init();
+	     //   millis_init();
 			_delay_ms(3000);
 			
 
@@ -74,6 +79,137 @@ log_s("geinitialiseert!");
 _delay_ms(1000);
 	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
 	
+		uart0_puts("WHILE");
+	
+	if (rf12_recvDone() && rf12_crc == 0) {
+		// process incoming data here
+		uart0_puts("DATA!");
+		
+		if (RF12_WANTS_ACK) {
+			rf12_sendStart(RF12_ACK_REPLY,0,0);
+		//	rf12_sendWait(1); // don't power down too soon
+			uart0_puts("ACK OK");
+		}
+
+		        for (byte i = 0; i < rf12_len; ++i){
+		        uart0_putc(rf12_data[i]);
+				}
+				
+		
+	} else {
+			uart0_puts("sleep");
+			_delay_ms(100);
+		// switch into idle mode until the next interrupt
+		set_sleep_mode(SLEEP_MODE_IDLE);
+		sleep_mode();
+	}
+
+	
+	
+	} // end while(1){
+	
+	
+} // end main
+	
+	
+	/*
+	//rood
+	
+	pca9635_set_led_pwm(2, 255);
+	_delay_ms(300);
+	pca9635_set_led_pwm(7, 255);
+	_delay_ms(300);	
+	pca9635_set_led_pwm(12, 255);
+	_delay_ms(300);
+	pca9635_set_led_pwm(15, 255);
+	_delay_ms(1000);
+	
+		//rood uit, blauw aan
+	pca9635_set_led_pwm(2, 0);
+	pca9635_set_led_pwm(0, 255);
+	_delay_ms(300);
+	pca9635_set_led_pwm(7, 0);
+	pca9635_set_led_pwm(9, 255);
+	_delay_ms(300);
+	pca9635_set_led_pwm(12, 0);
+	pca9635_set_led_pwm(10, 255);
+	_delay_ms(300);
+	pca9635_set_led_pwm(15, 0);
+	pca9635_set_led_pwm(13, 255);
+	_delay_ms(1000);
+	
+ // blauw uit, groen aan	
+	
+	pca9635_set_led_pwm(1, 255);
+	pca9635_set_led_pwm(0, 0);
+	_delay_ms(300);
+	pca9635_set_led_pwm(8, 255);
+	pca9635_set_led_pwm(9, 0);
+	_delay_ms(300);
+	pca9635_set_led_pwm(11, 255);
+	pca9635_set_led_pwm(10, 0);
+	_delay_ms(300);
+	pca9635_set_led_pwm(14, 255);
+	pca9635_set_led_pwm(13, 0);
+	_delay_ms(1000);
+
+
+	pca9635_set_led_pwm(1, 0);
+	_delay_ms(300);
+	pca9635_set_led_pwm(8, 0);
+	_delay_ms(300);
+	pca9635_set_led_pwm(11, 0);
+	_delay_ms(300);
+	pca9635_set_led_pwm(14, 0);
+	_delay_ms(1000);		
+
+
+// knipperen
+
+for(counter = 0; counter < 3; counter++)
+{
+pca9635_set_led_pwm(3, 255);
+pca9635_set_led_pwm(5, 255);
+_delay_ms(100);
+pca9635_set_led_pwm(3, 0);
+pca9635_set_led_pwm(5, 0);
+	_delay_ms(100);
+}
+
+for(counter = 0; counter < 3; counter++)
+{
+	pca9635_set_led_pwm(4, 255);
+	pca9635_set_led_pwm(6, 255);
+	_delay_ms(100);
+	pca9635_set_led_pwm(4, 0);
+	pca9635_set_led_pwm(6, 0);
+		_delay_ms(100);
+}
+
+
+for(counter = 0; counter < 3; counter++)
+{
+	pca9635_set_led_pwm(3, 255);
+	pca9635_set_led_pwm(5, 255);
+	_delay_ms(100);
+	pca9635_set_led_pwm(3, 0);
+	pca9635_set_led_pwm(5, 0);
+		_delay_ms(100);
+}
+
+for(counter = 0; counter < 3; counter++)
+{
+	pca9635_set_led_pwm(4, 255);
+	pca9635_set_led_pwm(6, 255);
+	_delay_ms(100);
+	pca9635_set_led_pwm(4, 0);
+	pca9635_set_led_pwm(6, 0);
+		_delay_ms(100);
+}
+
+_delay_ms(100);		
+	
+	
 	/*
 	    ++payload;
 	    
@@ -87,19 +223,31 @@ _delay_ms(1000);
 	    
 
 	    
-		_delay_ms(3000);
+		//_delay_ms(3000);
 		
+		for(mychannel =0; mychannel <= 15; mychannel++)
+		{
+			for(counter = 0; counter < 255; counter++)
+			{
+				_delay_ms(1);
+				pca9635_set_led_pwm(mychannel, counter);
+				
+			}
+			_delay_ms(100);
+			
+			for(counter = 255; counter > 0; counter--)
+			{
+				_delay_ms(1);
+				pca9635_set_led_pwm(mychannel, counter);
+				
+			}
+		}
 */
 	
 	
-	}
+	//}
 	
-	
-	
-	
-	
-	
-}
+//}
 
 
 /*
