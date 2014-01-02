@@ -296,8 +296,8 @@ static void rf12_idle() {
 static void rf12_interrupt() {
 	uint8_t in;
 	state = rf12_xferState(&in);
-uart0_putc(state);
-uart0_putc(rxstate);
+//uart0_putc(state);
+//uart0_putc(rxstate);
 	// data received or byte needed for sending
 	if (state & RF_FIFO_BIT) {
 		
@@ -354,6 +354,8 @@ uart0_putc(rxstate);
 	if (state & RF_POR_BIT) {
 		rxstate = POR_RECEIVED;
 	}
+
+
 	
 	// got wakeup call
 	if (state & RF_WDG_BIT) {
@@ -383,8 +385,9 @@ ISR(PCINT0_vect) {
 #else
 */
 ISR(INT0_vect) {
-	uart0_puts("I");
+	//uart0_puts("INT");
 	rf12_interrupt();
+	sleep_disable();
 }
 //#endif
 

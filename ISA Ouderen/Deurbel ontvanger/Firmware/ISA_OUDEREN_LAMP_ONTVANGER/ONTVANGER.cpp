@@ -84,24 +84,34 @@ _delay_ms(1000);
 	if (rf12_recvDone() && rf12_crc == 0) {
 		// process incoming data here
 		uart0_puts("DATA!");
-		
-		if (RF12_WANTS_ACK) {
-			rf12_sendStart(RF12_ACK_REPLY,0,0);
-		//	rf12_sendWait(1); // don't power down too soon
-			uart0_puts("ACK OK");
-		}
-
+		uart0_putc(rf12_len);
+		_delay_ms(20);
 		        for (byte i = 0; i < rf12_len; ++i){
 		        uart0_putc(rf12_data[i]);
 				}
 				
+				uart0_puts("STOP");
+				_delay_ms(20);
+						//if (RF12_WANTS_ACK) {
+							//rf12_sendStart(RF12_ACK_REPLY,0,0);
+							//	rf12_sendWait(1); // don't power down too soon
+							//uart0_puts("ACK OK");
+						//}
 		
 	} else {
 			uart0_puts("sleep");
 			_delay_ms(100);
-		// switch into idle mode until the next interrupt
-		set_sleep_mode(SLEEP_MODE_IDLE);
-		sleep_mode();
+    // switch into idle mode until the next interrupt - Choose our preferred sleep mode:
+    set_sleep_mode(SLEEP_MODE_IDLE);
+    
+    // Set sleep enable (SE) bit:
+    sleep_enable();
+    
+    // Put the device to sleep:
+    sleep_mode();
+	
+	 		uart0_puts("WAKE");
+		
 	}
 
 	
