@@ -79,28 +79,27 @@ log_s("geinitialiseert!");
 _delay_ms(1000);
 	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
 	
-		uart0_puts("WHILE");
-	
+		//uart0_puts("WHILE");
+	//_delay_ms(100);
 	if (rf12_recvDone() && rf12_crc == 0) {
 		// process incoming data here
-		uart0_puts("DATA!");
-		uart0_putc(rf12_len);
+		uart0_puts("\n\r -DATA!- ");
 		_delay_ms(20);
 		        for (byte i = 0; i < rf12_len; ++i){
 		        uart0_putc(rf12_data[i]);
 				}
 				
-				uart0_puts("STOP");
+			//	uart0_puts("STOP");
+				//_delay_ms(20);
+			
+			if (RF12_WANTS_ACK) {
+				rf12_sendStart(RF12_ACK_REPLY,0,0);
+				rf12_sendWait(1); // don't power down too soon
+				uart0_puts("ACK-OK");
 				_delay_ms(20);
-						//if (RF12_WANTS_ACK) {
-							//rf12_sendStart(RF12_ACK_REPLY,0,0);
-							//	rf12_sendWait(1); // don't power down too soon
-							//uart0_puts("ACK OK");
-						//}
+			}
 		
 	} else {
-			uart0_puts("sleep");
-			_delay_ms(100);
     // switch into idle mode until the next interrupt - Choose our preferred sleep mode:
     set_sleep_mode(SLEEP_MODE_IDLE);
     
@@ -108,10 +107,11 @@ _delay_ms(1000);
     sleep_enable();
     
     // Put the device to sleep:
-    sleep_mode();
+    sleep_cpu();
 	
-	 		uart0_puts("WAKE");
-		
+	// Clear sleep enable (SE) bit:
+	sleep_disable();
+	//_delay_ms(50);
 	}
 
 	
