@@ -7,9 +7,9 @@
 
 #include "toneAC.h"
 
-unsigned long _tAC_time; // Used to track end note with timer when playing note in the background.
+ // Used to track end note with timer when playing note in the background.
 #ifndef TONEAC_TINY
-uint8_t _tAC_volume[] = { 200, 100, 67, 50, 40, 33, 29, 22, 11, 2 }; // Duty for linear volume control.
+uint8_t _tAC_volume[] = { 200, 100, 67, 50, 40, 33, 29, 22, 11, 2 }; // Duty for linear volume counsigned long _tAC_time;ntrol.
 #endif
 
 #ifndef TONEAC_TINY

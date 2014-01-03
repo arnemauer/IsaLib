@@ -40,10 +40,52 @@ extern "C" {
 
 int main() {
 
-	  uint8_t mychannel;
-	  uint8_t counter;
-		static long payload;
-
+	uint8_t mychannel;
+	uint8_t counter;
+	static long payload;
+	
+	// config
+	uint8_t alarm_duration = 20; // in sec
+	
+	
+	//
+	uint8_t active_alarm; // not used, not used, not used, not used, doorbell, phone, fire, help; 
+	unsigned long active_alarm_time; // used to track end with timer;
+	
+	//sound
+	uint8_t  sound_current_alarm; // current alarm sound
+	uint8_t  sound_current_step; // current sound step from current alarm
+	
+	unsigned long sound_note_time; // Used to track end note with timer when playing note in the background.
+	
+	
+	//light - flash
+	uint8_t flash_current_step; 1 - 255
+	// flash_array 
+	// flash_array_time
+	
+	/// @struct Ramp
+	/// A "Ramp" is a target RGB color and the time in seconds to reach that color.
+	/// Ramps can be chained together with a non-zero ramp index in the chain field.
+	struct Flash_ramp {
+		byte leds[4]; // top center, top left, top right, bottom, 0..255
+		byte time; // time before going to the next step
+	};
+	
+	struct  Flash_ramp[] = {
+		{ 0, 0, 0, 0, 0 }, // 0: instant off
+		{ 255, 85, 30, 0, 0 }, // 1: instant warm white
+		{ 255, 150, 75, 0, 0 }, // 2: instant cold white
+		{ 0, 0, 0, 5, 0 }, // 3: 5s off
+			
+			};
+	
+	//light - icons
+	uint8_t icon_current; // f
+	uint8_t icon_current_step; // f
+	
+	
+	
 
 // disable ADC for less power 
   ADCSRA &= ~_BV(ADEN); // ADC off 
@@ -83,21 +125,75 @@ _delay_ms(1000);
 	//_delay_ms(100);
 	if (rf12_recvDone() && rf12_crc == 0) {
 		// process incoming data here
-		uart0_puts("\n\r -DATA!- ");
-		_delay_ms(20);
-		        for (byte i = 0; i < rf12_len; ++i){
-		        uart0_putc(rf12_data[i]);
-				}
-				
-			//	uart0_puts("STOP");
-				//_delay_ms(20);
-			
+		
+		
 			if (RF12_WANTS_ACK) {
 				rf12_sendStart(RF12_ACK_REPLY,0,0);
 				rf12_sendWait(1); // don't power down too soon
 				uart0_puts("ACK-OK");
 				_delay_ms(20);
 			}
+			
+			
+		uart0_puts("\n\r -DATA!- ");
+		_delay_ms(20);
+		        
+				for (byte i = 0; i < rf12_len; ++i){
+		        uart0_putc(rf12_data[i]);
+				}
+				
+				
+				// only get de first 
+				uint8_t data;
+				data = rf12_data[0]; // 
+				// not used, not used, not used, start (1) or stop(0), doorbell, phone, fire, help;
+				
+				 if(data & 0x10){
+					 // start alarm	 
+					 uart0_puts("START");
+					 active_alarm = active_alarm & data; /* 00001111 */	 
+				 }else{
+					 // stop alarm
+					  uart0_puts("STOP");
+					 active_alarm =  active_alarm & (~data); /* invert data, compare with active alarm array to clear the right alarm bit */		 
+				 }
+				 
+				 
+				 // MELDINGSDUUR RESETTEN
+				 
+				 
+				 // AL EEN ALARM ACTIEF?
+				 
+				 // JA - uc in slaapstandzetten
+				 
+				 // NEE - 
+				 // 1. sound_current_alarm vullen met eerst alarm
+				 // 2. timer 0 starten
+				 // 3. timer 2 alarm timer starten
+				 
+				 
+				 
+				 
+				 
+				 
+				 
+				 
+				 /*
+					uart0_puts("DOOR: ");
+					uart0_putc((active_alarm)&(0x08));
+					uart0_puts("; TEL:");
+					uart0_putc((active_alarm)&(0x04));
+					uart0_puts("; FIRE:");
+					uart0_putc((active_alarm)&(0x02));
+					uart0_puts("; HELP: ");
+					uart0_putc((active_alarm)&(0x01));
+					uart0_puts("; ");*/
+				
+				
+			//	uart0_puts("STOP");
+				_delay_ms(100);
+			
+		
 		
 	} else {
     // switch into idle mode until the next interrupt - Choose our preferred sleep mode:
