@@ -21,7 +21,7 @@ TIMER 2 - 8BIT  -  LED
 #include <stdio.h>
 #include <inttypes.h>
 #include <string.h>
-#include <avr/pgmspace.h>
+#include <avr/pgmspace.h> // for progmem / ram declarations
 #include <avr/sleep.h>
 
 
@@ -60,23 +60,26 @@ int main() {
 	
 	
 	//light - flash
-	uint8_t flash_current_step; 1 - 255
+	uint8_t flash_current_step; // 1 - 255
 	// flash_array 
 	// flash_array_time
 	
 	/// @struct Ramp
 	/// A "Ramp" is a target RGB color and the time in seconds to reach that color.
 	/// Ramps can be chained together with a non-zero ramp index in the chain field.
-	struct Flash_ramp {
-		byte leds[4]; // top center, top left, top right, bottom, 0..255
-		byte time; // time before going to the next step
+	struct flash_pattern_struct {
+		uint8_t led_left; // top center, top left, top right, bottom, 0..255
+		uint8_t led_center;
+		uint8_t led_right;
+		uint8_t led_bottom;
+		uint16_t time; // (0 tot +65,535) time before going to the next step
 	};
 	
-	struct  Flash_ramp[] = {
-		{ 0, 0, 0, 0, 0 }, // 0: instant off
-		{ 255, 85, 30, 0, 0 }, // 1: instant warm white
-		{ 255, 150, 75, 0, 0 }, // 2: instant cold white
-		{ 0, 0, 0, 5, 0 }, // 3: 5s off
+	struct flash_pattern_struct flash_pattern[] PROGMEM = {
+		{ 0xFF , 0xFF, 0xFF, 0xFF, 0  }, // 0: instant off
+		{  0xFF , 0xFF, 0xFF, 0xFF, 0 }, // 1: instant warm white
+		{  0xFF , 0xFF, 0xFF, 0xFF, 0 }, // 2: instant cold white
+		{ 0xFF , 0xFF, 0xFF, 0xFF, 0 }, // 3: 5s off
 			
 			};
 	
@@ -126,7 +129,18 @@ _delay_ms(1000);
 	if (rf12_recvDone() && rf12_crc == 0) {
 		// process incoming data here
 		
+		uart0_puts("AAA");
 		
+
+			for (byte j = 0; j < 4; ++j){
+				uart0_putc(pgm_read_word(&flash_pattern[0].led_bottom));
+			}
+		uart0_puts("AAA");
+
+		_delay_ms(100);
+		
+		
+				
 			if (RF12_WANTS_ACK) {
 				rf12_sendStart(RF12_ACK_REPLY,0,0);
 				rf12_sendWait(1); // don't power down too soon
