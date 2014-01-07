@@ -67,19 +67,19 @@ int main() {
 	/// @struct Ramp
 	/// A "Ramp" is a target RGB color and the time in seconds to reach that color.
 	/// Ramps can be chained together with a non-zero ramp index in the chain field.
-	struct flash_pattern_struct {
-		uint8_t led_left; // top center, top left, top right, bottom, 0..255
-		uint8_t led_center;
-		uint8_t led_right;
-		uint8_t led_bottom;
-		uint16_t time; // (0 tot +65,535) time before going to the next step
-	};
+typedef struct {
+		const	uint8_t led_left; // top center, top left, top right, bottom, 0..255
+		const	uint8_t led_center;
+		const	uint8_t led_right;
+		const	uint8_t led_bottom;
+		const	uint16_t time; // (0 tot +65,535) time before going to the next step
+	} STRUCT_FLASH_PATTERN;
 	
-	struct flash_pattern_struct flash_pattern[] PROGMEM = {
-		{ 0xFF , 0xFF, 0xFF, 0xFF, 0  }, // 0: instant off
-		{  0xFF , 0xFF, 0xFF, 0xFF, 0 }, // 1: instant warm white
-		{  0xFF , 0xFF, 0xFF, 0xFF, 0 }, // 2: instant cold white
-		{ 0xFF , 0xFF, 0xFF, 0xFF, 0 }, // 3: 5s off
+ STRUCT_FLASH_PATTERN flash_pattern[]  = {
+		{ 255 , 255, 255, 255 , 255  }, // 0: instant off
+		{ 255 , 255, 255, 255 , 255 }, // 1: instant warm white
+		{ 255 , 255, 255, 255 , 255 }, // 2: instant cold white
+		{ 255 , 255, 255, 255 , 255 }, // 3: 5s off
 			
 			};
 	
@@ -106,8 +106,8 @@ int main() {
 			_delay_ms(1000);
 		
 		
-			I2C_init();	
-			pca9635_init();
+	//		I2C_init();	
+		//	pca9635_init();
 			
 			log_s("PCA ok");
 			_delay_ms(1000);
@@ -122,20 +122,42 @@ int main() {
 // pca9635_set_led_pwm(15, 200);
 log_s("geinitialiseert!");
 _delay_ms(1000);
+
+	
+	uart0_puts("XXX");
+	
+
+	for (byte j = 0; j < 4; ++j){
+		uart0_putc(&flash_pattern[j].led_left);
+		uart0_putc(255);
+		uart0_puts("-");
+		_delay_ms(10);
+	}
+	uart0_puts("XXX");
+
+	_delay_ms(100);
+	
+	
+	
 	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
 	
+	
+	/*
 		//uart0_puts("WHILE");
 	//_delay_ms(100);
 	if (rf12_recvDone() && rf12_crc == 0) {
 		// process incoming data here
 		
-		uart0_puts("AAA");
+		uart0_puts("XXX");
 		
 
 			for (byte j = 0; j < 4; ++j){
-				uart0_putc(pgm_read_word(&flash_pattern[0].led_bottom));
+				uart0_putc(pgm_read_byte(&(flash_pattern[j].led_left)));
+				uart0_putc(255);
+				uart0_puts("-");
+				_delay_ms(10);
 			}
-		uart0_puts("AAA");
+		uart0_puts("XXX");
 
 		_delay_ms(100);
 		
@@ -165,12 +187,12 @@ _delay_ms(1000);
 				 if(data & 0x10){
 					 // start alarm	 
 					 uart0_puts("START");
-					 active_alarm = active_alarm & data; /* 00001111 */	 
+					 active_alarm = active_alarm & data; /* 00001111 
 				 }else{
 					 // stop alarm
 					  uart0_puts("STOP");
 					 active_alarm =  active_alarm & (~data); /* invert data, compare with active alarm array to clear the right alarm bit */		 
-				 }
+			//	 }
 				 
 				 
 				 // MELDINGSDUUR RESETTEN
@@ -205,11 +227,11 @@ _delay_ms(1000);
 				
 				
 			//	uart0_puts("STOP");
-				_delay_ms(100);
+			//	_delay_ms(100);
 			
 		
 		
-	} else {
+/*	} else {
     // switch into idle mode until the next interrupt - Choose our preferred sleep mode:
     set_sleep_mode(SLEEP_MODE_IDLE);
     
@@ -223,7 +245,7 @@ _delay_ms(1000);
 	sleep_disable();
 	//_delay_ms(50);
 	}
-
+*/
 	
 	
 	} // end while(1){
