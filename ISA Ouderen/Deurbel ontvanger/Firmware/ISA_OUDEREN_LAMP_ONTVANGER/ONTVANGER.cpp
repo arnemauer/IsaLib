@@ -68,20 +68,21 @@ int main() {
 	/// A "Ramp" is a target RGB color and the time in seconds to reach that color.
 	/// Ramps can be chained together with a non-zero ramp index in the chain field.
 typedef struct {
-		const	uint8_t led_left; // top center, top left, top right, bottom, 0..255
-		const	uint8_t led_center;
-		const	uint8_t led_right;
-		const	uint8_t led_bottom;
-		const	uint16_t time; // (0 tot +65,535) time before going to the next step
+			uint8_t led[4]; // top center, top left, top right, bottom, 0..255
+			uint16_t time;   // (0 tot +65,535) time in ms before going to the next step
 	} STRUCT_FLASH_PATTERN;
 	
- STRUCT_FLASH_PATTERN flash_pattern[]  = {
-		{ 255 , 255, 255, 255 , 255  }, // 0: instant off
-		{ 255 , 255, 255, 255 , 255 }, // 1: instant warm white
-		{ 255 , 255, 255, 255 , 255 }, // 2: instant cold white
-		{ 255 , 255, 255, 255 , 255 }, // 3: 5s off
-			
-			};
+ const static STRUCT_FLASH_PATTERN flash_pattern[ ] PROGMEM = {
+		
+		{ 255 , 255, 255, 255, 255 }, // 0: instant off
+		{ 255 , 255, 255, 255, 255 }, // 0: instant off
+		{ 255 , 255, 255, 255, 255 }, // 0: instant off
+		{ 255 , 255, 255, 255, 255 }, // 0: instant off
+		{ 255 , 255, 255, 255 , 255 }	
+		};
+	
+
+	
 	
 	//light - icons
 	uint8_t icon_current; // f
@@ -106,8 +107,8 @@ typedef struct {
 			_delay_ms(1000);
 		
 		
-	//		I2C_init();	
-		//	pca9635_init();
+			I2C_init();	
+			pca9635_init();
 			
 			log_s("PCA ok");
 			_delay_ms(1000);
@@ -117,23 +118,19 @@ typedef struct {
     rf12_initialize(2, RF12_868MHZ, 14);
     // see http://tools.jeelabs.org/rfm12b
   //  rf12_control(0xC040); // set low-battery level to 2.2V i.s.o. 3.1V
-	
-	
-// pca9635_set_led_pwm(15, 200);
+
 log_s("geinitialiseert!");
 _delay_ms(1000);
 
-	
-	uart0_puts("XXX");
-	
-
-	for (byte j = 0; j < 4; ++j){
-		uart0_putc(&flash_pattern[j].led_left);
-		uart0_putc(255);
+	for (byte j = 0; j <= 4; ++j){
+			for (byte i = 0; i <= 3; ++i){
+		uart0_putc(pgm_read_byte(&(flash_pattern[j].led[i] )));
+		//uart0_putc(255);
 		uart0_puts("-");
 		_delay_ms(10);
+		}
 	}
-	uart0_puts("XXX");
+
 
 	_delay_ms(100);
 	
