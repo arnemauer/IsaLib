@@ -20,6 +20,7 @@ TIMER 2 - 8BIT  -  LED
 #include <stdint.h>
 #include <stdio.h>
 #include <inttypes.h>
+#include <avr/power.h>
 #include <string.h>
 #include <avr/pgmspace.h> // for progmem / ram declarations
 #include <avr/sleep.h>
@@ -45,7 +46,7 @@ int main() {
 	static long payload;
 	
 	// config
-	uint8_t alarm_duration = 20; // in sec
+	unsigned long alarm_duration = 20000; // alarm duration in ms
 	
 	
 	//
@@ -53,7 +54,7 @@ int main() {
 	unsigned long active_alarm_time; // used to track end with timer;
 	
 	//sound
-	uint8_t  sound_current_alarm; // current alarm sound
+	uint8_t  sound_current_alarm; // current alarm sound 0=doorbell, 1=phone, 2= fire, 3=help
 	uint8_t  sound_current_step; // current sound step from current alarm
 	
 	unsigned long sound_note_time; // Used to track end note with timer when playing note in the background.
@@ -78,7 +79,7 @@ typedef struct {
 		{ 255 , 255, 255, 255, 255 }, // 0: instant off
 		{ 255 , 255, 255, 255, 255 }, // 0: instant off
 		{ 255 , 255, 255, 255, 255 }, // 0: instant off
-		{ 255 , 255, 255, 255 , 255 }	
+		{ 255 , 255, 255, 255, 255 }	
 		};
 	
 
@@ -96,9 +97,23 @@ typedef struct {
 
 
 	sei();
-	        // Initialize library
-	     //   millis_init();
+			/* Initialize MILLIS */
+	        millis_init();
 			_delay_ms(3000);
+			/* Initialize MILLIS */
+						
+						
+						
+						
+			/* Initialize TIMER 2 */
+			// Timer settings
+			TCCR2A = _BV(WGM21); // prescaler 128
+			TCCR2B = _BV(CS22)|_BV(CS20);
+							 	
+			// TIMSK2 = _BV(OCIE2A); // DO NOT ENABLE TIMER2 BY DEFAULT!
+			OCR2A = ((F_CPU / 128) / 1000);
+			power_timer2_disable(); // power timer2 down!
+			/* Initialize TIMER 2 */			
 			
 
 			/* Initialize UART */
@@ -119,46 +134,15 @@ typedef struct {
     // see http://tools.jeelabs.org/rfm12b
   //  rf12_control(0xC040); // set low-battery level to 2.2V i.s.o. 3.1V
 
-log_s("geinitialiseert!");
+log_s("initialized!");
 _delay_ms(1000);
 
-	for (byte j = 0; j <= 4; ++j){
-			for (byte i = 0; i <= 3; ++i){
-		uart0_putc(pgm_read_byte(&(flash_pattern[j].led[i] )));
-		//uart0_putc(255);
-		uart0_puts("-");
-		_delay_ms(10);
-		}
-	}
-
-
-	_delay_ms(100);
-	
-	
-	
 	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
 	
-	
-	/*
-		//uart0_puts("WHILE");
-	//_delay_ms(100);
+	//uart0_puts("WHILE");
+
 	if (rf12_recvDone() && rf12_crc == 0) {
 		// process incoming data here
-		
-		uart0_puts("XXX");
-		
-
-			for (byte j = 0; j < 4; ++j){
-				uart0_putc(pgm_read_byte(&(flash_pattern[j].led_left)));
-				uart0_putc(255);
-				uart0_puts("-");
-				_delay_ms(10);
-			}
-		uart0_puts("XXX");
-
-		_delay_ms(100);
-		
-		
 				
 			if (RF12_WANTS_ACK) {
 				rf12_sendStart(RF12_ACK_REPLY,0,0);
@@ -176,38 +160,66 @@ _delay_ms(1000);
 				}
 				
 				
-				// only get de first 
-				uint8_t data;
-				data = rf12_data[0]; // 
-				// not used, not used, not used, start (1) or stop(0), doorbell, phone, fire, help;
+				////////////////		Fill alarm array		 ////////////////
+				// only get the first byte
+				uint8_t data = rf12_data[0]; // not used, not used, not used, start (1) or stop(0), doorbell, phone, fire, help;
 				
 				 if(data & 0x10){
 					 // start alarm	 
 					 uart0_puts("START");
-					 active_alarm = active_alarm & data; /* 00001111 
+					 active_alarm = active_alarm & data; // 00001111 
 				 }else{
 					 // stop alarm
 					  uart0_puts("STOP");
 					 active_alarm =  active_alarm & (~data); /* invert data, compare with active alarm array to clear the right alarm bit */		 
-			//	 }
+				 }
+				 
+				////////////////		Fill alarm array		 ////////////////				 
+				
+				
+							 
+				 // IS ER EEN ALARM ACTIEF in array active_alarm?
+				 if(active_alarm & 0x0F){
+			 
+						 // Is there a active alarm thats already activated?
+						 if(active_alarm_time == 0) {
+							// Geen alarm actief
+
+							 // 1. sound_current_alarm vullen met eerst alarm
+							 sound_current_alarm = 4;
+							 if((sound_current_alarm == 4) && (active_alarm & 0x08)) sound_current_alarm = 0;
+							 if((sound_current_alarm == 4) && (active_alarm & 0x04)) sound_current_alarm = 1;
+							 if((sound_current_alarm == 4) && (active_alarm & 0x02)) sound_current_alarm = 2;
+							 if((sound_current_alarm == 4) && (active_alarm & 0x01)) sound_current_alarm = 3;
+							 
+					 					
+							// 2. timer 0 - millis starten
+							millis_reset();
+							millis_resume();
+				 
+							// 3. timer 2 - alarm timer starten
+							power_timer2_enable();
+							TIMSK2 |= _BV(OCIE2A);
+			 
+						 }
+				 
+
+				 		// MELDINGSDUUR RESETTEN
+				 		active_alarm_time = millis() + alarm_duration; /* 00001111 remove first 4 bits */
+								  
+				 
+					}else{ //  if(active_alarm & 0x0F){ // IS ER EEN ALARM ACTIEF in active_alarm?
+						// no active alarm in array
+												
+						active_alarm_time = 0; // set alarm time to zero, timers will be disabled in next timer 2 interrupt
+					}
+						 
 				 
 				 
-				 // MELDINGSDUUR RESETTEN
 				 
+			
 				 
-				 // AL EEN ALARM ACTIEF?
-				 
-				 // JA - uc in slaapstandzetten
-				 
-				 // NEE - 
-				 // 1. sound_current_alarm vullen met eerst alarm
-				 // 2. timer 0 starten
-				 // 3. timer 2 alarm timer starten
-				 
-				 
-				 
-				 
-				 
+
 				 
 				 
 				 
@@ -228,7 +240,7 @@ _delay_ms(1000);
 			
 		
 		
-/*	} else {
+	} else {
     // switch into idle mode until the next interrupt - Choose our preferred sleep mode:
     set_sleep_mode(SLEEP_MODE_IDLE);
     
@@ -242,14 +254,48 @@ _delay_ms(1000);
 	sleep_disable();
 	//_delay_ms(50);
 	}
-*/
+
+	
+		} // end while(1){
+		
+		
+	} // end main
+
 	
 	
-	} // end while(1){
 	
 	
-} // end main
+	/*
 	
+					 // stop timer2
+					 TIMSK2 &= ~_BV(OCIE2A);
+					 power_timer2_disable()
+					 
+					 
+					 //enable timer2
+					 power_timer2_enable()
+					 TIMSK2 |= _BV(OCIE2A);
+					 
+					 
+					 
+					 */
+	
+	
+	/*
+	opvragen progmem
+	
+			uart0_puts("XXX");
+		for (byte j = 0; j < 4; ++j){
+				uart0_putc(pgm_read_byte(&(flash_pattern[j].led_left)));
+				uart0_putc(255);
+				uart0_puts("-");
+				_delay_ms(10);
+			}
+			uart0_puts("XXX");
+			
+			
+			
+			*/
 	
 	/*
 	//rood
