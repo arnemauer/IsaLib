@@ -69,7 +69,7 @@ int main() {
 	/// A "Ramp" is a target RGB color and the time in seconds to reach that color.
 	/// Ramps can be chained together with a non-zero ramp index in the chain field.
 typedef struct {
-			uint8_t led[4]; // top center, top left, top right, bottom, 0..255
+			uint8_t led[4]; // bottom, top left, top center, top right, 0..255
 			uint16_t time;   // (0 tot +65,535) time in ms before going to the next step
 	} STRUCT_FLASH_PATTERN;
 	
@@ -213,32 +213,7 @@ _delay_ms(1000);
 												
 						active_alarm_time = 0; // set alarm time to zero, timers will be disabled in next timer 2 interrupt
 					}
-						 
-				 
-				 
-				 
-			
-				 
-
-				 
-				 
-				 
-				 /*
-					uart0_puts("DOOR: ");
-					uart0_putc((active_alarm)&(0x08));
-					uart0_puts("; TEL:");
-					uart0_putc((active_alarm)&(0x04));
-					uart0_puts("; FIRE:");
-					uart0_putc((active_alarm)&(0x02));
-					uart0_puts("; HELP: ");
-					uart0_putc((active_alarm)&(0x01));
-					uart0_puts("; ");*/
-				
-				
-			//	uart0_puts("STOP");
-			//	_delay_ms(100);
-			
-		
+						 		
 		
 	} else {
     // switch into idle mode until the next interrupt - Choose our preferred sleep mode:
@@ -261,6 +236,68 @@ _delay_ms(1000);
 		
 	} // end main
 
+	
+	
+	
+	
+ISR (TIMER2_COMPA_vect) {
+	
+	// check if the alarm needs to be stopped
+	if(millis > active_alarm_time){
+		// stop alarm
+		
+			// stop timer 1
+			millis_pause();
+			
+			// stop timer 2
+			TIMSK2 &= ~_BV(OCIE2A);
+			power_timer2_disable();
+			
+			// empty alarm arrray
+			active_alarm = 0x00; 
+			
+			// alle leds uit, pca in slaapstand
+			pca9635_set_led_mode(0); // put all leds off
+			pca9635_set_sleep(); // put pca9635 in sleep
+						
+			// automatisch slapen in loop.
+			
+	}else{
+		// continue alarm
+		isr_sound();
+		isr_light_flash();
+		isr_light_icon();		
+	}
+}
+
+
+	void isr_sound(){
+			
+			
+		}
+		
+	void isr_light_flash(){
+			
+			// haal flits arry op van current step
+			for (byte j = 0; j <= 3; ++j){
+				pca9635_set_led_pwm( j+3, pgm_read_byte(&(flash_pattern[flash_current_step].led[j])));
+			}
+			
+		}
+		
+	void isr_light_icon(){
+			
+			
+		}
+
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
