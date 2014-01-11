@@ -72,9 +72,12 @@ extern "C" {
 
 };
 
- 
+ typedef struct PATTERNS {
+	 STRUCT_SOUND_PATTERN pattern[100];
+		 
+		 };
 	
-const static struct STRUCT_SOUND_PATTERN sound_patterns[0] PROGMEM
+//const static struct STRUCT_SOUND_PATTERN sound_patterns[0] PROGMEM
 
 	/// @struct Ramp
 	/// A "Ramp" is a target RGB color and the time in seconds to reach that color.
@@ -84,7 +87,7 @@ const static struct STRUCT_SOUND_PATTERN sound_patterns[0] PROGMEM
 //const static sound_patterns;
 //struct student_info sound_patterns[20];      // E
 
-	const static struct STRUCT_SOUND_PATTERN sound_patterns[ ] PROGMEM = { 0 = // doorbell
+	const static struct STRUCT_SOUND_PATTERN sound_pattern_doorbell[ ] PROGMEM = {  // doorbell
 //const static sound_patterns[0] PROGMEM = { // doorbell
 		{ 1500	, 500 }, // 0: instant off
 		{ 0		, 500 }, // 0: instant off
@@ -136,9 +139,11 @@ const static struct STRUCT_SOUND_PATTERN sound_patterns[0] PROGMEM
 	};
 	
 	
- const static sound_pattern[] PROGMEM = { &sound_pattern_doorbell, &sound_pattern_phone  };
-	
-	//const static sound_pattern = { (STRUCT_SOUND_PATTERN *)sound_pattern_doorbell,  (STRUCT_SOUND_PATTERN *)sound_pattern_phone};
+ //const static sound_pattern[] PROGMEM = { &sound_pattern_doorbell, &sound_pattern_phone  };
+//const struct StringTable[2] PROGMEM = {
+//	sound_pattern_doorbell,
+//	sound_pattern_phone
+//};	
 
 
 	
@@ -386,7 +391,15 @@ ISR (TIMER2_COMPA_vect) {
 			// play next tone
 			
 		//	tone(unsigned long frequency, uint8_t volume);
+			if(sound_current_alarm == 0 ){
+			tone(pgm_read_byte(&(sound_pattern_doorbell[sound_current_step].frequency, pgm_read_byte(&(sound_pattern_doorbell[sound_current_step].time)));
+			}
+			if(sound_current_alarm == 1 ){
+			tone(pgm_read_byte(&(sound_pattern_phone[sound_current_step].frequency, pgm_read_byte(&(sound_pattern_phone[sound_current_step].time)));
+			}
+	
 			
+		
 			
 			 // sound_current_alarm; // current alarm sound 0=doorbell, 1=phone, 2= fire, 3=help
 			//  sound_current_step; // current sound step from current alarm

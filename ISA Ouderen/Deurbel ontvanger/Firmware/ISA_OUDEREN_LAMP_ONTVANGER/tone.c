@@ -6,6 +6,9 @@
  */ 
 
 #include "toneAC.h"
+#include "config.h"
+#include <inttypes.h>
+#include <avr/io.h>
 
 uint8_t _tAC_volume[] = { 200, 100, 67, 50, 40, 33, 29, 22, 11, 2 }; // Duty for linear volume counsigned long _tAC_time;ntrol.
 
@@ -45,10 +48,3 @@ void tone(unsigned long frequency, uint8_t volume) {
 		//PWMT1PORT &= ~_BV(PWMT1BMASK); // Other timer 1 PWM pin also to LOW.
 	}
 
-
-		ISR(TIMER1_COMPA_vect) { // Timer interrupt vector.
-			if (millis() >= _tAC_time) noToneAC(); // Check to see if it's time for the note to end.
-		}
-
-	
-	

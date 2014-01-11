@@ -72,7 +72,7 @@
 
 #ifndef toneAC_h
   #define toneAC_h
-
+#include <inttypes.h>
  
 
   //#define TONEAC_TINY // Uncomment to use alternate function toneAC(frequency, length) that saves 110 bytes.
@@ -99,7 +99,7 @@
   #endif
 
 
-    void toneAC(unsigned long frequency = 0, uint8_t volume = 10, unsigned long length = 0, uint8_t background = false);
+    void toneAC(unsigned long frequency, uint8_t volume);
 	void Alarm(int variant,int vption);
   void noToneAC();
 #endif
