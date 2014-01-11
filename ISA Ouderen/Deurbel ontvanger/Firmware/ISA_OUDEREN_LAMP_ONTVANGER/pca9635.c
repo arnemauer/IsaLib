@@ -79,28 +79,28 @@ uint8_t pca9635_set_led_pwm(uint8_t ledno, uint8_t cycle)
 * 2=individual PWM only
 * 3=individual and group PWM
 */
-void pca9635_set_led_mode(byte mode)
+void pca9635_set_led_mode(uint8_t mode)
 {
-	byte value;
+	uint8_t value;
 	switch (mode)
 	{
 		case 0:
-		value = B00000000;
+		value = 0x00; // B00000000
 		break;
 		case 1:
-		value = B01010101;
+		value = 0x55; //B01010101
 		break;
 		case 2:
-		value = B10101010;
+		value = 0xAA; //B10101010
 		break;
 		case 3:
-		value = B11111111;
+		value = 0xFF; //B11111111
 		break;
 	}
 	
 	I2C_start((0x40<<1)+I2C_WRITE);
-  	I2C_write(0x14 | autoincrement_bits); // LEDOUT0 = 0x14 = 10100; autoinc. 0x80 = 10000000; Total= 10010100;
-  	for (byte i = 0; i <= 3; ++i){
+  	I2C_write( 0x94 ); // LEDOUT0 = 0x14 = 10100, autoinc. 0x80 = 10000000, Total= 10010100,
+  	for (uint8_t i = 0; i <= 3; ++i){
 	   I2C_write(value);	
   	}
 			  
@@ -111,7 +111,7 @@ void pca9635_set_led_mode(byte mode)
 /**
 * Changes the oscillator mode between sleep (1) and active (0)
 */
-uint8_t pca9635_set_sleep(byte sleep)
+uint8_t pca9635_set_sleep(uint8_t sleep)
 {
 	I2C_start((0x40<<1)+I2C_READ);
 	I2C_write(0x80); // autoincrement, mode 0,

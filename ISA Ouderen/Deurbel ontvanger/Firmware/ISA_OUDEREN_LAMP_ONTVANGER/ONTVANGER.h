@@ -12,5 +12,6 @@
 void blinkAllLeds(bool set);
 static bool waitForAck();
 static void doReport();
+  void noTone();
 
 #endif /* ISA_GATEWAY_QUADROFLY_H_ */

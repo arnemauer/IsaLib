@@ -36,10 +36,11 @@ extern "C" {
 	#include "pca9635.h"
 	#include "uart.h"
 	#include "log.h"
+	#include "tone.h"
 };
 
 
-int main() {
+
 
 	uint8_t mychannel;
 	uint8_t counter;
@@ -57,14 +58,111 @@ int main() {
 	uint8_t  sound_current_alarm; // current alarm sound 0=doorbell, 1=phone, 2= fire, 3=help
 	uint8_t  sound_current_step; // current sound step from current alarm
 	
-	unsigned long sound_note_time; // Used to track end note with timer when playing note in the background.
+	unsigned long _sound_note_time; // Used to track end note with timer when playing note in the background.
 	
 	
 	//light - flash
 	uint8_t flash_current_step; // 1 - 255
 	// flash_array 
 	// flash_array_time
+
+ typedef struct STRUCT_SOUND_PATTERN{
+			unsigned long frequency; //
+			uint16_t time;   // (0 tot +65,535) time in ms before going to the next step
+
+};
+
+ 
 	
+const static struct STRUCT_SOUND_PATTERN sound_patterns[0] PROGMEM
+
+	/// @struct Ramp
+	/// A "Ramp" is a target RGB color and the time in seconds to reach that color.
+	/// Ramps can be chained together with a non-zero ramp index in the chain field.
+//	struct STRUCT_SOUND_PATTERN_INC STRUCT_SOUND_PATTERN;
+
+//const static sound_patterns;
+//struct student_info sound_patterns[20];      // E
+
+	const static struct STRUCT_SOUND_PATTERN sound_patterns[ ] PROGMEM = { 0 = // doorbell
+//const static sound_patterns[0] PROGMEM = { // doorbell
+		{ 1500	, 500 }, // 0: instant off
+		{ 0		, 500 }, // 0: instant off
+		{ 1200	, 500 }, // 0: instant off
+		{ 0		, 1500 }, // 0: instant off
+		{ 1500	, 500 }, // 0: instant off
+		{ 0		, 500 }, // 0: instant off
+		{ 1200	, 500 }, // 0: instant off
+		{ 0		, 1500 }, // 0: instant off
+	};
+
+
+
+	const static struct STRUCT_SOUND_PATTERN sound_pattern_phone[ ] PROGMEM = { //phone
+		
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+			{ 750	, 40 }, // 0: instant off
+			{ 1000	, 40 }, // 0: instant off
+										{ 750	, 40 }, // 0: instant off
+									{ 1000	, 40 }, // 0: instant off
+								{ 750	, 40 }, // 0: instant off
+									{ 1000	, 40 }, // 0: instant off
+														{ 750	, 40 }, // 0: instant off
+												{ 1000	, 40 }, // 0: instant off
+										{ 750	, 40 }, // 0: instant off
+															{ 1000	, 40 }, // 0: instant off
+				{ 750	, 40 }, // 0: instant off
+																																													
+			
+		
+	};
+	
+	
+ const static sound_pattern[] PROGMEM = { &sound_pattern_doorbell, &sound_pattern_phone  };
+	
+	//const static sound_pattern = { (STRUCT_SOUND_PATTERN *)sound_pattern_doorbell,  (STRUCT_SOUND_PATTERN *)sound_pattern_phone};
+
+
+	
+	/*
+	
+		const static STRUCT_SOUND_PATTERN sound_pattern[2] PROGMEM = {
+			
+			{ 255 , 255, 255, 255, 255 }, // 0: instant off
+			{ 255 , 255, 255, 255, 255 }, // 0: instant off
+			{ 255 , 255, 255, 255, 255 }, // 0: instant off
+			{ 255 , 255, 255, 255, 255 }, // 0: instant off
+			{ 255 , 255, 255, 255, 255 }
+		};	
+	
+		const static STRUCT_SOUND_PATTERN sound_pattern[3] PROGMEM = {
+			
+			{ 255 , 255, 255, 255, 255 }, // 0: instant off
+			{ 255 , 255, 255, 255, 255 }, // 0: instant off
+			{ 255 , 255, 255, 255, 255 }, // 0: instant off
+			{ 255 , 255, 255, 255, 255 }, // 0: instant off
+			{ 255 , 255, 255, 255, 255 }
+		};
+		*/
+		
 	/// @struct Ramp
 	/// A "Ramp" is a target RGB color and the time in seconds to reach that color.
 	/// Ramps can be chained together with a non-zero ramp index in the chain field.
@@ -90,7 +188,7 @@ typedef struct {
 	uint8_t icon_current_step; // f
 	
 	
-	
+int main() {	
 
 // disable ADC for less power 
   ADCSRA &= ~_BV(ADEN); // ADC off 
@@ -101,9 +199,10 @@ typedef struct {
 	        millis_init();
 			_delay_ms(3000);
 			/* Initialize MILLIS */
-						
-						
-						
+
+			/* Initialize TONE */						
+			tone_init();		
+			/* Initialize TONE */						
 						
 			/* Initialize TIMER 2 */
 			// Timer settings
@@ -243,7 +342,7 @@ _delay_ms(1000);
 ISR (TIMER2_COMPA_vect) {
 	
 	// check if the alarm needs to be stopped
-	if(millis > active_alarm_time){
+	if(millis_get() > active_alarm_time){
 		// stop alarm
 		
 			// stop timer 1
@@ -258,23 +357,43 @@ ISR (TIMER2_COMPA_vect) {
 			
 			// alle leds uit, pca in slaapstand
 			pca9635_set_led_mode(0); // put all leds off
-			pca9635_set_sleep(); // put pca9635 in sleep
+			pca9635_set_sleep(1); // put pca9635 in sleep
 						
 			// automatisch slapen in loop.
 			
 	}else{
 		// continue alarm
-		isr_sound();
-		isr_light_flash();
-		isr_light_icon();		
+	//	isr_sound();
+		//isr_light_flash();
+	//	isr_light_icon();		
 	}
 }
 
 
 	void isr_sound(){
 			
+			// Stop note if necessary 
+			if(_sound_note_time == 0){ // sound already playing?		
+					
+				if(millis_get() < _sound_note_time ){ // Do we need to stop the current note?
+					return; // dont stop current note
+				}else{
+					noTone(); // stop current note
+				}
+	
+			}
 			
-		}
+			// play next tone
+			
+		//	tone(unsigned long frequency, uint8_t volume);
+			
+			
+			 // sound_current_alarm; // current alarm sound 0=doorbell, 1=phone, 2= fire, 3=help
+			//  sound_current_step; // current sound step from current alarm
+			
+			
+				
+		} //void isr_sound()
 		
 	void isr_light_flash(){
 			
@@ -295,9 +414,7 @@ ISR (TIMER2_COMPA_vect) {
 	
 	
 	
-	
-	
-	
+
 	
 	
 	
