@@ -46,7 +46,7 @@ extern "C" {
 #define sound_alarm_keys_fire	8
 #define sound_alarm_keys_help  8
 
-#define flash_keys  36
+#define flash_keys  32
 
 const uint8_t sound_alarm_keys[] = {sound_alarm_keys_doorbell, sound_alarm_keys_phone, sound_alarm_keys_fire, sound_alarm_keys_help };
 const uint8_t alarm_bitmask[] = {0x08, 0x04, 0x02, 0x01};
@@ -90,14 +90,14 @@ const uint8_t alarm_bitmask[] = {0x08, 0x04, 0x02, 0x01};
 
 	const static STRUCT_SOUND_PATTERN sound_pattern_doorbell[sound_alarm_keys_doorbell] PROGMEM = {  // doorbell
 //const static sound_patterns[0] PROGMEM = { // doorbell
-		{ 1500	, 1000 }, // 0: instant off
+		{ 1500	, 500 }, // 0: instant off
+		{ 0		, 200 }, // 0: instant off
+		{ 1200	, 500 }, // 0: instant off
 		{ 0		, 1000 }, // 0: instant off
-		{ 1200	, 1000 }, // 0: instant off
-		{ 0		, 2000 }, // 0: instant off
-		{ 1500	, 1000 }, // 0: instant off
-		{ 0		, 1000 }, // 0: instant off
-		{ 1200	, 1000 }, // 0: instant off
-		{ 0		, 2000 } // 0: instant off
+		{ 1500	, 500 }, // 0: instant off
+		{ 0		, 200 }, // 0: instant off
+		{ 1200	, 500 }, // 0: instant off
+		{ 0		, 1500 } // 0: instant off
 	};
 
 
@@ -172,7 +172,7 @@ const uint8_t alarm_bitmask[] = {0x08, 0x04, 0x02, 0x01};
 	/// Ramps can be chained together with a non-zero ramp index in the chain field.
 typedef struct {
 			uint8_t led[4]; // bottom, top left, top center, top right, 0..255
-			uint16_t time;   // (0 tot +65,535) time in ms before going to the next step
+			unsigned long time;   // (0 tot +65,535) time in ms before going to the next step
 	} STRUCT_FLASH_PATTERN;
 	
  const static STRUCT_FLASH_PATTERN flash_pattern[ ] PROGMEM = {
@@ -292,7 +292,8 @@ int main() {
 		
 			I2C_init();	
 			pca9635_init();
-			
+			_delay_ms(1000);
+			pca9635_set_led_mode(0); // put all leds off
 			log_s("PCA ok");
 			_delay_ms(1000);
 			
@@ -419,8 +420,11 @@ ISR (TIMER2_COMPA_vect) {
 	if(millis_get() > active_alarm_time){
 		// stop alarm
 		
-			// stop timer 1
+			// stop timer 0
 			millis_pause();
+			
+			// stop sound
+			noTone();
 			
 			// stop timer 2
 			TIMSK2 &= ~_BV(OCIE2A);
@@ -438,8 +442,8 @@ ISR (TIMER2_COMPA_vect) {
 	}else{
 		// continue alarm
 		isr_sound();
-	 //   isr_light_flash();
-	//	isr_light_icon();		
+	    isr_light_flash();
+		isr_light_icon();		
 	}
 }
 
@@ -464,24 +468,25 @@ ISR (TIMER2_COMPA_vect) {
 			// play next tone
 		//	uart0_puts("PN");
 		//	tone(unsigned long frequency, uint8_t volume);
+		//uart0_putc(sound_current_alarm);
 			if(sound_current_alarm == 0 ){
-				tone(pgm_read_byte(&(sound_pattern_doorbell[sound_current_step].frequency)), 1); // freq, volume
-				_sound_note_time = millis_get() + pgm_read_byte(&(sound_pattern_doorbell[sound_current_step].time));
+				tone(pgm_read_word(&(sound_pattern_doorbell[sound_current_step].frequency)), 10); // freq, volume
+				_sound_note_time = (millis_get() + pgm_read_word(&(sound_pattern_doorbell[sound_current_step].time)));
 			}
 			if(sound_current_alarm == 1 ){
-				tone(pgm_read_byte(&(sound_pattern_phone[sound_current_step].frequency)), 1);
-				_sound_note_time = millis_get() + pgm_read_byte(&(sound_pattern_phone[sound_current_step].time));
+				tone(pgm_read_word(&(sound_pattern_phone[sound_current_step].frequency)), 10);
+				_sound_note_time = (millis_get() + pgm_read_word(&(sound_pattern_phone[sound_current_step].time)));
 			}
 			if(sound_current_alarm == 2 ){
-				tone(pgm_read_byte(&(sound_pattern_help[sound_current_step].frequency)), 1);
-				_sound_note_time = millis_get() + pgm_read_byte(&(sound_pattern_help[sound_current_step].time));
+				tone(pgm_read_word(&(sound_pattern_help[sound_current_step].frequency)), 10);
+				_sound_note_time = (millis_get() + pgm_read_word(&(sound_pattern_help[sound_current_step].time)));
 			}
 			if(sound_current_alarm == 3 ){
-				tone(pgm_read_byte(&(sound_pattern_fire[sound_current_step].frequency)),1);
-				_sound_note_time = millis_get() + pgm_read_byte(&(sound_pattern_fire[sound_current_step].time));
+				tone(pgm_read_word(&(sound_pattern_fire[sound_current_step].frequency)),10);
+				_sound_note_time = (millis_get() + pgm_read_word(&(sound_pattern_fire[sound_current_step].time)));
 			}
 			
-		_sound_note_time = millis_get() + 1000;
+		//_sound_note_time = millis_get() + 1000;
 			
 			// is variable sound_current_step equal to de total steps?
 			if(sound_current_step >= sound_alarm_keys[sound_current_alarm]){
@@ -523,11 +528,12 @@ ISR (TIMER2_COMPA_vect) {
 						
 			
 		// get next flash and send it to the PCA9635
-		for (byte j = 0; j <= 3; ++j){
-			pca9635_set_led_pwm( j+3, pgm_read_byte(&(flash_pattern[_flash_current_step].led[j])));
+		for (byte j = 0; j <= 3; j++){
+		pca9635_set_led_pwm( j+3, pgm_read_byte(&(flash_pattern[_flash_current_step].led[j])));
 		}
+		//pca9635_set_led_pwm_flash(3, pgm_read_byte(&(flash_pattern[_flash_current_step].led[0])), pgm_read_byte(&(flash_pattern[_flash_current_step].led[1])), pgm_read_byte(&(flash_pattern[_flash_current_step].led[2])), pgm_read_byte(&(flash_pattern[_flash_current_step].led[3])) );
 		
-		_flash_time = pgm_read_byte(&(flash_pattern[_flash_current_step].time));
+		_flash_time = millis_get() + pgm_read_word(&(flash_pattern[_flash_current_step].time));
 			
 		// is variable _flash_current_step equal to total steps?
 		if(_flash_current_step == (flash_keys -1 )) {
@@ -564,11 +570,11 @@ ISR (TIMER2_COMPA_vect) {
 	uint16_t intensity;
 	if(icon_current_step == 0 || icon_current_step == 11){
 		intensity = 255;
-		if(icon_current_step == 0) _icon_time = 1000;
-		else if(icon_current_step == 11) _icon_time = 1;
+		if(icon_current_step == 0) _icon_time = millis_get() + 1000;
+		else if(icon_current_step == 11) _icon_time = millis_get() + 1;
 	}else{
 		intensity = (250 - (icon_current_step * 25));
-		_icon_time = 50;
+		_icon_time = millis_get() + 50;
 		}
 	
 	
@@ -594,7 +600,7 @@ ISR (TIMER2_COMPA_vect) {
 					done = 1;
 				}
 				
-				if(active_alarm & 0x0F){ // is there ANY alarm active??
+				if(!(active_alarm & 0x0F)){ // is there ANY alarm active??
 					done = 1; // in case there is no active alarm anymore, just breakout while
 				}
 
