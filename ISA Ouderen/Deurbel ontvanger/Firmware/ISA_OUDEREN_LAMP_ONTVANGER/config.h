@@ -38,8 +38,7 @@
  *           C O N F I G U R A T I O N                *
  *                                                    *
  ******************************************************/
-#define F_CPU 16000000
-
+#define F_CPU        16000000     // 16MHz processor
 #define LOG_AVAILABLE /*!< Is Logging available */
 
 //#define UART_AVAILABLE /*!< Is UART available */

@@ -27,6 +27,7 @@ TIMER 2 - 8BIT  -  LED
 
 
 #define byte uint8_t
+#include "ONTVANGER.h"
 #include "RF12.h"
 #include "delay.c"
 #include "millis.h"
@@ -40,10 +41,16 @@ extern "C" {
 };
 
 
+#define sound_alarm_keys_doorbell  8
+#define sound_alarm_keys_phone     31
+#define sound_alarm_keys_fire	8
+#define sound_alarm_keys_help  8
 
+#define flash_keys  36
 
+const uint8_t sound_alarm_keys[] = {sound_alarm_keys_doorbell, sound_alarm_keys_phone, sound_alarm_keys_fire, sound_alarm_keys_help };
+const uint8_t alarm_bitmask[] = {0x08, 0x04, 0x02, 0x01};
 
-const uint8_t sound_alarm_keys[] = {10, 10, 10, 10 };
 
 	uint8_t mychannel;
 	uint8_t counter;
@@ -65,46 +72,37 @@ const uint8_t sound_alarm_keys[] = {10, 10, 10, 10 };
 	
 	
 	//light - flash
-	uint8_t flash_current_step; // 1 - 255
-	// flash_array 
-	// flash_array_time
-
- typedef struct STRUCT_SOUND_PATTERN{
-			unsigned long frequency; //
-			uint16_t time;   // (0 tot +65,535) time in ms before going to the next step
-
-};
-
- typedef struct PATTERNS {
-	 STRUCT_SOUND_PATTERN pattern[100];
-		 
-		 };
+	uint8_t _flash_current_step; // 1 - 255
+	unsigned long _flash_time; // Used to track end flash with timer
 	
-//const static struct STRUCT_SOUND_PATTERN sound_patterns[0] PROGMEM
 
-	/// @struct Ramp
-	/// A "Ramp" is a target RGB color and the time in seconds to reach that color.
-	/// Ramps can be chained together with a non-zero ramp index in the chain field.
-//	struct STRUCT_SOUND_PATTERN_INC STRUCT_SOUND_PATTERN;
+	//light - icons
+	uint8_t icon_current_alarm; //  current alarm sound 0=doorbell, 1=phone, 2= fire, 3=help
+	uint8_t icon_current_step; //   current sound step from current alarm
+	unsigned long _icon_time; // Used to track end flash with timer
+	
+	
 
-//const static sound_patterns;
-//struct student_info sound_patterns[20];      // E
+ typedef struct {
+			unsigned long frequency; //
+				unsigned long time;   // (0 tot +65,535) time in ms before going to the next step
+} STRUCT_SOUND_PATTERN;
 
-	const static struct STRUCT_SOUND_PATTERN sound_pattern_doorbell[sound_alarm_keys[0]] PROGMEM = {  // doorbell
+	const static STRUCT_SOUND_PATTERN sound_pattern_doorbell[sound_alarm_keys_doorbell] PROGMEM = {  // doorbell
 //const static sound_patterns[0] PROGMEM = { // doorbell
-		{ 1500	, 500 }, // 0: instant off
-		{ 0		, 500 }, // 0: instant off
-		{ 1200	, 500 }, // 0: instant off
-		{ 0		, 1500 }, // 0: instant off
-		{ 1500	, 500 }, // 0: instant off
-		{ 0		, 500 }, // 0: instant off
-		{ 1200	, 500 }, // 0: instant off
-		{ 0		, 1500 }, // 0: instant off
+		{ 1500	, 1000 }, // 0: instant off
+		{ 0		, 1000 }, // 0: instant off
+		{ 1200	, 1000 }, // 0: instant off
+		{ 0		, 2000 }, // 0: instant off
+		{ 1500	, 1000 }, // 0: instant off
+		{ 0		, 1000 }, // 0: instant off
+		{ 1200	, 1000 }, // 0: instant off
+		{ 0		, 2000 } // 0: instant off
 	};
 
 
 
-	const static struct STRUCT_SOUND_PATTERN sound_pattern_phone[sound_alarm_keys[1]] PROGMEM = { //phone
+	const static STRUCT_SOUND_PATTERN sound_pattern_phone[sound_alarm_keys_phone] PROGMEM = { //phone
 		
 		{ 1000	, 40 }, // 0: instant off
 		{ 750	, 40 }, // 0: instant off
@@ -125,37 +123,25 @@ const uint8_t sound_alarm_keys[] = {10, 10, 10, 10 };
 		{ 1000	, 40 }, // 0: instant off
 		{ 750	, 40 }, // 0: instant off
 		{ 1000	, 40 }, // 0: instant off
-			{ 750	, 40 }, // 0: instant off
-			{ 1000	, 40 }, // 0: instant off
-										{ 750	, 40 }, // 0: instant off
-									{ 1000	, 40 }, // 0: instant off
-								{ 750	, 40 }, // 0: instant off
-									{ 1000	, 40 }, // 0: instant off
-														{ 750	, 40 }, // 0: instant off
-												{ 1000	, 40 }, // 0: instant off
-										{ 750	, 40 }, // 0: instant off
-															{ 1000	, 40 }, // 0: instant off
-				{ 750	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 } // 0: instant off
 																																													
 			
 		
 	};
 	
 	
-		const static struct STRUCT_SOUND_PATTERN sound_pattern_help[sound_alarm_keys[2]] PROGMEM = {  // doorbell
-			//const static sound_patterns[0] PROGMEM = { // doorbell
-			{ 1500	, 500 }, // 0: instant off
-			{ 0		, 500 }, // 0: instant off
-			{ 1200	, 500 }, // 0: instant off
-			{ 0		, 1500 }, // 0: instant off
-			{ 1500	, 500 }, // 0: instant off
-			{ 0		, 500 }, // 0: instant off
-			{ 1200	, 500 }, // 0: instant off
-			{ 0		, 1500 }, // 0: instant off
-		};
 		
-		
-			const static struct STRUCT_SOUND_PATTERN sound_pattern_fire[sound_alarm_keys[3]] PROGMEM = {  // doorbell
+			const static STRUCT_SOUND_PATTERN sound_pattern_fire[sound_alarm_keys_fire] PROGMEM = {  // doorbell
 				//const static sound_patterns[0] PROGMEM = { // doorbell
 				{ 1500	, 500 }, // 0: instant off
 				{ 0		, 500 }, // 0: instant off
@@ -164,37 +150,23 @@ const uint8_t sound_alarm_keys[] = {10, 10, 10, 10 };
 				{ 1500	, 500 }, // 0: instant off
 				{ 0		, 500 }, // 0: instant off
 				{ 1200	, 500 }, // 0: instant off
-				{ 0		, 1500 }, // 0: instant off
+				{ 0		, 1500 } // 0: instant off
 			};
- //const static sound_pattern[] PROGMEM = { &sound_pattern_doorbell, &sound_pattern_phone  };
-//const struct StringTable[2] PROGMEM = {
-//	sound_pattern_doorbell,
-//	sound_pattern_phone
-//};	
+			
+					const static STRUCT_SOUND_PATTERN sound_pattern_help[sound_alarm_keys_help] PROGMEM = {  // doorbell
+						//const static sound_patterns[0] PROGMEM = { // doorbell
+						{ 1500	, 500 }, // 0: instant off
+						{ 0		, 500 }, // 0: instant off
+						{ 1200	, 500 }, // 0: instant off
+						{ 0		, 1500 }, // 0: instant off
+						{ 1500	, 500 }, // 0: instant off
+						{ 0		, 500 }, // 0: instant off
+						{ 1200	, 500 }, // 0: instant off
+						{ 0		, 1500 } // 0: instant off
+					};
 
 
 	
-	/*
-	
-		const static STRUCT_SOUND_PATTERN sound_pattern[2] PROGMEM = {
-			
-			{ 255 , 255, 255, 255, 255 }, // 0: instant off
-			{ 255 , 255, 255, 255, 255 }, // 0: instant off
-			{ 255 , 255, 255, 255, 255 }, // 0: instant off
-			{ 255 , 255, 255, 255, 255 }, // 0: instant off
-			{ 255 , 255, 255, 255, 255 }
-		};	
-	
-		const static STRUCT_SOUND_PATTERN sound_pattern[3] PROGMEM = {
-			
-			{ 255 , 255, 255, 255, 255 }, // 0: instant off
-			{ 255 , 255, 255, 255, 255 }, // 0: instant off
-			{ 255 , 255, 255, 255, 255 }, // 0: instant off
-			{ 255 , 255, 255, 255, 255 }, // 0: instant off
-			{ 255 , 255, 255, 255, 255 }
-		};
-		*/
-		
 	/// @struct Ramp
 	/// A "Ramp" is a target RGB color and the time in seconds to reach that color.
 	/// Ramps can be chained together with a non-zero ramp index in the chain field.
@@ -204,21 +176,86 @@ typedef struct {
 	} STRUCT_FLASH_PATTERN;
 	
  const static STRUCT_FLASH_PATTERN flash_pattern[ ] PROGMEM = {
+// bottom, top left, top center, top right 0..255 , time in ms
 		
-		{ 255 , 255, 255, 255, 255 }, // 0: instant off
-		{ 255 , 255, 255, 255, 255 }, // 0: instant off
-		{ 255 , 255, 255, 255, 255 }, // 0: instant off
-		{ 255 , 255, 255, 255, 255 }, // 0: instant off
-		{ 255 , 255, 255, 255, 255 }	
+		{ 255 , 255, 255, 255, 200 }, // flash, all on
+		{	0 ,	  0,   0,   0, 200 }, //		all off
+		{ 255 , 255, 255, 255, 200 }, // flash, all on
+		{	0 ,	  0,   0,   0, 200 }, //		all off
+		{ 255 , 255, 255, 255, 200 }, // flash, all on
+		{	0 ,	  0,   0,   0, 200 }, //		all off
+		{ 255 , 255, 255, 255, 200 }, // flash, all on
+		{	0 ,	  0,   0,   0, 200 }, //		all off
+
+
+		// FLASH TOP LEFT AND TOP RIGHT 3 times fast
+		{ 0	  , 255,   0, 255,  50 }, // 
+		{	0 ,	  0,   0,   0,  50 }, // all off
+		{ 0	  , 255,   0, 255,  50 }, // 
+		{	0 ,	  0,   0,   0,  50 }, // all off
+		{ 0	  , 255,   0, 255,  50 }, // 
+		{	0 ,	  0,   0,   0,  50 }, // all off
+	
+		// FLASH TOP CENTER AND BOTTOM 3 times fast
+		{ 255 ,   0, 255,   0,  50 }, //
+		{	0 ,	  0,   0,   0,  50 }, // all off
+		{ 255 ,   0, 255,   0,  50 }, //
+		{	0 ,	  0,   0,   0,  50 }, // all off
+		{ 255 ,   0, 255,   0,  50 }, //
+		{	0 ,	  0,   0,   0,  50 }, // all off
+			
+		// FLASH TOP LEFT AND TOP RIGHT 3 times fast
+		{ 0	  , 255,   0, 255,  50 }, //
+		{	0 ,	  0,   0,   0,  50 }, // all off
+		{ 0	  , 255,   0, 255,  50 }, //
+		{	0 ,	  0,   0,   0,  50 }, // all off
+		{ 0	  , 255,   0, 255,  50 }, //
+		{	0 ,	  0,   0,   0,  50 }, // all off
+		
+		// FLASH TOP CENTER AND BOTTOM 3 times fast
+		{ 255 ,   0, 255,   0,  50 }, //
+		{	0 ,	  0,   0,   0,  50 }, // all off
+		{ 255 ,   0, 255,   0,  50 }, //
+		{	0 ,	  0,   0,   0,  50 }, // all off
+		{ 255 ,   0, 255,   0,  50 }, //
+		{	0 ,	  0,   0,   0,  50 } // all off
+			
+
 		};
 	
 
-	
-	
-	//light - icons
-	uint8_t icon_current; // f
-	uint8_t icon_current_step; // f
-	
+		/// @struct Ramp
+		/// A "Ramp" is a target RGB color and the time in seconds to reach that color.
+		/// Ramps can be chained together with a non-zero ramp index in the chain field.
+		typedef struct {
+			uint8_t color[3]; // red, green, blue 0..255
+		} STRUCT_ICON_COLORS;
+
+	// RGB
+	 const static STRUCT_ICON_COLORS icon_colors[ ] PROGMEM = {
+		 { 61 , 245, 0 }, // doorbell - light green
+		 {	0 ,	  184,   245, }, // phone - lightblue
+		 { 255 , 0, 0 }, // fire - RED
+		 { 255 , 255, 0 }  // help - Yellow
+		 };
+			 
+			 
+			 /// @struct Ramp
+			 /// A "Ramp" is a target RGB color and the time in seconds to reach that color.
+			 /// Ramps can be chained together with a non-zero ramp index in the chain field.
+			 typedef struct {
+				 uint8_t lednr[3]; // red, green, blue
+			 } STRUCT_ICON_LED_NUMBERS;
+
+			 // RGB
+			 const static STRUCT_ICON_LED_NUMBERS icon_led_numbers[ ] PROGMEM = {
+				 {  2 ,  1,  0 }, // doorbell - light green
+				 {	7 ,	 8,  9 }, // phone - lightblue
+				 { 15 , 14, 13 }, // fire - RED
+				 { 12 , 11, 10 }  // help - Yellow
+			 };
+			 
+			 
 	
 int main() {	
 
@@ -294,11 +331,12 @@ _delay_ms(1000);
 				////////////////		Fill alarm array		 ////////////////
 				// only get the first byte
 				uint8_t data = rf12_data[0]; // not used, not used, not used, start (1) or stop(0), doorbell, phone, fire, help;
-				
+				uart0_putc(data);
+				_delay_ms(10);
 				 if(data & 0x10){
 					 // start alarm	 
 					 uart0_puts("START");
-					 active_alarm = active_alarm & data; // 00001111 
+					 active_alarm = active_alarm | data; // 00001111 
 				 }else{
 					 // stop alarm
 					  uart0_puts("STOP");
@@ -308,21 +346,23 @@ _delay_ms(1000);
 				////////////////		Fill alarm array		 ////////////////				 
 				
 				
-							 
+					uart0_putc(active_alarm);	 
 				 // IS ER EEN ALARM ACTIEF in array active_alarm?
 				 if(active_alarm & 0x0F){
-			 
+			  uart0_puts("YES");
 						 // Is there a active alarm thats already activated?
 						 if(active_alarm_time == 0) {
 							// Geen alarm actief
 
-							 // 1. sound_current_alarm vullen met eerst alarm
-							 sound_current_alarm = 4;
-							 if((sound_current_alarm == 4) && (active_alarm & 0x08)) sound_current_alarm = 0;
-							 if((sound_current_alarm == 4) && (active_alarm & 0x04)) sound_current_alarm = 1;
-							 if((sound_current_alarm == 4) && (active_alarm & 0x02)) sound_current_alarm = 2;
-							 if((sound_current_alarm == 4) && (active_alarm & 0x01)) sound_current_alarm = 3;
-							 
+							 // 1. fill icon_current_alarm and sound_current_alarm with the first alarm
+							 for (byte i = 0; i < 4; ++i){
+								if(active_alarm & (alarm_bitmask[i]) ){ // check if next alarm is active
+									sound_current_alarm = i;
+									icon_current_alarm  = i;
+									break;
+								} 
+							 }
+
 					 					
 							// 2. timer 0 - millis starten
 							millis_reset();
@@ -336,8 +376,10 @@ _delay_ms(1000);
 				 
 
 				 		// MELDINGSDUUR RESETTEN
-				 		active_alarm_time = millis() + alarm_duration; /* 00001111 remove first 4 bits */
-								  
+				 		active_alarm_time = millis_get() + alarm_duration; 
+						 uart0_putc(millis_get());
+						uart0_putc(active_alarm_time);
+				 
 				 
 					}else{ //  if(active_alarm & 0x0F){ // IS ER EEN ALARM ACTIEF in active_alarm?
 						// no active alarm in array
@@ -395,20 +437,24 @@ ISR (TIMER2_COMPA_vect) {
 			
 	}else{
 		// continue alarm
-	//	isr_sound();
-		//isr_light_flash();
+		isr_sound();
+	 //   isr_light_flash();
 	//	isr_light_icon();		
 	}
 }
 
 
 	void isr_sound(){
-			
+		//	uart0_putc(sound_current_step);
+		//	uart0_putc(millis_get());
+		//	uart0_putc(_sound_note_time);
 			// Stop note if necessary 
-			if(_sound_note_time == 0){ // sound already playing?		
-					
+			if(_sound_note_time != 0){ // sound already playing?		
+				//	uart0_puts("GS");
 				if(millis_get() < _sound_note_time ){ // Do we need to stop the current note?
+					//uart0_puts("DS");
 					return; // dont stop current note
+					
 				}else{
 					noTone(); // stop current note
 				}
@@ -416,45 +462,151 @@ ISR (TIMER2_COMPA_vect) {
 			}
 			
 			// play next tone
-			
+		//	uart0_puts("PN");
 		//	tone(unsigned long frequency, uint8_t volume);
 			if(sound_current_alarm == 0 ){
-			tone(pgm_read_byte(&(sound_pattern_doorbell[sound_current_step].frequency)), pgm_read_byte(&(sound_pattern_doorbell[sound_current_step].time)));
+				tone(pgm_read_byte(&(sound_pattern_doorbell[sound_current_step].frequency)), 1); // freq, volume
+				_sound_note_time = millis_get() + pgm_read_byte(&(sound_pattern_doorbell[sound_current_step].time));
 			}
 			if(sound_current_alarm == 1 ){
-			tone(pgm_read_byte(&(sound_pattern_phone[sound_current_step].frequency)), pgm_read_byte(&(sound_pattern_phone[sound_current_step].time)));
+				tone(pgm_read_byte(&(sound_pattern_phone[sound_current_step].frequency)), 1);
+				_sound_note_time = millis_get() + pgm_read_byte(&(sound_pattern_phone[sound_current_step].time));
 			}
 			if(sound_current_alarm == 2 ){
-				tone(pgm_read_byte(&(sound_pattern_help[sound_current_step].frequency)), pgm_read_byte(&(sound_pattern_help[sound_current_step].time)));
+				tone(pgm_read_byte(&(sound_pattern_help[sound_current_step].frequency)), 1);
+				_sound_note_time = millis_get() + pgm_read_byte(&(sound_pattern_help[sound_current_step].time));
 			}
 			if(sound_current_alarm == 3 ){
-				tone(pgm_read_byte(&(sound_pattern_fire[sound_current_step].frequency)), pgm_read_byte(&(sound_pattern_fire[sound_current_step].time)));
+				tone(pgm_read_byte(&(sound_pattern_fire[sound_current_step].frequency)),1);
+				_sound_note_time = millis_get() + pgm_read_byte(&(sound_pattern_fire[sound_current_step].time));
 			}
 			
+		_sound_note_time = millis_get() + 1000;
+			
 			// is variable sound_current_step equal to de total steps?
-			if(sound_current_step
-		
-			
-			 // sound_current_alarm; // current alarm sound 0=doorbell, 1=phone, 2= fire, 3=help
-			//  sound_current_step; // current sound step from current alarm
-			
-			
+			if(sound_current_step >= sound_alarm_keys[sound_current_alarm]){
+				// go to next sound
+				
+				uint8_t done = 0;
+				while(done == 0){
+					sound_current_alarm++; // sound_current_alarm plus one
+					if(sound_current_alarm == 4) { sound_current_alarm = 0; } // if sound_current_alarm is 4 than go back to 0
+					
+					if(active_alarm & (alarm_bitmask[sound_current_alarm]) ){ // check if next alarm is active
+						done = 1;
+					}
+				
+					if(!(active_alarm & 0x0F)){ // is there ANY alarm active??
+						done = 1; // in case there is no active alarm anymore, just breakout while
+					}
+
+				} // while
+				
+				sound_current_step = 0; // reset sound_current_step to zero to start the next sound	
+				
+			}else{
+				// set sound_current_step plus one
+				sound_current_step++;
+			}
+	
 				
 		} //void isr_sound()
 		
 	void isr_light_flash(){
 			
-			// haal flits arry op van current step
-			for (byte j = 0; j <= 3; ++j){
-				pca9635_set_led_pwm( j+3, pgm_read_byte(&(flash_pattern[flash_current_step].led[j])));
-			}
+		// Do we need to go to the next flash?
+		if(_flash_time != 0){ // is there already a flash ?
+			if(millis_get() < _flash_time ){ // Do we need to stop the current note?
+				return; // dont stop current flash
+			}						
+		}
+						
 			
+		// get next flash and send it to the PCA9635
+		for (byte j = 0; j <= 3; ++j){
+			pca9635_set_led_pwm( j+3, pgm_read_byte(&(flash_pattern[_flash_current_step].led[j])));
 		}
 		
-	void isr_light_icon(){
+		_flash_time = pgm_read_byte(&(flash_pattern[_flash_current_step].time));
 			
-			
+		// is variable _flash_current_step equal to total steps?
+		if(_flash_current_step == (flash_keys -1 )) {
+			//reset _flash_current_step to 0
+			_flash_current_step = 0;				
+		}else{
+			// set _flash_current_step +1
+			_flash_current_step++;
 		}
+		
+	} // END isr_light_flash
+		
+		
+		
+		
+		
+	void isr_light_icon(){
+		
+		// Do we need to go to the next flash?
+		if(_icon_time != 0){ // is there already a flash ?
+			if(millis_get() < _icon_time ){ // Do we need to stop the current note?
+				return; // dont stop current flash
+			}
+		}
+		
+		
+
+	// step 0 = 255
+	// step 1 = 250 - (1 x 25)  = 225
+	// step 2 = 250 - (2 x 25)  = 200
+	// step 11 = (if step == 11) brightness = 255
+	
+	// calculate intensity based on step
+	uint16_t intensity;
+	if(icon_current_step == 0 || icon_current_step == 11){
+		intensity = 255;
+		if(icon_current_step == 0) _icon_time = 1000;
+		else if(icon_current_step == 11) _icon_time = 1;
+	}else{
+		intensity = (250 - (icon_current_step * 25));
+		_icon_time = 50;
+		}
+	
+	
+	// get next flash and send it to the PCA9635
+	for (byte j = 0; j <= 3; j++){
+		uint8_t _dimmed_color = ((pgm_read_byte(&(icon_colors[icon_current_alarm].color[j])) * intensity) >> 8); // calculate dimmed color
+		pca9635_set_led_pwm( pgm_read_byte(&(icon_led_numbers[icon_current_alarm].lednr[j])), _dimmed_color);
+	}
+	
+
+	// is variable _flash_current_step equal to total steps?
+	if(icon_current_step == 11) {
+		//reset _flash_current_step to 0
+		icon_current_step = 0;
+		
+			
+			uint8_t done = 0;
+			while(done == 0){
+				icon_current_alarm++; // sound_current_alarm plus one
+				if(icon_current_alarm == 4) { icon_current_alarm = 0; } // if sound_current_alarm is 4 than go back to 0
+				
+				if(active_alarm & (alarm_bitmask[icon_current_alarm]) ){ // check if next alarm is active
+					done = 1;
+				}
+				
+				if(active_alarm & 0x0F){ // is there ANY alarm active??
+					done = 1; // in case there is no active alarm anymore, just breakout while
+				}
+
+			} // while
+			
+			
+		}else{
+		// set _flash_current_step +1
+		icon_current_step++;
+	}
+	
+} // END isr_light_icon
 
 	
 	
