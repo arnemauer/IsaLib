@@ -42,6 +42,9 @@ extern "C" {
 
 
 
+
+const uint8_t sound_alarm_keys[] = {10, 10, 10, 10 };
+
 	uint8_t mychannel;
 	uint8_t counter;
 	static long payload;
@@ -87,7 +90,7 @@ extern "C" {
 //const static sound_patterns;
 //struct student_info sound_patterns[20];      // E
 
-	const static struct STRUCT_SOUND_PATTERN sound_pattern_doorbell[ ] PROGMEM = {  // doorbell
+	const static struct STRUCT_SOUND_PATTERN sound_pattern_doorbell[sound_alarm_keys[0]] PROGMEM = {  // doorbell
 //const static sound_patterns[0] PROGMEM = { // doorbell
 		{ 1500	, 500 }, // 0: instant off
 		{ 0		, 500 }, // 0: instant off
@@ -101,7 +104,7 @@ extern "C" {
 
 
 
-	const static struct STRUCT_SOUND_PATTERN sound_pattern_phone[ ] PROGMEM = { //phone
+	const static struct STRUCT_SOUND_PATTERN sound_pattern_phone[sound_alarm_keys[1]] PROGMEM = { //phone
 		
 		{ 1000	, 40 }, // 0: instant off
 		{ 750	, 40 }, // 0: instant off
@@ -139,6 +142,30 @@ extern "C" {
 	};
 	
 	
+		const static struct STRUCT_SOUND_PATTERN sound_pattern_help[sound_alarm_keys[2]] PROGMEM = {  // doorbell
+			//const static sound_patterns[0] PROGMEM = { // doorbell
+			{ 1500	, 500 }, // 0: instant off
+			{ 0		, 500 }, // 0: instant off
+			{ 1200	, 500 }, // 0: instant off
+			{ 0		, 1500 }, // 0: instant off
+			{ 1500	, 500 }, // 0: instant off
+			{ 0		, 500 }, // 0: instant off
+			{ 1200	, 500 }, // 0: instant off
+			{ 0		, 1500 }, // 0: instant off
+		};
+		
+		
+			const static struct STRUCT_SOUND_PATTERN sound_pattern_fire[sound_alarm_keys[3]] PROGMEM = {  // doorbell
+				//const static sound_patterns[0] PROGMEM = { // doorbell
+				{ 1500	, 500 }, // 0: instant off
+				{ 0		, 500 }, // 0: instant off
+				{ 1200	, 500 }, // 0: instant off
+				{ 0		, 1500 }, // 0: instant off
+				{ 1500	, 500 }, // 0: instant off
+				{ 0		, 500 }, // 0: instant off
+				{ 1200	, 500 }, // 0: instant off
+				{ 0		, 1500 }, // 0: instant off
+			};
  //const static sound_pattern[] PROGMEM = { &sound_pattern_doorbell, &sound_pattern_phone  };
 //const struct StringTable[2] PROGMEM = {
 //	sound_pattern_doorbell,
@@ -392,13 +419,20 @@ ISR (TIMER2_COMPA_vect) {
 			
 		//	tone(unsigned long frequency, uint8_t volume);
 			if(sound_current_alarm == 0 ){
-			tone(pgm_read_byte(&(sound_pattern_doorbell[sound_current_step].frequency, pgm_read_byte(&(sound_pattern_doorbell[sound_current_step].time)));
+			tone(pgm_read_byte(&(sound_pattern_doorbell[sound_current_step].frequency)), pgm_read_byte(&(sound_pattern_doorbell[sound_current_step].time)));
 			}
 			if(sound_current_alarm == 1 ){
-			tone(pgm_read_byte(&(sound_pattern_phone[sound_current_step].frequency, pgm_read_byte(&(sound_pattern_phone[sound_current_step].time)));
+			tone(pgm_read_byte(&(sound_pattern_phone[sound_current_step].frequency)), pgm_read_byte(&(sound_pattern_phone[sound_current_step].time)));
 			}
-	
+			if(sound_current_alarm == 2 ){
+				tone(pgm_read_byte(&(sound_pattern_help[sound_current_step].frequency)), pgm_read_byte(&(sound_pattern_help[sound_current_step].time)));
+			}
+			if(sound_current_alarm == 3 ){
+				tone(pgm_read_byte(&(sound_pattern_fire[sound_current_step].frequency)), pgm_read_byte(&(sound_pattern_fire[sound_current_step].time)));
+			}
 			
+			// is variable sound_current_step equal to de total steps?
+			if(sound_current_step
 		
 			
 			 // sound_current_alarm; // current alarm sound 0=doorbell, 1=phone, 2= fire, 3=help
