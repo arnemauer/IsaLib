@@ -73,20 +73,17 @@ uint8_t pca9635_set_led_pwm(uint8_t ledno, uint8_t cycle)
   
   
   /**
-  * Sets the pwm value for given led, note that it must have previously been enabled for PWM control with set_mode
+  * Sets the pwm value for all leds, note that it must have previously been enabled for PWM control with set_mode
   *
-  * Remember that led numbers start from 0
+  * 
   */
-  void pca9635_set_led_pwm_flash(uint8_t ledno, uint8_t cycle0, uint8_t cycle1, uint8_t cycle2, uint8_t cycle3 )
+  void pca9635_set_all_led_pwm( uint8_t cycle )
   {
 	  I2C_start((0x40<<1)+I2C_WRITE);
-	  uint8_t reg = 0x02 + ledno;
-	  // 0x80 = autoincrementbits
-	  I2C_write((reg | 0x80) );
-	  I2C_write(cycle0);
-	  I2C_write(cycle1);
-	  I2C_write(cycle2);
-	  I2C_write(cycle3);
+	  I2C_write(0x82); // 10000010 autoincrement + led register one
+	  for(uint8_t i = 0; i <= 15; i++){
+		I2C_write(cycle);
+	  }
 	  I2C_stop();
 	  return;
   }

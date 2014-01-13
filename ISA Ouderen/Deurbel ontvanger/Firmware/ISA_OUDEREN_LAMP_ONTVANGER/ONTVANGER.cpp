@@ -24,6 +24,7 @@ TIMER 2 - 8BIT  -  LED
 #include <string.h>
 #include <avr/pgmspace.h> // for progmem / ram declarations
 #include <avr/sleep.h>
+#include <util/atomic.h>
 
 
 #define byte uint8_t
@@ -42,9 +43,9 @@ extern "C" {
 
 
 #define sound_alarm_keys_doorbell  8
-#define sound_alarm_keys_phone     31
-#define sound_alarm_keys_fire	8
-#define sound_alarm_keys_help  8
+#define sound_alarm_keys_phone     96
+#define sound_alarm_keys_fire	16
+#define sound_alarm_keys_help  9
 
 #define flash_keys  32
 
@@ -133,9 +134,72 @@ const uint8_t alarm_bitmask[] = {0x08, 0x04, 0x02, 0x01};
 		{ 1000	, 40 }, // 0: instant off
 		{ 750	, 40 }, // 0: instant off
 		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 } // 0: instant off
-																																													
+		{ 750	, 40 }, // 0: instant off
+		{ 0	    ,1000}, // 0: instant off
+																																																
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 1000	, 40 }, // 0: instant off
+		{ 750	, 40 }, // 0: instant off
+		{ 0	    ,1000}, // 0: instant off
 			
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 1000	, 40 }, // 0: instant off
+					{ 750	, 40 }, // 0: instant off
+					{ 0	    ,1000} // 0: instant off			
 		
 	};
 	
@@ -143,26 +207,35 @@ const uint8_t alarm_bitmask[] = {0x08, 0x04, 0x02, 0x01};
 		
 			const static STRUCT_SOUND_PATTERN sound_pattern_fire[sound_alarm_keys_fire] PROGMEM = {  // doorbell
 				//const static sound_patterns[0] PROGMEM = { // doorbell
-				{ 1500	, 500 }, // 0: instant off
-				{ 0		, 500 }, // 0: instant off
-				{ 1200	, 500 }, // 0: instant off
-				{ 0		, 1500 }, // 0: instant off
-				{ 1500	, 500 }, // 0: instant off
-				{ 0		, 500 }, // 0: instant off
-				{ 1200	, 500 }, // 0: instant off
-				{ 0		, 1500 } // 0: instant off
+				{ 2000	, 300 }, // 0: instant off
+				{ 0		, 300 }, // 0: instant off
+				{ 2000	, 300 }, // 0: instant off
+				{ 0		, 300 }, // 0: instant off
+				{ 2000	, 300 }, // 0: instant off
+				{ 0		, 300 }, // 0: instant off
+				{ 2000	, 300 }, // 0: instant off
+				{ 0		, 300 }, // 0: instant off
+				{ 2000	, 300 }, // 0: instant off
+				{ 0		, 300 }, // 0: instant off
+				{ 2000	, 300 }, // 0: instant off
+				{ 0		, 300 }, // 0: instant off
+				{ 2000	, 300 }, // 0: instant off
+				{ 0		, 300 }, // 0: instant off
+				{ 2000	, 300 }, // 0: instant off
+				{ 0		, 300 } // 0: instant off
 			};
 			
 					const static STRUCT_SOUND_PATTERN sound_pattern_help[sound_alarm_keys_help] PROGMEM = {  // doorbell
 						//const static sound_patterns[0] PROGMEM = { // doorbell
-						{ 1500	, 500 }, // 0: instant off
-						{ 0		, 500 }, // 0: instant off
-						{ 1200	, 500 }, // 0: instant off
-						{ 0		, 1500 }, // 0: instant off
-						{ 1500	, 500 }, // 0: instant off
-						{ 0		, 500 }, // 0: instant off
-						{ 1200	, 500 }, // 0: instant off
-						{ 0		, 1500 } // 0: instant off
+						{ 1215	, 300 }, // 0: instant off
+						{ 1445	, 300 }, // 0: instant off
+						{ 1820	, 300 }, // 0: instant off
+						{ 1445	, 300 }, // 0: instant off
+						{ 1215	, 300 }, // 0: instant off
+						{ 1445	, 300 }, // 0: instant off
+						{ 1820	, 300 }, // 0: instant off
+						{ 1445	, 300 },  // 0: instant off
+						{ 0		, 1000 }  // 0: instant off
 					};
 
 
@@ -249,10 +322,10 @@ typedef struct {
 
 			 // RGB
 			 const static STRUCT_ICON_LED_NUMBERS icon_led_numbers[ ] PROGMEM = {
-				 {  2 ,  1,  0 }, // doorbell - light green
-				 {	7 ,	 8,  9 }, // phone - lightblue
-				 { 15 , 14, 13 }, // fire - RED
-				 { 12 , 11, 10 }  // help - Yellow
+				 {  12 , 11, 10 }, // doorbell - light green 210
+				 {	15, 14, 13 }, // phone - lightblue
+				 { 7 , 8, 9 }, // fire - RED
+				 { 2 , 1, 0 }  // help - Yellow
 			 };
 			 
 			 
@@ -260,9 +333,7 @@ typedef struct {
 int main() {	
 
 // disable ADC for less power 
-  ADCSRA &= ~_BV(ADEN); // ADC off 
-
-
+	ADCSRA &= ~_BV(ADEN); // ADC off 
 	sei();
 			/* Initialize MILLIS */
 	        millis_init();
@@ -280,7 +351,7 @@ int main() {
 							 	
 			// TIMSK2 = _BV(OCIE2A); // DO NOT ENABLE TIMER2 BY DEFAULT!
 			OCR2A = ((F_CPU / 128) / 1000);
-			power_timer2_disable(); // power timer2 down!
+			//power_timer2_disable(); // power timer2 down!
 			/* Initialize TIMER 2 */			
 			
 
@@ -292,8 +363,11 @@ int main() {
 		
 			I2C_init();	
 			pca9635_init();
+			pca9635_set_all_led_pwm(255);
 			_delay_ms(1000);
-			pca9635_set_led_mode(0); // put all leds off
+			//pca9635_set_led_mode(0); // put all leds off
+			pca9635_set_all_led_pwm(0);
+			pca9635_set_sleep(1);
 			log_s("PCA ok");
 			_delay_ms(1000);
 			
@@ -317,23 +391,23 @@ _delay_ms(1000);
 				rf12_sendStart(RF12_ACK_REPLY,0,0);
 				rf12_sendWait(1); // don't power down too soon
 				uart0_puts("ACK-OK");
-				_delay_ms(20);
+				//_delay_ms(10);
 			}
 			
 			
-		uart0_puts("\n\r -DATA!- ");
-		_delay_ms(20);
+		uart0_puts("DATA");
+	//	_delay_ms(10);
 		        
-				for (byte i = 0; i < rf12_len; ++i){
-		        uart0_putc(rf12_data[i]);
-				}
+		//		for (byte i = 0; i < rf12_len; ++i){
+		  //      uart0_putc(rf12_data[i]);
+		//		}
 				
 				
 				////////////////		Fill alarm array		 ////////////////
 				// only get the first byte
 				uint8_t data = rf12_data[0]; // not used, not used, not used, start (1) or stop(0), doorbell, phone, fire, help;
 				uart0_putc(data);
-				_delay_ms(10);
+				//_delay_ms(10);
 				 if(data & 0x10){
 					 // start alarm	 
 					 uart0_puts("START");
@@ -346,17 +420,20 @@ _delay_ms(1000);
 				 
 				////////////////		Fill alarm array		 ////////////////				 
 				
-				
-					uart0_putc(active_alarm);	 
+				// strip first 4 bytes
+				uart0_putc(active_alarm);
+	
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{ 
 				 // IS ER EEN ALARM ACTIEF in array active_alarm?
 				 if(active_alarm & 0x0F){
-			  uart0_puts("YES");
+			  	
 						 // Is there a active alarm thats already activated?
 						 if(active_alarm_time == 0) {
 							// Geen alarm actief
 
 							 // 1. fill icon_current_alarm and sound_current_alarm with the first alarm
-							 for (byte i = 0; i < 4; ++i){
+							 for (byte i = 0; i <= 3; ++i){
 								if(active_alarm & (alarm_bitmask[i]) ){ // check if next alarm is active
 									sound_current_alarm = i;
 									icon_current_alarm  = i;
@@ -364,31 +441,47 @@ _delay_ms(1000);
 								} 
 							 }
 
-					 					
 							// 2. timer 0 - millis starten
 							millis_reset();
 							millis_resume();
 				 
 							// 3. timer 2 - alarm timer starten
-							power_timer2_enable();
+							//power_timer2_enable();
 							TIMSK2 |= _BV(OCIE2A);
 			 
+							// wake up pca9635!
+							pca9635_set_sleep(0);
+						//	pca9635_set_led_mode(2);
+							
+						 }else{
+							 
+							if(!(data & 0x10)){	 // already a active alarm and received a packet to stop alarm?	
+								// put leds off!
+								for (byte i = 0; i <= 3; ++i){
+									if(data & (alarm_bitmask[i]) ){ // check which alarm needs to be stopped
+										for (byte j = 0; j <= 2; j++){
+											pca9635_set_led_pwm( pgm_read_byte(&(icon_led_numbers[i].lednr[j])), 0); // leds off!
+										}
+									}
+								}
+							}
 						 }
 				 
 
-				 		// MELDINGSDUUR RESETTEN
-				 		active_alarm_time = millis_get() + alarm_duration; 
-						 uart0_putc(millis_get());
-						uart0_putc(active_alarm_time);
-				 
-				 
-					}else{ //  if(active_alarm & 0x0F){ // IS ER EEN ALARM ACTIEF in active_alarm?
+				 		// Only reset active alarm timer if there was a new alarm...
+						if(data & 0x10){
+				 			active_alarm_time = millis_get() + alarm_duration; 		 
+						 }
+
+				}else{ //  if(active_alarm & 0x0F){ // IS ER EEN ALARM ACTIEF in active_alarm?
 						// no active alarm in array
 												
 						active_alarm_time = 0; // set alarm time to zero, timers will be disabled in next timer 2 interrupt
-					}
+				}
 						 		
-		
+	 }// 	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+					 
+									
 	} else {
     // switch into idle mode until the next interrupt - Choose our preferred sleep mode:
     set_sleep_mode(SLEEP_MODE_IDLE);
@@ -415,11 +508,13 @@ _delay_ms(1000);
 	
 	
 ISR (TIMER2_COMPA_vect) {
-	
+//uart0_puts("I");
+
 	// check if the alarm needs to be stopped
-	if(millis_get() > active_alarm_time){
+	if(millis_get() >= active_alarm_time || active_alarm_time == 0){
 		// stop alarm
-		
+			
+			uart0_puts("STOPINT");			
 			// stop timer 0
 			millis_pause();
 			
@@ -428,23 +523,36 @@ ISR (TIMER2_COMPA_vect) {
 			
 			// stop timer 2
 			TIMSK2 &= ~_BV(OCIE2A);
-			power_timer2_disable();
+			//power_timer2_disable();
 			
+			// reset steps of sound, flash and icon
+			sound_current_step		= 0;
+			_sound_note_time		= 0;
+										
+			_flash_current_step		= 0;
+			_flash_time				= 0;
+										
+			icon_current_step		= 0;
+			_icon_time				= 0;
+										
 			// empty alarm arrray
 			active_alarm = 0x00; 
-			
+			active_alarm_time = 0;
+					
 			// alle leds uit, pca in slaapstand
-			pca9635_set_led_mode(0); // put all leds off
+			pca9635_set_all_led_pwm(0); // dimm all leds to zero
+		//	pca9635_set_led_mode(0); // put all leds off
 			pca9635_set_sleep(1); // put pca9635 in sleep
-						
 			// automatisch slapen in loop.
-			
+
+					
 	}else{
 		// continue alarm
 		isr_sound();
 	    isr_light_flash();
 		isr_light_icon();		
 	}
+						
 }
 
 
@@ -473,23 +581,23 @@ ISR (TIMER2_COMPA_vect) {
 				tone(pgm_read_word(&(sound_pattern_doorbell[sound_current_step].frequency)), 10); // freq, volume
 				_sound_note_time = (millis_get() + pgm_read_word(&(sound_pattern_doorbell[sound_current_step].time)));
 			}
-			if(sound_current_alarm == 1 ){
+			else if(sound_current_alarm == 1 ){
 				tone(pgm_read_word(&(sound_pattern_phone[sound_current_step].frequency)), 10);
 				_sound_note_time = (millis_get() + pgm_read_word(&(sound_pattern_phone[sound_current_step].time)));
 			}
-			if(sound_current_alarm == 2 ){
-				tone(pgm_read_word(&(sound_pattern_help[sound_current_step].frequency)), 10);
-				_sound_note_time = (millis_get() + pgm_read_word(&(sound_pattern_help[sound_current_step].time)));
-			}
-			if(sound_current_alarm == 3 ){
-				tone(pgm_read_word(&(sound_pattern_fire[sound_current_step].frequency)),10);
+			else if(sound_current_alarm == 2 ){
+				tone(pgm_read_word(&(sound_pattern_fire[sound_current_step].frequency)), 10);
 				_sound_note_time = (millis_get() + pgm_read_word(&(sound_pattern_fire[sound_current_step].time)));
+			}
+			else if(sound_current_alarm == 3 ){
+				tone(pgm_read_word(&(sound_pattern_help[sound_current_step].frequency)),10);
+				_sound_note_time = (millis_get() + pgm_read_word(&(sound_pattern_help[sound_current_step].time)));
 			}
 			
 		//_sound_note_time = millis_get() + 1000;
 			
 			// is variable sound_current_step equal to de total steps?
-			if(sound_current_step >= sound_alarm_keys[sound_current_alarm]){
+			if(sound_current_step >= (sound_alarm_keys[sound_current_alarm] -1)){
 				// go to next sound
 				
 				uint8_t done = 0;
@@ -568,18 +676,29 @@ ISR (TIMER2_COMPA_vect) {
 	
 	// calculate intensity based on step
 	uint16_t intensity;
-	if(icon_current_step == 0 || icon_current_step == 11){
+	if(icon_current_step == 0 || icon_current_step == 11){ // if current step is 0 or 11 then intensity is 255
 		intensity = 255;
-		if(icon_current_step == 0) _icon_time = millis_get() + 1000;
-		else if(icon_current_step == 11) _icon_time = millis_get() + 1;
+		
+		if(icon_current_step == 0){
+			_icon_time = millis_get() + 1000;
+		}else if(icon_current_step == 11){ // last step - set led full on, and go to next icon
+			_icon_time = millis_get() + 1;
+		}
+		
+		
 	}else{
-		intensity = (250 - (icon_current_step * 25));
+		intensity = (250 - (icon_current_step * 25)); // step 1 to 10, 
 		_icon_time = millis_get() + 50;
 		}
 	
+	// check if alarm still active, if not, put led off and go to next icon;
+	//if( ! (active_alarm & (alarm_bitmask[icon_current_alarm]))){ 
+		//icon_current_step = 11;
+	//	intensity = 0;
+	//}
 	
 	// get next flash and send it to the PCA9635
-	for (byte j = 0; j <= 3; j++){
+	for (byte j = 0; j <= 2; j++){
 		uint8_t _dimmed_color = ((pgm_read_byte(&(icon_colors[icon_current_alarm].color[j])) * intensity) >> 8); // calculate dimmed color
 		pca9635_set_led_pwm( pgm_read_byte(&(icon_led_numbers[icon_current_alarm].lednr[j])), _dimmed_color);
 	}

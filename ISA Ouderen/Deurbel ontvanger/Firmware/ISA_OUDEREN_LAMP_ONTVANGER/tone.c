@@ -41,7 +41,7 @@ void tone(unsigned long frequency, uint8_t volume) {
 
 
 	void noTone() {
-		uart0_puts("STOP");
+	//	uart0_puts("STOP");
 	//	TIMSK1 &= ~_BV(OCIE1A);     // Remove the timer interrupt.
 		 TCCR1B  &= ~(1<<0) | ~(1<<1) | ~(1<<2) ;        // No clock source (Timer/Counter stopped).
 		 TCCR1A  = 0x00;       // Set to defaults so PWM can work like normal (PWM, phase corrected, 8bit).
