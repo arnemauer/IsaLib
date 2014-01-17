@@ -42,292 +42,7 @@ extern "C" {
 };
 
 
-#define sound_alarm_keys_doorbell  8
-#define sound_alarm_keys_phone     96
-#define sound_alarm_keys_fire	16
-#define sound_alarm_keys_help  9
 
-#define flash_keys  32
-
-const uint8_t sound_alarm_keys[] = {sound_alarm_keys_doorbell, sound_alarm_keys_phone, sound_alarm_keys_fire, sound_alarm_keys_help };
-const uint8_t alarm_bitmask[] = {0x08, 0x04, 0x02, 0x01};
-
-
-	uint8_t mychannel;
-	uint8_t counter;
-	static long payload;
-	
-	// config
-	unsigned long alarm_duration = 20000; // alarm duration in ms
-	
-	
-	//
-	uint8_t active_alarm; // not used, not used, not used, not used, doorbell, phone, fire, help; 
-	unsigned long active_alarm_time; // used to track end with timer;
-	
-	//sound
-	uint8_t  sound_current_alarm; // current alarm sound 0=doorbell, 1=phone, 2= fire, 3=help
-	uint8_t  sound_current_step; // current sound step from current alarm
-	
-	unsigned long _sound_note_time; // Used to track end note with timer when playing note in the background.
-	
-	
-	//light - flash
-	uint8_t _flash_current_step; // 1 - 255
-	unsigned long _flash_time; // Used to track end flash with timer
-	
-
-	//light - icons
-	uint8_t icon_current_alarm; //  current alarm sound 0=doorbell, 1=phone, 2= fire, 3=help
-	uint8_t icon_current_step; //   current sound step from current alarm
-	unsigned long _icon_time; // Used to track end flash with timer
-	
-	
-
- typedef struct {
-			unsigned long frequency; //
-				unsigned long time;   // (0 tot +65,535) time in ms before going to the next step
-} STRUCT_SOUND_PATTERN;
-
-	const static STRUCT_SOUND_PATTERN sound_pattern_doorbell[sound_alarm_keys_doorbell] PROGMEM = {  // doorbell
-//const static sound_patterns[0] PROGMEM = { // doorbell
-		{ 1500	, 500 }, // 0: instant off
-		{ 0		, 200 }, // 0: instant off
-		{ 1200	, 500 }, // 0: instant off
-		{ 0		, 1000 }, // 0: instant off
-		{ 1500	, 500 }, // 0: instant off
-		{ 0		, 200 }, // 0: instant off
-		{ 1200	, 500 }, // 0: instant off
-		{ 0		, 1500 } // 0: instant off
-	};
-
-
-
-	const static STRUCT_SOUND_PATTERN sound_pattern_phone[sound_alarm_keys_phone] PROGMEM = { //phone
-		
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 0	    ,1000}, // 0: instant off
-																																																
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 1000	, 40 }, // 0: instant off
-		{ 750	, 40 }, // 0: instant off
-		{ 0	    ,1000}, // 0: instant off
-			
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 1000	, 40 }, // 0: instant off
-					{ 750	, 40 }, // 0: instant off
-					{ 0	    ,1000} // 0: instant off			
-		
-	};
-	
-	
-		
-			const static STRUCT_SOUND_PATTERN sound_pattern_fire[sound_alarm_keys_fire] PROGMEM = {  // doorbell
-				//const static sound_patterns[0] PROGMEM = { // doorbell
-				{ 2000	, 300 }, // 0: instant off
-				{ 0		, 300 }, // 0: instant off
-				{ 2000	, 300 }, // 0: instant off
-				{ 0		, 300 }, // 0: instant off
-				{ 2000	, 300 }, // 0: instant off
-				{ 0		, 300 }, // 0: instant off
-				{ 2000	, 300 }, // 0: instant off
-				{ 0		, 300 }, // 0: instant off
-				{ 2000	, 300 }, // 0: instant off
-				{ 0		, 300 }, // 0: instant off
-				{ 2000	, 300 }, // 0: instant off
-				{ 0		, 300 }, // 0: instant off
-				{ 2000	, 300 }, // 0: instant off
-				{ 0		, 300 }, // 0: instant off
-				{ 2000	, 300 }, // 0: instant off
-				{ 0		, 300 } // 0: instant off
-			};
-			
-					const static STRUCT_SOUND_PATTERN sound_pattern_help[sound_alarm_keys_help] PROGMEM = {  // doorbell
-						//const static sound_patterns[0] PROGMEM = { // doorbell
-						{ 1215	, 300 }, // 0: instant off
-						{ 1445	, 300 }, // 0: instant off
-						{ 1820	, 300 }, // 0: instant off
-						{ 1445	, 300 }, // 0: instant off
-						{ 1215	, 300 }, // 0: instant off
-						{ 1445	, 300 }, // 0: instant off
-						{ 1820	, 300 }, // 0: instant off
-						{ 1445	, 300 },  // 0: instant off
-						{ 0		, 1000 }  // 0: instant off
-					};
-
-
-	
-	/// @struct Ramp
-	/// A "Ramp" is a target RGB color and the time in seconds to reach that color.
-	/// Ramps can be chained together with a non-zero ramp index in the chain field.
-typedef struct {
-			uint8_t led[4]; // bottom, top left, top center, top right, 0..255
-			unsigned long time;   // (0 tot +65,535) time in ms before going to the next step
-	} STRUCT_FLASH_PATTERN;
-	
- const static STRUCT_FLASH_PATTERN flash_pattern[ ] PROGMEM = {
-// bottom, top left, top center, top right 0..255 , time in ms
-		
-		{ 255 , 255, 255, 255, 200 }, // flash, all on
-		{	0 ,	  0,   0,   0, 200 }, //		all off
-		{ 255 , 255, 255, 255, 200 }, // flash, all on
-		{	0 ,	  0,   0,   0, 200 }, //		all off
-		{ 255 , 255, 255, 255, 200 }, // flash, all on
-		{	0 ,	  0,   0,   0, 200 }, //		all off
-		{ 255 , 255, 255, 255, 200 }, // flash, all on
-		{	0 ,	  0,   0,   0, 200 }, //		all off
-
-
-		// FLASH TOP LEFT AND TOP RIGHT 3 times fast
-		{ 0	  , 255,   0, 255,  50 }, // 
-		{	0 ,	  0,   0,   0,  50 }, // all off
-		{ 0	  , 255,   0, 255,  50 }, // 
-		{	0 ,	  0,   0,   0,  50 }, // all off
-		{ 0	  , 255,   0, 255,  50 }, // 
-		{	0 ,	  0,   0,   0,  50 }, // all off
-	
-		// FLASH TOP CENTER AND BOTTOM 3 times fast
-		{ 255 ,   0, 255,   0,  50 }, //
-		{	0 ,	  0,   0,   0,  50 }, // all off
-		{ 255 ,   0, 255,   0,  50 }, //
-		{	0 ,	  0,   0,   0,  50 }, // all off
-		{ 255 ,   0, 255,   0,  50 }, //
-		{	0 ,	  0,   0,   0,  50 }, // all off
-			
-		// FLASH TOP LEFT AND TOP RIGHT 3 times fast
-		{ 0	  , 255,   0, 255,  50 }, //
-		{	0 ,	  0,   0,   0,  50 }, // all off
-		{ 0	  , 255,   0, 255,  50 }, //
-		{	0 ,	  0,   0,   0,  50 }, // all off
-		{ 0	  , 255,   0, 255,  50 }, //
-		{	0 ,	  0,   0,   0,  50 }, // all off
-		
-		// FLASH TOP CENTER AND BOTTOM 3 times fast
-		{ 255 ,   0, 255,   0,  50 }, //
-		{	0 ,	  0,   0,   0,  50 }, // all off
-		{ 255 ,   0, 255,   0,  50 }, //
-		{	0 ,	  0,   0,   0,  50 }, // all off
-		{ 255 ,   0, 255,   0,  50 }, //
-		{	0 ,	  0,   0,   0,  50 } // all off
-			
-
-		};
-	
-
-		/// @struct Ramp
-		/// A "Ramp" is a target RGB color and the time in seconds to reach that color.
-		/// Ramps can be chained together with a non-zero ramp index in the chain field.
-		typedef struct {
-			uint8_t color[3]; // red, green, blue 0..255
-		} STRUCT_ICON_COLORS;
-
-	// RGB
-	 const static STRUCT_ICON_COLORS icon_colors[ ] PROGMEM = {
-		 { 61 , 245, 0 }, // doorbell - light green
-		 {	0 ,	  184,   245, }, // phone - lightblue
-		 { 255 , 0, 0 }, // fire - RED
-		 { 255 , 255, 0 }  // help - Yellow
-		 };
-			 
-			 
-			 /// @struct Ramp
-			 /// A "Ramp" is a target RGB color and the time in seconds to reach that color.
-			 /// Ramps can be chained together with a non-zero ramp index in the chain field.
-			 typedef struct {
-				 uint8_t lednr[3]; // red, green, blue
-			 } STRUCT_ICON_LED_NUMBERS;
-
-			 // RGB
-			 const static STRUCT_ICON_LED_NUMBERS icon_led_numbers[ ] PROGMEM = {
-				 {  12 , 11, 10 }, // doorbell - light green 210
-				 {	15, 14, 13 }, // phone - lightblue
-				 { 7 , 8, 9 }, // fire - RED
-				 { 2 , 1, 0 }  // help - Yellow
-			 };
-			 
 			 
 	
 int main() {	
@@ -351,24 +66,29 @@ int main() {
 							 	
 			// TIMSK2 = _BV(OCIE2A); // DO NOT ENABLE TIMER2 BY DEFAULT!
 			OCR2A = ((F_CPU / 128) / 1000);
-			//power_timer2_disable(); // power timer2 down!
+			power_timer2_disable(); // power timer2 down!
 			/* Initialize TIMER 2 */			
 			
 
 			/* Initialize UART */
 			uart_init(UART_BAUD_SELECT(UART_BAUD_RATE,F_CPU));
-			uart0_puts("kak");
+			//uart0_puts("kak");
 			_delay_ms(1000);
+			/* Initialize UART */
 		
-		
+			/* Initialize I2C */
 			I2C_init();	
+			/* Initialize I2C */
+			
+			/* Initialize PCA9634 */
 			pca9635_init();
 			pca9635_set_all_led_pwm(255);
 			_delay_ms(1000);
-			//pca9635_set_led_mode(0); // put all leds off
 			pca9635_set_all_led_pwm(0);
 			pca9635_set_sleep(1);
-			log_s("PCA ok");
+			/* Initialize PCA9634 */
+			
+		//	log_s("PCA ok");
 			_delay_ms(1000);
 			
 			
@@ -386,17 +106,19 @@ _delay_ms(1000);
 
 	if (rf12_recvDone() && rf12_crc == 0) {
 		// process incoming data here
-				
+				ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+				{
+						
 			if (RF12_WANTS_ACK) {
 				rf12_sendStart(RF12_ACK_REPLY,0,0);
 				rf12_sendWait(1); // don't power down too soon
-				uart0_puts("ACK-OK");
+			//	uart0_puts("ACK-OK");
 				//_delay_ms(10);
 			}
 			
 			
 		uart0_puts("DATA");
-	//	_delay_ms(10);
+		_delay_ms(10);
 		        
 		//		for (byte i = 0; i < rf12_len; ++i){
 		  //      uart0_putc(rf12_data[i]);
@@ -407,25 +129,20 @@ _delay_ms(1000);
 				// only get the first byte
 				uint8_t data = rf12_data[0]; // not used, not used, not used, start (1) or stop(0), doorbell, phone, fire, help;
 				uart0_putc(data);
-				//_delay_ms(10);
+				_delay_ms(10);
 				 if(data & 0x10){
 					 // start alarm	 
-					 uart0_puts("START");
+					// uart0_puts("START");
 					 active_alarm = active_alarm | data; // 00001111 
 				 }else{
 					 // stop alarm
-					  uart0_puts("STOP");
+					//  uart0_puts("STOP");
 					 active_alarm =  active_alarm & (~data); /* invert data, compare with active alarm array to clear the right alarm bit */		 
 				 }
 				 
 				////////////////		Fill alarm array		 ////////////////				 
 				
-				// strip first 4 bytes
-				uart0_putc(active_alarm);
-	
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{ 
-				 // IS ER EEN ALARM ACTIEF in array active_alarm?
+			 // IS ER EEN ALARM ACTIEF in array active_alarm?
 				 if(active_alarm & 0x0F){
 			  	
 						 // Is there a active alarm thats already activated?
@@ -446,7 +163,7 @@ _delay_ms(1000);
 							millis_resume();
 				 
 							// 3. timer 2 - alarm timer starten
-							//power_timer2_enable();
+							power_timer2_enable();
 							TIMSK2 |= _BV(OCIE2A);
 			 
 							// wake up pca9635!
@@ -455,21 +172,24 @@ _delay_ms(1000);
 							
 						 }else{
 							 
-							if(!(data & 0x10)){	 // already a active alarm and received a packet to stop alarm?	
-								// put leds off!
-								for (byte i = 0; i <= 3; ++i){
-									if(data & (alarm_bitmask[i]) ){ // check which alarm needs to be stopped
-										for (byte j = 0; j <= 2; j++){
-											pca9635_set_led_pwm( pgm_read_byte(&(icon_led_numbers[i].lednr[j])), 0); // leds off!
+								if(!(data & 0x10)){	 // already a active alarm and received a packet to stop alarm?	
+									// put leds off!
+									for (byte i = 0; i <= 3; ++i){
+										if(data & (alarm_bitmask[i]) ){ // check which alarm needs to be stopped
+											for (byte j = 0; j <= 2; j++){
+												pca9635_set_led_pwm( pgm_read_byte(&(icon_led_numbers[i].lednr[j])), 0); // leds off!
+											}
 										}
 									}
 								}
-							}
-						 }
+							
+							
+						 } //  if(active_alarm_time == 0) {
 				 
 
-				 		// Only reset active alarm timer if there was a new alarm...
-						if(data & 0x10){
+				 		// Only reset active alarm timer if there is a new alarm...
+						// 0x10 = activate bit 0x0F are bits of the alarms
+						if( (data & 0x10) && (data & 0x0F)){
 				 			active_alarm_time = millis_get() + alarm_duration; 		 
 						 }
 
@@ -479,13 +199,20 @@ _delay_ms(1000);
 						active_alarm_time = 0; // set alarm time to zero, timers will be disabled in next timer 2 interrupt
 				}
 						 		
-	 }// 	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+
+ } //	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 					 
 									
 	} else {
-    // switch into idle mode until the next interrupt - Choose our preferred sleep mode:
-    set_sleep_mode(SLEEP_MODE_IDLE);
-    
+		
+		// switch into idle mode until the next interrupt - Choose our preferred sleep mode:
+	//	if(active_alarm_time > 0){
+			set_sleep_mode(SLEEP_MODE_IDLE); // if active alarm, go in pwr save mode to keep timer 2 running
+	//	}else{
+		//	set_sleep_mode(SLEEP_MODE_PWR_SAVE);
+		//}
+    // _delay_ms(5);
+	
     // Set sleep enable (SE) bit:
     sleep_enable();
     
@@ -495,6 +222,7 @@ _delay_ms(1000);
 	// Clear sleep enable (SE) bit:
 	sleep_disable();
 	//_delay_ms(50);
+		
 	}
 
 	
@@ -514,7 +242,7 @@ ISR (TIMER2_COMPA_vect) {
 	if(millis_get() >= active_alarm_time || active_alarm_time == 0){
 		// stop alarm
 			
-			uart0_puts("STOPINT");			
+			//uart0_puts("STOPINT");			
 			// stop timer 0
 			millis_pause();
 			
@@ -523,7 +251,7 @@ ISR (TIMER2_COMPA_vect) {
 			
 			// stop timer 2
 			TIMSK2 &= ~_BV(OCIE2A);
-			//power_timer2_disable();
+			power_timer2_disable();
 			
 			// reset steps of sound, flash and icon
 			sound_current_step		= 0;
@@ -541,7 +269,6 @@ ISR (TIMER2_COMPA_vect) {
 					
 			// alle leds uit, pca in slaapstand
 			pca9635_set_all_led_pwm(0); // dimm all leds to zero
-		//	pca9635_set_led_mode(0); // put all leds off
 			pca9635_set_sleep(1); // put pca9635 in sleep
 			// automatisch slapen in loop.
 
@@ -666,8 +393,6 @@ ISR (TIMER2_COMPA_vect) {
 				return; // dont stop current flash
 			}
 		}
-		
-		
 
 	// step 0 = 255
 	// step 1 = 250 - (1 x 25)  = 225
@@ -684,18 +409,12 @@ ISR (TIMER2_COMPA_vect) {
 		}else if(icon_current_step == 11){ // last step - set led full on, and go to next icon
 			_icon_time = millis_get() + 1;
 		}
-		
-		
+			
 	}else{
 		intensity = (250 - (icon_current_step * 25)); // step 1 to 10, 
-		_icon_time = millis_get() + 50;
+		_icon_time = millis_get() + 30;
 		}
 	
-	// check if alarm still active, if not, put led off and go to next icon;
-	//if( ! (active_alarm & (alarm_bitmask[icon_current_alarm]))){ 
-		//icon_current_step = 11;
-	//	intensity = 0;
-	//}
 	
 	// get next flash and send it to the PCA9635
 	for (byte j = 0; j <= 2; j++){

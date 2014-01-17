@@ -611,7 +611,7 @@ void rf12_interruptcontrol () {
 	//#if PINCHG_IRQ
 	EIMSK |= (1<<INT0);					// Enable INT0
 	
-	EICRA &= ~(1<<ISC01) | (1<<ISC00);	// Trigger INT0 on rising edge
+	//EICRA &= ~(1<<ISC01) | (1<<ISC00);	// Trigger INT0 on low level
 	//EICRA |= (1<<ISC01);	// Trigger INT0 on every change
 	
 	
