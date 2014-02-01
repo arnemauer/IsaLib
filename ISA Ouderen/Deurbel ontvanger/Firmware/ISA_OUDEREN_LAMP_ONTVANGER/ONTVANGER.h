@@ -36,6 +36,7 @@ unsigned long alarm_duration = 20000; // alarm duration in ms
 
 
 //
+uint8_t deep_sleep_ok; // if true timer stopped everything so uc can go in deep sleep
 uint8_t active_alarm; // not used, not used, not used, not used, doorbell, phone, fire, help;
 unsigned long active_alarm_time; // used to track end with timer;
 

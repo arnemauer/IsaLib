@@ -149,6 +149,8 @@ _delay_ms(1000);
 						 if(active_alarm_time == 0) {
 							// Geen alarm actief
 
+							deep_sleep_ok = false; // prevent while loop from going in deepsleep
+							
 							 // 1. fill icon_current_alarm and sound_current_alarm with the first alarm
 							 for (byte i = 0; i <= 3; ++i){
 								if(active_alarm & (alarm_bitmask[i]) ){ // check if next alarm is active
@@ -206,11 +208,11 @@ _delay_ms(1000);
 	} else {
 		
 		// switch into idle mode until the next interrupt - Choose our preferred sleep mode:
-	//	if(active_alarm_time > 0){
-			set_sleep_mode(SLEEP_MODE_IDLE); // if active alarm, go in pwr save mode to keep timer 2 running
-	//	}else{
-		//	set_sleep_mode(SLEEP_MODE_PWR_SAVE);
-		//}
+		if(deep_sleep_ok){
+			set_sleep_mode(SLEEP_MODE_PWR_SAVE); // if active alarm, go in pwr save mode to keep timer 2 running
+		}else{
+			set_sleep_mode(SLEEP_MODE_IDLE);
+		}
     // _delay_ms(5);
 	
     // Set sleep enable (SE) bit:
@@ -272,6 +274,7 @@ ISR (TIMER2_COMPA_vect) {
 			pca9635_set_sleep(1); // put pca9635 in sleep
 			// automatisch slapen in loop.
 
+			deep_sleep_ok = true;
 					
 	}else{
 		// continue alarm
