@@ -42,9 +42,9 @@
 #define LOG_AVAILABLE /*!< Is Logging available */
 
 //#define UART_AVAILABLE /*!< Is UART available */
-#define UART_BAUD_RATE 57600UL /*!< UART Baudrate in bit per second */
-#define DUART_RX0_BUFFER_SIZE 128
-#define DUART_TX0_BUFFER_SIZE 128
+#define UART_BAUD_RATE 57600ul /*!< UART Baudrate in bit per second */
+#define DUART_RX0_BUFFER_SIZE 512	
+#define DUART_TX0_BUFFER_SIZE 512
 
 /************************
  * Debug LED for examples

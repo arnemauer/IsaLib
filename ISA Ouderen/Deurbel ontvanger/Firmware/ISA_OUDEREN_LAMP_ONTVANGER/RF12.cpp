@@ -10,6 +10,7 @@
 #include <avr/eeprom.h>
 #include <avr/sleep.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
 
 #include "millis.h"
 extern "C" {
@@ -383,8 +384,16 @@ ISR(PCINT0_vect) {
 #else
 */
 ISR(INT0_vect) {
-	//uart0_puts("I");
-	rf12_interrupt();
+
+
+	//_delay_ms(15);
+	while(!(PIN_RFM_IRQ & (1<<BIT_RFM_IRQ))){
+		PORTB ^= _BV(0); // pb0 aan
+		rf12_interrupt();
+		}
+		
+	//PORTB &= ~_BV(0); // pb0 uit
+	
 }
 //#endif
 

@@ -47,6 +47,13 @@ extern "C" {
 	
 int main() {	
 
+DDRB |= _BV(0); // pb0 output
+PORTB |= _BV(0); // pb0 aan
+_delay_ms(500);
+ PORTB &= ~_BV(0); // pb0 uit
+
+
+
 // disable ADC for less power 
 	ADCSRA &= ~_BV(ADEN); // ADC off 
 	sei();
@@ -71,7 +78,7 @@ int main() {
 			
 
 			/* Initialize UART */
-			uart_init(UART_BAUD_SELECT(UART_BAUD_RATE,F_CPU));
+			uart_init( ((F_CPU)/((UART_BAUD_RATE)*16l)-1)) ;
 			//uart0_puts("kak");
 			_delay_ms(1000);
 			/* Initialize UART */
@@ -93,9 +100,12 @@ int main() {
 			
 			
   // node id, rfband, group id
-    rf12_initialize(2, RF12_868MHZ, 14);
+			rf12_initialize(2, RF12_868MHZ, 14);
     // see http://tools.jeelabs.org/rfm12b
   //  rf12_control(0xC040); // set low-battery level to 2.2V i.s.o. 3.1V
+
+
+			deep_sleep_ok = 1; // put device in deep sleep after initializing
 
 log_s("initialized!");
 _delay_ms(1000);
@@ -106,8 +116,6 @@ _delay_ms(1000);
 
 	if (rf12_recvDone() && rf12_crc == 0) {
 		// process incoming data here
-				ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-				{
 						
 			if (RF12_WANTS_ACK) {
 				rf12_sendStart(RF12_ACK_REPLY,0,0);
@@ -149,7 +157,7 @@ _delay_ms(1000);
 						 if(active_alarm_time == 0) {
 							// Geen alarm actief
 
-							deep_sleep_ok = false; // prevent while loop from going in deepsleep
+							deep_sleep_ok = 0; // prevent while loop from going in deepsleep
 							
 							 // 1. fill icon_current_alarm and sound_current_alarm with the first alarm
 							 for (byte i = 0; i <= 3; ++i){
@@ -202,18 +210,19 @@ _delay_ms(1000);
 				}
 						 		
 
- } //	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+
 					 
 									
 	} else {
 		
 		// switch into idle mode until the next interrupt - Choose our preferred sleep mode:
-		if(deep_sleep_ok){
-			set_sleep_mode(SLEEP_MODE_PWR_SAVE); // if active alarm, go in pwr save mode to keep timer 2 running
+		if(deep_sleep_ok == 1){
+		//	set_sleep_mode(SLEEP_MODE_STANDBY); // if active alarm, go in pwr save mode to keep timer 2 running
+			set_sleep_mode(SLEEP_MODE_PWR_DOWN); // if active alarm, go in pwr save mode to keep timer 2 running
 		}else{
 			set_sleep_mode(SLEEP_MODE_IDLE);
 		}
-    // _delay_ms(5);
+  //   _delay_ms(15);
 	
     // Set sleep enable (SE) bit:
     sleep_enable();
@@ -274,7 +283,7 @@ ISR (TIMER2_COMPA_vect) {
 			pca9635_set_sleep(1); // put pca9635 in sleep
 			// automatisch slapen in loop.
 
-			deep_sleep_ok = true;
+			deep_sleep_ok = 1;
 					
 	}else{
 		// continue alarm
