@@ -8,7 +8,7 @@ avrdude -c avrisp -P COM7 -b 19200 -p m328p -u -U efuse:w:0xFD:m -U hfuse:w:0xDE
 
 L CE
 H DE
-E FD
+E 05  (=FD)
 
 
 avrdude -p atmega328P -c avrisp -P /dev/ttyACM0 -b 19200 -u -U efuse:w:0x05:m -U hfuse:w:0xDA:m -U lfuse:w:0xFF:m -U lock:w:0x0F:m -F
