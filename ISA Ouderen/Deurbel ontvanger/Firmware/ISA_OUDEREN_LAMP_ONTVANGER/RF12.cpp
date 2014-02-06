@@ -387,10 +387,9 @@ ISR(INT0_vect) {
 
 
 	//_delay_ms(15);
-	while(!(PIN_RFM_IRQ & (1<<BIT_RFM_IRQ))){
-		PORTB ^= _BV(0); // pb0 aan
+	//while(!(PIN_RFM_IRQ & (1<<BIT_RFM_IRQ))){
 		rf12_interrupt();
-		}
+		//}
 		
 	//PORTB &= ~_BV(0); // pb0 uit
 	
