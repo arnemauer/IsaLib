@@ -215,10 +215,12 @@ _delay_ms(1000);
 									
 	} else {
 		
+		PORTB |= _BV(0); // pb0 aan, pin 14
+		
 		// switch into idle mode until the next interrupt - Choose our preferred sleep mode:
 		if(deep_sleep_ok == 1){
-		//	set_sleep_mode(SLEEP_MODE_STANDBY); // if active alarm, go in pwr save mode to keep timer 2 running
-			set_sleep_mode(SLEEP_MODE_PWR_DOWN); // if active alarm, go in pwr save mode to keep timer 2 running
+			set_sleep_mode(SLEEP_MODE_STANDBY); // if active alarm, go in pwr save mode to keep timer 2 running
+			//set_sleep_mode(SLEEP_MODE_PWR_DOWN); // if active alarm, go in pwr save mode to keep timer 2 running
 		}else{
 			set_sleep_mode(SLEEP_MODE_IDLE);
 		}
@@ -234,6 +236,7 @@ _delay_ms(1000);
 	sleep_disable();
 	//_delay_ms(50);
 		
+		PORTB &= ~_BV(0); // pb0 uit, pin 14
 	}
 
 	

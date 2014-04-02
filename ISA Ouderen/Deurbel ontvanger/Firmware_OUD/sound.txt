@@ -1,0 +1,21 @@
+http://code.google.com/p/playing-music-with-atmega328-pwm/
+
+pwm sound met timer 0 en timer 1
+
+Videos of the projects:
+
+http://www.youtube.com/watch?v=dWjsupWdNiI (Brasileirinho - Guitar)
+
+http://www.youtube.com/watch?v=v3vlXswfGGs (Turkish March - Piano) 
+
+
+VOORBEELDE
+https://code.google.com/p/arduino-nodo/source/browse/Nodo_Due/Sound.pde?r=183
+
+http://www.brightsparks.org.nz/the-forum/bb-our-main-discussion-forum-come-in-here/www-connected-solar-garen-lights-/
+
+http://www.electro-tech-online.com/threads/step-up-transformer-for-piezo-buzzer-circuit.122008/
+
+http://www.talkingelectronics.com/projects/PIC_LAB-1/extra_06.html
+
+http://www.diyaudio.com/forums/digital-line-level/198493-piezo-ceramic-driver-3-3v-microcontroller.html

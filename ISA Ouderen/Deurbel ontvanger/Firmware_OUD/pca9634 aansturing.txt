@@ -1,0 +1,7 @@
+https://github.com/rambo/pca9635/blob/master/pca9635.cpp
+
+https://github.com/Torrentula/I2C-master-lib
+
+https://github.com/Entropy512/DMX_PCA9635/blob/master/pca9635_test.c
+
+http://code.google.com/p/djs-sw-hw-projects/source/browse/trunk/BikeDash/SW/trunk/PCA9635.c?r=8

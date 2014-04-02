@@ -1,0 +1,36 @@
+ 2.5" x 1.4" x .825"
+
+63.5mm x 35.56mm x 20,955mm
+
+
+
+avrdude -c avrisp -P COM7 -b 19200 -p m328p -u -U efuse:w:0xFD:m -U hfuse:w:0xDE:m -U lfuse:w:0xCE:m -F -U flash:w:optiboot_atmega328.hex
+
+
+
+LOW
+258CK/14CK + 65ms =  DE
+avrdude -p m328p -b 9600 -c avrisp -P /dev/tty.usbserial-A8009NB0 -U flash:w:optiboot_atmega328.hex -U efuse:w:0x05:m -U hfuse:w:0xDE:m -U lfuse:w:0xDE:m -U lock:w:0x0F:m 
+avrdude -p m328p -b 9600 -c avrisp -P /dev/tty.usbserial-A600dWcL -U flash:w:optiboot_atmega328.hex -U efuse:w:0x05:m -U hfuse:w:0xDE:m -U lfuse:w:0xDE:m -U lock:w:0x0F:m 
+
+
+
+258CK/14CK + 4.1ms = CE
+avrdude -p m328p -b 9600 -c avrisp -P /dev/tty.usbserial-A8009NB0 -U flash:w:optiboot_atmega328.hex -U efuse:w:0x05:m -U hfuse:w:0xDE:m -U lfuse:w:0xCE:m -U lock:w:0x0F:m 
+avrdude -p m328p -b 9600 -c avrisp -P /dev/tty.usbserial-A600dWcL -U flash:w:optiboot_atmega328.hex -U efuse:w:0x05:m -U hfuse:w:0xDE:m -U lfuse:w:0xCE:m -U lock:w:0x0F:m 
+
+
+READ  FUSES
+avrdude -p m328p -b 9600 -c avrisp -P /dev/tty.usbserial-A700fdqg -U lfuse:r:-:h -U hfuse:r:-:h -U efuse:r:-:h -U lock:r:-:h
+avrdude -p m328p -b 9600 -c avrisp -P /dev/tty.usbserial-A600dWcL -U lfuse:r:-:h -U hfuse:r:-:h -U efuse:r:-:h -U lock:r:-:h
+
+
+
+L CE
+H DE
+E 05  (=FD)
+
+
+
+avrdude -p atmega328P -c avrisp -P /dev/ttyACM0 -b 19200 -u -U efuse:w:0x05:m -U hfuse:w:0xDA:m -U lfuse:w:0xFF:m -U lock:w:0x0F:m -F
+
