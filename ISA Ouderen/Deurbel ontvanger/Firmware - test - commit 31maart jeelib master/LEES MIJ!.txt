@@ -1,0 +1,2 @@
+test voor het werkend krijgen van de rfm12b in combinatie met slaapmodus power-down.
+rfm12b library van jeelibs gebruikt, uit master na commit van 31 maart 2014
