@@ -50,6 +50,7 @@ extern "C" {
 // transceiver states, these determine what to do with each interrupt
 enum {
 	TXCRC1, TXCRC2, TXTAIL, TXDONE, TXIDLE,
+	UNINITIALIZED, POR_RECEIVED,	// indicates uninitialized RFM12b and Power-On-Reset
 	TXRECV,
 	TXPRE1, TXPRE2, TXPRE3, TXSYN1, TXSYN2,
 };
@@ -62,6 +63,11 @@ static uint8_t group;               // network group
 static uint16_t frequency;          // Frequency within selected band
 static volatile uint8_t rxfill;     // number of data bytes in rf12_buf
 static volatile int8_t rxstate;     // current transceiver state
+
+volatile uint8_t rf12_gotwakeup;	// 1 if there was a wakeup-call from RFM12
+volatile uint16_t rfmstate;         // current power management setting of the RFM12 module
+volatile uint16_t state;            // last seen rfm12b state
+
 
 #define RETRIES     8               // stop retrying after 8 times
 #define RETRY_MS    1000            // resend packet every second until ack'ed
@@ -258,6 +264,12 @@ static void rf12_interrupt() {
 	   // correction: now takes 2 + 8 µs, since sending can be done at 8 MHz
 	   rf12_xfer(0x0000);
 
+uint8_t in;
+  state = rf12_xferState(&in);
+  
+  // data received or byte needed for sending
+  if (state & RF_FIFO_BIT) {
+
 	   if (rxstate == TXRECV) {
 		   uint8_t in = rf12_xferSlow(RF_RX_FIFO_READ);
 
@@ -289,7 +301,24 @@ static void rf12_interrupt() {
 		   rf12_xfer(RF_TXREG_WRITE + out);
 	   }
    }
-
+   
+     // power-on reset
+     if (state & RF_POR_BIT) {
+	     rxstate = POR_RECEIVED;
+     }
+     
+     // got wakeup call
+     if (state & RF_WDG_BIT) {
+	     rf12_setWatchdog(0);
+	     rf12_gotwakeup = 1;
+     }
+     
+     // fifo overflow or buffer underrun - abort reception/sending
+     if (state & RF_OVF_BIT) {
+	     rf12_idle();
+	     rxstate = TXIDLE;
+     }
+	   }
 
 //#if PINCHG_IRQ
 /*
@@ -340,7 +369,8 @@ static void rf12_recvStart () {
 //#include <Ports.h> // needed to avoid a linker error :(
 
 byte rf12_recvDone();
-XXXXXXXXXXXXXXXXXXXXXXXXXX HIER VERDERXXXXXXXXXXXXXXXXXXXXXX
+//XXXXXXXXXXXXXXXXXXXXXXXXXX HIER VERDERXXXXXXXXXXXXXXXXXXXXXX
+
 /// @details
 /// The timing of this function is relatively coarse, because SPI transfers are
 /// used to enable / disable the transmitter. This will add some jitter to the
@@ -368,26 +398,17 @@ XXXXXXXXXXXXXXXXXXXXXXXXXX HIER VERDERXXXXXXXXXXXXXXXXXXXXXX
 ///      }
 /// @see http://jeelabs.org/2010/12/11/rf12-acknowledgements/
 uint8_t rf12_recvDone () {
-	if (rxstate == TXRECV) {
-		if (fixedLength) {
-			if (rxfill >= fixedLength || rxfill >= RF_MAX) {
-				rxstate = TXIDLE;
-				rf12_crc = 1; //it is not a standard packet
-			//	LED_868RECEIVE_DDR	&= ~(1 << LED_868RECEIVE_BIT); // set output	
-				return 1;
-			}
-			} else if (rxfill >= rf12_len + 5 || rxfill >= RF_MAX) {
-			rxstate = TXIDLE;
-			if (rf12_len > RF12_MAXDATA)
-			rf12_crc = 1; // force bad crc if packet length is invalid
-			if (!(rf12_hdr & RF12_HDR_DST) || (nodeid & NODE_ID) == 31 ||
-			(rf12_hdr & RF12_HDR_MASK) == (nodeid & NODE_ID)) {
-				if (rf12_crc == 0 && crypter != 0)
-				crypter(0);
-				else
-				rf12_seq = -1;
-				return 1; // it's a broadcast packet or it's addressed to this node
-			}
+	if (rxstate == TXRECV && (rxfill >= rf12_len + 5 || rxfill >= RF_MAX)) {
+		rxstate = TXIDLE;
+		if (rf12_len > RF12_MAXDATA)
+		rf12_crc = 1; // force bad crc if packet length is invalid
+		if (!(rf12_hdr & RF12_HDR_DST) || (nodeid & NODE_ID) == 31 ||
+		(rf12_hdr & RF12_HDR_MASK) == (nodeid & NODE_ID)) {
+			if (rf12_crc == 0 && crypter != 0)
+			crypter(0);
+			else
+			rf12_seq = -1;
+			return 1; // it's a broadcast packet or it's addressed to this node
 		}
 	}
 	if (rxstate == TXIDLE)
@@ -396,23 +417,6 @@ uint8_t rf12_recvDone () {
 }
 
 
-// return signal strength calculated out of DRSSI bit
-uint8_t rf12_getRSSI() {
-	return (drssi<3 ? drssi*2+2 : 8|(drssi-3)*2);
-}
-
-void rf12_setBitrate(uint8_t rate) {
-	const long int decisions_per_sec = 900;
-	rf12_xfer(0xc600 | rate);
-	unsigned long bits_per_second = (10000000UL / 29UL / (1 + (rate & 0x7f)) / (1 + (rate >> 7) * 7));
-	unsigned long bytes_per_second = bits_per_second / 8;
-	drssi_bytes_per_decision = (bytes_per_second + decisions_per_sec - 1) / decisions_per_sec;
-}
-
-void rf12_setFixedLength(uint8_t packet_len) {
-	fixedLength = packet_len;
-	if (packet_len > 0) fixedLength++;  //add a byte for the groupid
-}
 
 /// @details
 /// Call this when you have some data to send. If it returns true, then you can
@@ -604,12 +608,14 @@ void rf12_interruptcontrol () {
 /// @param band This determines in which frequency range the wireless module
 ///             will operate. The following pre-defined constants are available:
 ///             RF12_433MHZ, RF12_868MHZ, RF12_915MHZ. You should use the one
-///             matching the module you have.
+///             matching the module you have, to get a useful TX/RX range.
 /// @param g Net groups are used to separate nodes: only nodes in the same net
 ///          group can communicate with each other. Valid values are 1 to 212.
 ///          This parameter is optional, it defaults to 212 (0xD4) when omitted.
 ///          This is the only allowed value for RFM12 modules, only RFM12B
 ///          modules support other group values.
+/// @param f Frequency correction to apply. Defaults to 1600, per RF12 docs.
+///          This parameter is optional, and was added in February 2014.
 /// @returns the nodeId, to be compatible with rf12_config().
 ///
 /// Programming Tips
@@ -620,10 +626,11 @@ void rf12_interruptcontrol () {
 /// rf12_initialize. The choice whether to use rf12_initialize() or
 /// rf12_config() at the top of every sketch is one of personal preference.
 /// To set EEPROM settings for use with rf12_config() use the RF12demo sketch.
-uint8_t rf12_initialize (uint8_t id, uint8_t b, uint8_t g) {
-	nodeid = id;
-	group = g;
-	band = b;
+uint8_t rf12_initialize (uint8_t id, uint8_t band, uint8_t g, uint16_t f) {
+    nodeid = id;
+    group = g;
+    frequency = f;
+
 	
 	rf12_spiInit();
 	
@@ -648,7 +655,7 @@ uint8_t rf12_initialize (uint8_t id, uint8_t b, uint8_t g) {
 	}
 	
 	
-	rf12_restore(id, b, g);
+	rf12_restore(id, band, g);
 	return nodeid;
 }
 
@@ -673,10 +680,9 @@ uint8_t rf12_initialize (uint8_t id, uint8_t b, uint8_t g) {
 ///          This parameter is optional, it defaults to 212 (0xD4) when omitted.
 ///          This is the only allowed value for RFM12 modules, only RFM12B
 ///          modules support other group values.
-void rf12_restore (uint8_t id, uint8_t b, uint8_t g) {
+void rf12_restore (uint8_t id, uint8_t band, uint8_t g) {
 	nodeid = id;
 	group = g;
-	band = b;
 	
 	//interrupts may be attached or detached for OOK
 	rf12_interruptcontrol();

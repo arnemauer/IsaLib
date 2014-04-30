@@ -71,7 +71,7 @@ void rf12_set_cs(uint8_t pin);
 void rf12_spiInit(void);
 
 /// Call this once with the node ID, frequency band, and optional group.
-uint8_t rf12_initialize(uint8_t id, uint8_t band, uint8_t group=0xD4);
+uint8_t rf12_initialize(uint8_t id, uint8_t band, uint8_t group=0xD4, uint16_t frequency=1600);
 
 /// Call this to restore the initial settings when switching from OOK to FSK
 /// with the node ID, frequency band, and optional group.
