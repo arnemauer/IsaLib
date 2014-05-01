@@ -3,6 +3,10 @@
 63.5mm x 35.56mm x 20,955mm
 
 
+http://talk.jeelabs.net/topic/498
+JCW -> See - I use low fuse 0xCE i.s.o. 0xFF. POSTED 16/09/2010 07:19:06
+
+
 
 avrdude -c avrisp -P COM7 -b 19200 -p m328p -u -U efuse:w:0xFD:m -U hfuse:w:0xDE:m -U lfuse:w:0xCE:m -F -U flash:w:optiboot_atmega328.hex
 
