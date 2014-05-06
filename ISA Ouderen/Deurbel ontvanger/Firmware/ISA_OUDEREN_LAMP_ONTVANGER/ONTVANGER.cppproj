@@ -180,6 +180,9 @@
     <Compile Include="RF12.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="timer2.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="tone.c">
       <SubType>compile</SubType>
     </Compile>

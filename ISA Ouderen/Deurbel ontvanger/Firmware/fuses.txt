@@ -11,6 +11,8 @@ JCW -> See - I use low fuse 0xCE i.s.o. 0xFF. POSTED 16/09/2010 07:19:06
 avrdude -c avrisp -P COM7 -b 19200 -p m328p -u -U efuse:w:0xFD:m -U hfuse:w:0xDE:m -U lfuse:w:0xCE:m -F -U flash:w:optiboot_atmega328.hex
 
 
+avrdude -c usbasp -p m328p -P USB -B 1500.0 -v -v -e -U efuse:w:0x05:m -U hfuse:w:0xDE:m -U lfuse:w:0xCE:m -F -U flash:w:optiboot_atmega328.hex
+
 
 LOW
 258CK/14CK + 65ms =  DE
@@ -20,8 +22,9 @@ avrdude -p m328p -b 9600 -c avrisp -P /dev/tty.usbserial-A600dWcL -U flash:w:opt
 
 
 258CK/14CK + 4.1ms = CE
-avrdude -p m328p -b 9600 -c avrisp -P /dev/tty.usbserial-A8009NB0 -U flash:w:optiboot_atmega328.hex -U efuse:w:0x05:m -U hfuse:w:0xDE:m -U lfuse:w:0xCE:m -U lock:w:0x0F:m 
-avrdude -p m328p -b 9600 -c avrisp -P /dev/tty.usbserial-A600dWcL -U flash:w:optiboot_atmega328.hex -U efuse:w:0x05:m -U hfuse:w:0xDE:m -U lfuse:w:0xCE:m -U lock:w:0x0F:m 
+avrdude -p m328p -b 9600 -c avrisp -P /dev/tty.usbserial-A8009NB0 -U flash:w:optiboot_atmega328.hex -U efuse:w:0xFD:m -U hfuse:w:0xDE:m -U lfuse:w:0xCE:m -U lock:w:0x0F:m 
+
+avrdude -p m328p -b 9600 -c avrisp -P /dev/tty.usbserial-A600dWcL -U flash:w:optiboot_atmega328.hex -U efuse:w:0xFD:m -U hfuse:w:0xDE:m -U lfuse:w:0xCE:m -U lock:w:0x0F:m 
 
 
 READ  FUSES

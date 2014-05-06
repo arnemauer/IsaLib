@@ -60,7 +60,6 @@ enum {
 	TXPRE1, TXPRE2, TXPRE3, TXSYN1, TXSYN2,
 };
 
-static uint8_t cs_pin = BIT_RFM_CS;     // chip select pin
 
 static uint8_t nodeid;              // address of this node
 static uint8_t group;               // network group

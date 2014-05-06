@@ -16,6 +16,8 @@ pca9635.c
 
 RF12.cpp
 
+timer2.c
+
 tone.c
 
 uart.c
