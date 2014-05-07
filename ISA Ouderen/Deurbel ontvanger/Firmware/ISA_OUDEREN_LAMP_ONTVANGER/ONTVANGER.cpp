@@ -181,6 +181,8 @@ int main() {
 						 if(active_alarm_time == 0) {
 							// Geen alarm actief
 
+							PRR = 0x03; // enable all devices except usart0 and adc
+							 
 							deep_sleep_ok = 0; // prevent while loop from going in deepsleep
 							
 							 // 1. fill icon_current_alarm and sound_current_alarm with the first alarm
@@ -200,6 +202,7 @@ int main() {
 							timer2_resume();							
 										 
 							// wake up pca9635!
+							I2C_init();	
 							pca9635_set_sleep(0);
 								
 						 }else{
@@ -283,8 +286,7 @@ int main() {
 	
 	
 ISR (TIMER2_COMPA_vect) {
-		PRR		= 0x01;
-	
+
 	// check if the alarm needs to be stopped
 	if(millis_get() >= active_alarm_time || active_alarm_time == 0){
 		// stop alarm

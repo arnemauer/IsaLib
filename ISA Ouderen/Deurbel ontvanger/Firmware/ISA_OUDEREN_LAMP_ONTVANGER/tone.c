@@ -5,7 +5,7 @@
  *  Author: arnefrankmauer
  */ 
 
-#include "toneAC.h"
+#include "tone.h"
 #include "config.h"
 #include <inttypes.h>
 #include <avr/io.h>

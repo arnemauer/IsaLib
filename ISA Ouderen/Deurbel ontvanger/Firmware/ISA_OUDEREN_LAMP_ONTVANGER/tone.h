@@ -9,9 +9,9 @@
 #ifndef TONE_H_
 #define TONE_H_
 
+#include <inttypes.h>
 
-	void tone(unsigned long frequency = 0, uint8_t volume = 10, unsigned long length = 0, uint8_t background = false);
-	void Alarm(int variant,int vption);
+	void tone(unsigned long frequency, uint8_t volume);
 	void noTone();
 	void tone_init();
 
