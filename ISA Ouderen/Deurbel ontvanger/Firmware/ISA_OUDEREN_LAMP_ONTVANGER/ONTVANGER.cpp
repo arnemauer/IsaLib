@@ -49,6 +49,15 @@ int main() {
 // disable ADC for less power 
 	ADCSRA &= ~_BV(ADEN); // ADC off 
 	sei();
+	
+	DDRB |= _BV(0); // pb0 output
+	DDRB |= _BV(1); // pb0 output
+	PORTB |= _BV(0); // pb0 aan
+	PORTB |= _BV(1); // pb0 aan
+	_delay_ms(500);
+	PORTB &= ~_BV(0); // pb0 uit
+	PORTB &= ~_BV(1); // pb0 uit
+	
 			/* Initialize MILLIS */
 	        millis_init();
 			_delay_ms(1000);
@@ -120,6 +129,7 @@ int main() {
 
 	
 	if (rf12_recvDone() && rf12_crc == 0) {
+		if(rf12_data[0] == 0x99) { // 153
 		// process incoming data here
 			
 				//	#ifdef DEBUG_SERIAL
@@ -148,7 +158,7 @@ int main() {
 				*/
 				////////////////		Fill alarm array		 ////////////////
 				// only get the first byte
-				uint8_t data = rf12_data[0]; // not used, not used, not used, start (1) or stop(0), doorbell, phone, fire, help;
+				uint8_t data = rf12_data[1]; // not used, not used, not used, start (1) or stop(0), doorbell, phone, fire, help;
 				
 				#ifdef DEBUG_SERIAL
 				uart0_putc(data);
@@ -253,7 +263,7 @@ int main() {
 
 			set_sleep_mode(SLEEP_MODE_STANDBY); // if active alarm, go in pwr save mode to keep timer 2 running
 			sleep_enable();
-			    
+			    PORTB |= _BV(1); // pb0 aan
 		// turn off brown-out enable in software
 			 sleep_bod_disable();
 			 
@@ -270,10 +280,12 @@ int main() {
 	
 	// Clear sleep enable (SE) bit:
 	sleep_disable();
-	
+	PORTB &= ~_BV(1); // pb0 uit
 	// 
 	//PRR		= 0x01;
-}
+		}
+
+	}
 
 	
 		} // end while(1){

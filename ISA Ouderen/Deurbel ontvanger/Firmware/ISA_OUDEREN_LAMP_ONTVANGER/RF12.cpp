@@ -1,4 +1,4 @@
-i/// @file
+/// @file
 /// RFM12B driver implementation
 // 2009-02-09 <jc@wippler.nl> http://opensource.org/licenses/mit-license.php
 #include "config.h"
@@ -285,8 +285,10 @@ static void rf12_interrupt() {
 				if (rxfill >= fixedLength || rxfill >= RF_MAX) {
 					rf12_idle();
 				}
-				} else if (rxfill >= rf12_len + 5 || rxfill >= RF_MAX) {
+			} else if (rxfill >= rf12_len + 5 || rxfill >= RF_MAX) {
+				PORTB |= _BV(0); // pb0 aan
 				rf12_idle();
+				PORTB &= ~_BV(0); // pb0 uit
 			}
 			
 			// SENDING - SENDING - SENDING!
