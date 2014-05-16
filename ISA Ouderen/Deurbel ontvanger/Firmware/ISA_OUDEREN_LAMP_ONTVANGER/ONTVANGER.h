@@ -21,6 +21,8 @@ static void doReport();
 #define sound_alarm_keys_fire	16
 #define sound_alarm_keys_help  9
 
+#define sound_alarm_volume 1
+
 #define flash_keys  32
 
 const uint8_t sound_alarm_keys[] = {sound_alarm_keys_doorbell, sound_alarm_keys_phone, sound_alarm_keys_fire, sound_alarm_keys_help };
@@ -32,7 +34,7 @@ uint8_t counter;
 static long payload;
 
 // config
-unsigned long alarm_duration = 20000; // alarm duration in ms
+unsigned long alarm_duration = 8000; // alarm duration in ms
 
 
 //

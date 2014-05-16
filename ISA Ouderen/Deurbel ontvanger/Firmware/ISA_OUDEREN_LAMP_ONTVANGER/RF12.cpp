@@ -286,9 +286,9 @@ static void rf12_interrupt() {
 					rf12_idle();
 				}
 			} else if (rxfill >= rf12_len + 5 || rxfill >= RF_MAX) {
-				PORTB |= _BV(0); // pb0 aan
+				//PORTB |= _BV(0); // pb0 aan
 				rf12_idle();
-				PORTB &= ~_BV(0); // pb0 uit
+				//PORTB &= ~_BV(0); // pb0 uit
 			}
 			
 			// SENDING - SENDING - SENDING!

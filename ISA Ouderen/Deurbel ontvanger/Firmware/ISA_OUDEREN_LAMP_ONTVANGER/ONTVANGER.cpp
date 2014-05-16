@@ -51,12 +51,10 @@ int main() {
 	sei();
 	
 	DDRB |= _BV(0); // pb0 output
-	DDRB |= _BV(1); // pb0 output
 	PORTB |= _BV(0); // pb0 aan
-	PORTB |= _BV(1); // pb0 aan
 	_delay_ms(500);
 	PORTB &= ~_BV(0); // pb0 uit
-	PORTB &= ~_BV(1); // pb0 uit
+
 	
 			/* Initialize MILLIS */
 	        millis_init();
@@ -64,12 +62,14 @@ int main() {
 			/* Initialize MILLIS */
 
 			/* Initialize TONE */						
-			tone_init();		
+			tone_init();	
+			noTone();	
 			/* Initialize TONE */						
 						
 						
 			/* Initialize TIMER 2 */
 			timer2_init();
+			timer2_pause();
 			/* Initialize TIMER 2 */			
 			
 			
@@ -97,7 +97,6 @@ int main() {
 			_delay_ms(100);
 			}
 			
-			pca9635_set_sleep(1);
 			/* Initialize PCA9634 */
 			
 		
@@ -124,6 +123,11 @@ int main() {
 				pca9635_set_led_pwm(14, 255);
 				_delay_ms(800);
 				pca9635_set_all_led_pwm(0);
+				pca9635_set_sleep(1);
+				
+				
+				
+				
 				
 	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
 
@@ -132,10 +136,7 @@ int main() {
 		if(rf12_data[0] == 0x99) { // 153
 		// process incoming data here
 			
-				//	#ifdef DEBUG_SERIAL
-				//	uart0_puts("DATA");
-				//	_delay_ms(10);
-				//	#endif
+//			#ifdef DEBUG_SERIAL	uart0_puts("DATA");	//	_delay_ms(10);	#endif
 					
 								
 			if (RF12_WANTS_ACK) {
@@ -156,6 +157,8 @@ int main() {
 							_delay_ms(50);
 							#endif
 				*/
+						
+						
 				////////////////		Fill alarm array		 ////////////////
 				// only get the first byte
 				uint8_t data = rf12_data[1]; // not used, not used, not used, start (1) or stop(0), doorbell, phone, fire, help;
@@ -186,12 +189,16 @@ int main() {
 				
 			 // IS ER EEN ALARM ACTIEF in array active_alarm?
 				 if(active_alarm & 0x0F){
-			  	
+
+						
+						
+							
+				  
 						 // Is there a active alarm thats already activated?
 						 if(active_alarm_time == 0) {
 							// Geen alarm actief
-
-							PRR = 0x03; // enable all devices except usart0 and adc
+				
+							
 							 
 							deep_sleep_ok = 0; // prevent while loop from going in deepsleep
 							
@@ -207,13 +214,18 @@ int main() {
 							// 2. timer 0 - millis starten
 							millis_reset();
 							millis_resume();
+							
+							active_alarm_time = millis_get() + alarm_duration;
+							
+							// wake up pca9635!
+							power_twi_enable();
+							I2C_init();
+							pca9635_set_sleep(0);
 				 
 							// 3. timer 2 - alarm timer starten
 							timer2_resume();							
 										 
-							// wake up pca9635!
-							I2C_init();	
-							pca9635_set_sleep(0);
+							
 								
 						 }else{
 							 
@@ -229,14 +241,21 @@ int main() {
 								}
 							
 							
+								// Only reset active alarm timer if there is a new alarm...
+								// 0x10 = activate bit 0x0F are bits of the alarms
+								if( (data & 0x10) && (data & 0x0F)){
+										active_alarm_time = millis_get() + alarm_duration;
+								}
+														
+														
+														
+							
 						 } //  if(active_alarm_time == 0) {
 				 
 
-				 		// Only reset active alarm timer if there is a new alarm...
-						// 0x10 = activate bit 0x0F are bits of the alarms
-						if( (data & 0x10) && (data & 0x0F)){
-				 			active_alarm_time = millis_get() + alarm_duration; 		 
-						 }
+				 	
+					 
+					 
 
 				}else{ //  if(active_alarm & 0x0F){ // IS ER EEN ALARM ACTIEF in active_alarm?
 						// no active alarm in array	
@@ -252,18 +271,15 @@ int main() {
 		// switch into idle mode until the next interrupt - Choose our preferred sleep mode:
 		if(deep_sleep_ok == 1){
 			// disable various internal devices for standby
-			// disable TWI, Timer/Counter2, Timer/Counter0, Timer/Counter1, SPI, USART0, ADC
+			// disable TWI, Timer/Counter2, Timer/Counter0, Timer/Counter1, USART0, ADC
 		//		#ifdef DEBUG_SERIAL
 		//		PRR		= 0x69;
 		//		#else
-		////		PRR		= 0x6B;
+			//	PRR		= 0xEB;
 		//	#endif
-		
-
 
 			set_sleep_mode(SLEEP_MODE_STANDBY); // if active alarm, go in pwr save mode to keep timer 2 running
 			sleep_enable();
-			    PORTB |= _BV(1); // pb0 aan
 		// turn off brown-out enable in software
 			 sleep_bod_disable();
 			 
@@ -280,9 +296,8 @@ int main() {
 	
 	// Clear sleep enable (SE) bit:
 	sleep_disable();
-	PORTB &= ~_BV(1); // pb0 uit
 	// 
-	//PRR		= 0x01;
+
 		}
 
 	}
@@ -320,6 +335,8 @@ ISR (TIMER2_COMPA_vect) {
 			// alle leds uit, pca in slaapstand
 			pca9635_set_all_led_pwm(0); // dimm all leds to zero
 			pca9635_set_sleep(1); // put pca9635 in sleep
+			power_twi_disable();
+			
 			// automatisch slapen in loop.
 
 			//uart0_puts("STOPINT");
@@ -367,19 +384,19 @@ ISR (TIMER2_COMPA_vect) {
 		//	tone(unsigned long frequency, uint8_t volume);
 		//uart0_putc(sound_current_alarm);
 			if(sound_current_alarm == 0 ){
-				tone(pgm_read_word(&(sound_pattern_doorbell[sound_current_step].frequency)), 10); // freq, volume
+				tone(pgm_read_word(&(sound_pattern_doorbell[sound_current_step].frequency)), sound_alarm_volume); // freq, volume
 				_sound_note_time = (millis_get() + pgm_read_word(&(sound_pattern_doorbell[sound_current_step].time)));
 			}
 			else if(sound_current_alarm == 1 ){
-				tone(pgm_read_word(&(sound_pattern_phone[sound_current_step].frequency)), 10);
+				tone(pgm_read_word(&(sound_pattern_phone[sound_current_step].frequency)), sound_alarm_volume);
 				_sound_note_time = (millis_get() + pgm_read_word(&(sound_pattern_phone[sound_current_step].time)));
 			}
 			else if(sound_current_alarm == 2 ){
-				tone(pgm_read_word(&(sound_pattern_fire[sound_current_step].frequency)), 10);
+				tone(pgm_read_word(&(sound_pattern_fire[sound_current_step].frequency)), sound_alarm_volume);
 				_sound_note_time = (millis_get() + pgm_read_word(&(sound_pattern_fire[sound_current_step].time)));
 			}
 			else if(sound_current_alarm == 3 ){
-				tone(pgm_read_word(&(sound_pattern_help[sound_current_step].frequency)),10);
+				tone(pgm_read_word(&(sound_pattern_help[sound_current_step].frequency)),sound_alarm_volume);
 				_sound_note_time = (millis_get() + pgm_read_word(&(sound_pattern_help[sound_current_step].time)));
 			}
 			

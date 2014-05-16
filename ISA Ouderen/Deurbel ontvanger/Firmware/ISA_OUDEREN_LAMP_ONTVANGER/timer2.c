@@ -19,8 +19,8 @@ void timer2_init()
 	
 	OCR2A = ((F_CPU / 128) / 1000);
 		
-	TIMSK2 &= ~_BV(OCIE2A);
-	power_timer2_disable(); // powerdown timer2!
+//	TIMSK2 &= ~_BV(OCIE2A);
+//	power_timer2_disable(); // powerdown timer2!
 	
 }
 
