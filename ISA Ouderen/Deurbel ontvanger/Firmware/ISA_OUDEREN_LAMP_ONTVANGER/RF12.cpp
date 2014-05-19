@@ -243,9 +243,12 @@ uint16_t rf12_control(uint16_t cmd) {
 /// @details
 /// Brings RFM12 in idle-mode.
 static void rf12_idle() {
+//	PORTB |= _BV(0); // pb0 aan
+
 	rfmstate &= ~B11110000; // switch off synthesizer, transmitter, receiver and baseband
 	rfmstate |=  B00001000; // make sure crystal is running
 	rf12_xfer(rfmstate);
+   //PORTB &= ~_BV(0); // pb0 uit
 }
 
 
@@ -268,6 +271,9 @@ static void rf12_interrupt() {
 			rf12_buf[rxfill++] = in;
 			rf12_crc = _crc16_update(rf12_crc, in);
 
+		
+
+		
 			// do drssi binary-tree search
 			if ( drssi < 3 && ((rxfill-2)%drssi_bytes_per_decision)==0 ) {// not yet final value
 				// top nibble when going up, bottom one when going down
@@ -279,18 +285,22 @@ static void rf12_interrupt() {
 					rf12_xfer(RF_RECV_CONTROL | drssi*2+1);
 				}
 			}
+//PORTB |= _BV(0); // pb0 aan
 
+		
 			// check if we got all the bytes (or maximum packet length was reached)
 			if (fixedLength) {
 				if (rxfill >= fixedLength || rxfill >= RF_MAX) {
+					//PORTB |= _BV(0); // pb0 aan
 					rf12_idle();
+					//PORTB &= ~_BV(0); // pb0 uit
 				}
 			} else if (rxfill >= rf12_len + 5 || rxfill >= RF_MAX) {
-				//PORTB |= _BV(0); // pb0 aan
+				PORTB |= _BV(0); // pb0 aan
 				rf12_idle();
-				//PORTB &= ~_BV(0); // pb0 uit
+				PORTB &= ~_BV(0); // pb0 uit
 			}
-			
+					//PORTB &= ~_BV(0); // pb0 uit
 			// SENDING - SENDING - SENDING!
 			} else {                  // we are sending
 			uint8_t out;
@@ -313,6 +323,8 @@ static void rf12_interrupt() {
 		}
 	}
 	
+
+	
 	// power-on reset
 	if (state & RF_POR_BIT) {
 		rxstate = POR_RECEIVED;
@@ -326,7 +338,9 @@ static void rf12_interrupt() {
 	
 	// fifo overflow or buffer underrun - abort reception/sending
 	if (state & RF_OVF_BIT) {
+		//PORTB |= _BV(0); // pb0 aan
 		rf12_idle();
+		//PORTB &= ~_BV(0); // pb0 uit
 		rxstate = TXIDLE;
 	}
 
@@ -334,7 +348,10 @@ static void rf12_interrupt() {
 
 
 ISR(INT0_vect) {
+//PORTB |= _BV(0); // pb0 aan
+
 		rf12_interrupt();
+	//PORTB &= ~_BV(0); // pb0 uit
 }
 
 
@@ -386,30 +403,51 @@ byte rf12_recvDone();
 ///      }
 /// @see http://jeelabs.org/2010/12/11/rf12-acknowledgements/
 uint8_t rf12_recvDone () {
+			
+		
 	if (rxstate == TXRECV) {
 		if (fixedLength) {
-			if (rxfill >= fixedLength || rxfill >= RF_MAX) {
+				
+				if (rxfill >= fixedLength || rxfill >= RF_MAX) {
+					rxstate = TXIDLE;
+					rf12_crc = 1; //it is not a standard packet
+				//	LED_868RECEIVE_DDR	&= ~(1 << LED_868RECEIVE_BIT); // set output	
+					return 1;
+				}
+			
+		} else if (rxfill >= rf12_len + 5 || rxfill >= RF_MAX) {
+		
 				rxstate = TXIDLE;
-				rf12_crc = 1; //it is not a standard packet
-			//	LED_868RECEIVE_DDR	&= ~(1 << LED_868RECEIVE_BIT); // set output	
-				return 1;
-			}
-			} else if (rxfill >= rf12_len + 5 || rxfill >= RF_MAX) {
-			rxstate = TXIDLE;
-			if (rf12_len > RF12_MAXDATA)
-			rf12_crc = 1; // force bad crc if packet length is invalid
-			if (!(rf12_hdr & RF12_HDR_DST) || (nodeid & NODE_ID) == 31 ||
-			(rf12_hdr & RF12_HDR_MASK) == (nodeid & NODE_ID)) {
-				if (rf12_crc == 0 && crypter != 0)
-				crypter(0);
-				else
-				rf12_seq = -1;
-				return 1; // it's a broadcast packet or it's addressed to this node
-			}
+			
+				if (rf12_len > RF12_MAXDATA) { 
+					rf12_crc = 1; // force bad crc if packet length is invalid
+				}
+					
+				if (!(rf12_hdr & RF12_HDR_DST) || (nodeid & NODE_ID) == 31 ||
+				(rf12_hdr & RF12_HDR_MASK) == (nodeid & NODE_ID)) {
+				
+				
+					if (rf12_crc == 0 && crypter != 0){
+						crypter(0);
+					} else {
+						rf12_seq = -1;
+					}
+				
+					return 1; // it's a broadcast packet or it's addressed to this node
+				}
+			
+			
 		}
 	}
-	if (rxstate == TXIDLE)
+	
+
+		
+	if (rxstate == TXIDLE){
+		
 	rf12_recvStart();
+	}
+	
+	
 	return 0;
 }
 
@@ -450,7 +488,9 @@ uint8_t rf12_canSend () {
 	// if (rxstate == TXRECV && rxfill == 0 && rf12_getRSSI() < 2) {
 	// TODO listen-before-send disabled until we figure out how to do it right
 	if (rxstate == TXRECV && rxfill == 0) {
+		//PORTB |= _BV(0); // pb0 aan
 		rf12_idle();
+		//PORTB &= ~_BV(0); // pb0 uit
 		rxstate = TXIDLE;
 		return 1;
 	}
@@ -716,9 +756,11 @@ void rf12_onOff (uint8_t value) {
 ///          If RF12WAKEUP (-1), wake the radio up so that the next call to
 ///          rf12_recvDone() can restore normal reception.
 void rf12_sleep (char n) {
-	if (n < 0)
-	rf12_idle();
-	else {
+	if (n < 0){
+			//PORTB |= _BV(0); // pb0 aan
+			rf12_idle();
+			//PORTB &= ~_BV(0); // pb0 uit
+	} else {
 		rfmstate &= ~B11111000; // make sure everything is switched off (except bod, wkup, clk)
 		rf12_xfer(rfmstate);
 	}

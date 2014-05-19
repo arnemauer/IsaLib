@@ -55,6 +55,11 @@ int main() {
 	_delay_ms(500);
 	PORTB &= ~_BV(0); // pb0 uit
 
+
+	DDRD |= _BV(7); // pb0 output
+	PORTD |= _BV(7); // pb0 aan
+	_delay_ms(500);
+	PORTD &= ~_BV(7); // pb0 uit
 	
 			/* Initialize MILLIS */
 	        millis_init();
@@ -131,57 +136,34 @@ int main() {
 				
 	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
 
-	
+
+		PORTD |= _BV(7); // pb0 aan
+		
+		
 	if (rf12_recvDone() && rf12_crc == 0) {
-		if(rf12_data[0] == 0x99) { // 153
-		// process incoming data here
-			
-//			#ifdef DEBUG_SERIAL	uart0_puts("DATA");	//	_delay_ms(10);	#endif
-					
-								
+
+
 			if (RF12_WANTS_ACK) {
 				rf12_sendStart(RF12_ACK_REPLY,0,0);
 				rf12_sendWait(1); // don't power down too soon
-				
-				#ifdef DEBUG_SERIAL
-				uart0_puts("ACK-OK");
-				_delay_ms(10);
-				#endif
 			}
 			
-		
-						/*	#ifdef DEBUG_SERIAL
-							for (byte i = 0; i < rf12_len; ++i){
-								uart0_putc(rf12_data[i]);
-							}
-							_delay_ms(50);
-							#endif
-				*/
-						
-						
+
+		// only react to packets with first byte 0x99
+		if(rf12_data[0] == 0x99) { // 153
+		// process incoming data here
+								
+			
 				////////////////		Fill alarm array		 ////////////////
 				// only get the first byte
 				uint8_t data = rf12_data[1]; // not used, not used, not used, start (1) or stop(0), doorbell, phone, fire, help;
-				
-				#ifdef DEBUG_SERIAL
-				uart0_putc(data);
-				_delay_ms(10);
-				#endif    
-						
-				 if(data & 0x10){
-					 #ifdef DEBUG_SERIAL
+
+				if(data & 0x10){
 					 // start alarm	 
-					 uart0_puts("START");
-					 #endif
-					
 					 active_alarm = active_alarm | data; // 00001111 
 					 
 				 }else{
-					 #ifdef DEBUG_SERIAL
-					 // start alarm
-					 uart0_puts("STOP");
-					 #endif
-					 
+					 // stop alarm
 					 active_alarm =  active_alarm & (~data); /* invert data, compare with active alarm array to clear the right alarm bit */		 
 				 }
 				 
@@ -189,10 +171,6 @@ int main() {
 				
 			 // IS ER EEN ALARM ACTIEF in array active_alarm?
 				 if(active_alarm & 0x0F){
-
-						
-						
-							
 				  
 						 // Is there a active alarm thats already activated?
 						 if(active_alarm_time == 0) {
@@ -264,44 +242,45 @@ int main() {
 						 		
 
 
-					 
+		}
+		
 									
 	} else {
 		
 		// switch into idle mode until the next interrupt - Choose our preferred sleep mode:
 		if(deep_sleep_ok == 1){
-			// disable various internal devices for standby
-			// disable TWI, Timer/Counter2, Timer/Counter0, Timer/Counter1, USART0, ADC
-		//		#ifdef DEBUG_SERIAL
-		//		PRR		= 0x69;
-		//		#else
-			//	PRR		= 0xEB;
-		//	#endif
+				// disable various internal devices for standby
+				// disable TWI, Timer/Counter2, Timer/Counter0, Timer/Counter1, USART0, ADC
+				//		#ifdef DEBUG_SERIAL
+				//		PRR		= 0x69;
+				//		#else
+				//	PRR		= 0xEB;
+				//	#endif
 
-			set_sleep_mode(SLEEP_MODE_STANDBY); // if active alarm, go in pwr save mode to keep timer 2 running
-			sleep_enable();
-		// turn off brown-out enable in software
-			 sleep_bod_disable();
+				set_sleep_mode(SLEEP_MODE_STANDBY); // if active alarm, go in pwr save mode to keep timer 2 running
+				sleep_enable();
+				// turn off brown-out enable in software
+				 sleep_bod_disable();
 			 
-		// Put the device to sleep:
-			sleep_cpu();
+				// Put the device to sleep:
+				sleep_cpu();
 		}else{
-			// disable various adc + usart0
-			set_sleep_mode(SLEEP_MODE_IDLE);
-			sleep_enable();
+				// disable various adc + usart0
+				set_sleep_mode(SLEEP_MODE_IDLE);
+				sleep_enable();
 			
-			// Put the device to sleep:
-			sleep_cpu();
+				// Put the device to sleep:
+				sleep_cpu();
 		}
 	
-	// Clear sleep enable (SE) bit:
-	sleep_disable();
-	// 
-
-		}
-
+			// Clear sleep enable (SE) bit:
+			sleep_disable();
 	}
 
+
+
+	
+		PORTD &= ~_BV(7); // pb0 uit
 	
 		} // end while(1){
 		
