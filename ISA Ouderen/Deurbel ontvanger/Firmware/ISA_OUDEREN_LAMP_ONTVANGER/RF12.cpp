@@ -285,22 +285,17 @@ static void rf12_interrupt() {
 					rf12_xfer(RF_RECV_CONTROL | drssi*2+1);
 				}
 			}
-//PORTB |= _BV(0); // pb0 aan
 
 		
 			// check if we got all the bytes (or maximum packet length was reached)
 			if (fixedLength) {
 				if (rxfill >= fixedLength || rxfill >= RF_MAX) {
-					//PORTB |= _BV(0); // pb0 aan
 					rf12_idle();
-					//PORTB &= ~_BV(0); // pb0 uit
 				}
 			} else if (rxfill >= rf12_len + 5 || rxfill >= RF_MAX) {
-				PORTB |= _BV(0); // pb0 aan
 				rf12_idle();
-				PORTB &= ~_BV(0); // pb0 uit
 			}
-					//PORTB &= ~_BV(0); // pb0 uit
+					
 			// SENDING - SENDING - SENDING!
 			} else {                  // we are sending
 			uint8_t out;
@@ -414,7 +409,7 @@ uint8_t rf12_recvDone () {
 				//	LED_868RECEIVE_DDR	&= ~(1 << LED_868RECEIVE_BIT); // set output	
 					return 1;
 				}
-			
+
 		} else if (rxfill >= rf12_len + 5 || rxfill >= RF_MAX) {
 		
 				rxstate = TXIDLE;
@@ -443,8 +438,7 @@ uint8_t rf12_recvDone () {
 
 		
 	if (rxstate == TXIDLE){
-		
-	rf12_recvStart();
+		rf12_recvStart();
 	}
 	
 	

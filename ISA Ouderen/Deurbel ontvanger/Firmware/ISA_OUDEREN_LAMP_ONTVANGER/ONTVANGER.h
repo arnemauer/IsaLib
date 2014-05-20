@@ -19,9 +19,9 @@ static void doReport();
 #define sound_alarm_keys_doorbell  8
 #define sound_alarm_keys_phone     96
 #define sound_alarm_keys_fire	16
-#define sound_alarm_keys_help  9
+#define sound_alarm_keys_help  19
 
-#define sound_alarm_volume 1
+#define sound_alarm_volume 10
 
 #define flash_keys  32
 
@@ -34,7 +34,7 @@ uint8_t counter;
 static long payload;
 
 // config
-unsigned long alarm_duration = 8000; // alarm duration in ms
+unsigned long alarm_duration = 20000; // alarm duration in ms
 
 
 //
@@ -204,14 +204,23 @@ const static STRUCT_SOUND_PATTERN sound_pattern_fire[sound_alarm_keys_fire] PROG
 
 const static STRUCT_SOUND_PATTERN sound_pattern_help[sound_alarm_keys_help] PROGMEM = {  // doorbell
 	//const static sound_patterns[0] PROGMEM = { // doorbell
-	{ 1215	, 300 }, // 0: instant off
-	{ 1445	, 300 }, // 0: instant off
-	{ 1820	, 300 }, // 0: instant off
-	{ 1445	, 300 }, // 0: instant off
-	{ 1215	, 300 }, // 0: instant off
-	{ 1445	, 300 }, // 0: instant off
-	{ 1820	, 300 }, // 0: instant off
-	{ 1445	, 300 },  // 0: instant off
+	{ 1820	, 200 }, // 0: instant off
+	{ 1445	, 200 }, // 0: instant off
+	{ 1820	, 200 }, // 0: instant off
+	{ 1445	, 200 }, // 0: instant off
+	{ 1820	, 200 }, // 0: instant off
+	{ 1445	, 200 }, // 0: instant off
+	{ 1820	, 200 }, // 0: instant off
+	{ 1445	, 200 }, // 0: instant off
+	{ 0		, 1000 },  // 0: instant off
+	{ 1820	, 200 }, // 0: instant off
+	{ 1445	, 200 }, // 0: instant off
+	{ 1820	, 200 }, // 0: instant off
+	{ 1445	, 200 }, // 0: instant off
+	{ 1820	, 200 }, // 0: instant off
+	{ 1445	, 200 }, // 0: instant off
+	{ 1820	, 200 }, // 0: instant off
+	{ 1445	, 200 }, // 0: instant off
 	{ 0		, 1000 }  // 0: instant off
 };
 

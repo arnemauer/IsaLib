@@ -50,17 +50,7 @@ int main() {
 	ADCSRA &= ~_BV(ADEN); // ADC off 
 	sei();
 	
-	DDRB |= _BV(0); // pb0 output
-	PORTB |= _BV(0); // pb0 aan
-	_delay_ms(500);
-	PORTB &= ~_BV(0); // pb0 uit
 
-
-	DDRD |= _BV(7); // pb0 output
-	PORTD |= _BV(7); // pb0 aan
-	_delay_ms(500);
-	PORTD &= ~_BV(7); // pb0 uit
-	
 			/* Initialize MILLIS */
 	        millis_init();
 			_delay_ms(1000);
@@ -135,12 +125,10 @@ int main() {
 				
 				
 	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
-
-
-		PORTD |= _BV(7); // pb0 aan
+	
 		
-		
-	if (rf12_recvDone() && rf12_crc == 0) {
+	if (rf12_recvDone()) { // a packet has been received
+		if(rf12_crc == 0){ //  CRC of the received packet, zero indicates correct reception.
 
 
 			if (RF12_WANTS_ACK) {
@@ -175,9 +163,7 @@ int main() {
 						 // Is there a active alarm thats already activated?
 						 if(active_alarm_time == 0) {
 							// Geen alarm actief
-				
-							
-							 
+										 
 							deep_sleep_ok = 0; // prevent while loop from going in deepsleep
 							
 							 // 1. fill icon_current_alarm and sound_current_alarm with the first alarm
@@ -230,10 +216,7 @@ int main() {
 							
 						 } //  if(active_alarm_time == 0) {
 				 
-
-				 	
-					 
-					 
+		 
 
 				}else{ //  if(active_alarm & 0x0F){ // IS ER EEN ALARM ACTIEF in active_alarm?
 						// no active alarm in array	
@@ -242,21 +225,13 @@ int main() {
 						 		
 
 
-		}
-		
+				} // if(rf12_data[0] == 0x99){
+			} // if(rf12_crc == 0){ 
 									
-	} else {
+		} else {
 		
-		// switch into idle mode until the next interrupt - Choose our preferred sleep mode:
-		if(deep_sleep_ok == 1){
-				// disable various internal devices for standby
-				// disable TWI, Timer/Counter2, Timer/Counter0, Timer/Counter1, USART0, ADC
-				//		#ifdef DEBUG_SERIAL
-				//		PRR		= 0x69;
-				//		#else
-				//	PRR		= 0xEB;
-				//	#endif
-
+			// switch into idle mode until the next interrupt - Choose our preferred sleep mode:
+			if(deep_sleep_ok == 1){
 				set_sleep_mode(SLEEP_MODE_STANDBY); // if active alarm, go in pwr save mode to keep timer 2 running
 				sleep_enable();
 				// turn off brown-out enable in software
@@ -264,25 +239,22 @@ int main() {
 			 
 				// Put the device to sleep:
 				sleep_cpu();
-		}else{
+			}else{
 				// disable various adc + usart0
 				set_sleep_mode(SLEEP_MODE_IDLE);
 				sleep_enable();
 			
 				// Put the device to sleep:
 				sleep_cpu();
-		}
+			}
 	
 			// Clear sleep enable (SE) bit:
 			sleep_disable();
-	}
-
+		}
 
 
 	
-		PORTD &= ~_BV(7); // pb0 uit
-	
-		} // end while(1){
+	} // end while(1){
 		
 		
 	} // end main
@@ -341,15 +313,10 @@ ISR (TIMER2_COMPA_vect) {
 
 
 	void isr_sound(){
-		//	uart0_putc(sound_current_step);
-		//	uart0_putc(millis_get());
-		//	uart0_putc(_sound_note_time);
 		
 			// Stop note if necessary 
 			if(_sound_note_time != 0){ // sound already playing?		
-				//	uart0_puts("GS");
 				if(millis_get() < _sound_note_time ){ // Do we need to stop the current note?
-					//uart0_puts("DS");
 					return; // dont stop current note
 					
 				}else{
@@ -359,9 +326,6 @@ ISR (TIMER2_COMPA_vect) {
 			}
 			
 			// play next tone
-		//	uart0_puts("PN");
-		//	tone(unsigned long frequency, uint8_t volume);
-		//uart0_putc(sound_current_alarm);
 			if(sound_current_alarm == 0 ){
 				tone(pgm_read_word(&(sound_pattern_doorbell[sound_current_step].frequency)), sound_alarm_volume); // freq, volume
 				_sound_note_time = (millis_get() + pgm_read_word(&(sound_pattern_doorbell[sound_current_step].time)));
@@ -462,7 +426,7 @@ ISR (TIMER2_COMPA_vect) {
 		intensity = 255;
 		
 		if(icon_current_step == 0){
-			_icon_time = millis_get() + 1000;
+			_icon_time = millis_get() + 650;
 		}else if(icon_current_step == 11){ // last step - set led full on, and go to next icon
 			_icon_time = millis_get() + 1;
 		}
