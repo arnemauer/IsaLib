@@ -1,0 +1,5 @@
+1. spoel -> zorgt voor opslingering. 
+
+2. FET-driver TC428 -> zowel non-inverting als inverting in 1 package
+
+3. voltage doubling circuit -> http://www.freepatentsonline.com/6617967.html
