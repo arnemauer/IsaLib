@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.005" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -6544,7 +6544,7 @@ LilyPad 1206- DIO-09955</description>
 <instance part="SUPPLY3" gate="GND" x="101.6" y="129.54"/>
 <instance part="R3" gate="R?" x="170.18" y="114.3"/>
 <instance part="C4" gate="G$1" x="40.64" y="187.96"/>
-<instance part="BATTERY_2" gate="G$1" x="68.58" y="172.72" rot="R270"/>
+<instance part="BATTERY_2" gate="G$1" x="71.12" y="172.72" rot="R270"/>
 </instances>
 <busses>
 </busses>
@@ -6579,8 +6579,9 @@ LilyPad 1206- DIO-09955</description>
 <junction x="58.42" y="162.56"/>
 <pinref part="BATTERY_1" gate="G$1" pin="-"/>
 <junction x="58.42" y="163.83"/>
-<wire x1="68.58" y1="165.1" x2="68.58" y2="162.56" width="0.1524" layer="91"/>
-<wire x1="68.58" y1="162.56" x2="58.42" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="71.12" y1="162.56" x2="58.42" y2="162.56" width="0.1524" layer="91"/>
+<pinref part="BATTERY_2" gate="G$1" pin="-"/>
+<wire x1="71.12" y1="163.83" x2="71.12" y2="162.56" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="SUPPLY4" gate="GND" pin="GND"/>
@@ -6735,8 +6736,9 @@ LilyPad 1206- DIO-09955</description>
 <pinref part="BATTERY_1" gate="G$1" pin="+"/>
 <wire x1="58.42" y1="181.61" x2="58.42" y2="182.88" width="0.1524" layer="91"/>
 <junction x="58.42" y="181.61"/>
-<wire x1="68.58" y1="180.34" x2="68.58" y2="182.88" width="0.1524" layer="91"/>
-<wire x1="68.58" y1="182.88" x2="58.42" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="71.12" y1="182.88" x2="58.42" y2="182.88" width="0.1524" layer="91"/>
+<pinref part="BATTERY_2" gate="G$1" pin="+"/>
+<wire x1="71.12" y1="181.61" x2="71.12" y2="182.88" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <wire x1="10.16" y1="157.48" x2="10.16" y2="154.94" width="0.1524" layer="91"/>
