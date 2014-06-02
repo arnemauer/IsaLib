@@ -6846,8 +6846,8 @@ Block, Siemens and generic&lt;p&gt;
 <part name="SUPPLY5" library="supply2" deviceset="GND" device=""/>
 <part name="R8" library="resistor" deviceset="R-EU_" device="R0805" value="10K"/>
 <part name="C3" library="resistor" deviceset="C-EU" device="C0805" value="100nf"/>
-<part name="Q1" library="SparkFun" deviceset="MOSFET-PCHANNEL" device=""/>
-<part name="D1" library="adafruit" deviceset="DIODE" device="SOD-323F"/>
+<part name="Q1" library="SparkFun" deviceset="MOSFET-PCHANNEL" device="" value="BSH203"/>
+<part name="D1" library="adafruit" deviceset="DIODE" device="SOD-323F" value="1N4148"/>
 <part name="+3V7" library="supply1" deviceset="+3V3" device="" value="+3V"/>
 <part name="+3V9" library="supply1" deviceset="+3V3" device="" value="+3V"/>
 <part name="+3V6" library="supply1" deviceset="+3V3" device="" value="+3V"/>
