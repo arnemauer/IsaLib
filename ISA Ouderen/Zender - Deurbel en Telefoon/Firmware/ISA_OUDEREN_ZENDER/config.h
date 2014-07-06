@@ -38,14 +38,13 @@
  *           C O N F I G U R A T I O N                *
  *                                                    *
  ******************************************************/
-#define F_CPU 16000000
-
+#define F_CPU        16000000     // 16MHz processor
 #define LOG_AVAILABLE /*!< Is Logging available */
 
 //#define UART_AVAILABLE /*!< Is UART available */
-#define UART_BAUD_RATE 57600UL /*!< UART Baudrate in bit per second */
-#define DUART_RX0_BUFFER_SIZE 128
-#define DUART_TX0_BUFFER_SIZE 128
+#define UART_BAUD_RATE 57600ul /*!< UART Baudrate in bit per second */
+#define DUART_RX0_BUFFER_SIZE 512	
+#define DUART_TX0_BUFFER_SIZE 512
 
 /************************
  * Debug LED for examples
@@ -70,6 +69,8 @@
 #define BIT_RFM_CS 2
 
 //Pin that the RFM12's IRQ  is connected to
+
+// DO NOT USE THIS, USE INT0! 
 #define DDR_RFM_IRQ DDRD
 #define PORT_RFM_IRQ PORTD
 #define PIN_RFM_IRQ PIND
