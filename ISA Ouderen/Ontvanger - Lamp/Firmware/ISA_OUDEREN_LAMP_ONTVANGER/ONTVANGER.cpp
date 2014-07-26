@@ -98,7 +98,7 @@ int main() {
 			// node id, rfband, group id
 			rf12_initialize(2, RF12_868MHZ, 14);
 			// see http://tools.jeelabs.org/rfm12b
-		
+			rf12_setLowDuty(500);
 
 
 			deep_sleep_ok = 1; // put device in deep sleep after initializing
@@ -232,6 +232,8 @@ int main() {
 		
 			// switch into idle mode until the next interrupt - Choose our preferred sleep mode:
 			if(deep_sleep_ok == 1){
+				rf12_setLowDuty(250);
+				
 				set_sleep_mode(SLEEP_MODE_STANDBY); // if active alarm, go in pwr save mode to keep timer 2 running
 				sleep_enable();
 				// turn off brown-out enable in software

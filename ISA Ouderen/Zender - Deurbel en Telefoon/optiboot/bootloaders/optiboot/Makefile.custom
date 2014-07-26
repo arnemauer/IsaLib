@@ -1,0 +1,35 @@
+#
+# Makefile for "custom" platforms.   Add your board here.
+#
+
+
+wildfire: TARGET = $@
+wildfire: CHIP = atmega1284p
+wildfire:
+	$(MAKE) $(CHIP) AVR_FREQ=16000000L LED=B5
+	mv $(PROGRAM)_$(CHIP).hex $(PROGRAM)_$(TARGET).hex
+	mv $(PROGRAM)_$(CHIP).lst $(PROGRAM)_$(TARGET).lst
+
+
+
+
+# Standard atmega328, only at 38.400 baud for closer clock accuracy AND using 8Mhz internal RC oscillator
+#
+atmega328_384_8: TARGET = atmega328
+atmega328_384_8: MCU_TARGET = atmega328p
+atmega328_384_8: CFLAGS += '-DLED_START_FLASHES=3' '-DBAUD_RATE=38400'
+atmega328_384_8: AVR_FREQ = 8000000L
+atmega328_384_8: LDSECTIONS  = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
+atmega328_384_8: $(PROGRAM)_atmega328_384_8.hex
+atmega328_384_8: $(PROGRAM)_atmega328_384_8.lst
+
+atmega328_384_8_isp: atmega328
+atmega328_384_8_isp: TARGET = atmega328
+atmega328_384_8_isp: MCU_TARGET = atmega328p
+# 512 byte boot, SPIEN
+atmega328_384_8_isp: HFUSE = DE
+# Int. RC Osc. 8MHz, slowly rising power-65ms 
+atmega328_384_8_isp: LFUSE = E2
+# 2.7V brownout
+atmega328_384_8_isp: EFUSE = 05
+atmega328_384_8_isp: isp

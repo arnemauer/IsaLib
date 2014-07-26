@@ -21,7 +21,7 @@ static void doReport();
 #define sound_alarm_keys_fire	16
 #define sound_alarm_keys_help  19
 
-#define sound_alarm_volume 10
+#define sound_alarm_volume 1
 
 #define flash_keys  32
 

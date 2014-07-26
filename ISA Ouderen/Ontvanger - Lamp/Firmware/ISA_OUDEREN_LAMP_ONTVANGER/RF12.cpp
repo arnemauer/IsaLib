@@ -273,7 +273,7 @@ static void rf12_interrupt() {
 
 		
 
-		
+		/*
 			// do drssi binary-tree search
 			if ( drssi < 3 && ((rxfill-2)%drssi_bytes_per_decision)==0 ) {// not yet final value
 				// top nibble when going up, bottom one when going down
@@ -285,7 +285,8 @@ static void rf12_interrupt() {
 					rf12_xfer(RF_RECV_CONTROL | drssi*2+1);
 				}
 			}
-
+*/
+		
 		
 			// check if we got all the bytes (or maximum packet length was reached)
 			if (fixedLength) {
@@ -326,10 +327,10 @@ static void rf12_interrupt() {
 	}
 
 	// got wakeup call
-	if (state & RF_WDG_BIT) {
-		rf12_setWatchdog(0);
-		rf12_gotwakeup = 1;
-	}
+	//if (state & RF_WDG_BIT) {
+		//rf12_setWatchdog(0);
+	//	rf12_gotwakeup = 1;
+	//}
 	
 	// fifo overflow or buffer underrun - abort reception/sending
 	if (state & RF_OVF_BIT) {
@@ -349,7 +350,10 @@ ISR(INT0_vect) {
 	//PORTB &= ~_BV(0); // pb0 uit
 }
 
-
+void SendACK(const void* sendBuf, uint8_t sendLen, uint8_t waitMode) {
+	while (!CanSend()) ReceiveComplete();
+	SendStart(RF12_SOURCEID, sendBuf, sendLen, false, true, waitMode);
+}
 
 static void rf12_recvStart () {
 	//LED_868RECEIVE_DDR	|= (1 << LED_868RECEIVE_BIT); // set output	
@@ -360,9 +364,9 @@ static void rf12_recvStart () {
 	rf12_crc = _crc16_update(~0, group);
 	#endif
 	rxstate = TXRECV;
-	drssi = 1;              // set drssi to start value
-	rf12_xfer(RF_RECV_CONTROL | drssi*2+1);
-	rfmstate |= B11011000; // enable crystal, synthesizer, receiver and baseband
+	//drssi = 1;              // set drssi to start value
+//	rf12_xfer(RF_RECV_CONTROL | drssi*2+1);
+	rfmstate |= B01011010; // DISABLE RECEIVER FOR DUTY CYCLE! enable crystal, synthesizer, receiver and baseband, enable wakeupbit for duty cycle!
 	rf12_xfer(rfmstate);
 }
 
@@ -405,12 +409,11 @@ uint8_t rf12_recvDone () {
 				
 				if (rxfill >= fixedLength || rxfill >= RF_MAX) {
 					rxstate = TXIDLE;
-					rf12_crc = 1; //it is not a standard packet
-				//	LED_868RECEIVE_DDR	&= ~(1 << LED_868RECEIVE_BIT); // set output	
+					rf12_crc = 1; //it is not a standard packet	
 					return 1;
 				}
 
-		} else if (rxfill >= rf12_len + 5 || rxfill >= RF_MAX) {
+		} else if (rxfill >= rf12_len + 6 || rxfill >= RF_MAX) {
 		
 				rxstate = TXIDLE;
 			
@@ -447,9 +450,9 @@ uint8_t rf12_recvDone () {
 
 
 // return signal strength calculated out of DRSSI bit
-uint8_t rf12_getRSSI() {
-	return (drssi<3 ? drssi*2+2 : 8|(drssi-3)*2);
-}
+//uint8_t rf12_getRSSI() {
+//	return (drssi<3 ? drssi*2+2 : 8|(drssi-3)*2);/
+//}
 
 void rf12_setBitrate(uint8_t rate) {
 	const long int decisions_per_sec = 900;
@@ -709,9 +712,10 @@ void rf12_restore (uint8_t id, uint8_t b, uint8_t g) {
 	rf12_xfer(0xC483);              // AFC@VDI,NO RSTRIC,!st,!fi,OE,EN
 	rf12_xfer(0x9850);              // !mp,90kHz,MAX OUT
 	rf12_xfer(0xCC77);              // OB1,OB0, LPX,!ddy,DDIT,BW0
-	rf12_xfer(0xE000);              // NOT USE
+	rf12_xfer(0xE0F2);              // NOT USE
 	rf12_xfer(0xC800);              // NOT USE
 	rf12_xfer(0xC049);              // 1.66MHz,3.1V
+	
 
 	rxstate = TXIDLE;
 	
@@ -769,7 +773,7 @@ void rf12_sleep (char n) {
 /// because of the external interrupt. The RFM12b wakeup-timer only needs about 1.5µA.
 /// Don't expect an accurate timing. It's about 10% off. Only one timer is supported.
 /// @param m Number of milliseconds
-void rf12_setWatchdog (unsigned long m) {
+void rf12_setLowDuty (unsigned long m) {
 	// calculate parameters for RFM12 module
 	// T_wakeup[ms] = m * 2^r
 	char r=0;
@@ -780,21 +784,26 @@ void rf12_setWatchdog (unsigned long m) {
 	
 	// Disable old wakeup-timer if enabled
 //	if (bitRead(rfmstate,1)) {
-	if ((rfmstate>>1)&0x01){
+	//if ((rfmstate)&0x02){
 		//bitClear(rfmstate,1);
-		rfmstate &= ~(1 << 1);
-		rf12_xfer(rfmstate);
-	}
+	//	rfmstate &= ~(1 << 1);
+	//	rf12_xfer(rfmstate);
+	//}
 	
 	// enable wakeup call if we have to
-	if (m>0) {
+	//if (m>0) {
 		// write time to wakeup-register
-		rf12_xfer(RF_WAKEUP_TIMER | (r<<8) | m);
+		//rf12_xfer(RF_WAKEUP_TIMER | (r<<8) | m);
+		rf12_xfer(0xE1FA); //500ms
+		
+		rf12_xfer(0xC833); //  Low Duty-Cycle D=25 = 20% van 500ms = 102ms  
 		// enable wakeup
+		
 		//bitSet(rfmstate,1);
-		rfmstate |= (1 << 1);
+		rfmstate |= (1 << 1); //  In this operation mode, bit er must be cleared and bit ew must be set in the Power Management Command.
+		rfmstate &= ~(1 << 7);
 		rf12_xfer(rfmstate);
-	}
+	//}
 }
 
 

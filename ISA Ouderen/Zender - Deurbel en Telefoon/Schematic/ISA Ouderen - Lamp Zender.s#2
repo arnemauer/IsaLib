@@ -10689,7 +10689,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="SUPPLY2" library="supply2" deviceset="GND" device=""/>
 <part name="IC1" library="atmel" deviceset="MEGA8" device="-AI"/>
 <part name="SUPPLY4" library="supply2" deviceset="GND" device=""/>
-<part name="R6" library="resistor" deviceset="R-EU_" device="R0805" value="4.7K"/>
+<part name="R6" library="resistor" deviceset="R-EU_" device="R0805" value="680"/>
 <part name="OK2" library="optocoupler" deviceset="HCPL0700" device="" value="6N139"/>
 <part name="SUPPLY5" library="supply2" deviceset="GND" device=""/>
 <part name="R8" library="resistor" deviceset="R-EU_" device="R0805" value="10K"/>
@@ -10708,7 +10708,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="+3V3" library="supply1" deviceset="+3V3" device="" value="+3V"/>
 <part name="SUPPLY1" library="supply2" deviceset="GND" device=""/>
 <part name="+3V4" library="supply1" deviceset="+3V3" device="" value="+3V"/>
-<part name="R3" library="SparkFun-Electromechanical" deviceset="TRIMPOT" device=""/>
+<part name="R3" library="SparkFun-Electromechanical" deviceset="TRIMPOT" device="" value="10K"/>
 <part name="C4" library="resistor" deviceset="C-EU" device="C0805" value="100nf"/>
 <part name="BATTERY_2" library="Itead_BP_110825.lbr" deviceset="BATTERY_1236_C" device=""/>
 <part name="PAD1" library="wirepad" deviceset="WIREPAD" device="SMD5-1,8" value="WIREPADSMD5-1,8"/>
@@ -10724,7 +10724,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="SUPPLY21" library="supply2" deviceset="GND" device=""/>
 <part name="IC4" library="SparkFun" deviceset="AVR-MEGA8" device="-AI" value="MEGA8-AI"/>
 <part name="SUPPLY22" library="supply2" deviceset="GND" device=""/>
-<part name="R15" library="resistor" deviceset="R-EU_" device="R0805" value="4.7K"/>
+<part name="R15" library="resistor" deviceset="R-EU_" device="R0805" value="6.8K"/>
 <part name="OK4" library="optocoupler" deviceset="HCPL0700" device="" value="6N139"/>
 <part name="SUPPLY23" library="supply2" deviceset="GND" device=""/>
 <part name="R16" library="resistor" deviceset="R-EU_" device="R0805" value="10K"/>
@@ -10743,7 +10743,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="+3V21" library="supply1" deviceset="+3V3" device="" value="+3V"/>
 <part name="SUPPLY24" library="supply2" deviceset="GND" device=""/>
 <part name="+3V22" library="supply1" deviceset="+3V3" device="" value="+3V"/>
-<part name="R18" library="SparkFun-Electromechanical" deviceset="TRIMPOT" device=""/>
+<part name="R18" library="SparkFun-Electromechanical" deviceset="TRIMPOT" device="" value="50K"/>
 <part name="C11" library="resistor" deviceset="C-EU" device="C0805" value="100nf"/>
 <part name="BATTERY_4" library="Itead_BP_110825.lbr" deviceset="BATTERY_1236_C" device=""/>
 <part name="PAD3" library="wirepad" deviceset="WIREPAD" device="SMD5-1,8" value="WIREPADSMD5-1,8"/>
@@ -10781,7 +10781,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <instance part="SUPPLY5" gate="GND" x="132.08" y="99.06"/>
 <instance part="R8" gate="G$1" x="127" y="116.84" rot="R90"/>
 <instance part="C3" gate="G$1" x="30.48" y="132.08"/>
-<instance part="Q1" gate="G$1" x="137.16" y="68.58"/>
+<instance part="Q1" gate="G$1" x="137.16" y="68.58" rot="MR180"/>
 <instance part="D1" gate="G$1" x="109.22" y="134.62" rot="R90"/>
 <instance part="+3V7" gate="G$1" x="58.42" y="187.96"/>
 <instance part="+3V9" gate="G$1" x="129.54" y="129.54"/>
@@ -10966,13 +10966,13 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <pinref part="+3V9" gate="G$1" pin="+3V3"/>
 </segment>
 <segment>
-<pinref part="Q1" gate="G$1" pin="D"/>
 <wire x1="137.16" y1="78.74" x2="137.16" y2="76.2" width="0.1524" layer="91"/>
 <pinref part="+3V6" gate="G$1" pin="+3V3"/>
 <pinref part="R2" gate="G$1" pin="2"/>
-<wire x1="137.16" y1="76.2" x2="137.16" y2="73.66" width="0.1524" layer="91"/>
 <wire x1="116.84" y1="66.04" x2="116.84" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="76.2" x2="116.84" y2="76.2" width="0.1524" layer="91"/>
+<pinref part="Q1" gate="G$1" pin="S"/>
+<wire x1="137.16" y1="73.66" x2="137.16" y2="76.2" width="0.1524" layer="91"/>
 <junction x="137.16" y="76.2"/>
 </segment>
 <segment>
@@ -11125,13 +11125,6 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <pinref part="R3" gate="R?" pin="WIPER"/>
 </segment>
 </net>
-<net name="N$1" class="0">
-<segment>
-<pinref part="U$3" gate="G$1" pin="VCC"/>
-<pinref part="Q1" gate="G$1" pin="S"/>
-<wire x1="137.16" y1="63.5" x2="137.16" y2="60.96" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$2" class="0">
 <segment>
 <pinref part="Q1" gate="G$1" pin="G"/>
@@ -11142,6 +11135,13 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <wire x1="109.22" y1="124.46" x2="109.22" y2="132.08" width="0.1524" layer="91"/>
 <wire x1="86.36" y1="124.46" x2="109.22" y2="124.46" width="0.1524" layer="91"/>
 <junction x="109.22" y="124.46"/>
+</segment>
+</net>
+<net name="N$1" class="0">
+<segment>
+<pinref part="Q1" gate="G$1" pin="D"/>
+<pinref part="U$3" gate="G$1" pin="VCC"/>
+<wire x1="137.16" y1="63.5" x2="137.16" y2="60.96" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

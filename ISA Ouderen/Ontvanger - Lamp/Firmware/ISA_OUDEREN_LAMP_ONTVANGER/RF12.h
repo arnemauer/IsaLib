@@ -17,21 +17,22 @@
 
 /// Shorthand for RFM12B group byte in rf12_buf.
 #define rf12_grp        rf12_buf[0]
-/// Shorthand for RFM12B header byte in rf12_buf.
-#define rf12_hdr        rf12_buf[1]
-/// Shorthand for RFM12B length byte in rf12_buf.
-#define rf12_len        rf12_buf[2]
-/// Shorthand for first RFM12B data byte in rf12_buf.
-#define rf12_data       (rf12_buf + 3)
 
-/// RFM12B CTL bit mask.
-#define RF12_HDR_CTL    0x80
-/// RFM12B DST bit mask.
-#define RF12_HDR_DST    0x40
-/// RFM12B ACK bit mask.
-#define RF12_HDR_ACK    0x20
-/// RFM12B HDR bit mask.
-#define RF12_HDR_MASK   0x1F
+/// pointer to 1st header byte in rf12_buf (CTL + DESTINATIONID)
+#define rf12_hdr1        rf12_buf[1]
+/// pointer to 2nd header byte in rf12_buf (ACK + SOURCEID)
+#define rf12_hdr2        rf12_buf[2]
+
+
+/// Shorthand for RF12 length byte in rf12_buf.
+#define rf12_len        rf12_buf[3]
+/// Shorthand for first RF12 data byte in rf12_buf.
+#define rf12_data       (rf12_buf + 4)
+
+#define RF12_HDR_IDMASK      0x7F
+#define RF12_HDR_ACKCTLMASK  0x80
+#define RF12_DESTID   (rf12_hdr1 & RF12_HDR_IDMASK)
+#define RF12_SOURCEID (rf12_hdr2 & RF12_HDR_IDMASK)
 
 /// RFM12B Maximum message size in bytes.
 #define RF12_MAXDATA    66
@@ -46,11 +47,9 @@
 #define RF12_EEPROM_EKEY (RF12_EEPROM_ADDR + RF12_EEPROM_SIZE) ///< EE start.
 #define RF12_EEPROM_ELEN 16                 ///< EE number of bytes.
 
-/// Shorthand to simplify detecting a request for an ACK.
-#define RF12_WANTS_ACK ((rf12_hdr & RF12_HDR_ACK) && !(rf12_hdr & RF12_HDR_CTL))
-/// Shorthand to simplify sending out the proper ACK reply.
-#define RF12_ACK_REPLY (rf12_hdr & RF12_HDR_DST ? RF12_HDR_CTL : \
-RF12_HDR_CTL | RF12_HDR_DST | (rf12_hdr & RF12_HDR_MASK))
+// shorthands to simplify sending out the proper ACK when requested
+#define RF12_WANTS_ACK ((rf12_hdr2 & RF12_HDR_ACKCTLMASK) && !(rf12_hdr1 & RF12_HDR_ACKCTLMASK))
+
 
 // options for RF12_sleep()
 #define RF12_SLEEP 0        ///< Enter sleep mode.
@@ -109,6 +108,9 @@ void rf12_sendStart(uint8_t hdr, const void* ptr, uint8_t len, uint8_t sync);
 /// This variant loops on rf12_canSend() and then calls rf12_sendStart() asap.
 void rf12_sendNow(uint8_t hdr, const void* ptr, uint8_t len);
 
+void SendACK(const void* sendBuf = "", uint8_t sendLen=0, uint8_t waitMode=SLEEP_MODE_IDLE);
+
+
 /// Wait for send to finish.
 /// @param mode sleep mode 0=none, 1=idle, 2=standby, 3=powerdown.
 void rf12_sendWait(uint8_t mode);
@@ -124,7 +126,7 @@ void rf12_sleep(char n);
 /// Request a wakeup-event after this many ms.
 /// Maximum time is about 2 years but limited by unsigned long which gives about 49 days
 /// @note set to 0 to disable a running wakeup-timer
-void rf12_setWatchdog(unsigned long ms);
+void rf12_setLowDuty(unsigned long ms);
 
 /// Checks if there was a wakeup-call from the RFM12 watchdog.
 /// @return true if RFM12 fired a watchdog interrupt

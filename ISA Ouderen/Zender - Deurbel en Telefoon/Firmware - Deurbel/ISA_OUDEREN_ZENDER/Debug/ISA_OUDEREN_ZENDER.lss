@@ -1,0 +1,2300 @@
+
+ISA_OUDEREN_ZENDER.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000009a  00800100  00000c12  00000ca6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000c12  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000162  0080019a  0080019a  00000d40  2**0
+                  ALLOC
+  3 .stab         00000750  00000000  00000000  00000d40  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      0000010b  00000000  00000000  00001490  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .comment      0000002f  00000000  00000000  0000159b  2**0
+                  CONTENTS, READONLY
+  6 .debug_aranges 00000318  00000000  00000000  000015ca  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   00002e79  00000000  00000000  000018e2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 00000f46  00000000  00000000  0000475b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   00001ceb  00000000  00000000  000056a1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_frame  00000804  00000000  00000000  0000738c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_str    00000c77  00000000  00000000  00007b90  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_loc    00001b5f  00000000  00000000  00008807  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 00000370  00000000  00000000  0000a366  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	45 c0       	rjmp	.+138    	; 0x8c <__ctors_end>
+   2:	00 00       	nop
+   4:	5f c4       	rjmp	.+2238   	; 0x8c4 <__vector_1>
+   6:	00 00       	nop
+   8:	71 c0       	rjmp	.+226    	; 0xec <__vector_2>
+   a:	00 00       	nop
+   c:	5a c0       	rjmp	.+180    	; 0xc2 <__bad_interrupt>
+   e:	00 00       	nop
+  10:	58 c0       	rjmp	.+176    	; 0xc2 <__bad_interrupt>
+  12:	00 00       	nop
+  14:	56 c0       	rjmp	.+172    	; 0xc2 <__bad_interrupt>
+  16:	00 00       	nop
+  18:	54 c0       	rjmp	.+168    	; 0xc2 <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	c2 c0       	rjmp	.+388    	; 0x1a2 <__vector_7>
+  1e:	00 00       	nop
+  20:	50 c0       	rjmp	.+160    	; 0xc2 <__bad_interrupt>
+  22:	00 00       	nop
+  24:	4e c0       	rjmp	.+156    	; 0xc2 <__bad_interrupt>
+  26:	00 00       	nop
+  28:	4c c0       	rjmp	.+152    	; 0xc2 <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	4a c0       	rjmp	.+148    	; 0xc2 <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	48 c0       	rjmp	.+144    	; 0xc2 <__bad_interrupt>
+  32:	00 00       	nop
+  34:	46 c0       	rjmp	.+140    	; 0xc2 <__bad_interrupt>
+  36:	00 00       	nop
+  38:	44 c0       	rjmp	.+136    	; 0xc2 <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	42 c0       	rjmp	.+132    	; 0xc2 <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	40 c0       	rjmp	.+128    	; 0xc2 <__bad_interrupt>
+  42:	00 00       	nop
+  44:	3e c0       	rjmp	.+124    	; 0xc2 <__bad_interrupt>
+  46:	00 00       	nop
+  48:	08 c5       	rjmp	.+2576   	; 0xa5a <__vector_18>
+  4a:	00 00       	nop
+  4c:	3b c5       	rjmp	.+2678   	; 0xac4 <__vector_19>
+  4e:	00 00       	nop
+  50:	38 c0       	rjmp	.+112    	; 0xc2 <__bad_interrupt>
+  52:	00 00       	nop
+  54:	36 c0       	rjmp	.+108    	; 0xc2 <__bad_interrupt>
+  56:	00 00       	nop
+  58:	34 c0       	rjmp	.+104    	; 0xc2 <__bad_interrupt>
+  5a:	00 00       	nop
+  5c:	32 c0       	rjmp	.+100    	; 0xc2 <__bad_interrupt>
+  5e:	00 00       	nop
+  60:	30 c0       	rjmp	.+96     	; 0xc2 <__bad_interrupt>
+  62:	00 00       	nop
+  64:	2e c0       	rjmp	.+92     	; 0xc2 <__bad_interrupt>
+	...
+
+00000068 <_ZL17configRegs_compat>:
+  68:	01 04 02 00 03 02 04 8a 05 05 06 c3 0b 20 19 42     ............. .B
+  78:	1e 2c 25 80 2e 88 2f 2d 37 00 38 00 3c 8f 3d 10     .,%.../-7.8.<.=.
+  88:	6f 20 00 00                                         o ..
+
+0000008c <__ctors_end>:
+  8c:	11 24       	eor	r1, r1
+  8e:	1f be       	out	0x3f, r1	; 63
+  90:	cf ef       	ldi	r28, 0xFF	; 255
+  92:	d8 e0       	ldi	r29, 0x08	; 8
+  94:	de bf       	out	0x3e, r29	; 62
+  96:	cd bf       	out	0x3d, r28	; 61
+
+00000098 <__do_copy_data>:
+  98:	11 e0       	ldi	r17, 0x01	; 1
+  9a:	a0 e0       	ldi	r26, 0x00	; 0
+  9c:	b1 e0       	ldi	r27, 0x01	; 1
+  9e:	e2 e1       	ldi	r30, 0x12	; 18
+  a0:	fc e0       	ldi	r31, 0x0C	; 12
+  a2:	02 c0       	rjmp	.+4      	; 0xa8 <__do_copy_data+0x10>
+  a4:	05 90       	lpm	r0, Z+
+  a6:	0d 92       	st	X+, r0
+  a8:	aa 39       	cpi	r26, 0x9A	; 154
+  aa:	b1 07       	cpc	r27, r17
+  ac:	d9 f7       	brne	.-10     	; 0xa4 <__do_copy_data+0xc>
+
+000000ae <__do_clear_bss>:
+  ae:	22 e0       	ldi	r18, 0x02	; 2
+  b0:	aa e9       	ldi	r26, 0x9A	; 154
+  b2:	b1 e0       	ldi	r27, 0x01	; 1
+  b4:	01 c0       	rjmp	.+2      	; 0xb8 <.do_clear_bss_start>
+
+000000b6 <.do_clear_bss_loop>:
+  b6:	1d 92       	st	X+, r1
+
+000000b8 <.do_clear_bss_start>:
+  b8:	ac 3f       	cpi	r26, 0xFC	; 252
+  ba:	b2 07       	cpc	r27, r18
+  bc:	e1 f7       	brne	.-8      	; 0xb6 <.do_clear_bss_loop>
+  be:	14 d1       	rcall	.+552    	; 0x2e8 <main>
+  c0:	a6 c5       	rjmp	.+2892   	; 0xc0e <_exit>
+
+000000c2 <__bad_interrupt>:
+  c2:	9e cf       	rjmp	.-196    	; 0x0 <__vectors>
+
+000000c4 <doorbell_disable_interrupt>:
+	EICRA &= ~(1<<ISC11) | (1<<ISC10);	// Trigger INT1 on low level
+	doorbell_enable_interrupt();
+}
+
+void doorbell_disable_interrupt(){
+	EIMSK &= ~(1<<INT1);					// Enable INT1
+  c4:	e9 98       	cbi	0x1d, 1	; 29
+  c6:	08 95       	ret
+
+000000c8 <doorbell_enable_interrupt>:
+}
+
+void doorbell_enable_interrupt(){
+	EIMSK |= (1<<INT1);					// Enable INT1
+  c8:	e9 9a       	sbi	0x1d, 1	; 29
+  ca:	08 95       	ret
+
+000000cc <doorbell_init>:
+ * Initialize doorbell interrupt
+ *
+ * @param i The specified uint16_t
+ */
+void doorbell_init() {
+	DDRD &= ~_BV(DDD3);
+  cc:	53 98       	cbi	0x0a, 3	; 10
+	EICRA &= ~(1<<ISC11) | (1<<ISC10);	// Trigger INT1 on low level
+  ce:	e9 e6       	ldi	r30, 0x69	; 105
+  d0:	f0 e0       	ldi	r31, 0x00	; 0
+  d2:	80 81       	ld	r24, Z
+  d4:	87 7f       	andi	r24, 0xF7	; 247
+  d6:	80 83       	st	Z, r24
+	doorbell_enable_interrupt();
+  d8:	f7 cf       	rjmp	.-18     	; 0xc8 <doorbell_enable_interrupt>
+
+000000da <doorbell_interrupt>:
+}
+
+void doorbell_interrupt(){
+		//doorbell_last_state = 1;
+		
+		if(!(PIND & (1 << 3))){ // doorbell_last_state == 0
+  da:	4b 99       	sbic	0x09, 3	; 9
+  dc:	06 c0       	rjmp	.+12     	; 0xea <doorbell_interrupt+0x10>
+		doorbell_last_state = 1;
+  de:	81 e0       	ldi	r24, 0x01	; 1
+  e0:	80 93 00 01 	sts	0x0100, r24
+		triggered = 1;
+  e4:	80 93 9a 01 	sts	0x019A, r24
+		doorbell_disable_interrupt();
+  e8:	ed cf       	rjmp	.-38     	; 0xc4 <doorbell_disable_interrupt>
+  ea:	08 95       	ret
+
+000000ec <__vector_2>:
+		}
+		
+}
+
+
+ISR(INT1_vect) {
+  ec:	1f 92       	push	r1
+  ee:	0f 92       	push	r0
+  f0:	0f b6       	in	r0, 0x3f	; 63
+  f2:	0f 92       	push	r0
+  f4:	11 24       	eor	r1, r1
+  f6:	2f 93       	push	r18
+  f8:	3f 93       	push	r19
+  fa:	4f 93       	push	r20
+  fc:	5f 93       	push	r21
+  fe:	6f 93       	push	r22
+ 100:	7f 93       	push	r23
+ 102:	8f 93       	push	r24
+ 104:	9f 93       	push	r25
+ 106:	af 93       	push	r26
+ 108:	bf 93       	push	r27
+ 10a:	ef 93       	push	r30
+ 10c:	ff 93       	push	r31
+	doorbell_interrupt();
+ 10e:	e5 df       	rcall	.-54     	; 0xda <doorbell_interrupt>
+}
+ 110:	ff 91       	pop	r31
+ 112:	ef 91       	pop	r30
+ 114:	bf 91       	pop	r27
+ 116:	af 91       	pop	r26
+ 118:	9f 91       	pop	r25
+ 11a:	8f 91       	pop	r24
+ 11c:	7f 91       	pop	r23
+ 11e:	6f 91       	pop	r22
+ 120:	5f 91       	pop	r21
+ 122:	4f 91       	pop	r20
+ 124:	3f 91       	pop	r19
+ 126:	2f 91       	pop	r18
+ 128:	0f 90       	pop	r0
+ 12a:	0f be       	out	0x3f, r0	; 63
+ 12c:	0f 90       	pop	r0
+ 12e:	1f 90       	pop	r1
+ 130:	18 95       	reti
+
+00000132 <log_s>:
+ *
+ * @param s The specified string
+ */
+void log_s(const char *s) {
+#ifdef LOG_AVAILABLE
+    uart0_puts(s);
+ 132:	27 c5       	rjmp	.+2638   	; 0xb82 <uart0_puts>
+ 134:	08 95       	ret
+
+00000136 <millis_init>:
+{
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+	{
+		milliseconds -= ms;
+	}
+}
+ 136:	82 e0       	ldi	r24, 0x02	; 2
+ 138:	80 93 b0 00 	sts	0x00B0, r24
+ 13c:	93 e0       	ldi	r25, 0x03	; 3
+ 13e:	90 93 b1 00 	sts	0x00B1, r25
+ 142:	80 93 70 00 	sts	0x0070, r24
+ 146:	8a ef       	ldi	r24, 0xFA	; 250
+ 148:	80 93 b3 00 	sts	0x00B3, r24
+ 14c:	08 95       	ret
+
+0000014e <millis_get>:
+ 14e:	0f 93       	push	r16
+ 150:	1f 93       	push	r17
+ 152:	8f b7       	in	r24, 0x3f	; 63
+ 154:	f8 94       	cli
+ 156:	00 91 9b 01 	lds	r16, 0x019B
+ 15a:	10 91 9c 01 	lds	r17, 0x019C
+ 15e:	20 91 9d 01 	lds	r18, 0x019D
+ 162:	30 91 9e 01 	lds	r19, 0x019E
+ 166:	8f bf       	out	0x3f, r24	; 63
+ 168:	60 2f       	mov	r22, r16
+ 16a:	71 2f       	mov	r23, r17
+ 16c:	82 2f       	mov	r24, r18
+ 16e:	93 2f       	mov	r25, r19
+ 170:	1f 91       	pop	r17
+ 172:	0f 91       	pop	r16
+ 174:	08 95       	ret
+
+00000176 <millis_resume>:
+ 176:	e4 e6       	ldi	r30, 0x64	; 100
+ 178:	f0 e0       	ldi	r31, 0x00	; 0
+ 17a:	80 81       	ld	r24, Z
+ 17c:	8f 7b       	andi	r24, 0xBF	; 191
+ 17e:	80 83       	st	Z, r24
+ 180:	e0 e7       	ldi	r30, 0x70	; 112
+ 182:	f0 e0       	ldi	r31, 0x00	; 0
+ 184:	80 81       	ld	r24, Z
+ 186:	82 60       	ori	r24, 0x02	; 2
+ 188:	80 83       	st	Z, r24
+ 18a:	08 95       	ret
+
+0000018c <millis_pause>:
+ 18c:	e0 e7       	ldi	r30, 0x70	; 112
+ 18e:	f0 e0       	ldi	r31, 0x00	; 0
+ 190:	80 81       	ld	r24, Z
+ 192:	8d 7f       	andi	r24, 0xFD	; 253
+ 194:	80 83       	st	Z, r24
+ 196:	e4 e6       	ldi	r30, 0x64	; 100
+ 198:	f0 e0       	ldi	r31, 0x00	; 0
+ 19a:	80 81       	ld	r24, Z
+ 19c:	80 64       	ori	r24, 0x40	; 64
+ 19e:	80 83       	st	Z, r24
+ 1a0:	08 95       	ret
+
+000001a2 <__vector_7>:
+
+ISR(ISR_VECT)
+{
+ 1a2:	1f 92       	push	r1
+ 1a4:	0f 92       	push	r0
+ 1a6:	0f b6       	in	r0, 0x3f	; 63
+ 1a8:	0f 92       	push	r0
+ 1aa:	11 24       	eor	r1, r1
+ 1ac:	8f 93       	push	r24
+ 1ae:	9f 93       	push	r25
+ 1b0:	af 93       	push	r26
+ 1b2:	bf 93       	push	r27
+	++milliseconds;
+ 1b4:	80 91 9b 01 	lds	r24, 0x019B
+ 1b8:	90 91 9c 01 	lds	r25, 0x019C
+ 1bc:	a0 91 9d 01 	lds	r26, 0x019D
+ 1c0:	b0 91 9e 01 	lds	r27, 0x019E
+ 1c4:	01 96       	adiw	r24, 0x01	; 1
+ 1c6:	a1 1d       	adc	r26, r1
+ 1c8:	b1 1d       	adc	r27, r1
+ 1ca:	80 93 9b 01 	sts	0x019B, r24
+ 1ce:	90 93 9c 01 	sts	0x019C, r25
+ 1d2:	a0 93 9d 01 	sts	0x019D, r26
+ 1d6:	b0 93 9e 01 	sts	0x019E, r27
+}
+ 1da:	bf 91       	pop	r27
+ 1dc:	af 91       	pop	r26
+ 1de:	9f 91       	pop	r25
+ 1e0:	8f 91       	pop	r24
+ 1e2:	0f 90       	pop	r0
+ 1e4:	0f be       	out	0x3f, r0	; 63
+ 1e6:	0f 90       	pop	r0
+ 1e8:	1f 90       	pop	r1
+ 1ea:	18 95       	reti
+
+000001ec <_Z11sendpackagev>:
+
+	
+	
+
+	
+void sendpackage(){ 
+ 1ec:	cf 92       	push	r12
+ 1ee:	df 92       	push	r13
+ 1f0:	ef 92       	push	r14
+ 1f2:	ff 92       	push	r15
+ 1f4:	1f 93       	push	r17
+ 1f6:	cf 93       	push	r28
+ 1f8:	df 93       	push	r29
+ 1fa:	13 e0       	ldi	r17, 0x03	; 3
+			if (rf12_recvDone()) { // a packet has been received
+				
+				log_s("\rPAKKET ONTVANGEN - CRC=");
+				uart0_putc(rf12_crc);
+				log_s("; RF12HDR=");
+				uart0_putc(rf12_hdr);
+ 1fc:	cd ea       	ldi	r28, 0xAD	; 173
+ 1fe:	d1 e0       	ldi	r29, 0x01	; 1
+
+	
+void sendpackage(){ 
+	    for (byte i = 0; i < RETRY_LIMIT; ++i) {
+			
+		    rf69_sleep(RF12_WAKEUP);
+ 200:	8f ef       	ldi	r24, 0xFF	; 255
+ 202:	26 d4       	rcall	.+2124   	; 0xa50 <_Z10rf69_sleepc>
+			
+			//rf69_sendNow( RF12_HDR_DST | DESTINATION_NODE_ID, &pre_payload, sizeof(pre_payload));
+			//rf69_sendWait(1); //idle
+			// _delay_ms(2);
+		    rf69_sendNow(RF12_HDR_ACK | RF12_HDR_DST | DESTINATION_NODE_ID, &payload, sizeof(payload));
+ 204:	42 e0       	ldi	r20, 0x02	; 2
+ 206:	61 e0       	ldi	r22, 0x01	; 1
+ 208:	71 e0       	ldi	r23, 0x01	; 1
+ 20a:	82 e6       	ldi	r24, 0x62	; 98
+ 20c:	e5 d3       	rcall	.+1994   	; 0x9d8 <_Z12rf69_sendNowhPKvh>
+		    rf69_sendWait(1); //idle
+ 20e:	81 e0       	ldi	r24, 0x01	; 1
+ 210:	f8 d3       	rcall	.+2032   	; 0xa02 <_Z13rf69_sendWaith>
+	
+		
+	
+	// wait a few milliseconds for proper ACK to me, return true if indeed received
+	static byte waitForAck() {
+		unsigned long long ACK_WAIT_TILL = millis_get() + ACK_TIME; 
+ 212:	9d df       	rcall	.-198    	; 0x14e <millis_get>
+ 214:	0f 2e       	mov	r0, r31
+ 216:	f9 e1       	ldi	r31, 0x19	; 25
+ 218:	cf 2e       	mov	r12, r31
+ 21a:	d1 2c       	mov	r13, r1
+ 21c:	e1 2c       	mov	r14, r1
+ 21e:	f1 2c       	mov	r15, r1
+ 220:	f0 2d       	mov	r31, r0
+ 222:	c6 0e       	add	r12, r22
+ 224:	d7 1e       	adc	r13, r23
+ 226:	e8 1e       	adc	r14, r24
+ 228:	f9 1e       	adc	r15, r25
+ 22a:	23 c0       	rjmp	.+70     	; 0x272 <_Z11sendpackagev+0x86>
+		while (millis_get() <= ACK_WAIT_TILL) {
+			if (rf12_recvDone()) { // a packet has been received
+ 22c:	c0 d3       	rcall	.+1920   	; 0x9ae <_Z13rf69_recvDonev>
+ 22e:	88 23       	and	r24, r24
+ 230:	01 f1       	breq	.+64     	; 0x272 <_Z11sendpackagev+0x86>
+				
+				log_s("\rPAKKET ONTVANGEN - CRC=");
+ 232:	83 e0       	ldi	r24, 0x03	; 3
+ 234:	91 e0       	ldi	r25, 0x01	; 1
+ 236:	7d df       	rcall	.-262    	; 0x132 <log_s>
+				uart0_putc(rf12_crc);
+ 238:	80 91 f4 01 	lds	r24, 0x01F4
+ 23c:	90 91 f5 01 	lds	r25, 0x01F5
+ 240:	86 d4       	rcall	.+2316   	; 0xb4e <uart0_putc>
+				log_s("; RF12HDR=");
+ 242:	8c e1       	ldi	r24, 0x1C	; 28
+ 244:	91 e0       	ldi	r25, 0x01	; 1
+ 246:	75 df       	rcall	.-278    	; 0x132 <log_s>
+				uart0_putc(rf12_hdr);
+ 248:	88 81       	ld	r24, Y
+ 24a:	81 d4       	rcall	.+2306   	; 0xb4e <uart0_putc>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 24c:	2f ef       	ldi	r18, 0xFF	; 255
+ 24e:	83 ec       	ldi	r24, 0xC3	; 195
+ 250:	99 e0       	ldi	r25, 0x09	; 9
+ 252:	21 50       	subi	r18, 0x01	; 1
+ 254:	80 40       	sbci	r24, 0x00	; 0
+ 256:	90 40       	sbci	r25, 0x00	; 0
+ 258:	e1 f7       	brne	.-8      	; 0x252 <_Z11sendpackagev+0x66>
+ 25a:	00 c0       	rjmp	.+0      	; 0x25c <_Z11sendpackagev+0x70>
+ 25c:	00 00       	nop
+				_delay_ms(400);
+				 	if (rf12_crc == 0 && rf12_hdr == ( RF12_HDR_CTL | DESTINATION_NODE_ID)){
+ 25e:	80 91 f4 01 	lds	r24, 0x01F4
+ 262:	90 91 f5 01 	lds	r25, 0x01F5
+ 266:	89 2b       	or	r24, r25
+ 268:	a9 f4       	brne	.+42     	; 0x294 <_Z11sendpackagev+0xa8>
+ 26a:	88 81       	ld	r24, Y
+ 26c:	82 38       	cpi	r24, 0x82	; 130
+ 26e:	91 f4       	brne	.+36     	; 0x294 <_Z11sendpackagev+0xa8>
+ 270:	28 c0       	rjmp	.+80     	; 0x2c2 <_Z11sendpackagev+0xd6>
+		
+	
+	// wait a few milliseconds for proper ACK to me, return true if indeed received
+	static byte waitForAck() {
+		unsigned long long ACK_WAIT_TILL = millis_get() + ACK_TIME; 
+		while (millis_get() <= ACK_WAIT_TILL) {
+ 272:	6d df       	rcall	.-294    	; 0x14e <millis_get>
+ 274:	c6 16       	cp	r12, r22
+ 276:	d7 06       	cpc	r13, r23
+ 278:	e8 06       	cpc	r14, r24
+ 27a:	f9 06       	cpc	r15, r25
+ 27c:	b8 f6       	brcc	.-82     	; 0x22c <_Z11sendpackagev+0x40>
+ 27e:	15 c0       	rjmp	.+42     	; 0x2aa <_Z11sendpackagev+0xbe>
+		    
+		    _delay_ms(RETRY_PERIOD);
+	    }
+		
+		 #ifdef DEBUG_SERIAL
+		 log_s("NO ACK... Failed sending package! \r");
+ 280:	87 e2       	ldi	r24, 0x27	; 39
+ 282:	91 e0       	ldi	r25, 0x01	; 1
+ 284:	56 df       	rcall	.-340    	; 0x132 <log_s>
+ 286:	8f e3       	ldi	r24, 0x3F	; 63
+ 288:	9c e9       	ldi	r25, 0x9C	; 156
+ 28a:	01 97       	sbiw	r24, 0x01	; 1
+ 28c:	f1 f7       	brne	.-4      	; 0x28a <_Z11sendpackagev+0x9e>
+ 28e:	00 c0       	rjmp	.+0      	; 0x290 <_Z11sendpackagev+0xa4>
+ 290:	00 00       	nop
+ 292:	22 c0       	rjmp	.+68     	; 0x2d8 <_Z11sendpackagev+0xec>
+				_delay_ms(400);
+				 	if (rf12_crc == 0 && rf12_hdr == ( RF12_HDR_CTL | DESTINATION_NODE_ID)){
+						return 1;
+					}
+					
+			set_sleep_mode(SLEEP_MODE_IDLE);
+ 294:	83 b7       	in	r24, 0x33	; 51
+ 296:	81 7f       	andi	r24, 0xF1	; 241
+ 298:	83 bf       	out	0x33, r24	; 51
+			sleep_mode();
+ 29a:	83 b7       	in	r24, 0x33	; 51
+ 29c:	81 60       	ori	r24, 0x01	; 1
+ 29e:	83 bf       	out	0x33, r24	; 51
+ 2a0:	88 95       	sleep
+ 2a2:	83 b7       	in	r24, 0x33	; 51
+ 2a4:	8e 7f       	andi	r24, 0xFE	; 254
+ 2a6:	83 bf       	out	0x33, r24	; 51
+ 2a8:	e4 cf       	rjmp	.-56     	; 0x272 <_Z11sendpackagev+0x86>
+			// _delay_ms(2);
+		    rf69_sendNow(RF12_HDR_ACK | RF12_HDR_DST | DESTINATION_NODE_ID, &payload, sizeof(payload));
+		    rf69_sendWait(1); //idle
+			
+		    byte acked = waitForAck();
+		    rf69_sleep(RF12_SLEEP);
+ 2aa:	80 e0       	ldi	r24, 0x00	; 0
+ 2ac:	d1 d3       	rcall	.+1954   	; 0xa50 <_Z10rf69_sleepc>
+ 2ae:	8f e1       	ldi	r24, 0x1F	; 31
+ 2b0:	9e e4       	ldi	r25, 0x4E	; 78
+ 2b2:	01 97       	sbiw	r24, 0x01	; 1
+ 2b4:	f1 f7       	brne	.-4      	; 0x2b2 <_Z11sendpackagev+0xc6>
+ 2b6:	00 c0       	rjmp	.+0      	; 0x2b8 <_Z11sendpackagev+0xcc>
+ 2b8:	00 00       	nop
+ 2ba:	11 50       	subi	r17, 0x01	; 1
+	
+	
+
+	
+void sendpackage(){ 
+	    for (byte i = 0; i < RETRY_LIMIT; ++i) {
+ 2bc:	09 f0       	breq	.+2      	; 0x2c0 <_Z11sendpackagev+0xd4>
+ 2be:	a0 cf       	rjmp	.-192    	; 0x200 <_Z11sendpackagev+0x14>
+ 2c0:	df cf       	rjmp	.-66     	; 0x280 <_Z11sendpackagev+0x94>
+			// _delay_ms(2);
+		    rf69_sendNow(RF12_HDR_ACK | RF12_HDR_DST | DESTINATION_NODE_ID, &payload, sizeof(payload));
+		    rf69_sendWait(1); //idle
+			
+		    byte acked = waitForAck();
+		    rf69_sleep(RF12_SLEEP);
+ 2c2:	80 e0       	ldi	r24, 0x00	; 0
+ 2c4:	c5 d3       	rcall	.+1930   	; 0xa50 <_Z10rf69_sleepc>
+
+		    if (acked) {
+			  #ifdef DEBUG_SERIAL
+			   log_s("ACK OK\r");
+ 2c6:	8b e4       	ldi	r24, 0x4B	; 75
+ 2c8:	91 e0       	ldi	r25, 0x01	; 1
+ 2ca:	33 df       	rcall	.-410    	; 0x132 <log_s>
+ 2cc:	8f e3       	ldi	r24, 0x3F	; 63
+ 2ce:	9c e9       	ldi	r25, 0x9C	; 156
+ 2d0:	01 97       	sbiw	r24, 0x01	; 1
+ 2d2:	f1 f7       	brne	.-4      	; 0x2d0 <_Z11sendpackagev+0xe4>
+ 2d4:	00 c0       	rjmp	.+0      	; 0x2d6 <_Z11sendpackagev+0xea>
+ 2d6:	00 00       	nop
+		
+		 #ifdef DEBUG_SERIAL
+		 log_s("NO ACK... Failed sending package! \r");
+		 _delay_ms(20);
+		 #endif
+	}
+ 2d8:	df 91       	pop	r29
+ 2da:	cf 91       	pop	r28
+ 2dc:	1f 91       	pop	r17
+ 2de:	ff 90       	pop	r15
+ 2e0:	ef 90       	pop	r14
+ 2e2:	df 90       	pop	r13
+ 2e4:	cf 90       	pop	r12
+ 2e6:	08 95       	ret
+
+000002e8 <main>:
+uint8_t payload[2] = {0x99, 0x18}; // 10 DUMMY BYTES
+
+	
+int main() {	
+// disable ADC for less power 
+	ADCSRA &= ~_BV(ADEN); // ADC off 
+ 2e8:	ea e7       	ldi	r30, 0x7A	; 122
+ 2ea:	f0 e0       	ldi	r31, 0x00	; 0
+ 2ec:	80 81       	ld	r24, Z
+ 2ee:	8f 77       	andi	r24, 0x7F	; 127
+ 2f0:	80 83       	st	Z, r24
+	sei();
+ 2f2:	78 94       	sei
+	
+	
+			/* Initialize MILLIS */
+	        millis_init();
+ 2f4:	20 df       	rcall	.-448    	; 0x136 <millis_init>
+ 2f6:	2f ef       	ldi	r18, 0xFF	; 255
+ 2f8:	89 e6       	ldi	r24, 0x69	; 105
+ 2fa:	98 e1       	ldi	r25, 0x18	; 24
+ 2fc:	21 50       	subi	r18, 0x01	; 1
+ 2fe:	80 40       	sbci	r24, 0x00	; 0
+ 300:	90 40       	sbci	r25, 0x00	; 0
+ 302:	e1 f7       	brne	.-8      	; 0x2fc <main+0x14>
+ 304:	00 c0       	rjmp	.+0      	; 0x306 <main+0x1e>
+ 306:	00 00       	nop
+
+
+						
+			/* Initialize UART */
+			#ifdef DEBUG_SERIAL
+				uart_init(UART_BAUD_SELECT(UART_BAUD_RATE,F_CPU)) ;
+ 308:	89 e1       	ldi	r24, 0x19	; 25
+ 30a:	90 e0       	ldi	r25, 0x00	; 0
+ 30c:	07 d4       	rcall	.+2062   	; 0xb1c <uart0_init>
+				log_s("UART OK\r");
+ 30e:	83 e5       	ldi	r24, 0x53	; 83
+ 310:	91 e0       	ldi	r25, 0x01	; 1
+ 312:	0f df       	rcall	.-482    	; 0x132 <log_s>
+ 314:	2f ef       	ldi	r18, 0xFF	; 255
+ 316:	89 e6       	ldi	r24, 0x69	; 105
+ 318:	98 e1       	ldi	r25, 0x18	; 24
+ 31a:	21 50       	subi	r18, 0x01	; 1
+ 31c:	80 40       	sbci	r24, 0x00	; 0
+ 31e:	90 40       	sbci	r25, 0x00	; 0
+ 320:	e1 f7       	brne	.-8      	; 0x31a <main+0x32>
+ 322:	00 c0       	rjmp	.+0      	; 0x324 <main+0x3c>
+ 324:	00 00       	nop
+				
+
+				
+			/* Initialize RFM12B */
+			#ifdef DEBUG_SERIAL
+				log_s("RF12 INIT..."); _delay_ms(1000);
+ 326:	8c e5       	ldi	r24, 0x5C	; 92
+ 328:	91 e0       	ldi	r25, 0x01	; 1
+ 32a:	03 df       	rcall	.-506    	; 0x132 <log_s>
+ 32c:	2f ef       	ldi	r18, 0xFF	; 255
+ 32e:	89 e6       	ldi	r24, 0x69	; 105
+ 330:	98 e1       	ldi	r25, 0x18	; 24
+ 332:	21 50       	subi	r18, 0x01	; 1
+ 334:	80 40       	sbci	r24, 0x00	; 0
+ 336:	90 40       	sbci	r25, 0x00	; 0
+ 338:	e1 f7       	brne	.-8      	; 0x332 <main+0x4a>
+ 33a:	00 c0       	rjmp	.+0      	; 0x33c <main+0x54>
+ 33c:	00 00       	nop
+			#endif
+			
+			rf12_spiInit();
+ 33e:	6c d0       	rcall	.+216    	; 0x418 <_Z12rf12_spiInitv>
+			rf69_initialize(NODE_ID, RF12_868MHZ, 14); // node id, rfband, group id
+ 340:	20 e4       	ldi	r18, 0x40	; 64
+ 342:	36 e0       	ldi	r19, 0x06	; 6
+ 344:	4e e0       	ldi	r20, 0x0E	; 14
+ 346:	62 e0       	ldi	r22, 0x02	; 2
+ 348:	83 e0       	ldi	r24, 0x03	; 3
+ 34a:	df d2       	rcall	.+1470   	; 0x90a <_Z15rf69_initializehhhj>
+
+			#ifdef DEBUG_SERIAL
+				log_s(" OK\r"); _delay_ms(1000);
+ 34c:	8e e4       	ldi	r24, 0x4E	; 78
+ 34e:	91 e0       	ldi	r25, 0x01	; 1
+ 350:	f0 de       	rcall	.-544    	; 0x132 <log_s>
+ 352:	2f ef       	ldi	r18, 0xFF	; 255
+ 354:	89 e6       	ldi	r24, 0x69	; 105
+ 356:	98 e1       	ldi	r25, 0x18	; 24
+ 358:	21 50       	subi	r18, 0x01	; 1
+ 35a:	80 40       	sbci	r24, 0x00	; 0
+ 35c:	90 40       	sbci	r25, 0x00	; 0
+ 35e:	e1 f7       	brne	.-8      	; 0x358 <main+0x70>
+ 360:	00 c0       	rjmp	.+0      	; 0x362 <main+0x7a>
+ 362:	00 00       	nop
+			#endif
+
+		#ifdef DEBUG_SERIAL
+		log_s("DOORBELL INIT..."); _delay_ms(1000);
+ 364:	89 e6       	ldi	r24, 0x69	; 105
+ 366:	91 e0       	ldi	r25, 0x01	; 1
+ 368:	e4 de       	rcall	.-568    	; 0x132 <log_s>
+ 36a:	2f ef       	ldi	r18, 0xFF	; 255
+ 36c:	89 e6       	ldi	r24, 0x69	; 105
+ 36e:	98 e1       	ldi	r25, 0x18	; 24
+ 370:	21 50       	subi	r18, 0x01	; 1
+ 372:	80 40       	sbci	r24, 0x00	; 0
+ 374:	90 40       	sbci	r25, 0x00	; 0
+ 376:	e1 f7       	brne	.-8      	; 0x370 <main+0x88>
+ 378:	00 c0       	rjmp	.+0      	; 0x37a <main+0x92>
+ 37a:	00 00       	nop
+		#endif
+		
+			doorbell_init();
+ 37c:	a7 de       	rcall	.-690    	; 0xcc <doorbell_init>
+		#ifdef DEBUG_SERIAL
+			log_s(" OK \r"); _delay_ms(1000);
+ 37e:	8a e7       	ldi	r24, 0x7A	; 122
+ 380:	91 e0       	ldi	r25, 0x01	; 1
+ 382:	d7 de       	rcall	.-594    	; 0x132 <log_s>
+ 384:	2f ef       	ldi	r18, 0xFF	; 255
+ 386:	89 e6       	ldi	r24, 0x69	; 105
+ 388:	98 e1       	ldi	r25, 0x18	; 24
+ 38a:	21 50       	subi	r18, 0x01	; 1
+ 38c:	80 40       	sbci	r24, 0x00	; 0
+ 38e:	90 40       	sbci	r25, 0x00	; 0
+ 390:	e1 f7       	brne	.-8      	; 0x38a <main+0xa2>
+ 392:	00 c0       	rjmp	.+0      	; 0x394 <main+0xac>
+ 394:	00 00       	nop
+				
+	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
+
+
+
+	if(triggered){
+ 396:	80 91 9a 01 	lds	r24, 0x019A
+ 39a:	88 23       	and	r24, r24
+ 39c:	81 f0       	breq	.+32     	; 0x3be <main+0xd6>
+		millis_resume();
+ 39e:	eb de       	rcall	.-554    	; 0x176 <millis_resume>
+			#ifdef DEBUG_SERIAL
+			log_s("Send Package...");
+ 3a0:	80 e8       	ldi	r24, 0x80	; 128
+ 3a2:	91 e0       	ldi	r25, 0x01	; 1
+ 3a4:	c6 de       	rcall	.-628    	; 0x132 <log_s>
+ 3a6:	2f ef       	ldi	r18, 0xFF	; 255
+ 3a8:	89 e6       	ldi	r24, 0x69	; 105
+ 3aa:	98 e1       	ldi	r25, 0x18	; 24
+ 3ac:	21 50       	subi	r18, 0x01	; 1
+ 3ae:	80 40       	sbci	r24, 0x00	; 0
+ 3b0:	90 40       	sbci	r25, 0x00	; 0
+ 3b2:	e1 f7       	brne	.-8      	; 0x3ac <main+0xc4>
+ 3b4:	00 c0       	rjmp	.+0      	; 0x3b6 <main+0xce>
+ 3b6:	00 00       	nop
+			_delay_ms(1000);
+			#endif
+			
+		// send message
+		sendpackage();
+ 3b8:	19 df       	rcall	.-462    	; 0x1ec <_Z11sendpackagev>
+		
+		triggered = 0; // reset trigger
+ 3ba:	10 92 9a 01 	sts	0x019A, r1
+		
+	}
+	
+	if((PIND & (1 << 3)) && doorbell_last_state == 1){ // if pin is high again
+ 3be:	4b 9b       	sbis	0x09, 3	; 9
+ 3c0:	1f c0       	rjmp	.+62     	; 0x400 <main+0x118>
+ 3c2:	80 91 00 01 	lds	r24, 0x0100
+ 3c6:	81 30       	cpi	r24, 0x01	; 1
+ 3c8:	d9 f4       	brne	.+54     	; 0x400 <main+0x118>
+		
+					#ifdef DEBUG_SERIAL
+					log_s("PWR_DOWN\r");
+ 3ca:	80 e9       	ldi	r24, 0x90	; 144
+ 3cc:	91 e0       	ldi	r25, 0x01	; 1
+ 3ce:	b1 de       	rcall	.-670    	; 0x132 <log_s>
+ 3d0:	8f e3       	ldi	r24, 0x3F	; 63
+ 3d2:	9c e9       	ldi	r25, 0x9C	; 156
+ 3d4:	01 97       	sbiw	r24, 0x01	; 1
+ 3d6:	f1 f7       	brne	.-4      	; 0x3d4 <main+0xec>
+ 3d8:	00 c0       	rjmp	.+0      	; 0x3da <main+0xf2>
+ 3da:	00 00       	nop
+					 _delay_ms(20);
+					#endif
+		cli();			
+ 3dc:	f8 94       	cli
+		millis_pause();
+ 3de:	d6 de       	rcall	.-596    	; 0x18c <millis_pause>
+		doorbell_last_state = 0;
+ 3e0:	10 92 00 01 	sts	0x0100, r1
+		doorbell_enable_interrupt();
+ 3e4:	71 de       	rcall	.-798    	; 0xc8 <doorbell_enable_interrupt>
+		set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+ 3e6:	83 b7       	in	r24, 0x33	; 51
+ 3e8:	81 7f       	andi	r24, 0xF1	; 241
+ 3ea:	84 60       	ori	r24, 0x04	; 4
+ 3ec:	83 bf       	out	0x33, r24	; 51
+        sleep_enable();
+ 3ee:	83 b7       	in	r24, 0x33	; 51
+ 3f0:	81 60       	ori	r24, 0x01	; 1
+ 3f2:	83 bf       	out	0x33, r24	; 51
+	     sei();
+ 3f4:	78 94       	sei
+	    sleep_cpu();
+ 3f6:	88 95       	sleep
+	     sleep_disable();
+ 3f8:	83 b7       	in	r24, 0x33	; 51
+ 3fa:	8e 7f       	andi	r24, 0xFE	; 254
+ 3fc:	83 bf       	out	0x33, r24	; 51
+ 3fe:	cb cf       	rjmp	.-106    	; 0x396 <main+0xae>
+		   
+	}else{
+			#ifdef DEBUG_SERIAL
+		//	log_s("Wait for doorbell to go high again... Sleep... (PWR_SAVE) \r"); _delay_ms(100);
+			#endif
+		set_sleep_mode(SLEEP_MODE_PWR_SAVE); // keep millis timer enabled, so avr wakes every ms
+ 400:	83 b7       	in	r24, 0x33	; 51
+ 402:	81 7f       	andi	r24, 0xF1	; 241
+ 404:	86 60       	ori	r24, 0x06	; 6
+ 406:	83 bf       	out	0x33, r24	; 51
+		sleep_mode();
+ 408:	83 b7       	in	r24, 0x33	; 51
+ 40a:	81 60       	ori	r24, 0x01	; 1
+ 40c:	83 bf       	out	0x33, r24	; 51
+ 40e:	88 95       	sleep
+ 410:	83 b7       	in	r24, 0x33	; 51
+ 412:	8e 7f       	andi	r24, 0xFE	; 254
+ 414:	83 bf       	out	0x33, r24	; 51
+ 416:	bf cf       	rjmp	.-130    	; 0x396 <main+0xae>
+
+00000418 <_Z12rf12_spiInitv>:
+}
+
+
+void rf12_spiInit () {
+
+		DDR_SPI |= (1 << BIT_MOSI) | (1 << BIT_SCK) | (1 << BIT_RFM_CS);  // SDI, SCK,  CS output 
+ 418:	84 b1       	in	r24, 0x04	; 4
+ 41a:	8c 62       	ori	r24, 0x2C	; 44
+ 41c:	84 b9       	out	0x04, r24	; 4
+		PORT_RFM_CS |= (1 << BIT_RFM_CS);  // Pull RFM12B CS high
+ 41e:	2a 9a       	sbi	0x05, 2	; 5
+		DDR_SPI &= ~(1 << BIT_MISO);  // SDO  input
+ 420:	24 98       	cbi	0x04, 4	; 4
+
+	#ifdef SPCR
+	SPCR = _BV(SPE) | _BV(MSTR);
+ 422:	80 e5       	ldi	r24, 0x50	; 80
+ 424:	8c bd       	out	0x2c, r24	; 44
+	#else
+	// ATtiny
+	USICR = bit(USIWM0);
+	#endif
+	
+	  DDR_RFM_IRQ &= ~(1 << BIT_RFM_IRQ);  // RFM12 IRQ  input
+ 426:	52 98       	cbi	0x0a, 2	; 10
+	  PORT_RFM_IRQ |= (1 << BIT_RFM_IRQ); // digitalWrite(RFM_IRQ, 1); // pull-up
+ 428:	5a 9a       	sbi	0x0b, 2	; 11
+ 42a:	08 95       	ret
+
+0000042c <_ZL15spiTransferByteh>:
+    // digitalWrite(RFM_IRQ, 1); // pull-up
+}
+
+static uint8_t spiTransferByte (uint8_t out) {
+#ifdef SPDR
+    SPDR = out;
+ 42c:	8e bd       	out	0x2e, r24	; 46
+    while (!(SPSR & _BV(SPIF)))
+ 42e:	0d b4       	in	r0, 0x2d	; 45
+ 430:	07 fe       	sbrs	r0, 7
+ 432:	fd cf       	rjmp	.-6      	; 0x42e <_ZL15spiTransferByteh+0x2>
+        ;
+    return SPDR;
+ 434:	8e b5       	in	r24, 0x2e	; 46
+        USICR = v1;
+        USICR = v2;
+    }
+    return USIDR;
+#endif
+}
+ 436:	08 95       	ret
+
+00000438 <_ZN4RF697controlEhh>:
+  0x3D, 0x10, // PacketConfig2, interpkt = 1, autorxrestart off
+  0x6F, 0x20, // TestDagc ...
+  0
+};
+
+uint8_t RF69::control(uint8_t cmd, uint8_t val) {
+ 438:	cf 93       	push	r28
+ 43a:	c6 2f       	mov	r28, r22
+#ifndef EIMSK
+#define EIMSK GIMSK // ATtiny
+#endif
+
+struct PreventInterrupt {
+    PreventInterrupt () { EIMSK &= ~ _BV(INT0); }
+ 43c:	e8 98       	cbi	0x1d, 0	; 29
+    return USIDR;
+#endif
+}
+
+static uint8_t spiTransfer (uint8_t cmd, uint8_t val) {
+    SS_PORT &= ~ _BV(SS_BIT);
+ 43e:	2a 98       	cbi	0x05, 2	; 5
+    spiTransferByte(cmd);
+ 440:	f5 df       	rcall	.-22     	; 0x42c <_ZL15spiTransferByteh>
+    uint8_t in = spiTransferByte(val);
+ 442:	8c 2f       	mov	r24, r28
+ 444:	f3 df       	rcall	.-26     	; 0x42c <_ZL15spiTransferByteh>
+    SS_PORT |= _BV(SS_BIT);
+ 446:	2a 9a       	sbi	0x05, 2	; 5
+#define EIMSK GIMSK // ATtiny
+#endif
+
+struct PreventInterrupt {
+    PreventInterrupt () { EIMSK &= ~ _BV(INT0); }
+    ~PreventInterrupt () { EIMSK |= _BV(INT0); }
+ 448:	e8 9a       	sbi	0x1d, 0	; 29
+    PreventInterrupt irq0;
+    return spiTransfer(cmd, val);
+}
+ 44a:	cf 91       	pop	r28
+ 44c:	08 95       	ret
+
+0000044e <_ZL7readRegh>:
+static void writeReg (uint8_t addr, uint8_t value) {
+    RF69::control(addr | 0x80, value);
+}
+
+static uint8_t readReg (uint8_t addr) {
+    return RF69::control(addr, 0);
+ 44e:	60 e0       	ldi	r22, 0x00	; 0
+}
+ 450:	f3 cf       	rjmp	.-26     	; 0x438 <_ZN4RF697controlEhh>
+
+00000452 <_ZL9flushFifov>:
+
+static void flushFifo () {
+    while (readReg(REG_IRQFLAGS2) & (IRQ2_FIFONOTEMPTY | IRQ2_FIFOOVERRUN))
+ 452:	02 c0       	rjmp	.+4      	; 0x458 <_ZL9flushFifov+0x6>
+        readReg(REG_FIFO);
+ 454:	80 e0       	ldi	r24, 0x00	; 0
+ 456:	fb df       	rcall	.-10     	; 0x44e <_ZL7readRegh>
+static uint8_t readReg (uint8_t addr) {
+    return RF69::control(addr, 0);
+}
+
+static void flushFifo () {
+    while (readReg(REG_IRQFLAGS2) & (IRQ2_FIFONOTEMPTY | IRQ2_FIFOOVERRUN))
+ 458:	88 e2       	ldi	r24, 0x28	; 40
+ 45a:	f9 df       	rcall	.-14     	; 0x44e <_ZL7readRegh>
+ 45c:	80 75       	andi	r24, 0x50	; 80
+ 45e:	d1 f7       	brne	.-12     	; 0x454 <_ZL9flushFifov+0x2>
+        readReg(REG_FIFO);
+}
+ 460:	08 95       	ret
+
+00000462 <_ZL8writeReghh>:
+    PreventInterrupt irq0;
+    return spiTransfer(cmd, val);
+}
+
+static void writeReg (uint8_t addr, uint8_t value) {
+    RF69::control(addr | 0x80, value);
+ 462:	80 68       	ori	r24, 0x80	; 128
+ 464:	e9 cf       	rjmp	.-46     	; 0x438 <_ZN4RF697controlEhh>
+
+00000466 <_ZL7setModeh>:
+static void flushFifo () {
+    while (readReg(REG_IRQFLAGS2) & (IRQ2_FIFONOTEMPTY | IRQ2_FIFOOVERRUN))
+        readReg(REG_FIFO);
+}
+
+static void setMode (uint8_t mode) {
+ 466:	cf 93       	push	r28
+ 468:	c8 2f       	mov	r28, r24
+    writeReg(REG_OPMODE, (readReg(REG_OPMODE) & 0xE3) | mode);
+ 46a:	81 e0       	ldi	r24, 0x01	; 1
+ 46c:	f0 df       	rcall	.-32     	; 0x44e <_ZL7readRegh>
+ 46e:	83 7e       	andi	r24, 0xE3	; 227
+ 470:	68 2f       	mov	r22, r24
+ 472:	6c 2b       	or	r22, r28
+ 474:	81 e0       	ldi	r24, 0x01	; 1
+ 476:	f5 df       	rcall	.-22     	; 0x462 <_ZL8writeReghh>
+    // while ((readReg(REG_IRQFLAGS1) & IRQ1_MODEREADY) == 0)
+    //     ;
+}
+ 478:	cf 91       	pop	r28
+ 47a:	08 95       	ret
+
+0000047c <_ZN4RF6912setFrequencyEm>:
+    // Frequency steps are in units of (32,000,000 >> 19) = 61.03515625 Hz
+    // use multiples of 64 to avoid multi-precision arithmetic, i.e. 3906.25 Hz
+    // due to this, the lower 6 bits of the calculated factor will always be 0
+    // this is still 4 ppm, i.e. well below the radio's 32 MHz crystal accuracy
+    // 868.0 MHz = 0xD90000, 868.3 MHz = 0xD91300, 915.0 MHz = 0xE4C000  
+    frf = ((freq << 2) / (32000000L >> 11)) << 6;
+ 47c:	66 0f       	add	r22, r22
+ 47e:	77 1f       	adc	r23, r23
+ 480:	88 1f       	adc	r24, r24
+ 482:	99 1f       	adc	r25, r25
+ 484:	66 0f       	add	r22, r22
+ 486:	77 1f       	adc	r23, r23
+ 488:	88 1f       	adc	r24, r24
+ 48a:	99 1f       	adc	r25, r25
+ 48c:	29 e0       	ldi	r18, 0x09	; 9
+ 48e:	3d e3       	ldi	r19, 0x3D	; 61
+ 490:	40 e0       	ldi	r20, 0x00	; 0
+ 492:	50 e0       	ldi	r21, 0x00	; 0
+ 494:	84 d3       	rcall	.+1800   	; 0xb9e <__udivmodsi4>
+ 496:	da 01       	movw	r26, r20
+ 498:	c9 01       	movw	r24, r18
+ 49a:	88 0f       	add	r24, r24
+ 49c:	99 1f       	adc	r25, r25
+ 49e:	aa 1f       	adc	r26, r26
+ 4a0:	bb 1f       	adc	r27, r27
+ 4a2:	88 0f       	add	r24, r24
+ 4a4:	99 1f       	adc	r25, r25
+ 4a6:	aa 1f       	adc	r26, r26
+ 4a8:	bb 1f       	adc	r27, r27
+ 4aa:	88 0f       	add	r24, r24
+ 4ac:	99 1f       	adc	r25, r25
+ 4ae:	aa 1f       	adc	r26, r26
+ 4b0:	bb 1f       	adc	r27, r27
+ 4b2:	88 0f       	add	r24, r24
+ 4b4:	99 1f       	adc	r25, r25
+ 4b6:	aa 1f       	adc	r26, r26
+ 4b8:	bb 1f       	adc	r27, r27
+ 4ba:	88 0f       	add	r24, r24
+ 4bc:	99 1f       	adc	r25, r25
+ 4be:	aa 1f       	adc	r26, r26
+ 4c0:	bb 1f       	adc	r27, r27
+ 4c2:	88 0f       	add	r24, r24
+ 4c4:	99 1f       	adc	r25, r25
+ 4c6:	aa 1f       	adc	r26, r26
+ 4c8:	bb 1f       	adc	r27, r27
+ 4ca:	80 93 a8 01 	sts	0x01A8, r24
+ 4ce:	90 93 a9 01 	sts	0x01A9, r25
+ 4d2:	a0 93 aa 01 	sts	0x01AA, r26
+ 4d6:	b0 93 ab 01 	sts	0x01AB, r27
+ 4da:	08 95       	ret
+
+000004dc <_ZN4RF697canSendEv>:
+}
+
+bool RF69::canSend () {
+    if (rxstate == TXRECV && rxfill == 0) {
+ 4dc:	80 91 a1 01 	lds	r24, 0x01A1
+ 4e0:	85 30       	cpi	r24, 0x05	; 5
+ 4e2:	31 f4       	brne	.+12     	; 0x4f0 <_ZN4RF697canSendEv+0x14>
+ 4e4:	80 91 a2 01 	lds	r24, 0x01A2
+ 4e8:	88 23       	and	r24, r24
+ 4ea:	21 f0       	breq	.+8      	; 0x4f4 <_ZN4RF697canSendEv+0x18>
+        rxstate = TXIDLE;
+        setMode(MODE_STANDBY);
+        return true;
+    }
+    return false;
+ 4ec:	80 e0       	ldi	r24, 0x00	; 0
+ 4ee:	08 95       	ret
+ 4f0:	80 e0       	ldi	r24, 0x00	; 0
+ 4f2:	08 95       	ret
+    frf = ((freq << 2) / (32000000L >> 11)) << 6;
+}
+
+bool RF69::canSend () {
+    if (rxstate == TXRECV && rxfill == 0) {
+        rxstate = TXIDLE;
+ 4f4:	84 e0       	ldi	r24, 0x04	; 4
+ 4f6:	80 93 a1 01 	sts	0x01A1, r24
+        setMode(MODE_STANDBY);
+ 4fa:	b5 df       	rcall	.-150    	; 0x466 <_ZL7setModeh>
+        return true;
+ 4fc:	81 e0       	ldi	r24, 0x01	; 1
+    }
+    return false;
+}
+ 4fe:	08 95       	ret
+
+00000500 <_ZN4RF697sendingEv>:
+
+bool RF69::sending () {
+    return rxstate < TXIDLE;
+ 500:	90 91 a1 01 	lds	r25, 0x01A1
+ 504:	81 e0       	ldi	r24, 0x01	; 1
+ 506:	94 30       	cpi	r25, 0x04	; 4
+ 508:	0c f0       	brlt	.+2      	; 0x50c <_ZN4RF697sendingEv+0xc>
+ 50a:	80 e0       	ldi	r24, 0x00	; 0
+}
+ 50c:	08 95       	ret
+
+0000050e <_ZN4RF695sleepEb>:
+
+void RF69::sleep (bool off) {
+    setMode(off ? MODE_SLEEP : MODE_STANDBY);
+ 50e:	88 23       	and	r24, r24
+ 510:	11 f0       	breq	.+4      	; 0x516 <_ZN4RF695sleepEb+0x8>
+ 512:	80 e0       	ldi	r24, 0x00	; 0
+ 514:	01 c0       	rjmp	.+2      	; 0x518 <_ZN4RF695sleepEb+0xa>
+ 516:	84 e0       	ldi	r24, 0x04	; 4
+ 518:	a6 df       	rcall	.-180    	; 0x466 <_ZL7setModeh>
+    rxstate = TXIDLE;
+ 51a:	84 e0       	ldi	r24, 0x04	; 4
+ 51c:	80 93 a1 01 	sts	0x01A1, r24
+ 520:	08 95       	ret
+
+00000522 <_ZN4RF6916configure_compatEv>:
+
+// References to the RF12 driver above this line will generate compiler errors!
+#include "RF69_compat.h"
+#include "RF12.h"
+
+void RF69::configure_compat () {
+ 522:	cf 93       	push	r28
+ 524:	df 93       	push	r29
+}
+
+static void initRadio (ROM_UINT8* init) {
+   // spiInit();
+    do
+        writeReg(REG_SYNCVALUE1, 0xAA);
+ 526:	6a ea       	ldi	r22, 0xAA	; 170
+ 528:	8f e2       	ldi	r24, 0x2F	; 47
+ 52a:	9b df       	rcall	.-202    	; 0x462 <_ZL8writeReghh>
+    while (readReg(REG_SYNCVALUE1) != 0xAA);
+ 52c:	8f e2       	ldi	r24, 0x2F	; 47
+ 52e:	8f df       	rcall	.-226    	; 0x44e <_ZL7readRegh>
+    //     ;
+}
+
+static void initRadio (ROM_UINT8* init) {
+   // spiInit();
+    do
+ 530:	8a 3a       	cpi	r24, 0xAA	; 170
+ 532:	c9 f7       	brne	.-14     	; 0x526 <_ZN4RF6916configure_compatEv+0x4>
+        writeReg(REG_SYNCVALUE1, 0xAA);
+    while (readReg(REG_SYNCVALUE1) != 0xAA);
+    do
+        writeReg(REG_SYNCVALUE1, 0x55);
+ 534:	65 e5       	ldi	r22, 0x55	; 85
+ 536:	8f e2       	ldi	r24, 0x2F	; 47
+ 538:	94 df       	rcall	.-216    	; 0x462 <_ZL8writeReghh>
+    while (readReg(REG_SYNCVALUE1) != 0x55);
+ 53a:	8f e2       	ldi	r24, 0x2F	; 47
+ 53c:	88 df       	rcall	.-240    	; 0x44e <_ZL7readRegh>
+static void initRadio (ROM_UINT8* init) {
+   // spiInit();
+    do
+        writeReg(REG_SYNCVALUE1, 0xAA);
+    while (readReg(REG_SYNCVALUE1) != 0xAA);
+    do
+ 53e:	85 35       	cpi	r24, 0x55	; 85
+ 540:	c9 f7       	brne	.-14     	; 0x534 <_ZN4RF6916configure_compatEv+0x12>
+        writeReg(REG_SYNCVALUE1, 0x55);
+    while (readReg(REG_SYNCVALUE1) != 0x55);
+    for (;;) {
+        uint8_t cmd = ROM_READ_UINT8(init);
+ 542:	e8 e6       	ldi	r30, 0x68	; 104
+ 544:	f0 e0       	ldi	r31, 0x00	; 0
+ 546:	84 91       	lpm	r24, Z
+        if (cmd == 0) break;
+ 548:	88 23       	and	r24, r24
+ 54a:	51 f0       	breq	.+20     	; 0x560 <_ZN4RF6916configure_compatEv+0x3e>
+ 54c:	ef 01       	movw	r28, r30
+
+// References to the RF12 driver above this line will generate compiler errors!
+#include "RF69_compat.h"
+#include "RF12.h"
+
+void RF69::configure_compat () {
+ 54e:	fe 01       	movw	r30, r28
+ 550:	31 96       	adiw	r30, 0x01	; 1
+        writeReg(REG_SYNCVALUE1, 0x55);
+    while (readReg(REG_SYNCVALUE1) != 0x55);
+    for (;;) {
+        uint8_t cmd = ROM_READ_UINT8(init);
+        if (cmd == 0) break;
+        writeReg(cmd, ROM_READ_UINT8(init+1));
+ 552:	64 91       	lpm	r22, Z
+ 554:	86 df       	rcall	.-244    	; 0x462 <_ZL8writeReghh>
+        init += 2;
+ 556:	22 96       	adiw	r28, 0x02	; 2
+    while (readReg(REG_SYNCVALUE1) != 0xAA);
+    do
+        writeReg(REG_SYNCVALUE1, 0x55);
+    while (readReg(REG_SYNCVALUE1) != 0x55);
+    for (;;) {
+        uint8_t cmd = ROM_READ_UINT8(init);
+ 558:	fe 01       	movw	r30, r28
+ 55a:	84 91       	lpm	r24, Z
+        if (cmd == 0) break;
+ 55c:	81 11       	cpse	r24, r1
+ 55e:	f7 cf       	rjmp	.-18     	; 0x54e <_ZN4RF6916configure_compatEv+0x2c>
+
+void RF69::configure_compat () {
+    initRadio(configRegs_compat);    
+    // FIXME doesn't seem to work, nothing comes in but noise for group 0
+    // writeReg(REG_SYNCCONFIG, group ? 0x88 : 0x80);
+    writeReg(REG_SYNCVALUE2, group);
+ 560:	60 91 a7 01 	lds	r22, 0x01A7
+ 564:	80 e3       	ldi	r24, 0x30	; 48
+ 566:	7d df       	rcall	.-262    	; 0x462 <_ZL8writeReghh>
+
+    writeReg(REG_FRFMSB, frf >> 16);
+ 568:	80 91 a8 01 	lds	r24, 0x01A8
+ 56c:	90 91 a9 01 	lds	r25, 0x01A9
+ 570:	a0 91 aa 01 	lds	r26, 0x01AA
+ 574:	b0 91 ab 01 	lds	r27, 0x01AB
+ 578:	bd 01       	movw	r22, r26
+ 57a:	88 27       	eor	r24, r24
+ 57c:	99 27       	eor	r25, r25
+ 57e:	87 e0       	ldi	r24, 0x07	; 7
+ 580:	70 df       	rcall	.-288    	; 0x462 <_ZL8writeReghh>
+    writeReg(REG_FRFMSB+1, frf >> 8);
+ 582:	80 91 a8 01 	lds	r24, 0x01A8
+ 586:	90 91 a9 01 	lds	r25, 0x01A9
+ 58a:	a0 91 aa 01 	lds	r26, 0x01AA
+ 58e:	b0 91 ab 01 	lds	r27, 0x01AB
+ 592:	69 2f       	mov	r22, r25
+ 594:	7a 2f       	mov	r23, r26
+ 596:	8b 2f       	mov	r24, r27
+ 598:	99 27       	eor	r25, r25
+ 59a:	88 e0       	ldi	r24, 0x08	; 8
+ 59c:	62 df       	rcall	.-316    	; 0x462 <_ZL8writeReghh>
+    writeReg(REG_FRFMSB+2, frf);
+ 59e:	60 91 a8 01 	lds	r22, 0x01A8
+ 5a2:	89 e0       	ldi	r24, 0x09	; 9
+ 5a4:	5e df       	rcall	.-324    	; 0x462 <_ZL8writeReghh>
+
+    rxstate = TXIDLE;
+ 5a6:	84 e0       	ldi	r24, 0x04	; 4
+ 5a8:	80 93 a1 01 	sts	0x01A1, r24
+}
+ 5ac:	df 91       	pop	r29
+ 5ae:	cf 91       	pop	r28
+ 5b0:	08 95       	ret
+
+000005b2 <_ZN4RF6915recvDone_compatEPh>:
+
+uint8_t* recvBuf;
+
+uint16_t RF69::recvDone_compat (uint8_t* buf) {
+    switch (rxstate) {
+ 5b2:	20 91 a1 01 	lds	r18, 0x01A1
+ 5b6:	24 30       	cpi	r18, 0x04	; 4
+ 5b8:	21 f0       	breq	.+8      	; 0x5c2 <_ZN4RF6915recvDone_compatEPh+0x10>
+ 5ba:	25 30       	cpi	r18, 0x05	; 5
+ 5bc:	09 f0       	breq	.+2      	; 0x5c0 <_ZN4RF6915recvDone_compatEPh+0xe>
+ 5be:	5f c0       	rjmp	.+190    	; 0x67e <_ZN4RF6915recvDone_compatEPh+0xcc>
+ 5c0:	30 c0       	rjmp	.+96     	; 0x622 <_ZN4RF6915recvDone_compatEPh+0x70>
+    case TXIDLE:
+        rxfill = rf12_len = 0;
+ 5c2:	10 92 ae 01 	sts	0x01AE, r1
+ 5c6:	10 92 a2 01 	sts	0x01A2, r1
+		"eor %B0,__tmp_reg__" "\n\t"
+		"eor %A0,%1"
+		: "=r" (__ret), "=d" (__tmp)
+		: "r" (__data), "0" (__crc)
+		: "r0"
+	);
+ 5ca:	40 91 a7 01 	lds	r20, 0x01A7
+ 5ce:	2f ef       	ldi	r18, 0xFF	; 255
+ 5d0:	3f ef       	ldi	r19, 0xFF	; 255
+ 5d2:	24 27       	eor	r18, r20
+ 5d4:	42 2f       	mov	r20, r18
+ 5d6:	42 95       	swap	r20
+ 5d8:	42 27       	eor	r20, r18
+ 5da:	04 2e       	mov	r0, r20
+ 5dc:	46 95       	lsr	r20
+ 5de:	46 95       	lsr	r20
+ 5e0:	40 25       	eor	r20, r0
+ 5e2:	04 2e       	mov	r0, r20
+ 5e4:	46 95       	lsr	r20
+ 5e6:	40 25       	eor	r20, r0
+ 5e8:	47 70       	andi	r20, 0x07	; 7
+ 5ea:	02 2e       	mov	r0, r18
+ 5ec:	23 2f       	mov	r18, r19
+ 5ee:	46 95       	lsr	r20
+ 5f0:	07 94       	ror	r0
+ 5f2:	47 95       	ror	r20
+ 5f4:	30 2d       	mov	r19, r0
+ 5f6:	24 27       	eor	r18, r20
+ 5f8:	06 94       	lsr	r0
+ 5fa:	47 95       	ror	r20
+ 5fc:	30 25       	eor	r19, r0
+ 5fe:	24 27       	eor	r18, r20
+        crc = _crc16_update(~0, group);
+ 600:	20 93 a4 01 	sts	0x01A4, r18
+ 604:	30 93 a5 01 	sts	0x01A5, r19
+        recvBuf = buf;
+ 608:	90 93 a0 01 	sts	0x01A0, r25
+ 60c:	80 93 9f 01 	sts	0x019F, r24
+        rxstate = TXRECV;
+ 610:	85 e0       	ldi	r24, 0x05	; 5
+ 612:	80 93 a1 01 	sts	0x01A1, r24
+        flushFifo();
+ 616:	1d df       	rcall	.-454    	; 0x452 <_ZL9flushFifov>
+        setMode(MODE_RECEIVER);
+ 618:	80 e1       	ldi	r24, 0x10	; 16
+ 61a:	25 df       	rcall	.-438    	; 0x466 <_ZL7setModeh>
+            if (!(rf12_hdr & RF12_HDR_DST) || node == 31 ||
+                    (rf12_hdr & RF12_HDR_MASK) == node)
+                return crc;
+        }
+    }
+    return ~0;
+ 61c:	2f ef       	ldi	r18, 0xFF	; 255
+ 61e:	3f ef       	ldi	r19, 0xFF	; 255
+        crc = _crc16_update(~0, group);
+        recvBuf = buf;
+        rxstate = TXRECV;
+        flushFifo();
+        setMode(MODE_RECEIVER);
+        break;
+ 620:	36 c0       	rjmp	.+108    	; 0x68e <_ZN4RF6915recvDone_compatEPh+0xdc>
+    case TXRECV:
+        if (rxfill >= rf12_len + 5 || rxfill >= RF_MAX) {
+ 622:	20 91 a2 01 	lds	r18, 0x01A2
+ 626:	80 91 ae 01 	lds	r24, 0x01AE
+ 62a:	30 e0       	ldi	r19, 0x00	; 0
+ 62c:	90 e0       	ldi	r25, 0x00	; 0
+ 62e:	05 96       	adiw	r24, 0x05	; 5
+ 630:	28 17       	cp	r18, r24
+ 632:	39 07       	cpc	r19, r25
+ 634:	24 f4       	brge	.+8      	; 0x63e <_ZN4RF6915recvDone_compatEPh+0x8c>
+ 636:	80 91 a2 01 	lds	r24, 0x01A2
+ 63a:	88 34       	cpi	r24, 0x48	; 72
+ 63c:	18 f1       	brcs	.+70     	; 0x684 <_ZN4RF6915recvDone_compatEPh+0xd2>
+            rxstate = TXIDLE;
+ 63e:	84 e0       	ldi	r24, 0x04	; 4
+ 640:	80 93 a1 01 	sts	0x01A1, r24
+            setMode(MODE_STANDBY);
+ 644:	10 df       	rcall	.-480    	; 0x466 <_ZL7setModeh>
+            if (rf12_len > RF12_MAXDATA)
+ 646:	80 91 ae 01 	lds	r24, 0x01AE
+ 64a:	83 34       	cpi	r24, 0x43	; 67
+ 64c:	30 f0       	brcs	.+12     	; 0x65a <_ZN4RF6915recvDone_compatEPh+0xa8>
+                crc = 1; // force bad crc for invalid packet
+ 64e:	81 e0       	ldi	r24, 0x01	; 1
+ 650:	90 e0       	ldi	r25, 0x00	; 0
+ 652:	90 93 a5 01 	sts	0x01A5, r25
+ 656:	80 93 a4 01 	sts	0x01A4, r24
+            if (!(rf12_hdr & RF12_HDR_DST) || node == 31 ||
+ 65a:	80 91 ad 01 	lds	r24, 0x01AD
+ 65e:	86 ff       	sbrs	r24, 6
+ 660:	09 c0       	rjmp	.+18     	; 0x674 <_ZN4RF6915recvDone_compatEPh+0xc2>
+ 662:	80 91 a6 01 	lds	r24, 0x01A6
+ 666:	8f 31       	cpi	r24, 0x1F	; 31
+ 668:	29 f0       	breq	.+10     	; 0x674 <_ZN4RF6915recvDone_compatEPh+0xc2>
+                    (rf12_hdr & RF12_HDR_MASK) == node)
+ 66a:	90 91 ad 01 	lds	r25, 0x01AD
+        if (rxfill >= rf12_len + 5 || rxfill >= RF_MAX) {
+            rxstate = TXIDLE;
+            setMode(MODE_STANDBY);
+            if (rf12_len > RF12_MAXDATA)
+                crc = 1; // force bad crc for invalid packet
+            if (!(rf12_hdr & RF12_HDR_DST) || node == 31 ||
+ 66e:	9f 71       	andi	r25, 0x1F	; 31
+ 670:	98 13       	cpse	r25, r24
+ 672:	0b c0       	rjmp	.+22     	; 0x68a <_ZN4RF6915recvDone_compatEPh+0xd8>
+                    (rf12_hdr & RF12_HDR_MASK) == node)
+                return crc;
+ 674:	20 91 a4 01 	lds	r18, 0x01A4
+ 678:	30 91 a5 01 	lds	r19, 0x01A5
+ 67c:	08 c0       	rjmp	.+16     	; 0x68e <_ZN4RF6915recvDone_compatEPh+0xdc>
+        }
+    }
+    return ~0;
+ 67e:	2f ef       	ldi	r18, 0xFF	; 255
+ 680:	3f ef       	ldi	r19, 0xFF	; 255
+ 682:	05 c0       	rjmp	.+10     	; 0x68e <_ZN4RF6915recvDone_compatEPh+0xdc>
+ 684:	2f ef       	ldi	r18, 0xFF	; 255
+ 686:	3f ef       	ldi	r19, 0xFF	; 255
+ 688:	02 c0       	rjmp	.+4      	; 0x68e <_ZN4RF6915recvDone_compatEPh+0xdc>
+ 68a:	2f ef       	ldi	r18, 0xFF	; 255
+ 68c:	3f ef       	ldi	r19, 0xFF	; 255
+}
+ 68e:	82 2f       	mov	r24, r18
+ 690:	93 2f       	mov	r25, r19
+ 692:	08 95       	ret
+
+00000694 <_ZN4RF6916sendStart_compatEhPKvh>:
+
+void RF69::sendStart_compat (uint8_t hdr, const void* ptr, uint8_t len) {
+ 694:	ff 92       	push	r15
+ 696:	0f 93       	push	r16
+ 698:	1f 93       	push	r17
+ 69a:	cf 93       	push	r28
+ 69c:	df 93       	push	r29
+    rf12_len = len;
+ 69e:	40 93 ae 01 	sts	0x01AE, r20
+    for (int i = 0; i < len; ++i)
+ 6a2:	44 23       	and	r20, r20
+ 6a4:	69 f0       	breq	.+26     	; 0x6c0 <_ZN4RF6916sendStart_compatEhPKvh+0x2c>
+ 6a6:	a6 2f       	mov	r26, r22
+ 6a8:	b7 2f       	mov	r27, r23
+ 6aa:	ef ea       	ldi	r30, 0xAF	; 175
+ 6ac:	f1 e0       	ldi	r31, 0x01	; 1
+        }
+    }
+    return ~0;
+}
+
+void RF69::sendStart_compat (uint8_t hdr, const void* ptr, uint8_t len) {
+ 6ae:	24 2f       	mov	r18, r20
+ 6b0:	30 e0       	ldi	r19, 0x00	; 0
+ 6b2:	2e 0f       	add	r18, r30
+ 6b4:	3f 1f       	adc	r19, r31
+    rf12_len = len;
+    for (int i = 0; i < len; ++i)
+        rf12_data[i] = ((const uint8_t*) ptr)[i];
+ 6b6:	9d 91       	ld	r25, X+
+ 6b8:	91 93       	st	Z+, r25
+    return ~0;
+}
+
+void RF69::sendStart_compat (uint8_t hdr, const void* ptr, uint8_t len) {
+    rf12_len = len;
+    for (int i = 0; i < len; ++i)
+ 6ba:	e2 17       	cp	r30, r18
+ 6bc:	f3 07       	cpc	r31, r19
+ 6be:	d9 f7       	brne	.-10     	; 0x6b6 <_ZN4RF6916sendStart_compatEhPKvh+0x22>
+        rf12_data[i] = ((const uint8_t*) ptr)[i];
+    rf12_hdr = hdr & RF12_HDR_DST ? hdr : (hdr & ~RF12_HDR_MASK) + node;  
+ 6c0:	86 fd       	sbrc	r24, 6
+ 6c2:	04 c0       	rjmp	.+8      	; 0x6cc <_ZN4RF6916sendStart_compatEhPKvh+0x38>
+ 6c4:	80 7e       	andi	r24, 0xE0	; 224
+ 6c6:	90 91 a6 01 	lds	r25, 0x01A6
+ 6ca:	89 0f       	add	r24, r25
+ 6cc:	80 93 ad 01 	sts	0x01AD, r24
+ 6d0:	20 91 a7 01 	lds	r18, 0x01A7
+ 6d4:	8f ef       	ldi	r24, 0xFF	; 255
+ 6d6:	9f ef       	ldi	r25, 0xFF	; 255
+ 6d8:	82 27       	eor	r24, r18
+ 6da:	28 2f       	mov	r18, r24
+ 6dc:	22 95       	swap	r18
+ 6de:	28 27       	eor	r18, r24
+ 6e0:	02 2e       	mov	r0, r18
+ 6e2:	26 95       	lsr	r18
+ 6e4:	26 95       	lsr	r18
+ 6e6:	20 25       	eor	r18, r0
+ 6e8:	02 2e       	mov	r0, r18
+ 6ea:	26 95       	lsr	r18
+ 6ec:	20 25       	eor	r18, r0
+ 6ee:	27 70       	andi	r18, 0x07	; 7
+ 6f0:	08 2e       	mov	r0, r24
+ 6f2:	89 2f       	mov	r24, r25
+ 6f4:	26 95       	lsr	r18
+ 6f6:	07 94       	ror	r0
+ 6f8:	27 95       	ror	r18
+ 6fa:	90 2d       	mov	r25, r0
+ 6fc:	82 27       	eor	r24, r18
+ 6fe:	06 94       	lsr	r0
+ 700:	27 95       	ror	r18
+ 702:	90 25       	eor	r25, r0
+ 704:	82 27       	eor	r24, r18
+    rf12_crc = _crc16_update(~0, group);
+ 706:	90 93 f5 01 	sts	0x01F5, r25
+ 70a:	80 93 f4 01 	sts	0x01F4, r24
+    rxstate = - (2 + rf12_len); // preamble and SYN1/SYN2 are sent by hardware
+ 70e:	90 91 ae 01 	lds	r25, 0x01AE
+ 712:	8e ef       	ldi	r24, 0xFE	; 254
+ 714:	89 1b       	sub	r24, r25
+ 716:	80 93 a1 01 	sts	0x01A1, r24
+    flushFifo();
+ 71a:	9b de       	rcall	.-714    	; 0x452 <_ZL9flushFifov>
+    setMode(MODE_TRANSMITTER);
+ 71c:	8c e0       	ldi	r24, 0x0C	; 12
+ 71e:	a3 de       	rcall	.-698    	; 0x466 <_ZL7setModeh>
+    writeReg(REG_DIOMAPPING1, 0x00); // PacketSent
+ 720:	60 e0       	ldi	r22, 0x00	; 0
+ 722:	85 e2       	ldi	r24, 0x25	; 37
+ 724:	9e de       	rcall	.-708    	; 0x462 <_ZL8writeReghh>
+            if (rxstate < 0) {
+                out = recvBuf[3 + rf12_len + rxstate];
+                crc = _crc16_update(crc, out);
+            } else {
+                switch (rxstate) {
+                    case TXCRC1: out = crc; break;
+ 726:	c4 ea       	ldi	r28, 0xA4	; 164
+ 728:	d1 e0       	ldi	r29, 0x01	; 1
+    
+    // use busy polling until the last byte fits into the buffer
+    // this makes sure it all happens on time, and that sendWait can sleep
+    while (rxstate < TXDONE)
+        if ((readReg(REG_IRQFLAGS2) & IRQ2_FIFOFULL) == 0) {
+            uint8_t out = 0xAA;
+ 72a:	0f 2e       	mov	r0, r31
+ 72c:	fa ea       	ldi	r31, 0xAA	; 170
+ 72e:	ff 2e       	mov	r15, r31
+ 730:	f0 2d       	mov	r31, r0
+            if (rxstate < 0) {
+                out = recvBuf[3 + rf12_len + rxstate];
+ 732:	0e ea       	ldi	r16, 0xAE	; 174
+ 734:	11 e0       	ldi	r17, 0x01	; 1
+    setMode(MODE_TRANSMITTER);
+    writeReg(REG_DIOMAPPING1, 0x00); // PacketSent
+    
+    // use busy polling until the last byte fits into the buffer
+    // this makes sure it all happens on time, and that sendWait can sleep
+    while (rxstate < TXDONE)
+ 736:	4d c0       	rjmp	.+154    	; 0x7d2 <_ZN4RF6916sendStart_compatEhPKvh+0x13e>
+        if ((readReg(REG_IRQFLAGS2) & IRQ2_FIFOFULL) == 0) {
+ 738:	88 e2       	ldi	r24, 0x28	; 40
+ 73a:	89 de       	rcall	.-750    	; 0x44e <_ZL7readRegh>
+ 73c:	88 23       	and	r24, r24
+ 73e:	0c f4       	brge	.+2      	; 0x742 <_ZN4RF6916sendStart_compatEhPKvh+0xae>
+ 740:	48 c0       	rjmp	.+144    	; 0x7d2 <_ZN4RF6916sendStart_compatEhPKvh+0x13e>
+            uint8_t out = 0xAA;
+            if (rxstate < 0) {
+ 742:	80 91 a1 01 	lds	r24, 0x01A1
+ 746:	88 23       	and	r24, r24
+ 748:	0c f0       	brlt	.+2      	; 0x74c <_ZN4RF6916sendStart_compatEhPKvh+0xb8>
+ 74a:	2f c0       	rjmp	.+94     	; 0x7aa <_ZN4RF6916sendStart_compatEhPKvh+0x116>
+                out = recvBuf[3 + rf12_len + rxstate];
+ 74c:	f8 01       	movw	r30, r16
+ 74e:	90 81       	ld	r25, Z
+ 750:	80 91 a1 01 	lds	r24, 0x01A1
+ 754:	e0 91 9f 01 	lds	r30, 0x019F
+ 758:	f0 91 a0 01 	lds	r31, 0x01A0
+ 75c:	e9 0f       	add	r30, r25
+ 75e:	f1 1d       	adc	r31, r1
+ 760:	e8 0f       	add	r30, r24
+ 762:	f1 1d       	adc	r31, r1
+ 764:	87 fd       	sbrc	r24, 7
+ 766:	fa 95       	dec	r31
+ 768:	63 81       	ldd	r22, Z+3	; 0x03
+ 76a:	80 91 a4 01 	lds	r24, 0x01A4
+ 76e:	90 91 a5 01 	lds	r25, 0x01A5
+ 772:	86 27       	eor	r24, r22
+ 774:	28 2f       	mov	r18, r24
+ 776:	22 95       	swap	r18
+ 778:	28 27       	eor	r18, r24
+ 77a:	02 2e       	mov	r0, r18
+ 77c:	26 95       	lsr	r18
+ 77e:	26 95       	lsr	r18
+ 780:	20 25       	eor	r18, r0
+ 782:	02 2e       	mov	r0, r18
+ 784:	26 95       	lsr	r18
+ 786:	20 25       	eor	r18, r0
+ 788:	27 70       	andi	r18, 0x07	; 7
+ 78a:	08 2e       	mov	r0, r24
+ 78c:	89 2f       	mov	r24, r25
+ 78e:	26 95       	lsr	r18
+ 790:	07 94       	ror	r0
+ 792:	27 95       	ror	r18
+ 794:	90 2d       	mov	r25, r0
+ 796:	82 27       	eor	r24, r18
+ 798:	06 94       	lsr	r0
+ 79a:	27 95       	ror	r18
+ 79c:	90 25       	eor	r25, r0
+ 79e:	82 27       	eor	r24, r18
+                crc = _crc16_update(crc, out);
+ 7a0:	80 93 a4 01 	sts	0x01A4, r24
+ 7a4:	90 93 a5 01 	sts	0x01A5, r25
+ 7a8:	0d c0       	rjmp	.+26     	; 0x7c4 <_ZN4RF6916sendStart_compatEhPKvh+0x130>
+            } else {
+                switch (rxstate) {
+ 7aa:	80 91 a1 01 	lds	r24, 0x01A1
+ 7ae:	88 23       	and	r24, r24
+ 7b0:	19 f0       	breq	.+6      	; 0x7b8 <_ZN4RF6916sendStart_compatEhPKvh+0x124>
+ 7b2:	81 30       	cpi	r24, 0x01	; 1
+ 7b4:	31 f4       	brne	.+12     	; 0x7c2 <_ZN4RF6916sendStart_compatEhPKvh+0x12e>
+ 7b6:	02 c0       	rjmp	.+4      	; 0x7bc <_ZN4RF6916sendStart_compatEhPKvh+0x128>
+                    case TXCRC1: out = crc; break;
+ 7b8:	68 81       	ld	r22, Y
+ 7ba:	04 c0       	rjmp	.+8      	; 0x7c4 <_ZN4RF6916sendStart_compatEhPKvh+0x130>
+                    case TXCRC2: out = crc >> 8; break;
+ 7bc:	60 91 a5 01 	lds	r22, 0x01A5
+ 7c0:	01 c0       	rjmp	.+2      	; 0x7c4 <_ZN4RF6916sendStart_compatEhPKvh+0x130>
+    
+    // use busy polling until the last byte fits into the buffer
+    // this makes sure it all happens on time, and that sendWait can sleep
+    while (rxstate < TXDONE)
+        if ((readReg(REG_IRQFLAGS2) & IRQ2_FIFOFULL) == 0) {
+            uint8_t out = 0xAA;
+ 7c2:	6f 2d       	mov	r22, r15
+                switch (rxstate) {
+                    case TXCRC1: out = crc; break;
+                    case TXCRC2: out = crc >> 8; break;
+                }
+            }
+            writeReg(REG_FIFO, out);
+ 7c4:	80 e0       	ldi	r24, 0x00	; 0
+ 7c6:	4d de       	rcall	.-870    	; 0x462 <_ZL8writeReghh>
+            ++rxstate;
+ 7c8:	80 91 a1 01 	lds	r24, 0x01A1
+ 7cc:	8f 5f       	subi	r24, 0xFF	; 255
+ 7ce:	80 93 a1 01 	sts	0x01A1, r24
+    setMode(MODE_TRANSMITTER);
+    writeReg(REG_DIOMAPPING1, 0x00); // PacketSent
+    
+    // use busy polling until the last byte fits into the buffer
+    // this makes sure it all happens on time, and that sendWait can sleep
+    while (rxstate < TXDONE)
+ 7d2:	80 91 a1 01 	lds	r24, 0x01A1
+ 7d6:	83 30       	cpi	r24, 0x03	; 3
+ 7d8:	0c f4       	brge	.+2      	; 0x7dc <_ZN4RF6916sendStart_compatEhPKvh+0x148>
+ 7da:	ae cf       	rjmp	.-164    	; 0x738 <_ZN4RF6916sendStart_compatEhPKvh+0xa4>
+                }
+            }
+            writeReg(REG_FIFO, out);
+            ++rxstate;
+        }
+}
+ 7dc:	df 91       	pop	r29
+ 7de:	cf 91       	pop	r28
+ 7e0:	1f 91       	pop	r17
+ 7e2:	0f 91       	pop	r16
+ 7e4:	ff 90       	pop	r15
+ 7e6:	08 95       	ret
+
+000007e8 <_ZN4RF6916interrupt_compatEv>:
+
+void RF69::interrupt_compat () {
+ 7e8:	cf 93       	push	r28
+ 7ea:	df 93       	push	r29
+    if (rxstate == TXRECV) {
+ 7ec:	80 91 a1 01 	lds	r24, 0x01A1
+ 7f0:	85 30       	cpi	r24, 0x05	; 5
+ 7f2:	09 f0       	breq	.+2      	; 0x7f6 <_ZN4RF6916interrupt_compatEv+0xe>
+ 7f4:	59 c0       	rjmp	.+178    	; 0x8a8 <_ZN4RF6916interrupt_compatEv+0xc0>
+        rssi = readReg(REG_RSSIVALUE);
+ 7f6:	84 e2       	ldi	r24, 0x24	; 36
+ 7f8:	2a de       	rcall	.-940    	; 0x44e <_ZL7readRegh>
+ 7fa:	80 93 a3 01 	sts	0x01A3, r24
+        IRQ_ENABLE; // allow nested interrupts from here on
+ 7fe:	78 94       	sei
+                if (rxfill == 0)
+                    recvBuf[rxfill++] = group;
+                uint8_t in = readReg(REG_FIFO);
+                recvBuf[rxfill++] = in;
+                crc = _crc16_update(crc, in);              
+                if (rxfill >= rf12_len + 5 || rxfill >= RF_MAX)
+ 800:	ce ea       	ldi	r28, 0xAE	; 174
+ 802:	d1 e0       	ldi	r29, 0x01	; 1
+void RF69::interrupt_compat () {
+    if (rxstate == TXRECV) {
+        rssi = readReg(REG_RSSIVALUE);
+        IRQ_ENABLE; // allow nested interrupts from here on
+        for (;;) { // busy loop, to get each data byte as soon as it comes in
+            if (readReg(REG_IRQFLAGS2) & (IRQ2_FIFONOTEMPTY|IRQ2_FIFOOVERRUN)) {
+ 804:	88 e2       	ldi	r24, 0x28	; 40
+ 806:	23 de       	rcall	.-954    	; 0x44e <_ZL7readRegh>
+ 808:	80 75       	andi	r24, 0x50	; 80
+ 80a:	e1 f3       	breq	.-8      	; 0x804 <_ZN4RF6916interrupt_compatEv+0x1c>
+                if (rxfill == 0)
+ 80c:	80 91 a2 01 	lds	r24, 0x01A2
+ 810:	81 11       	cpse	r24, r1
+ 812:	0e c0       	rjmp	.+28     	; 0x830 <_ZN4RF6916interrupt_compatEv+0x48>
+                    recvBuf[rxfill++] = group;
+ 814:	80 91 a2 01 	lds	r24, 0x01A2
+ 818:	90 91 a7 01 	lds	r25, 0x01A7
+ 81c:	e0 91 9f 01 	lds	r30, 0x019F
+ 820:	f0 91 a0 01 	lds	r31, 0x01A0
+ 824:	e8 0f       	add	r30, r24
+ 826:	f1 1d       	adc	r31, r1
+ 828:	90 83       	st	Z, r25
+ 82a:	8f 5f       	subi	r24, 0xFF	; 255
+ 82c:	80 93 a2 01 	sts	0x01A2, r24
+                uint8_t in = readReg(REG_FIFO);
+ 830:	80 e0       	ldi	r24, 0x00	; 0
+ 832:	0d de       	rcall	.-998    	; 0x44e <_ZL7readRegh>
+                recvBuf[rxfill++] = in;
+ 834:	90 91 a2 01 	lds	r25, 0x01A2
+ 838:	e0 91 9f 01 	lds	r30, 0x019F
+ 83c:	f0 91 a0 01 	lds	r31, 0x01A0
+ 840:	e9 0f       	add	r30, r25
+ 842:	f1 1d       	adc	r31, r1
+ 844:	80 83       	st	Z, r24
+ 846:	9f 5f       	subi	r25, 0xFF	; 255
+ 848:	90 93 a2 01 	sts	0x01A2, r25
+ 84c:	20 91 a4 01 	lds	r18, 0x01A4
+ 850:	30 91 a5 01 	lds	r19, 0x01A5
+ 854:	28 27       	eor	r18, r24
+ 856:	82 2f       	mov	r24, r18
+ 858:	82 95       	swap	r24
+ 85a:	82 27       	eor	r24, r18
+ 85c:	08 2e       	mov	r0, r24
+ 85e:	86 95       	lsr	r24
+ 860:	86 95       	lsr	r24
+ 862:	80 25       	eor	r24, r0
+ 864:	08 2e       	mov	r0, r24
+ 866:	86 95       	lsr	r24
+ 868:	80 25       	eor	r24, r0
+ 86a:	87 70       	andi	r24, 0x07	; 7
+ 86c:	02 2e       	mov	r0, r18
+ 86e:	23 2f       	mov	r18, r19
+ 870:	86 95       	lsr	r24
+ 872:	07 94       	ror	r0
+ 874:	87 95       	ror	r24
+ 876:	30 2d       	mov	r19, r0
+ 878:	28 27       	eor	r18, r24
+ 87a:	06 94       	lsr	r0
+ 87c:	87 95       	ror	r24
+ 87e:	30 25       	eor	r19, r0
+ 880:	28 27       	eor	r18, r24
+                crc = _crc16_update(crc, in);              
+ 882:	20 93 a4 01 	sts	0x01A4, r18
+ 886:	30 93 a5 01 	sts	0x01A5, r19
+                if (rxfill >= rf12_len + 5 || rxfill >= RF_MAX)
+ 88a:	20 91 a2 01 	lds	r18, 0x01A2
+ 88e:	88 81       	ld	r24, Y
+ 890:	30 e0       	ldi	r19, 0x00	; 0
+ 892:	90 e0       	ldi	r25, 0x00	; 0
+ 894:	05 96       	adiw	r24, 0x05	; 5
+ 896:	28 17       	cp	r18, r24
+ 898:	39 07       	cpc	r19, r25
+ 89a:	8c f4       	brge	.+34     	; 0x8be <_ZN4RF6916interrupt_compatEv+0xd6>
+ 89c:	80 91 a2 01 	lds	r24, 0x01A2
+ 8a0:	88 34       	cpi	r24, 0x48	; 72
+ 8a2:	08 f4       	brcc	.+2      	; 0x8a6 <_ZN4RF6916interrupt_compatEv+0xbe>
+ 8a4:	af cf       	rjmp	.-162    	; 0x804 <_ZN4RF6916interrupt_compatEv+0x1c>
+ 8a6:	0b c0       	rjmp	.+22     	; 0x8be <_ZN4RF6916interrupt_compatEv+0xd6>
+                    break;
+            }
+        }
+    } else if (readReg(REG_IRQFLAGS2) & IRQ2_PACKETSENT) {
+ 8a8:	88 e2       	ldi	r24, 0x28	; 40
+ 8aa:	d1 dd       	rcall	.-1118   	; 0x44e <_ZL7readRegh>
+ 8ac:	83 ff       	sbrs	r24, 3
+ 8ae:	07 c0       	rjmp	.+14     	; 0x8be <_ZN4RF6916interrupt_compatEv+0xd6>
+        // rxstate will be TXDONE at this point
+        rxstate = TXIDLE;
+ 8b0:	84 e0       	ldi	r24, 0x04	; 4
+ 8b2:	80 93 a1 01 	sts	0x01A1, r24
+        setMode(MODE_STANDBY);
+ 8b6:	d7 dd       	rcall	.-1106   	; 0x466 <_ZL7setModeh>
+        writeReg(REG_DIOMAPPING1, 0x80); // SyncAddress
+ 8b8:	60 e8       	ldi	r22, 0x80	; 128
+ 8ba:	85 e2       	ldi	r24, 0x25	; 37
+ 8bc:	d2 dd       	rcall	.-1116   	; 0x462 <_ZL8writeReghh>
+    }
+}
+ 8be:	df 91       	pop	r29
+ 8c0:	cf 91       	pop	r28
+ 8c2:	08 95       	ret
+
+000008c4 <__vector_1>:
+
+ISR(INT0_vect) {
+ 8c4:	1f 92       	push	r1
+ 8c6:	0f 92       	push	r0
+ 8c8:	0f b6       	in	r0, 0x3f	; 63
+ 8ca:	0f 92       	push	r0
+ 8cc:	11 24       	eor	r1, r1
+ 8ce:	2f 93       	push	r18
+ 8d0:	3f 93       	push	r19
+ 8d2:	4f 93       	push	r20
+ 8d4:	5f 93       	push	r21
+ 8d6:	6f 93       	push	r22
+ 8d8:	7f 93       	push	r23
+ 8da:	8f 93       	push	r24
+ 8dc:	9f 93       	push	r25
+ 8de:	af 93       	push	r26
+ 8e0:	bf 93       	push	r27
+ 8e2:	ef 93       	push	r30
+ 8e4:	ff 93       	push	r31
+	//PORTB |= _BV(0); // pb0 aan
+
+	RF69::interrupt_compat();
+ 8e6:	80 df       	rcall	.-256    	; 0x7e8 <_ZN4RF6916interrupt_compatEv>
+	//PORTB &= ~_BV(0); // pb0 uit
+}
+ 8e8:	ff 91       	pop	r31
+ 8ea:	ef 91       	pop	r30
+ 8ec:	bf 91       	pop	r27
+ 8ee:	af 91       	pop	r26
+ 8f0:	9f 91       	pop	r25
+ 8f2:	8f 91       	pop	r24
+ 8f4:	7f 91       	pop	r23
+ 8f6:	6f 91       	pop	r22
+ 8f8:	5f 91       	pop	r21
+ 8fa:	4f 91       	pop	r20
+ 8fc:	3f 91       	pop	r19
+ 8fe:	2f 91       	pop	r18
+ 900:	0f 90       	pop	r0
+ 902:	0f be       	out	0x3f, r0	; 63
+ 904:	0f 90       	pop	r0
+ 906:	1f 90       	pop	r1
+ 908:	18 95       	reti
+
+0000090a <_Z15rf69_initializehhhj>:
+// }
+
+
+
+
+uint8_t rf69_initialize (uint8_t id, uint8_t band, uint8_t group, uint16_t off) {
+ 90a:	cf 92       	push	r12
+ 90c:	df 92       	push	r13
+ 90e:	ef 92       	push	r14
+ 910:	ff 92       	push	r15
+ 912:	1f 93       	push	r17
+ 914:	cf 93       	push	r28
+ 916:	df 93       	push	r29
+ 918:	c8 2f       	mov	r28, r24
+ 91a:	16 2f       	mov	r17, r22
+ 91c:	d4 2f       	mov	r29, r20
+ 91e:	f9 01       	movw	r30, r18
+    uint8_t freq = 0;
+    switch (band) {
+ 920:	62 30       	cpi	r22, 0x02	; 2
+ 922:	31 f0       	breq	.+12     	; 0x930 <_Z15rf69_initializehhhj+0x26>
+ 924:	63 30       	cpi	r22, 0x03	; 3
+ 926:	31 f0       	breq	.+12     	; 0x934 <_Z15rf69_initializehhhj+0x2a>
+ 928:	61 30       	cpi	r22, 0x01	; 1
+ 92a:	31 f0       	breq	.+12     	; 0x938 <_Z15rf69_initializehhhj+0x2e>
+
+
+
+
+uint8_t rf69_initialize (uint8_t id, uint8_t band, uint8_t group, uint16_t off) {
+    uint8_t freq = 0;
+ 92c:	a0 e0       	ldi	r26, 0x00	; 0
+ 92e:	05 c0       	rjmp	.+10     	; 0x93a <_Z15rf69_initializehhhj+0x30>
+    switch (band) {
+        case RF12_433MHZ: freq = 43; break;
+        case RF12_868MHZ: freq = 86; break;
+ 930:	a6 e5       	ldi	r26, 0x56	; 86
+ 932:	03 c0       	rjmp	.+6      	; 0x93a <_Z15rf69_initializehhhj+0x30>
+        case RF12_915MHZ: freq = 90; break;
+ 934:	aa e5       	ldi	r26, 0x5A	; 90
+ 936:	01 c0       	rjmp	.+2      	; 0x93a <_Z15rf69_initializehhhj+0x30>
+
+
+uint8_t rf69_initialize (uint8_t id, uint8_t band, uint8_t group, uint16_t off) {
+    uint8_t freq = 0;
+    switch (band) {
+        case RF12_433MHZ: freq = 43; break;
+ 938:	ab e2       	ldi	r26, 0x2B	; 43
+        case RF12_868MHZ: freq = 86; break;
+        case RF12_915MHZ: freq = 90; break;
+    }
+    RF69::setFrequency(freq * 10000000L + band * 2500L * off);
+ 93a:	b0 e0       	ldi	r27, 0x00	; 0
+ 93c:	20 e8       	ldi	r18, 0x80	; 128
+ 93e:	36 e9       	ldi	r19, 0x96	; 150
+ 940:	48 e9       	ldi	r20, 0x98	; 152
+ 942:	50 e0       	ldi	r21, 0x00	; 0
+ 944:	5a d1       	rcall	.+692    	; 0xbfa <__muluhisi3>
+ 946:	6b 01       	movw	r12, r22
+ 948:	7c 01       	movw	r14, r24
+ 94a:	21 2f       	mov	r18, r17
+ 94c:	30 e0       	ldi	r19, 0x00	; 0
+ 94e:	a4 ec       	ldi	r26, 0xC4	; 196
+ 950:	b9 e0       	ldi	r27, 0x09	; 9
+ 952:	47 d1       	rcall	.+654    	; 0xbe2 <__umulhisi3>
+ 954:	df 01       	movw	r26, r30
+ 956:	9b 01       	movw	r18, r22
+ 958:	ac 01       	movw	r20, r24
+ 95a:	4f d1       	rcall	.+670    	; 0xbfa <__muluhisi3>
+ 95c:	6c 0d       	add	r22, r12
+ 95e:	7d 1d       	adc	r23, r13
+ 960:	8e 1d       	adc	r24, r14
+ 962:	9f 1d       	adc	r25, r15
+ 964:	8b dd       	rcall	.-1258   	; 0x47c <_ZN4RF6912setFrequencyEm>
+    RF69::group = group;
+ 966:	d0 93 a7 01 	sts	0x01A7, r29
+    RF69::node = id & RF12_HDR_MASK;
+ 96a:	8c 2f       	mov	r24, r28
+ 96c:	8f 71       	andi	r24, 0x1F	; 31
+ 96e:	80 93 a6 01 	sts	0x01A6, r24
+ 972:	87 e8       	ldi	r24, 0x87	; 135
+ 974:	93 e1       	ldi	r25, 0x13	; 19
+ 976:	01 97       	sbiw	r24, 0x01	; 1
+ 978:	f1 f7       	brne	.-4      	; 0x976 <_Z15rf69_initializehhhj+0x6c>
+ 97a:	00 c0       	rjmp	.+0      	; 0x97c <_Z15rf69_initializehhhj+0x72>
+ 97c:	00 00       	nop
+    _delay_ms(20); // needed to make RFM69 work properly on power-up
+   
+   
+    if (RF69::node != 0){
+ 97e:	80 91 a6 01 	lds	r24, 0x01A6
+ 982:	88 23       	and	r24, r24
+ 984:	39 f0       	breq	.+14     	; 0x994 <_Z15rf69_initializehhhj+0x8a>
+      //  attachInterrupt(0, RF69::interrupt_compat, RISING);
+			 EIMSK |= (1 << INT0); // enable int0 interrupt //bitSet(EIMSK, INT0);
+ 986:	e8 9a       	sbi	0x1d, 0	; 29
+			 EICRA |= (1 << ISC00) | (1 << ISC01); // trigger on rising edge
+ 988:	e9 e6       	ldi	r30, 0x69	; 105
+ 98a:	f0 e0       	ldi	r31, 0x00	; 0
+ 98c:	80 81       	ld	r24, Z
+ 98e:	83 60       	ori	r24, 0x03	; 3
+ 990:	80 83       	st	Z, r24
+ 992:	01 c0       	rjmp	.+2      	; 0x996 <_Z15rf69_initializehhhj+0x8c>
+
+    }else{
+        EIMSK &= ~(1 << INT0); // disable pcint0 interrupt  //bitClear(EIMSK, INT0);
+ 994:	e8 98       	cbi	0x1d, 0	; 29
+	}
+	
+
+
+	
+    RF69::configure_compat();
+ 996:	c5 dd       	rcall	.-1142   	; 0x522 <_ZN4RF6916configure_compatEv>
+    return nodeid = id;
+ 998:	c0 93 f6 01 	sts	0x01F6, r28
+}
+ 99c:	8c 2f       	mov	r24, r28
+ 99e:	df 91       	pop	r29
+ 9a0:	cf 91       	pop	r28
+ 9a2:	1f 91       	pop	r17
+ 9a4:	ff 90       	pop	r15
+ 9a6:	ef 90       	pop	r14
+ 9a8:	df 90       	pop	r13
+ 9aa:	cf 90       	pop	r12
+ 9ac:	08 95       	ret
+
+000009ae <_Z13rf69_recvDonev>:
+
+
+
+uint8_t rf69_recvDone () {
+    rf69_crc = RF69::recvDone_compat((uint8_t*) rf69_buf);
+ 9ae:	8c ea       	ldi	r24, 0xAC	; 172
+ 9b0:	91 e0       	ldi	r25, 0x01	; 1
+ 9b2:	ff dd       	rcall	.-1026   	; 0x5b2 <_ZN4RF6915recvDone_compatEPh>
+ 9b4:	90 93 f5 01 	sts	0x01F5, r25
+ 9b8:	80 93 f4 01 	sts	0x01F4, r24
+    return rf69_crc != ~0;
+ 9bc:	20 91 f4 01 	lds	r18, 0x01F4
+ 9c0:	30 91 f5 01 	lds	r19, 0x01F5
+ 9c4:	81 e0       	ldi	r24, 0x01	; 1
+ 9c6:	2f 3f       	cpi	r18, 0xFF	; 255
+ 9c8:	3f 4f       	sbci	r19, 0xFF	; 255
+ 9ca:	09 f4       	brne	.+2      	; 0x9ce <_Z13rf69_recvDonev+0x20>
+ 9cc:	80 e0       	ldi	r24, 0x00	; 0
+}
+ 9ce:	08 95       	ret
+
+000009d0 <_Z12rf69_canSendv>:
+
+uint8_t rf69_canSend () {
+    return RF69::canSend();
+ 9d0:	85 cd       	rjmp	.-1270   	; 0x4dc <_ZN4RF697canSendEv>
+}
+ 9d2:	08 95       	ret
+
+000009d4 <_Z14rf69_sendStarthPKvh>:
+
+// void rf69_sendStart (uint8_t hdr) {
+// }
+
+void rf69_sendStart (uint8_t hdr, const void* ptr, uint8_t len) {
+    RF69::sendStart_compat(hdr, ptr, len);
+ 9d4:	5f ce       	rjmp	.-834    	; 0x694 <_ZN4RF6916sendStart_compatEhPKvh>
+ 9d6:	08 95       	ret
+
+000009d8 <_Z12rf69_sendNowhPKvh>:
+}
+
+// void rf69_sendStart (uint8_t hdr, const void* ptr, uint8_t len, uint8_t sync) {
+// }
+
+void rf69_sendNow (uint8_t hdr, const void* ptr, uint8_t len) {
+ 9d8:	0f 93       	push	r16
+ 9da:	1f 93       	push	r17
+ 9dc:	cf 93       	push	r28
+ 9de:	df 93       	push	r29
+ 9e0:	18 2f       	mov	r17, r24
+ 9e2:	eb 01       	movw	r28, r22
+ 9e4:	04 2f       	mov	r16, r20
+    while (!rf69_canSend())
+ 9e6:	01 c0       	rjmp	.+2      	; 0x9ea <_Z12rf69_sendNowhPKvh+0x12>
+        rf69_recvDone();
+ 9e8:	e2 df       	rcall	.-60     	; 0x9ae <_Z13rf69_recvDonev>
+
+// void rf69_sendStart (uint8_t hdr, const void* ptr, uint8_t len, uint8_t sync) {
+// }
+
+void rf69_sendNow (uint8_t hdr, const void* ptr, uint8_t len) {
+    while (!rf69_canSend())
+ 9ea:	f2 df       	rcall	.-28     	; 0x9d0 <_Z12rf69_canSendv>
+ 9ec:	88 23       	and	r24, r24
+ 9ee:	e1 f3       	breq	.-8      	; 0x9e8 <_Z12rf69_sendNowhPKvh+0x10>
+        rf69_recvDone();
+    rf69_sendStart(hdr, ptr, len);
+ 9f0:	40 2f       	mov	r20, r16
+ 9f2:	be 01       	movw	r22, r28
+ 9f4:	81 2f       	mov	r24, r17
+ 9f6:	ee df       	rcall	.-36     	; 0x9d4 <_Z14rf69_sendStarthPKvh>
+}
+ 9f8:	df 91       	pop	r29
+ 9fa:	cf 91       	pop	r28
+ 9fc:	1f 91       	pop	r17
+ 9fe:	0f 91       	pop	r16
+ a00:	08 95       	ret
+
+00000a02 <_Z13rf69_sendWaith>:
+
+void rf69_sendWait (uint8_t mode) {
+ a02:	0f 93       	push	r16
+ a04:	1f 93       	push	r17
+ a06:	cf 93       	push	r28
+ a08:	df 93       	push	r29
+ a0a:	c8 2f       	mov	r28, r24
+    while (RF69::sending())
+        if (mode) {
+            set_sleep_mode(mode == 3 ? SLEEP_MODE_PWR_DOWN :
+ a0c:	14 e0       	ldi	r17, 0x04	; 4
+ a0e:	d0 e0       	ldi	r29, 0x00	; 0
+ a10:	0c e0       	ldi	r16, 0x0C	; 12
+        rf69_recvDone();
+    rf69_sendStart(hdr, ptr, len);
+}
+
+void rf69_sendWait (uint8_t mode) {
+    while (RF69::sending())
+ a12:	16 c0       	rjmp	.+44     	; 0xa40 <_Z13rf69_sendWaith+0x3e>
+        if (mode) {
+ a14:	cc 23       	and	r28, r28
+ a16:	a1 f0       	breq	.+40     	; 0xa40 <_Z13rf69_sendWaith+0x3e>
+            set_sleep_mode(mode == 3 ? SLEEP_MODE_PWR_DOWN :
+ a18:	83 b7       	in	r24, 0x33	; 51
+ a1a:	81 7f       	andi	r24, 0xF1	; 241
+ a1c:	c3 30       	cpi	r28, 0x03	; 3
+ a1e:	21 f0       	breq	.+8      	; 0xa28 <_Z13rf69_sendWaith+0x26>
+ a20:	c2 30       	cpi	r28, 0x02	; 2
+ a22:	21 f4       	brne	.+8      	; 0xa2c <_Z13rf69_sendWaith+0x2a>
+ a24:	90 2f       	mov	r25, r16
+ a26:	03 c0       	rjmp	.+6      	; 0xa2e <_Z13rf69_sendWaith+0x2c>
+ a28:	91 2f       	mov	r25, r17
+ a2a:	01 c0       	rjmp	.+2      	; 0xa2e <_Z13rf69_sendWaith+0x2c>
+ a2c:	9d 2f       	mov	r25, r29
+ a2e:	89 2b       	or	r24, r25
+ a30:	83 bf       	out	0x33, r24	; 51
+#ifdef SLEEP_MODE_STANDBY
+                           mode == 2 ? SLEEP_MODE_STANDBY :
+#endif
+                                       SLEEP_MODE_IDLE);
+            sleep_mode();
+ a32:	83 b7       	in	r24, 0x33	; 51
+ a34:	81 60       	ori	r24, 0x01	; 1
+ a36:	83 bf       	out	0x33, r24	; 51
+ a38:	88 95       	sleep
+ a3a:	83 b7       	in	r24, 0x33	; 51
+ a3c:	8e 7f       	andi	r24, 0xFE	; 254
+ a3e:	83 bf       	out	0x33, r24	; 51
+        rf69_recvDone();
+    rf69_sendStart(hdr, ptr, len);
+}
+
+void rf69_sendWait (uint8_t mode) {
+    while (RF69::sending())
+ a40:	5f dd       	rcall	.-1346   	; 0x500 <_ZN4RF697sendingEv>
+ a42:	81 11       	cpse	r24, r1
+ a44:	e7 cf       	rjmp	.-50     	; 0xa14 <_Z13rf69_sendWaith+0x12>
+                           mode == 2 ? SLEEP_MODE_STANDBY :
+#endif
+                                       SLEEP_MODE_IDLE);
+            sleep_mode();
+        }
+}
+ a46:	df 91       	pop	r29
+ a48:	cf 91       	pop	r28
+ a4a:	1f 91       	pop	r17
+ a4c:	0f 91       	pop	r16
+ a4e:	08 95       	ret
+
+00000a50 <_Z10rf69_sleepc>:
+
+// void rf69_onOff (uint8_t value) {
+// }
+
+void rf69_sleep (char n) {
+    RF69::sleep(n == RF12_SLEEP);
+ a50:	91 e0       	ldi	r25, 0x01	; 1
+ a52:	81 11       	cpse	r24, r1
+ a54:	90 e0       	ldi	r25, 0x00	; 0
+ a56:	89 2f       	mov	r24, r25
+ a58:	5a cd       	rjmp	.-1356   	; 0x50e <_ZN4RF695sleepEb>
+
+00000a5a <__vector_18>:
+	/* get data from receive buffer */
+	data = UART_RxBuf[tmptail];
+
+	return (UART_LastRxError << 8) + data;
+
+} /* uart0_peek */
+ a5a:	1f 92       	push	r1
+ a5c:	0f 92       	push	r0
+ a5e:	0f b6       	in	r0, 0x3f	; 63
+ a60:	0f 92       	push	r0
+ a62:	11 24       	eor	r1, r1
+ a64:	2f 93       	push	r18
+ a66:	3f 93       	push	r19
+ a68:	4f 93       	push	r20
+ a6a:	5f 93       	push	r21
+ a6c:	8f 93       	push	r24
+ a6e:	9f 93       	push	r25
+ a70:	ef 93       	push	r30
+ a72:	ff 93       	push	r31
+ a74:	40 91 c0 00 	lds	r20, 0x00C0
+ a78:	50 91 c6 00 	lds	r21, 0x00C6
+ a7c:	48 71       	andi	r20, 0x18	; 24
+ a7e:	80 91 f9 01 	lds	r24, 0x01F9
+ a82:	90 e0       	ldi	r25, 0x00	; 0
+ a84:	01 96       	adiw	r24, 0x01	; 1
+ a86:	8f 77       	andi	r24, 0x7F	; 127
+ a88:	99 27       	eor	r25, r25
+ a8a:	20 91 f8 01 	lds	r18, 0x01F8
+ a8e:	30 e0       	ldi	r19, 0x00	; 0
+ a90:	28 17       	cp	r18, r24
+ a92:	39 07       	cpc	r19, r25
+ a94:	39 f0       	breq	.+14     	; 0xaa4 <__vector_18+0x4a>
+ a96:	80 93 f9 01 	sts	0x01F9, r24
+ a9a:	fc 01       	movw	r30, r24
+ a9c:	e4 50       	subi	r30, 0x04	; 4
+ a9e:	fe 4f       	sbci	r31, 0xFE	; 254
+ aa0:	50 83       	st	Z, r21
+ aa2:	01 c0       	rjmp	.+2      	; 0xaa6 <__vector_18+0x4c>
+ aa4:	42 e0       	ldi	r20, 0x02	; 2
+ aa6:	40 93 f7 01 	sts	0x01F7, r20
+ aaa:	ff 91       	pop	r31
+ aac:	ef 91       	pop	r30
+ aae:	9f 91       	pop	r25
+ ab0:	8f 91       	pop	r24
+ ab2:	5f 91       	pop	r21
+ ab4:	4f 91       	pop	r20
+ ab6:	3f 91       	pop	r19
+ ab8:	2f 91       	pop	r18
+ aba:	0f 90       	pop	r0
+ abc:	0f be       	out	0x3f, r0	; 63
+ abe:	0f 90       	pop	r0
+ ac0:	1f 90       	pop	r1
+ ac2:	18 95       	reti
+
+00000ac4 <__vector_19>:
+ ac4:	1f 92       	push	r1
+ ac6:	0f 92       	push	r0
+ ac8:	0f b6       	in	r0, 0x3f	; 63
+ aca:	0f 92       	push	r0
+ acc:	11 24       	eor	r1, r1
+ ace:	8f 93       	push	r24
+ ad0:	9f 93       	push	r25
+ ad2:	ef 93       	push	r30
+ ad4:	ff 93       	push	r31
+ ad6:	90 91 fb 01 	lds	r25, 0x01FB
+ ada:	80 91 fa 01 	lds	r24, 0x01FA
+ ade:	98 17       	cp	r25, r24
+ ae0:	79 f0       	breq	.+30     	; 0xb00 <__vector_19+0x3c>
+ ae2:	80 91 fa 01 	lds	r24, 0x01FA
+ ae6:	90 e0       	ldi	r25, 0x00	; 0
+ ae8:	01 96       	adiw	r24, 0x01	; 1
+ aea:	8f 77       	andi	r24, 0x7F	; 127
+ aec:	99 27       	eor	r25, r25
+ aee:	80 93 fa 01 	sts	0x01FA, r24
+ af2:	fc 01       	movw	r30, r24
+ af4:	e4 58       	subi	r30, 0x84	; 132
+ af6:	fd 4f       	sbci	r31, 0xFD	; 253
+ af8:	80 81       	ld	r24, Z
+ afa:	80 93 c6 00 	sts	0x00C6, r24
+ afe:	05 c0       	rjmp	.+10     	; 0xb0a <__vector_19+0x46>
+ b00:	e1 ec       	ldi	r30, 0xC1	; 193
+ b02:	f0 e0       	ldi	r31, 0x00	; 0
+ b04:	80 81       	ld	r24, Z
+ b06:	8f 7d       	andi	r24, 0xDF	; 223
+ b08:	80 83       	st	Z, r24
+ b0a:	ff 91       	pop	r31
+ b0c:	ef 91       	pop	r30
+ b0e:	9f 91       	pop	r25
+ b10:	8f 91       	pop	r24
+ b12:	0f 90       	pop	r0
+ b14:	0f be       	out	0x3f, r0	; 63
+ b16:	0f 90       	pop	r0
+ b18:	1f 90       	pop	r1
+ b1a:	18 95       	reti
+
+00000b1c <uart0_init>:
+ b1c:	10 92 fb 01 	sts	0x01FB, r1
+ b20:	10 92 fa 01 	sts	0x01FA, r1
+ b24:	10 92 f9 01 	sts	0x01F9, r1
+ b28:	10 92 f8 01 	sts	0x01F8, r1
+ b2c:	99 23       	and	r25, r25
+ b2e:	24 f4       	brge	.+8      	; 0xb38 <uart0_init+0x1c>
+ b30:	22 e0       	ldi	r18, 0x02	; 2
+ b32:	20 93 c0 00 	sts	0x00C0, r18
+ b36:	9f 77       	andi	r25, 0x7F	; 127
+ b38:	90 93 c5 00 	sts	0x00C5, r25
+ b3c:	80 93 c4 00 	sts	0x00C4, r24
+ b40:	88 e9       	ldi	r24, 0x98	; 152
+ b42:	80 93 c1 00 	sts	0x00C1, r24
+ b46:	86 e0       	ldi	r24, 0x06	; 6
+ b48:	80 93 c2 00 	sts	0x00C2, r24
+ b4c:	08 95       	ret
+
+00000b4e <uart0_putc>:
+**************************************************************************/
+void uart0_putc(uint8_t data)
+{
+	uint16_t tmphead;
+
+	tmphead  = (UART_TxHead + 1) & UART_TX0_BUFFER_MASK;
+ b4e:	60 91 fb 01 	lds	r22, 0x01FB
+ b52:	70 e0       	ldi	r23, 0x00	; 0
+ b54:	6f 5f       	subi	r22, 0xFF	; 255
+ b56:	7f 4f       	sbci	r23, 0xFF	; 255
+ b58:	6f 77       	andi	r22, 0x7F	; 127
+ b5a:	77 27       	eor	r23, r23
+ b5c:	ab 01       	movw	r20, r22
+
+	while ( tmphead == UART_TxTail ) {
+ b5e:	20 91 fa 01 	lds	r18, 0x01FA
+ b62:	30 e0       	ldi	r19, 0x00	; 0
+ b64:	24 17       	cp	r18, r20
+ b66:	35 07       	cpc	r19, r21
+ b68:	d1 f3       	breq	.-12     	; 0xb5e <uart0_putc+0x10>
+		;/* wait for free space in buffer */
+	}
+
+	UART_TxBuf[tmphead] = data;
+ b6a:	fb 01       	movw	r30, r22
+ b6c:	e4 58       	subi	r30, 0x84	; 132
+ b6e:	fd 4f       	sbci	r31, 0xFD	; 253
+ b70:	80 83       	st	Z, r24
+	UART_TxHead = tmphead;
+ b72:	60 93 fb 01 	sts	0x01FB, r22
+
+	/* enable UDRE interrupt */
+	UART0_CONTROL    |= _BV(UART0_UDRIE);
+ b76:	e1 ec       	ldi	r30, 0xC1	; 193
+ b78:	f0 e0       	ldi	r31, 0x00	; 0
+ b7a:	80 81       	ld	r24, Z
+ b7c:	80 62       	ori	r24, 0x20	; 32
+ b7e:	80 83       	st	Z, r24
+ b80:	08 95       	ret
+
+00000b82 <uart0_puts>:
+Purpose:  transmit string to UART
+Input:    string to be transmitted
+Returns:  none
+**************************************************************************/
+void uart0_puts(const char *s )
+{
+ b82:	cf 93       	push	r28
+ b84:	df 93       	push	r29
+ b86:	ec 01       	movw	r28, r24
+	while (*s) {
+ b88:	88 81       	ld	r24, Y
+ b8a:	88 23       	and	r24, r24
+ b8c:	29 f0       	breq	.+10     	; 0xb98 <uart0_puts+0x16>
+Function: uart0_puts()
+Purpose:  transmit string to UART
+Input:    string to be transmitted
+Returns:  none
+**************************************************************************/
+void uart0_puts(const char *s )
+ b8e:	21 96       	adiw	r28, 0x01	; 1
+{
+	while (*s) {
+		uart0_putc(*s++);
+ b90:	de df       	rcall	.-68     	; 0xb4e <uart0_putc>
+Input:    string to be transmitted
+Returns:  none
+**************************************************************************/
+void uart0_puts(const char *s )
+{
+	while (*s) {
+ b92:	89 91       	ld	r24, Y+
+ b94:	81 11       	cpse	r24, r1
+ b96:	fc cf       	rjmp	.-8      	; 0xb90 <uart0_puts+0xe>
+		uart0_putc(*s++);
+	}
+
+} /* uart0_puts */
+ b98:	df 91       	pop	r29
+ b9a:	cf 91       	pop	r28
+ b9c:	08 95       	ret
+
+00000b9e <__udivmodsi4>:
+ b9e:	a1 e2       	ldi	r26, 0x21	; 33
+ ba0:	1a 2e       	mov	r1, r26
+ ba2:	aa 1b       	sub	r26, r26
+ ba4:	bb 1b       	sub	r27, r27
+ ba6:	fd 01       	movw	r30, r26
+ ba8:	0d c0       	rjmp	.+26     	; 0xbc4 <__udivmodsi4_ep>
+
+00000baa <__udivmodsi4_loop>:
+ baa:	aa 1f       	adc	r26, r26
+ bac:	bb 1f       	adc	r27, r27
+ bae:	ee 1f       	adc	r30, r30
+ bb0:	ff 1f       	adc	r31, r31
+ bb2:	a2 17       	cp	r26, r18
+ bb4:	b3 07       	cpc	r27, r19
+ bb6:	e4 07       	cpc	r30, r20
+ bb8:	f5 07       	cpc	r31, r21
+ bba:	20 f0       	brcs	.+8      	; 0xbc4 <__udivmodsi4_ep>
+ bbc:	a2 1b       	sub	r26, r18
+ bbe:	b3 0b       	sbc	r27, r19
+ bc0:	e4 0b       	sbc	r30, r20
+ bc2:	f5 0b       	sbc	r31, r21
+
+00000bc4 <__udivmodsi4_ep>:
+ bc4:	66 1f       	adc	r22, r22
+ bc6:	77 1f       	adc	r23, r23
+ bc8:	88 1f       	adc	r24, r24
+ bca:	99 1f       	adc	r25, r25
+ bcc:	1a 94       	dec	r1
+ bce:	69 f7       	brne	.-38     	; 0xbaa <__udivmodsi4_loop>
+ bd0:	60 95       	com	r22
+ bd2:	70 95       	com	r23
+ bd4:	80 95       	com	r24
+ bd6:	90 95       	com	r25
+ bd8:	9b 01       	movw	r18, r22
+ bda:	ac 01       	movw	r20, r24
+ bdc:	bd 01       	movw	r22, r26
+ bde:	cf 01       	movw	r24, r30
+ be0:	08 95       	ret
+
+00000be2 <__umulhisi3>:
+ be2:	a2 9f       	mul	r26, r18
+ be4:	b0 01       	movw	r22, r0
+ be6:	b3 9f       	mul	r27, r19
+ be8:	c0 01       	movw	r24, r0
+ bea:	a3 9f       	mul	r26, r19
+ bec:	01 d0       	rcall	.+2      	; 0xbf0 <__umulhisi3+0xe>
+ bee:	b2 9f       	mul	r27, r18
+ bf0:	70 0d       	add	r23, r0
+ bf2:	81 1d       	adc	r24, r1
+ bf4:	11 24       	eor	r1, r1
+ bf6:	91 1d       	adc	r25, r1
+ bf8:	08 95       	ret
+
+00000bfa <__muluhisi3>:
+ bfa:	f3 df       	rcall	.-26     	; 0xbe2 <__umulhisi3>
+ bfc:	a5 9f       	mul	r26, r21
+ bfe:	90 0d       	add	r25, r0
+ c00:	b4 9f       	mul	r27, r20
+ c02:	90 0d       	add	r25, r0
+ c04:	a4 9f       	mul	r26, r20
+ c06:	80 0d       	add	r24, r0
+ c08:	91 1d       	adc	r25, r1
+ c0a:	11 24       	eor	r1, r1
+ c0c:	08 95       	ret
+
+00000c0e <_exit>:
+ c0e:	f8 94       	cli
+
+00000c10 <__stop_program>:
+ c10:	ff cf       	rjmp	.-2      	; 0xc10 <__stop_program>
