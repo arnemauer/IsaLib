@@ -639,6 +639,7 @@ uint8_t rf12_initialize (uint8_t id, uint8_t b, uint8_t g) {
 	rf12_spiInit();
 	
 	rf12_interruptcontrol();
+	
 	// reset RFM12b module
 	rf12_xfer(0xCA82); // enable software reset
 	rf12_xfer(0xFE00); // do software reset

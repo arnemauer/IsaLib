@@ -174,10 +174,10 @@
     <Compile Include="pca9635.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="RF12.cpp">
+    <Compile Include="RFM12B.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="RF12.h">
+    <Compile Include="RFM12B.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="timer2.c">

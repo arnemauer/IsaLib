@@ -42,7 +42,7 @@ C_SRCS +=  \
 ../millis.c \
 ../ONTVANGER.cpp \
 ../pca9635.c \
-../RF12.cpp \
+../RFM12B.cpp \
 ../timer2.c \
 ../tone.c \
 ../uart.c
@@ -61,7 +61,7 @@ log.o \
 millis.o \
 ONTVANGER.o \
 pca9635.o \
-RF12.o \
+RFM12B.o \
 timer2.o \
 tone.o \
 uart.o
@@ -73,7 +73,7 @@ log.o \
 millis.o \
 ONTVANGER.o \
 pca9635.o \
-RF12.o \
+RFM12B.o \
 timer2.o \
 tone.o \
 uart.o
@@ -85,7 +85,7 @@ log.d \
 millis.d \
 ONTVANGER.d \
 pca9635.d \
-RF12.d \
+RFM12B.d \
 timer2.d \
 tone.d \
 uart.d
@@ -97,7 +97,7 @@ log.d \
 millis.d \
 ONTVANGER.d \
 pca9635.d \
-RF12.d \
+RFM12B.d \
 timer2.d \
 tone.d \
 uart.d

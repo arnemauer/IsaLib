@@ -41,14 +41,15 @@ uint8_t rf69_initialize (uint8_t id, uint8_t band, uint8_t group, uint16_t off) 
     }
     RF69::setFrequency(freq * 10000000L + band * 2500L * off);
     RF69::group = group;
-    RF69::node = id & RF12_HDR_MASK;
+    RF69::nodeID = id;
     _delay_ms(20); // needed to make RFM69 work properly on power-up
    
    
-    if (RF69::node != 0){
+    if (RF69::nodeID != 0){
       //  attachInterrupt(0, RF69::interrupt_compat, RISING);
-			 EIMSK |= (1 << INT0); // enable int0 interrupt //bitSet(EIMSK, INT0);
 			 EICRA |= (1 << ISC00) | (1 << ISC01); // trigger on rising edge
+			 EIMSK |= (1 << INT0); // enable int0 interrupt //bitSet(EIMSK, INT0);
+			 
 
     }else{
         EIMSK &= ~(1 << INT0); // disable pcint0 interrupt  //bitClear(EIMSK, INT0);
@@ -63,49 +64,15 @@ uint8_t rf69_initialize (uint8_t id, uint8_t band, uint8_t group, uint16_t off) 
 
 
 
-uint8_t rf69_recvDone () {
-    rf69_crc = RF69::recvDone_compat((uint8_t*) rf69_buf);
-    return rf69_crc != ~0;
-}
 
-uint8_t rf69_canSend () {
-    return RF69::canSend();
-}
 
-// void rf69_sendStart (uint8_t hdr) {
-// }
 
-void rf69_sendStart (uint8_t hdr, const void* ptr, uint8_t len) {
-    RF69::sendStart_compat(hdr, ptr, len);
-}
 
-// void rf69_sendStart (uint8_t hdr, const void* ptr, uint8_t len, uint8_t sync) {
-// }
-
-void rf69_sendNow (uint8_t hdr, const void* ptr, uint8_t len) {
-    while (!rf69_canSend())
-        rf69_recvDone();
-    rf69_sendStart(hdr, ptr, len);
-}
-
-void rf69_sendWait (uint8_t mode) {
-    while (RF69::sending())
-        if (mode) {
-            set_sleep_mode(mode == 3 ? SLEEP_MODE_PWR_DOWN :
-#ifdef SLEEP_MODE_STANDBY
-                           mode == 2 ? SLEEP_MODE_STANDBY :
-#endif
-                                       SLEEP_MODE_IDLE);
-            sleep_mode();
-        }
-}
 
 // void rf69_onOff (uint8_t value) {
 // }
 
-void rf69_sleep (char n) {
-    RF69::sleep(n == RF12_SLEEP);
-}
+
 
 // char rf69_lowbat () {
 // }

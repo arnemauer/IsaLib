@@ -18,11 +18,14 @@
 /// Shorthand for RFM12B group byte in rf12_buf.
 #define rf12_grp        rf12_buf[0]
 /// Shorthand for RFM12B header byte in rf12_buf.
-#define rf12_hdr        rf12_buf[1]
+#define rf12_hdr1        rf12_buf[1]
+/// Shorthand for RFM12B header byte in rf12_buf.
+#define rf12_hdr2        rf12_buf[2]
+
 /// Shorthand for RFM12B length byte in rf12_buf.
-#define rf12_len        rf12_buf[2]
+#define rf12_len        rf12_buf[3]
 /// Shorthand for first RFM12B data byte in rf12_buf.
-#define rf12_data       (rf12_buf + 3)
+#define rf12_data       (rf12_buf + 4)
 
 /// RFM12B CTL bit mask.
 #define RF12_HDR_CTL    0x80

@@ -34,8 +34,8 @@ uint8_t counter;
 static long payload;
 
 // config
-unsigned long alarm_duration = 20000; // alarm duration in ms
-
+//unsigned long alarm_duration = 20000; // alarm duration in ms
+unsigned long alarm_duration = 5000; // alarm duration in ms
 
 //
 uint8_t deep_sleep_ok; // if true timer stopped everything so uc can go in deep sleep

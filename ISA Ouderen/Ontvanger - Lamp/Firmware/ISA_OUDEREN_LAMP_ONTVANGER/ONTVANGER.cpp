@@ -11,7 +11,7 @@ TIMER 1 - 16BIT -  PIEZO SOUND
 TIMER 2 - 8BIT  -  LED
 */
 
-//#define DEBUG_SERIAL
+#define DEBUG_SERIAL
 
 #include "config.h"
 #include <avr/io.h>
@@ -30,7 +30,7 @@ TIMER 2 - 8BIT  -  LED
 
 #define byte uint8_t
 #include "ONTVANGER.h"
-#include "RF12.h"
+#include "RFM12B.h"
 #include "delay.c"
 #include "timer2.c"
 #include "millis.h"
@@ -43,7 +43,15 @@ extern "C" {
 	#include "tone.h"
 };
 
-		 
+RFM12B radio;
+
+ISR(INT0_vect) {
+	radio.InterruptHandler();
+}
+
+#define NETWORKID         14  //what network this node is on
+#define NODEID             2  //this node's ID, should be unique among nodes on this NETWORKID
+
 	
 int main() {	
 // disable ADC for less power 
@@ -72,6 +80,8 @@ int main() {
 			#ifdef DEBUG_SERIAL
 			uart_init( ((F_CPU)/((UART_BAUD_RATE)*16l)-1)) ;
 			_delay_ms(1000);
+			log_s("UART OK\r");
+			_delay_ms(1000);
 			#else
 			power_usart0_disable();
 			#endif
@@ -96,17 +106,15 @@ int main() {
 			
 		
 			// node id, rfband, group id
-			rf12_initialize(2, RF12_868MHZ, 14);
+			radio.Initialize(NODEID, RF12_868MHZ, NETWORKID);
 			// see http://tools.jeelabs.org/rfm12b
-			rf12_setLowDuty(500);
+			radio.SetLowDuty(500);
 
-
-			deep_sleep_ok = 1; // put device in deep sleep after initializing
-			#ifdef DEBUG_SERIAL
-			log_s("initialized!");
-			_delay_ms(1000);
-			#endif
-			
+	#ifdef DEBUG_SERIAL
+	log_s("RF OK!");
+	_delay_ms(1000);
+	#endif
+		
 			// initialised
 			
 				pca9635_set_led_pwm(1, 255);
@@ -120,31 +128,44 @@ int main() {
 				pca9635_set_all_led_pwm(0);
 				pca9635_set_sleep(1);
 				
-				
+			deep_sleep_ok = 1; // put device in deep sleep after initializing
+			
+			#ifdef DEBUG_SERIAL
+				log_s("initialized!");
+				_delay_ms(1000);
+			#endif
 				
 				
 				
 	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
-	
+
+	if (radio.ReceiveComplete()) { // a packet has been received
 		
-	if (rf12_recvDone()) { // a packet has been received
-		if(rf12_crc == 0){ //  CRC of the received packet, zero indicates correct reception.
-
-
-			if (RF12_WANTS_ACK) {
-				rf12_sendStart(RF12_ACK_REPLY,0,0);
-				rf12_sendWait(1); // don't power down too soon
+				#ifdef DEBUG_SERIAL
+				if(radio.CRCPass()){
+				log_s("CRCOK\r");
+				}else{
+					log_s("CRC NOOK\r");
+				}
+				
+				//_delay_ms(5);
+				#endif
+			
+		if(radio.CRCPass()){ //  CRC of the received packet, zero indicates correct reception.
+		
+			if (radio.ACKRequested()) {
+				radio.SendACK();
+				radio.SendWait(1); // don't power down too soon
 			}
 			
-
+					
 		// only react to packets with first byte 0x99
-		if(rf12_data[0] == 0x99) { // 153
-		// process incoming data here
-								
+		if(radio.GetData()[0] == 0x99) { // 153
+		// process incoming data here	
 			
 				////////////////		Fill alarm array		 ////////////////
 				// only get the first byte
-				uint8_t data = rf12_data[1]; // not used, not used, not used, start (1) or stop(0), doorbell, phone, fire, help;
+				uint8_t data = radio.GetData()[1]; // not used, not used, not used, start (1) or stop(0), doorbell, phone, fire, help;
 
 				if(data & 0x10){
 					 // start alarm	 
@@ -152,7 +173,7 @@ int main() {
 					 
 				 }else{
 					 // stop alarm
-					 active_alarm =  active_alarm & (~data); /* invert data, compare with active alarm array to clear the right alarm bit */		 
+					 active_alarm =  active_alarm & (~data); // invert data, compare with active alarm array to clear the right alarm bit 		 
 				 }
 				 
 				////////////////		Fill alarm array		 ////////////////				 
@@ -232,8 +253,7 @@ int main() {
 		
 			// switch into idle mode until the next interrupt - Choose our preferred sleep mode:
 			if(deep_sleep_ok == 1){
-				rf12_setLowDuty(250);
-				
+								
 				set_sleep_mode(SLEEP_MODE_STANDBY); // if active alarm, go in pwr save mode to keep timer 2 running
 				sleep_enable();
 				// turn off brown-out enable in software
@@ -262,8 +282,7 @@ int main() {
 	} // end main
 
 	
-	
-	
+
 	
 ISR (TIMER2_COMPA_vect) {
 

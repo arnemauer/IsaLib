@@ -8,6 +8,7 @@
 
 #define DEBUG_SERIAL
 
+#define byte uint8_t
 #include "config.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -22,14 +23,15 @@
 #include <avr/sleep.h>
 #include <util/atomic.h>
 
-
-
 #include "ISA_OUDEREN_ZENDER.h"
-#include "doorbell.h"
-#include "RF69_compat.h"
-#include "RF12.h"
-#include "RF69.h"
 #include "millis.h"
+#include "doorbell.h"
+#include "RFM69registers.h"
+#include "RFM69.h"
+//#include "RF69_avr.h"
+//#include "RF12.h"
+//#include "RF69.h"
+
 //#include "toneAC.h"
 extern "C" {
 	#include "uart.h"
@@ -37,10 +39,11 @@ extern "C" {
 };
 
 #define NODE_ID				3
+#define NETWORKID			14  //the same on all nodes that talk to each other
 #define DESTINATION_NODE_ID 2 
 #define RETRY_PERIOD    10  // how soon to retry if ACK didn't come in, in ms
-#define RETRY_LIMIT     3   // maximum number of times to retry
-#define ACK_TIME        25  // number of milliseconds to wait for an ack
+#define RETRY_LIMIT     10   // maximum number of times to retry
+#define ACK_TIME        10  // number of milliseconds to wait for an ack
 
 //struct {
 //	uint8_t house_code: 0x99;     // housecode: 0x99 =153
@@ -51,6 +54,13 @@ extern "C" {
 uint8_t pre_payload[50] = {0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01 };
 uint8_t payload[2] = {0x99, 0x18}; // 10 DUMMY BYTES
 
+RFM69 radio;
+	
+
+	ISR(INT0_vect) {
+		RFM69::isr0();
+	}
+	
 	
 int main() {	
 // disable ADC for less power 
@@ -81,8 +91,8 @@ int main() {
 				log_s("RF12 INIT..."); _delay_ms(1000);
 			#endif
 			
-			rf12_spiInit();
-			rf69_initialize(NODE_ID, RF12_868MHZ, 14); // node id, rfband, group id
+		
+		radio.initialize(RF69_868MHZ, NODE_ID, NETWORKID); // node id, rfband, group id
 
 			#ifdef DEBUG_SERIAL
 				log_s(" OK\r"); _delay_ms(1000);
@@ -106,11 +116,23 @@ int main() {
 		millis_resume();
 			#ifdef DEBUG_SERIAL
 			log_s("Send Package...");
-			_delay_ms(1000);
+			_delay_ms(30);
 			#endif
 			
 		// send message
-		sendpackage();
+		//sendpackage();
+		
+		uint8_t response = radio.sendWithRetry(DESTINATION_NODE_ID, payload, sizeof(payload), RETRY_LIMIT, ACK_TIME);
+		
+		if(response){
+			log_s("ACK OK");
+			_delay_ms(30);
+		}else{
+			log_s("NO ACK");
+			_delay_ms(30);
+		}
+		
+		//radio.send(DESTINATION_NODE_ID, payload, sizeof(payload), 1);
 		
 		triggered = 0; // reset trigger
 		
@@ -119,8 +141,8 @@ int main() {
 	if((PIND & (1 << 3)) && doorbell_last_state == 1){ // if pin is high again
 		
 					#ifdef DEBUG_SERIAL
-					log_s("PWR_DOWN\r");
-					 _delay_ms(20);
+					log_s("\rPWR_DOWN\r");
+					 _delay_ms(30);
 					#endif
 		cli();			
 		millis_pause();
@@ -158,19 +180,28 @@ int main() {
 
 	
 void sendpackage(){ 
+	/*
+	
 	    for (byte i = 0; i < RETRY_LIMIT; ++i) {
 			
-		    rf69_sleep(RF12_WAKEUP);
-			
+		   		//    radio.sleep(RF12_WAKEUP);
+
 			//rf69_sendNow( RF12_HDR_DST | DESTINATION_NODE_ID, &pre_payload, sizeof(pre_payload));
 			//rf69_sendWait(1); //idle
 			// _delay_ms(2);
-		    rf69_sendNow(RF12_HDR_ACK | RF12_HDR_DST | DESTINATION_NODE_ID, &payload, sizeof(payload));
-		    rf69_sendWait(1); //idle
 			
-		    byte acked = waitForAck();
-		    rf69_sleep(RF12_SLEEP);
-
+			//DESTINATION_NODE_ID
+		  //  radio.sendNow(6, 1, 0, &payload, sizeof(payload));
+		 //  radio.sendWait(1); //idle
+			
+			//byte acked = radio.sendWithRetry(DESTINATION_NODE_ID, &payload, sizeof(payload), 3, 25);
+			
+			radio.send(DESTINATION_NODE_ID, &payload, sizeof(payload), 1);
+			
+		  //  byte acked = waitForAck();
+		//     RF69::sleep(1);
+			 
+			 
 		    if (acked) {
 			  #ifdef DEBUG_SERIAL
 			   log_s("ACK OK\r");
@@ -194,6 +225,10 @@ void sendpackage(){
 		 log_s("NO ACK... Failed sending package! \r");
 		 _delay_ms(20);
 		 #endif
+		 
+		 */
+	
+	
 	}
 	
 	
@@ -203,16 +238,16 @@ void sendpackage(){
 	static byte waitForAck() {
 		unsigned long long ACK_WAIT_TILL = millis_get() + ACK_TIME; 
 		while (millis_get() <= ACK_WAIT_TILL) {
-			if (rf12_recvDone()) { // a packet has been received
+			if (radio.receiveDone()) { // a packet has been received
 				
 				log_s("\rPAKKET ONTVANGEN - CRC=");
-				uart0_putc(rf12_crc);
+				//uart0_putc(rf12_crc);
 				log_s("; RF12HDR=");
-				uart0_putc(rf12_hdr);
+
 				_delay_ms(400);
-				 	if (rf12_crc == 0 && rf12_hdr == ( RF12_HDR_CTL | DESTINATION_NODE_ID)){
+				 	//if (rf12_crc == 0 && rf12_hdr == ( RF12_HDR_CTL | DESTINATION_NODE_ID)){
 						return 1;
-					}
+					//}
 					
 			set_sleep_mode(SLEEP_MODE_IDLE);
 			sleep_mode();
@@ -220,4 +255,5 @@ void sendpackage(){
 		}
 		return 0;
 	}
+	
 	

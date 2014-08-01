@@ -10,11 +10,7 @@ millis.c
 
 ISA_OUDEREN_ZENDER.cpp
 
-RF12.cpp
-
-RF69.cpp
-
-RF69_compat.cpp
+RFM69.cpp
 
 uart.c
 

@@ -168,25 +168,13 @@
     <Compile Include="millis.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="RF12.cpp">
+    <Compile Include="RFM69.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="RF12.h">
+    <Compile Include="RFM69.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="RF69.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="RF69.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="RF69_avr.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="RF69_compat.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="RF69_compat.h">
+    <Compile Include="RFM69registers.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="uart.c">

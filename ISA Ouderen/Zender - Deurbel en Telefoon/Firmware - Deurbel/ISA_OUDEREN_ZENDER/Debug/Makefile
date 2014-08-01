@@ -40,9 +40,7 @@ C_SRCS +=  \
 ../log.c \
 ../millis.c \
 ../ISA_OUDEREN_ZENDER.cpp \
-../RF12.cpp \
-../RF69.cpp \
-../RF69_compat.cpp \
+../RFM69.cpp \
 ../uart.c
 
 
@@ -57,9 +55,7 @@ doorbell.o \
 log.o \
 millis.o \
 ISA_OUDEREN_ZENDER.o \
-RF12.o \
-RF69.o \
-RF69_compat.o \
+RFM69.o \
 uart.o
 
 OBJS_AS_ARGS +=  \
@@ -67,9 +63,7 @@ doorbell.o \
 log.o \
 millis.o \
 ISA_OUDEREN_ZENDER.o \
-RF12.o \
-RF69.o \
-RF69_compat.o \
+RFM69.o \
 uart.o
 
 C_DEPS +=  \
@@ -77,9 +71,7 @@ doorbell.d \
 log.d \
 millis.d \
 ISA_OUDEREN_ZENDER.d \
-RF12.d \
-RF69.d \
-RF69_compat.d \
+RFM69.d \
 uart.d
 
 C_DEPS_AS_ARGS +=  \
@@ -87,9 +79,7 @@ doorbell.d \
 log.d \
 millis.d \
 ISA_OUDEREN_ZENDER.d \
-RF12.d \
-RF69.d \
-RF69_compat.d \
+RFM69.d \
 uart.d
 
 OUTPUT_FILE_PATH +=ISA_OUDEREN_ZENDER.elf
@@ -103,10 +93,6 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
-
-
-
-
 
 
 

@@ -14,7 +14,7 @@ ONTVANGER.cpp
 
 pca9635.c
 
-RF12.cpp
+RFM12B.cpp
 
 timer2.c
 
