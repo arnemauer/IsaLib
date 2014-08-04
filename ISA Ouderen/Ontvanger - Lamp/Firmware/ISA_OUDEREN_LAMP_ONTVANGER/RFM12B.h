@@ -28,7 +28,7 @@
 //#define RF12_SOURCEID   rf12_hdr & RF12_HDR_MASK
 
 /// RF12 Maximum message size in bytes.
-#define RF12_MAXDATA    128
+#define RF12_MAXDATA    25
 /// Max transmit/receive buffer: 4 header + data + 2 crc bytes
 #define RF_MAX          (RF12_MAXDATA + 6)
 
@@ -79,7 +79,7 @@
 
 // RF12 command codes
 #define RF_RECEIVER_ON  0x82DD
-//#define RF_RECEIVER_ON  0x8206 // shutdown Crystal, synthesizer PLL; start WAKEUP
+#define RF_RECEIVER_LOWDUTY_ON  0x8206 // shutdown Crystal, synthesizer PLL; start WAKEUP
 
 #define RF_XMITTER_ON   0x823D
 #define RF_IDLE_MODE    0x820D

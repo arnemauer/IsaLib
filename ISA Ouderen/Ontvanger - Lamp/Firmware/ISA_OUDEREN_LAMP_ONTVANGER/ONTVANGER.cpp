@@ -108,7 +108,7 @@ int main() {
 			// node id, rfband, group id
 			radio.Initialize(NODEID, RF12_868MHZ, NETWORKID);
 			// see http://tools.jeelabs.org/rfm12b
-			radio.SetLowDuty(500);
+		//	radio.SetLowDuty(500);
 
 	#ifdef DEBUG_SERIAL
 	log_s("RF OK!");
@@ -154,8 +154,11 @@ int main() {
 		if(radio.CRCPass()){ //  CRC of the received packet, zero indicates correct reception.
 		
 			if (radio.ACKRequested()) {
+				log_s(".");
 				radio.SendACK();
+				log_s("+");
 				radio.SendWait(1); // don't power down too soon
+				
 			}
 			
 					
