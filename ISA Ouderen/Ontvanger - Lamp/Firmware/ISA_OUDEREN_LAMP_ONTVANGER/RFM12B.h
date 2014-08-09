@@ -28,7 +28,7 @@
 //#define RF12_SOURCEID   rf12_hdr & RF12_HDR_MASK
 
 /// RF12 Maximum message size in bytes.
-#define RF12_MAXDATA    25
+#define RF12_MAXDATA    10
 /// Max transmit/receive buffer: 4 header + data + 2 crc bytes
 #define RF_MAX          (RF12_MAXDATA + 6)
 
@@ -163,6 +163,7 @@ class RFM12B
 	bool ACKReceived(uint8_t fromNodeID=0);
 	
 	void SetLowDuty(unsigned long m=255);
+	void SetLowDutyOnOff(uint8_t value);
 	
 	static void CryptFunction(bool sending);
 	void Encrypt(const uint8_t* key, uint8_t keyLen = 16);

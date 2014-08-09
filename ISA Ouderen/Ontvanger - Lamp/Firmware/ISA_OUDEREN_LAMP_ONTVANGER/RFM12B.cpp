@@ -18,7 +18,7 @@ volatile uint16_t RFM12B::rf12_crc;    // running crc value
 volatile uint8_t rf12_buf[RF_MAX];     // recv/xmit buf, including hdr & crc bytes
 
 volatile uint16_t rfmstate;         // current power management setting of the RFM12 module
-
+volatile uint16_t lowdutyregister = 0x0000;
 
 void RFM12B::SPIInit() {
 
@@ -250,9 +250,9 @@ void RFM12B::ReceiveStart() {
 	rf12_crc = 0x1d0f;
 	
 	rxstate = TXRECV;
-	XFER(RF_RECEIVER_ON);
-	
-	//XFER(RF_RECEIVER_LOWDUTY_ON);
+	//XFER(RF_RECEIVER_ON);
+	SetLowDutyOnOff(1);
+	XFER(RF_RECEIVER_LOWDUTY_ON);
 }
 
 bool RFM12B::ReceiveComplete() {
@@ -276,7 +276,8 @@ bool RFM12B::ReceiveComplete() {
 bool RFM12B::CanSend() {
 	// no need to test with interrupts disabled: state TXRECV is only reached
 	// outside of ISR and we don't care if rxfill jumps from 0 to 1 here
-	if (rxstate == TXRECV && rxfill == 0 && (XFERSlow(0x0000) & RF_RSSI_BIT) == 0) {
+	if (rxstate == TXRECV && rxfill == 0 && (Byte(0x00) & RF_RSSI_BIT) == 0) {
+		SetLowDutyOnOff(0); // disable low duty cycle
 		XFER(RF_IDLE_MODE); // stop receiver
 		//XXX just in case, don't know whether these RF12 reads are needed!
 		// rf12_XFER(0x0000); // status register
@@ -399,31 +400,28 @@ void RFM12B::SetLowDuty(unsigned long m) {
 		m >>= 1;
 	}
 	
-	// Disable old wakeup-timer if enabled
-	//	if (bitRead(rfmstate,1)) {
-	//if ((rfmstate)&0x02){
-	//bitClear(rfmstate,1);
-	//	rfmstate &= ~(1 << 1);
-	//	rf12_xfer(rfmstate);
-	//}
-	
-	// enable wakeup call if we have to
-	//if (m>0) {
-	// write time to wakeup-register
-	//rf12_xfer(RF_WAKEUP_TIMER | (r<<8) | m);
+	//XFER(RF_WAKEUP_TIMER | (r<<8) | m);
 	XFER(0xE1FA); //500ms
 	
-	XFER(0xC833); //  Low Duty-Cycle D=25 = 20% van 500ms = 102ms
-	// enable wakeup
-	
-	//bitSet(rfmstate,1);
-	//rfmstate = 0x8200;
-	//rfmstate |= (1 << 1); //  In this operation mode, bit er must be cleared and bit ew must be set in the Power Management Command.
-//	rfmstate &= ~(1 << 7);
-//	XFER(rfmstate);
-	//}
+	lowdutyregister = 0xC832; //  Low Duty-Cycle D=25 = 20% van 500ms = 102ms >> enablebit is NOT set
+	XFER(lowdutyregister); 
+
+
 }
 
+void RFM12B::SetLowDutyOnOff(uint8_t value) {
+
+if(value){ // set low duty on in lowduty register 15
+	lowdutyregister |= (1 << 0);
+	XFER(lowdutyregister); // set bit 0 (enable) to 1
+		
+}else{ // set low duty off in lowduty register 15
+	lowdutyregister &= ~(1<<0);  
+	XFER(lowdutyregister); // set bit 0 (enable) to 0
+}
+
+
+}
 
 
 

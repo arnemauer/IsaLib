@@ -491,10 +491,10 @@ void sendpackage(){
  2e8:	00 c0       	rjmp	.+0      	; 0x2ea <main+0xc6>
  2ea:	00 00       	nop
  2ec:	0f 2e       	mov	r0, r31
- 2ee:	fa e0       	ldi	r31, 0x0A	; 10
+ 2ee:	f2 e3       	ldi	r31, 0x32	; 50
  2f0:	ef 2e       	mov	r14, r31
  2f2:	f0 2d       	mov	r31, r0
- 2f4:	0a e0       	ldi	r16, 0x0A	; 10
+ 2f4:	04 e1       	ldi	r16, 0x14	; 20
  2f6:	22 e0       	ldi	r18, 0x02	; 2
  2f8:	41 e0       	ldi	r20, 0x01	; 1
  2fa:	51 e0       	ldi	r21, 0x01	; 1

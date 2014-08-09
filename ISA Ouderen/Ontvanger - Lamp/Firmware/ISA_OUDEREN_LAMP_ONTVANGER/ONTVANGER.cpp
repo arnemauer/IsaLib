@@ -11,7 +11,7 @@ TIMER 1 - 16BIT -  PIEZO SOUND
 TIMER 2 - 8BIT  -  LED
 */
 
-#define DEBUG_SERIAL
+//#define DEBUG_SERIAL
 
 #include "config.h"
 #include <avr/io.h>
@@ -108,7 +108,7 @@ int main() {
 			// node id, rfband, group id
 			radio.Initialize(NODEID, RF12_868MHZ, NETWORKID);
 			// see http://tools.jeelabs.org/rfm12b
-		//	radio.SetLowDuty(500);
+			radio.SetLowDuty(500);
 
 	#ifdef DEBUG_SERIAL
 	log_s("RF OK!");
