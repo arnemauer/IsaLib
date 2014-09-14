@@ -124,14 +124,14 @@ int main() {
 	#endif
 		
 	
-		uint8_t payload[3] = {0x01, 0x02, 0x03}; // 10 DUMMY BYTES
-		radio.send(3, payload, 3, true);
-		log_s("SOK");
+	//	uint8_t payload[3] = {0x01, 0x02, 0x03}; // 10 DUMMY BYTES
+	////	radio.send(3, payload, 3, true);
+	//	log_s("SOK");
 			_delay_ms(1000);
 			
-		radio.send(3, payload, 3, true);	
-					log_s("SOK");
-				_delay_ms(1000);
+	//	radio.send(3, payload, 3, true);	
+		//			log_s("SOK");
+	//			_delay_ms(1000);
 			
 	//	radio.sendACK();
 		//radio.sendACK();
@@ -161,18 +161,15 @@ int main() {
 				
 				
 	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
-
+	
 	if (radio.receiveDone()) { // a packet has been received
 	//	log_s("\rRECV OK");
 		  if (radio.ACKRequested()){
 				//log_s(".");
-				radio.SENDERID = 3;
-				radio.sendACK();
-				radio.sendACK();
 				radio.sendACK();
 				log_s("+");
-				//	_delay_ms(5);
-			//	radio.SendWait(1); // don't power down too soon
+					_delay_ms(1);
+				//radio.SendWait(1); // don't power down too soon
 				
 			}
 			

@@ -363,9 +363,11 @@ int RFM69::readRSSI(bool forceTrigger) {
 
 byte RFM69::readReg(byte addr)
 {
-	 select();
-	return spiTransfer (addr, 0);
-	 unselect();
+	select();
+	byte regval =  spiTransfer (addr, 0);
+	unselect();
+	return regval;
+
 }
 
 void RFM69::writeReg(byte addr, byte value){

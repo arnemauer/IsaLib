@@ -14,6 +14,11 @@
 #include <inttypes.h>
 #include <util/crc16.h>
 
+extern "C" {
+	#include "uart.h"
+	#include "log.h"
+
+};
 volatile uint8_t RFM69::DATA[MAX_DATA_LEN];
 volatile uint8_t RFM69::_mode;       // current transceiver state
 volatile uint8_t RFM69::listenModeOn = 0;
@@ -128,10 +133,11 @@ bool RFM69::initialize(uint8_t freqBand, uint8_t nodeID, uint8_t networkID)
   // Disable it during initialization so we always start from a known state.
   encrypt(0);
 
-  setMode(RF69_MODE_STANDBY);
+  setMode(RF69_MODE_STANDBY); // zinloos omdat default al in standby?
+  
 	while ((readReg(REG_IRQFLAGS1) & RF_IRQFLAGS1_MODEREADY) == 0x00); // Wait for ModeReady
 
-  			 EICRA |= (1 << ISC00) | (1 << ISC01); // trigger on rising edge
+  			 EICRA &= ~(1<<ISC01) | (1<<ISC00);	// Trigger INT0 on low level
 			 EIMSK |= (1 << INT0); // enable int0 interrupt //bitSet(EIMSK, INT0);
 			    
   selfPointer = this;
@@ -329,7 +335,7 @@ void RFM69::sendFrame(byte toAddress, const void* buffer, byte bufferSize, bool 
 
 	/* no need to wait for transmit mode to be ready since its handled by the radio */
 	setMode(RF69_MODE_TX);
-	while ((PIND &  (1 << 2)) == 0); //wait for DIO0 to turn HIGH signalling transmission finish
+	while ((PIND &  (1 << 2))); //wait for DIO0 to turn HIGH signalling transmission finish
   
 	//while (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PACKETSENT == 0x00); // Wait for ModeReady
 	setMode(RF69_MODE_STANDBY);
@@ -337,8 +343,8 @@ void RFM69::sendFrame(byte toAddress, const void* buffer, byte bufferSize, bool 
 }
 
 void RFM69::interruptHandler() {
-	  
   if (_mode == RF69_MODE_RX && (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY))
+
   {
     setMode(RF69_MODE_STANDBY);
     select();
@@ -384,7 +390,8 @@ void RFM69::receiveBegin() {
   RSSI = 0;
   if (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PAYLOADREADY)
     writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
-  writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01); //set DIO0 to "PAYLOADREADY" in receive mode
+	
+	 writeReg(REG_DIOMAPPING1, RF_DIOMAPPING1_DIO0_01); //set DIO0 to "PAYLOADREADY" in receive mode
 
 		setMode(RF69_MODE_RX);
 
@@ -441,8 +448,10 @@ int RFM69::readRSSI(bool forceTrigger) {
 byte RFM69::readReg(byte addr)
 {
 	 select();
-	return spiTransfer (addr, 0);
+	byte regval =  spiTransfer (addr, 0);
 	 unselect();
+	   return regval;
+
 }
 
 void RFM69::writeReg(byte addr, byte value){
@@ -541,12 +550,12 @@ void RFM69::rcCalibration()
 
 
  void RFM69::noInterrupts () {
-	//EIMSK &= ~(1 << INT0); // disable pcint0 interrupt  //bitClear(EIMSK, INT0);
-cli();
+	EIMSK &= ~(1 << INT0); // disable pcint0 interrupt  //bitClear(EIMSK, INT0);
+//cli();
 }
 
  void RFM69::allowInterrupts () {
-	//EIMSK |= (1 << INT0); // enable pcint1 interrupt //bitSet(EIMSK, INT0);
-	sei();
+	EIMSK |= (1 << INT0); // enable pcint1 interrupt //bitSet(EIMSK, INT0);
+	//sei();
 }
 

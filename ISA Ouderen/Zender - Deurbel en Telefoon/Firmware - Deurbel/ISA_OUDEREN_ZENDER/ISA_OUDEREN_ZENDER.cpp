@@ -42,7 +42,7 @@ extern "C" {
 #define NETWORKID			14  //the same on all nodes that talk to each other
 #define DESTINATION_NODE_ID 2 
 
-#define RETRY_LIMIT     20   // maximum number of times to retry
+#define RETRY_LIMIT     2   // maximum number of times to retry
 #define ACK_TIME        50  // number of milliseconds to wait for an ack
 
 //struct {
