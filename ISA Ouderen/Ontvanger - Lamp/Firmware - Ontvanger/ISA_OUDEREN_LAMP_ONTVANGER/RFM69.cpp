@@ -138,6 +138,8 @@ bool RFM69::initialize(uint8_t freqBand, uint8_t nodeID, uint8_t networkID)
 	while ((readReg(REG_IRQFLAGS1) & RF_IRQFLAGS1_MODEREADY) == 0x00); // Wait for ModeReady
 
   			 EICRA &= ~(1<<ISC01) | (1<<ISC00);	// Trigger INT0 on low level
+			// EICRA |= (1<<ISC01);
+			 
 			 EIMSK |= (1 << INT0); // enable int0 interrupt //bitSet(EIMSK, INT0);
 			    
   selfPointer = this;
@@ -333,13 +335,16 @@ void RFM69::sendFrame(byte toAddress, const void* buffer, byte bufferSize, bool 
     spiTransferByte(((byte*)buffer)[i]);
 	unselect();
 
+	cli();
 	/* no need to wait for transmit mode to be ready since its handled by the radio */
 	setMode(RF69_MODE_TX);
-	while ((PIND &  (1 << 2))); //wait for DIO0 to turn HIGH signalling transmission finish
+
+
+	while ((PIND &  (1 << 2))); //wait for DIO0 to turn low signalling transmission finish
   
 	//while (readReg(REG_IRQFLAGS2) & RF_IRQFLAGS2_PACKETSENT == 0x00); // Wait for ModeReady
 	setMode(RF69_MODE_STANDBY);
-  
+	sei();
 }
 
 void RFM69::interruptHandler() {
@@ -448,7 +453,7 @@ int RFM69::readRSSI(bool forceTrigger) {
 byte RFM69::readReg(byte addr)
 {
 	 select();
-	byte regval =  spiTransfer (addr, 0);
+	byte regval =  spiTransfer (addr & 0x7F, 0);
 	 unselect();
 	   return regval;
 

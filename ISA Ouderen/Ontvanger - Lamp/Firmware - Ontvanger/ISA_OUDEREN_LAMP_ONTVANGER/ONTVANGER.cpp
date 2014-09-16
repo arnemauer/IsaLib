@@ -124,15 +124,18 @@ int main() {
 	#endif
 		
 	
-	//	uint8_t payload[3] = {0x01, 0x02, 0x03}; // 10 DUMMY BYTES
+		uint8_t payload[3] = {0x01, 0x02, 0x03}; // 10 DUMMY BYTES
 	////	radio.send(3, payload, 3, true);
 	//	log_s("SOK");
-			_delay_ms(1000);
-			
-	//	radio.send(3, payload, 3, true);	
-		//			log_s("SOK");
-	//			_delay_ms(1000);
-			
+		//	_delay_ms(1000);
+		//	log_s("SOK");
+			//	uint8_t response = radio.sendWithRetry(3, payload, sizeof(payload), 5, 20);
+				
+			//	log_s("SOK");
+
+				_delay_ms(1000);
+				
+					
 	//	radio.sendACK();
 		//radio.sendACK();
 	//	radio.sendACK();
@@ -159,6 +162,20 @@ int main() {
 			#endif
 				
 				
+				
+				
+				while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
+					
+					
+					radio.send(3, payload, sizeof(payload), true);
+					
+						log_s("SOK");
+
+						_delay_ms(1000);
+				}
+				
+				
+		/*		
 				
 	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
 	
@@ -291,7 +308,7 @@ int main() {
 
 	
 	} // end while(1){
-		
+		*/
 		
 	} // end main
 

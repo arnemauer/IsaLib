@@ -183,7 +183,8 @@ bool RFM69::canSend()
 void RFM69::send(byte toAddress, const void* buffer, byte bufferSize, bool requestACK)
 {
   writeReg(REG_PACKETCONFIG2, (readReg(REG_PACKETCONFIG2) & 0xFB) | RF_PACKET2_RXRESTART); // avoid RX deadlocks
-  while (!canSend()) receiveDone();
+ long now = millis();
+  while (!canSend() && millis()-now < RF69_CSMA_LIMIT_MS) receiveDone();
   sendFrame(toAddress, buffer, bufferSize, requestACK, false);
 }
 
@@ -361,10 +362,11 @@ int RFM69::readRSSI(bool forceTrigger) {
   return rssi;
 }
 
+
 byte RFM69::readReg(byte addr)
 {
 	select();
-	byte regval =  spiTransfer (addr, 0);
+	byte regval =  spiTransfer (addr & 0x7F, 0);
 	unselect();
 	return regval;
 
@@ -422,13 +424,8 @@ void RFM69::readAllRegs()
     regVal = spiTransferByte(0);
     unselect();
 
-  //  Serial.print(regAddr, HEX);
-  //  Serial.print(" - ");
-   // Serial.print(regVal,HEX);
-  //  Serial.print(" - ");
-  //  Serial.println(regVal,BIN);
 	}
-  unselect();
+
 }
 
 byte RFM69::readTemperature(byte calFactor)  //returns centigrade
@@ -467,11 +464,11 @@ void RFM69::rcCalibration()
 
  void RFM69::noInterrupts () {
 	//EIMSK &= ~(1 << INT0); // disable pcint0 interrupt  //bitClear(EIMSK, INT0);
-cli();
+//cli();
 }
 
  void RFM69::allowInterrupts () {
 	//EIMSK |= (1 << INT0); // enable pcint1 interrupt //bitSet(EIMSK, INT0);
-	sei();
+	//sei();
 }
 

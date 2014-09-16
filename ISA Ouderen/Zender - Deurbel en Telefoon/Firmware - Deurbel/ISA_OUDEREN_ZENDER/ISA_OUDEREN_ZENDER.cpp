@@ -42,8 +42,8 @@ extern "C" {
 #define NETWORKID			14  //the same on all nodes that talk to each other
 #define DESTINATION_NODE_ID 2 
 
-#define RETRY_LIMIT     2   // maximum number of times to retry
-#define ACK_TIME        50  // number of milliseconds to wait for an ack
+#define RETRY_LIMIT     5   // maximum number of times to retry
+#define ACK_TIME        40  // number of milliseconds to wait for an ack
 
 //struct {
 //	uint8_t house_code: 0x99;     // housecode: 0x99 =153
