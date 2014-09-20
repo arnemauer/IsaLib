@@ -164,19 +164,6 @@ int main() {
 				
 				
 				
-				while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
-					
-					
-					radio.send(3, payload, sizeof(payload), true);
-					
-						log_s("SOK");
-
-						_delay_ms(1000);
-				}
-				
-				
-		/*		
-				
 	while(1){ // Stop (so it doesn't repeat forever driving you crazy--you're welcome).
 	
 	if (radio.receiveDone()) { // a packet has been received
@@ -285,7 +272,7 @@ int main() {
 			// switch into idle mode until the next interrupt - Choose our preferred sleep mode:
 			if(deep_sleep_ok == 1){
 								
-				set_sleep_mode(SLEEP_MODE_STANDBY); // if active alarm, go in pwr save mode to keep timer 2 running
+				set_sleep_mode(SLEEP_MODE_PWR_DOWN); // if active alarm, go in pwr save mode to keep timer 2 running
 				sleep_enable();
 				// turn off brown-out enable in software
 				 sleep_bod_disable();
@@ -308,7 +295,7 @@ int main() {
 
 	
 	} // end while(1){
-		*/
+		
 		
 	} // end main
 
